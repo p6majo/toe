@@ -1,0 +1,9 @@
+for compiling the libraries run the following commands
+make java
+make
+
+make java compiles the java class files
+make builds the header file and the libraries with the native programs 
+
+It took me a long time to find out that there was trouble with additional compiler options -g -O
+only use -fpic -shared otherwise it won't work
