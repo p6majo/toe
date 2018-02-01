@@ -5,6 +5,7 @@ import com.p6majo.math.complex.Complex;
 import com.p6majo.math.function.ComplexFunction;
 import com.p6majo.math.function.ComplexSin;
 import com.p6majo.math.utils.Box;
+import com.p6majo.math.utils.Resolution;
 import org.junit.Test;
 
 import java.util.TreeSet;

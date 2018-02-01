@@ -1,5 +1,4 @@
-package com.p6majo.math.newtoniteration;
-
+package com.p6majo.math.mandelbrot;
 
 import com.p6majo.math.complex.Complex;
 import com.p6majo.math.function.ComplexPolynomial;
@@ -7,22 +6,22 @@ import com.p6majo.math.utils.Box;
 import com.p6majo.math.utils.Resolution;
 import org.junit.Test;
 
-public class NewtonIterationPoly {
+public class MandelbrotTest {
 
     @Test
-    public void testNewtonIterationPoly() throws Exception {
+    public void tesMandelbrot() throws Exception {
 
 
         Resolution res = new Resolution(8*688,8*288);
-        Box box = new Box(-2.58,-1.08,2.58,1.08);
+        Box box = new Box(-1.1*2.58,-1.1*1.08,1.1*2.58,1.1*1.08);
 
-        Complex[] coeff = new Complex[]{Complex.ONE.scale(-1),Complex.NULL,Complex.NULL,Complex.NULL,Complex.NULL,Complex.NULL,Complex.NULL,Complex.ONE};
+        Complex[] coeff = new Complex[]{Complex.NULL,Complex.NULL,Complex.ONE};
 
         ComplexPolynomial pol = new ComplexPolynomial(coeff);
 
-        NewtonIterator iterator = new NewtonIterator(pol,box,res,"newtonx7m1.ppm");
+        MandelIterator iterator = new MandelIterator(pol,box,res,"mandelx3.ppm");
         long start = System.currentTimeMillis();
-        iterator.generateImageWithStream();
+        iterator.generateImage();
         System.out.println("Image generated with stream after "+(System.currentTimeMillis()-start)+" ms.");
 
 

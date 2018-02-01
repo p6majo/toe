@@ -7,6 +7,7 @@ import com.maplesoft.openmaple.EngineCallBacksDefault;
 import com.p6majo.math.complex.Complex;
 import com.p6majo.math.function.MapleZetaOverZetaPrime;
 import com.p6majo.math.utils.Box;
+import com.p6majo.math.utils.Resolution;
 
 import java.util.TreeSet;
 

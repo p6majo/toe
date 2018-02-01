@@ -6,6 +6,7 @@ import com.maplesoft.openmaple.Engine;
 import com.maplesoft.openmaple.EngineCallBacksDefault;
 import com.p6majo.math.function.MapleNegOneOverPsiFunction;
 import com.p6majo.math.utils.Box;
+import com.p6majo.math.utils.Resolution;
 
 public class IterationOneOverGamma {
 	

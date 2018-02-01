@@ -4,6 +4,7 @@ package com.p6majo.math.newtoniteration;
 import com.p6majo.math.complex.Complex;
 import com.p6majo.math.function.ComplexPolynomial;
 import com.p6majo.math.utils.Box;
+import com.p6majo.math.utils.Resolution;
 import com.p6majo.math.utils.Utils;
 
 public class IterationPolyTransition {

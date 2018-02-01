@@ -5,6 +5,7 @@ import com.p6majo.math.complex.Complex;
 import com.p6majo.math.function.ComplexFractionFunction;
 import com.p6majo.math.function.ComplexPolynomial;
 import com.p6majo.math.utils.Box;
+import com.p6majo.math.utils.Resolution;
 
 import java.util.TreeSet;
 

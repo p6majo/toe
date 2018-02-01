@@ -4,6 +4,7 @@ import com.p6majo.math.complex.Complex;
 import com.p6majo.math.function.ComplexFunction;
 import com.p6majo.math.utils.Box;
 import com.p6majo.math.utils.Color;
+import com.p6majo.math.utils.Resolution;
 import com.p6majo.math.utils.Utils;
 
 import java.io.FileNotFoundException;

@@ -4,6 +4,7 @@ package com.p6majo.math.newtoniteration;
 import com.p6majo.math.function.ComplexBesselJ;
 import com.p6majo.math.function.ComplexFunction;
 import com.p6majo.math.utils.Box;
+import com.p6majo.math.utils.Resolution;
 
 public class IterationBesselJ {
 	
