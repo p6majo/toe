@@ -10,18 +10,19 @@ import java.util.List;
  * @version 1.0
  * @param <D> type of data (i.e. Double, Complex)
  */
-public class Plot<D extends Number> {
+public abstract class Plot<D extends Number> {
 
-    final private PlotData<D> plotData;
-    final private PlotRange plotRange;
-    private List<PlotOption> plotOptionList;
-    private List<JvmType.Primitive> primitiveList;
-    private DataProvider provider;
-    private OutputChannel out;
+    final protected PlotData<D> plotData;
+    final protected PlotRange plotRange;
+    final public PlotOptions plotOptions;
+    protected List<JvmType.Primitive> primitiveList;
+    protected DataProvider provider;
+    protected OutputChannel out;
 
     public Plot(){
         this.plotRange = new PlotRange();
         this.plotData = new PlotData<D>();
+        this.plotOptions  = new PlotOptions();
     }
 
 
@@ -59,6 +60,19 @@ public class Plot<D extends Number> {
     }
 
 
+    public void setPlotOption(PlotOptions.TypeOption type){
+        this.plotOptions.setTypeOption(type);
+    }
+
+    public void setStyleOption(PlotOptions.StyleOption styleOption){
+        this.plotOptions.setStyleOption(styleOption);
+    }
+
+    public void setOutputOption(PlotOptions.OutputOption outputOption){
+        this.plotOptions.setOutputOption(outputOption);
+    }
+
+
     /**
      * this method utilizes the dataProvider to generate one data point for each sampling point
      */
@@ -66,7 +80,13 @@ public class Plot<D extends Number> {
         provider.setPlotRange(plotRange);
         provider.setData(plotData.getData());
         provider.start();
+        this.plotData.setData(provider.getData());
     }
 
+    public abstract void out();
+
+    public Number[] getData(){
+        return this.plotData.getData();
+    }
 
 }

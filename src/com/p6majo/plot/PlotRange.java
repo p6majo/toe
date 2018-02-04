@@ -3,7 +3,7 @@ package com.p6majo.plot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlotRange {
+public class PlotRange{
     private List<Range> ranges;
     private long samplingPoints = 1;
 
@@ -13,7 +13,7 @@ public class PlotRange {
     }
 
     public void addRange(Range range){
-        this.ranges.add(range);
+        this.addRange(range.getStart(),range.getEnd(),range.getSamples());
     }
 
     public void addRange(Number start, Number end, Integer samples){

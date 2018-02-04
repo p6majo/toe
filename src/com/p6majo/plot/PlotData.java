@@ -21,4 +21,16 @@ public class PlotData<D extends Number> {
     public Number[] getData(){
         return this.data;
     }
+
+    public void setData(Number[] data){
+        this.data = data;
+    }
+
+    public D getData(int i){
+        return (D) this.data[i];
+    }
+
+    public void setData(int i,Number data){
+        this.data[i]=data;
+    }
 }
