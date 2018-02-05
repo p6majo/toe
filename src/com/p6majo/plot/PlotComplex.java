@@ -1,40 +1,57 @@
 package com.p6majo.plot;
 
-import com.p6majo.math.complex.Complex;
-import com.p6majo.math.utils.Box;
-import com.p6majo.math.utils.Utils;
-import com.princeton.Draw;
-import java.awt.*;
-import java.awt.color.ColorSpace;
-import java.util.function.Function;
-import java.util.stream.IntStream;
 
+import com.p6majo.math.complex.Complex;
+import com.p6majo.math.utils.Utils;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class PlotComplex extends Plot<Complex> {
 
-    //frame for default output
-    private Draw frame;
-    private Box range;
-    private int width=300;
-    private int height = 300;
-    private double zmax = 1;
 
     //black and transparent picture that contains the shape of the contours
     //it can be superimposed to the regular surface plot
     private Color[] contours = null;
     private double[][] edges  = null;
 
+    private int width,height;
+    private double zmax;
+
+    private OutputChannel out ;
+
     /**
      * A function that calculates the color of a complex value indicating its phase information
      */
-    Function<Complex,Color> colorFunction = new Function<Complex, Color>() {
+    Function<Point,Color> colorFunction = new Function<Point, Color>() {
         @Override
-        public Color apply(Complex z) {
+        public Color apply(Point p) {
+            Complex z = plotData.getData(p.y*width+p.x);
             double phase = z.neg().phase();
             return Color.getHSBColor((float) ((phase+Math.PI)/2./Math.PI),1f,Math.min(1f,(float) (z.abs()/zmax)));
         }
     };
 
+    Function<Point,Color> colorFunctionWithContour = new Function<Point, Color>() {
+        @Override
+        public Color apply(Point p) {
+            Complex z = plotData.getData(p.y*width+p.x);
+            double phase = z.neg().phase();
+            double e = edges[p.y][p.x];
+            Color bg =  Color.getHSBColor((float) ((phase+Math.PI)/2./Math.PI),1f,Math.min(1f,(float) (z.abs()/zmax)));
+            Color fg = new Color(0f,0f,0f,(float) (1.-0.25*Math.min(4.,edges[p.y][p.x])));
+            //perform overlay
+            float alpha = 1f-fg.getAlpha()/255f;
+            int newRed = (int) ((fg.getRed() * alpha) + (bg.getRed() * (1.0f - alpha)));
+            int newGreen =(int) ( (fg.getGreen() * alpha) + (bg.getGreen() * (1.0f - alpha)));
+            int newBlue = (int) ( (fg.getBlue() * alpha) + (bg.getBlue() * (1.0f - alpha)));
+
+            return new Color(newRed,newGreen,newBlue);
+        }
+    };
 
     public PlotComplex(DataProvider<Complex> provider){
         super.provider  = provider;
@@ -44,54 +61,45 @@ public class PlotComplex extends Plot<Complex> {
     public void out() {
         switch(super.plotOptions.getOutputOption()){
             case DEFAULT:
+                this.out = new OutputChannelDraw(this,this.plotOptions);
             default:
-                this.width = super.plotRange.getRange(0).getSamples();
-                this.height = super.plotRange.getRange(1).getSamples();
-                this.zmax = super.plotRange.getRange(2).getEnd().doubleValue();
-
-                this.generatePlot();
                 break;
         }
+
+        this.width = super.plotRange.getRange(0).getSamples();
+        this.height = super.plotRange.getRange(1).getSamples();
+        this.zmax = super.plotRange.getRange(2).getEnd().doubleValue();
+        this.generatePlot();
     }
 
 
     private void generatePlot(){
-        frame = new Draw();
-        frame.setCanvasSize(width,height);
-        frame.setXscale(0,width);
-        frame.setYscale(0,height);
-        frame.enableDoubleBuffering();
-
-
         switch(super.plotOptions.getTypeOption()){
             case DEFAULT:
 
                 int clines = super.plotOptions.getContourLines();
-
                 if (clines>0) generateContourLines(clines);
 
+                final Function selFunc= clines==0?colorFunction:colorFunctionWithContour;
 
-                long points = IntStream.range(0,height)
-                        .boxed()
-                        //.parallel()//parallel plotting leads to disturbances
+               // java.util.ArrayList<PrimitivePoint> pointList = new ArrayList<PrimitivePoint>();
+
+                java.util.List<Point> pointList =IntStream.range(0,height).boxed()
                         .flatMap(y -> IntStream
                                 .range(0, width)
-                                .mapToObj(x->new Point(x,y,colorFunction.apply(this.plotData.getData(y*width+x))))
-                        ).count();
-                System.out.println(points + "  data points generated.");
+                                .mapToObj(x->new Point(x,y))
+                        ).collect(Collectors.toList());
 
 
+                for (Point p:pointList)
+                    out.addPrimitive(new PrimitivePoint(p,(Color) selFunc.apply(p)));
 
+                out.finished();
                 break;
 
             default:
                 break;
         }
-
-
-
-
-        frame.show();
 
     }
 
@@ -204,32 +212,6 @@ public class PlotComplex extends Plot<Complex> {
         return hEdges;
     }
 
-
-    /*************************/
-    /** Output objects *******/
-    /*************************/
-
-    public class Point{
-
-
-        public Point(int x,int y,Color color) {
-            if (plotOptions.getContourLines()>0){
-
-                //forground
-                Color edge = new Color(0f,0f,0f,(float) (1.-0.25*Math.min(4.,edges[y][x])));
-                //perform overlay
-
-                float alpha = 1f-edge.getAlpha()/255f;
-                int newRed = (int) ((edge.getRed() * alpha) + (color.getRed() * (1.0f - alpha)));
-                int newGreen =(int) ( (edge.getGreen() * alpha) + (color.getGreen() * (1.0f - alpha)));
-                int newBlue = (int) ( (edge.getBlue() * alpha) + (color.getBlue() * (1.0f - alpha)));
-
-                frame.setPenColor(new Color(newRed,newGreen,newBlue));
-            }
-            else frame.setPenColor(color);
-            frame.point(x,y);
-        }
-    }
 
 
 

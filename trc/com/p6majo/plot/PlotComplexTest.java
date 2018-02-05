@@ -33,6 +33,8 @@ public class PlotComplexTest {
         this.cPlot.plotOptions.setContourLines(21);
         this.cPlot.plotOptions.setContourRange(new Range(0.1,10));
         this.cPlot.plotOptions.setLogScaleZ(true);
+        this.cPlot.plotOptions.setOutputOption(PlotOptions.OutputOption.DEFAULT);
+        this.cPlot.plotOptions.setOutputFilename("test.ppm");
 
     }
 

@@ -10,6 +10,9 @@ public class PlotOptions {
     public static enum TypeOption {DEFAULT};
 
     private OutputOption outputOption = OutputOption.DEFAULT;
+    private String outputFilename = "";
+
+
     private StyleOption styleOption = StyleOption.DEFAULT;
     private TypeOption typeOption = TypeOption.DEFAULT;
 
@@ -64,6 +67,14 @@ public class PlotOptions {
 
     public void setContourRange(Range contourRange) {
         this.contourRange = contourRange;
+    }
+
+    public String getOutputFilename() {
+        return outputFilename;
+    }
+
+    public void setOutputFilename(String outputFilename) {
+        this.outputFilename = outputFilename;
     }
 
 }
