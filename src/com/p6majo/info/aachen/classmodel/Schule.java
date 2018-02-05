@@ -1,4 +1,4 @@
-package com.p6majo.info.classmodel;
+package com.p6majo.info.aachen.classmodel;
 
 import java.util.ArrayList;
 
@@ -29,7 +29,13 @@ public class Schule {
         info+="und ein Hausmeister namens "+hausmeister.getName()+".";
         return info;
     }
+
+
     public String getName() {
         return name;
+    }
+
+    public ArrayList<Schueler> getSchuelerschaft(){
+        return this.schuelerschaft;
     }
 }

@@ -1,4 +1,4 @@
-package com.p6majo.info.classmodel;
+package com.p6majo.info.aachen.classmodel;
 
 public class Mensch {
     private int alter=0;

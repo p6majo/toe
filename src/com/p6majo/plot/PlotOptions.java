@@ -4,6 +4,7 @@ import com.princeton.Out;
 
 public class PlotOptions {
 
+
     public static enum OutputOption {DEFAULT,FILE,DRAW,EPS,GEOGEBRA,POVRAY};
     public static enum StyleOption {DEFAULT,SOLID,DOTTED,DASHED};
     public static enum TypeOption {DEFAULT};
@@ -14,6 +15,7 @@ public class PlotOptions {
 
     private int contourLines =0;
     private boolean logScaleZ = false;
+    private Range contourRange = null;
 
 
     public OutputOption getOutputOption() {
@@ -54,6 +56,14 @@ public class PlotOptions {
 
     public void setLogScaleZ(boolean logScaleZ) {
         this.logScaleZ = logScaleZ;
+    }
+
+    public Range getContourRange() {
+        return contourRange;
+    }
+
+    public void setContourRange(Range contourRange) {
+        this.contourRange = contourRange;
     }
 
 }

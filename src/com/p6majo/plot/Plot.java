@@ -1,7 +1,5 @@
 package com.p6majo.plot;
 
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType;
-
 import java.util.List;
 
 /**
@@ -15,7 +13,7 @@ public abstract class Plot<D extends Number> {
     final protected PlotData<D> plotData;
     final protected PlotRange plotRange;
     final public PlotOptions plotOptions;
-    protected List<JvmType.Primitive> primitiveList;
+    protected List<Primitive> primitiveList;
     protected DataProvider provider;
     protected OutputChannel out;
 

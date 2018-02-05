@@ -17,7 +17,7 @@ public class PlotComplexTest {
 
     private PlotComplex cPlot ;
     private ComplexFunctionDataProvider cProvider;
-    private int gridsize = 1001;
+    private int gridsize = 1401;
 
     @Before
     public void setUp() throws Exception {
@@ -30,8 +30,9 @@ public class PlotComplexTest {
         this.cPlot.addRange(-3,3,gridsize);//yrange
         this.cPlot.addRange(0,1);//zrange
 
-        this.cPlot.plotOptions.setContourLines(11);
-        this.cPlot.plotOptions.setLogScaleZ(false);
+        this.cPlot.plotOptions.setContourLines(21);
+        this.cPlot.plotOptions.setContourRange(new Range(0.1,10));
+        this.cPlot.plotOptions.setLogScaleZ(true);
 
     }
 

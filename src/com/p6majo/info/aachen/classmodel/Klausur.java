@@ -1,14 +1,16 @@
-package com.p6majo.info.classmodel;
+package com.p6majo.info.aachen.classmodel;
 
 public class Klausur {
     private int note = -1;
     private String inhalt;
     private String fach;
     private Schueler schueler;
+    private Lehrer lehrer;
 
-    public Klausur(Schueler schueler,String fach) {
+    public Klausur(Schueler schueler,String fach,Lehrer lehrer) {
         this.schueler = schueler;
         this.fach = fach;
+        this.lehrer = lehrer;
     }
 
     public int getNote() {
@@ -27,5 +29,9 @@ public class Klausur {
 
     public Schueler getSchueler() {
         return schueler;
+    }
+
+    public Lehrer getLehrer() {
+        return lehrer;
     }
 }
