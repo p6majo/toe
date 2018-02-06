@@ -1,4 +1,4 @@
-package com.p6majo.info.aachen.classmodel;
+package com.p6majo.info.classmodel;
 
 public class Klausur {
     private int note = -1;

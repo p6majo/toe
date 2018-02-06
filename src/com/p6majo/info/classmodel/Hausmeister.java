@@ -1,4 +1,4 @@
-package com.p6majo.info.aachen.classmodel;
+package com.p6majo.info.classmodel;
 
 public class Hausmeister extends Mensch {
     public Hausmeister(String name){

@@ -1,4 +1,4 @@
-package com.p6majo.info.aachen.classmodel;
+package com.p6majo.info.classmodel;
 
 public class Lehrer extends Mensch {
     private String fach1;
