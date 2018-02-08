@@ -18,7 +18,7 @@ import static com.nr.test.NRTestUtil.maxel;
 import static com.nr.test.NRTestUtil.vecsub;
 import static org.junit.Assert.fail;
 
-public class Test_StepperBS {
+public class BenmarkTestComplexifiedVersion {
 
   @Before
   public void setUp() throws Exception {
@@ -31,16 +31,18 @@ public class Test_StepperBS {
   @Test
   public void test() {
     int i,nvar=4;
-    final double atol=1.0e-6,rtol=atol,h1=0.01,hmin=0.0,x1=1.0,x2=20.0;
+    final double atol=1.0e-8,rtol=atol,h1=0.01,hmin=0.0,x1=1.0,x2=40.0;
     double sbeps;
     // dydx= new double[nvar], not used
     double[] y= new double[nvar],yout= new double[nvar],yexp= new double[nvar]; 
-    boolean localflag, globalflag=false;
+    boolean detailflag=false, localflag, globalflag=false;
 
     Complex[] yc = new Complex[nvar], youtc=new Complex[nvar], yexpc = new Complex[nvar];
 
     // Test StepperBS
-    System.out.println("Testing StepperBS");
+    System.out.println("Testing StepperBS and ComplexStepperBS in parallel");
+    System.out.println("A system of odes for bessel functions is solved once with double variables and once with complex variables (along the real number line).");
+    System.out.println("The agreement is required for successful integration of complex systems of odes. The numerical cost of the transition from double to complex can be estimated.");
 
     Bessjy bess = new Bessjy();
     for (i=0;i<nvar;i++) {
@@ -51,8 +53,8 @@ public class Test_StepperBS {
     }
 
 
-    Output out=new Output(20);
-    ComplexOutput outc = new ComplexOutput(20);
+    Output out=new Output(400001);
+    ComplexOutput outc = new ComplexOutput(400001);
     rhs_StepperBS d = new rhs_StepperBS();
     rhs_ComplexStepperBS dc = new rhs_ComplexStepperBS();
 
@@ -63,10 +65,13 @@ public class Test_StepperBS {
     ComplexOdeint odec = new ComplexOdeint(yc,x1,x2,atol,rtol,h1,hmin,outc,dc,sc);
     long startDouble = System.currentTimeMillis();
     ode.integrate();
-    System.out.println("Time for double integration: "+(System.currentTimeMillis()-startDouble)+" ms.");
+    long doubleDuration = (System.currentTimeMillis()-startDouble);
+    System.out.println("Time for double integration: "+doubleDuration+" ms.");
     long startComplex = System.currentTimeMillis();
     odec.integrate();
-    System.out.println("Time for complex integration: "+(System.currentTimeMillis()-startComplex)+" ms.");
+    long complexDuration = System.currentTimeMillis()-startComplex;
+    System.out.println("Time for complex integration: "+complexDuration+" ms.");
+    System.out.println("Increase in expenses by: "+(100.*(complexDuration-doubleDuration)/doubleDuration)+"%.");
 
     for (i=0;i<nvar;i++) {
       yout[i]=out.ysave[i][out.count-1];
@@ -74,13 +79,20 @@ public class Test_StepperBS {
       System.out.printf("%f  %f %s %s\n", yout[i],yexp[i],youtc[i].toString(),yexpc[i].toString());
     }
 
-    sbeps = 1.e-8;
+    sbeps = 1.e-7;
     System.out.println(maxel(vecsub(yout,yexp)));
     localflag = maxel(vecsub(yout,yexp)) > sbeps;
-    globalflag = globalflag || localflag;
+
+    //check each value
+    for (i=0;i<nvar;i++)
+      for (int j=0;j<out.count;j++)
+        if (outc.ysave[i][j].minus(Complex.ONE.scale(out.ysave[i][j])).abs()>sbeps) detailflag = true;
+
+
+    globalflag = globalflag || localflag||detailflag;
+
     if (localflag) {
       fail("*** StepperBS: Inaccurate integration");
-      
     }
 
     if (globalflag) System.out.println("Failed\n");

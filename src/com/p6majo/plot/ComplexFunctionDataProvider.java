@@ -9,6 +9,17 @@ public class ComplexFunctionDataProvider extends DataProvider {
 
     final private Function<Complex,Complex> function;
 
+    /*
+    private static double dx;
+    private static double dy;
+
+    private static double xmin;
+    private static double ymin;
+
+    private static int ySamples;
+    private static int xSamples;
+    */
+
     public ComplexFunctionDataProvider(Function<Complex, Complex> function){
         this.function  = function;
     }
@@ -45,7 +56,11 @@ public class ComplexFunctionDataProvider extends DataProvider {
         double xmin = xRange.getStart().doubleValue();
         double ymin = yRange.getStart().doubleValue();
 
-        super.data = IntStream.range(0,ySamples)
+        System.out.println(super.data.toString());
+
+        //this is not so good since the reference to the old data array is destroyed
+
+        Complex[] tmpData = IntStream.range(0,ySamples)
                 .boxed()
                 .parallel()
                 .flatMap(y->IntStream
@@ -54,7 +69,10 @@ public class ComplexFunctionDataProvider extends DataProvider {
                 )
                 .map(function)
                 .toArray(Complex[]::new);
+
+        IntStream.range(0,xSamples*ySamples).forEach(i->super.data[i]=tmpData[i]);
     }
+
 
     public Number[] getData(){
         return super.data;

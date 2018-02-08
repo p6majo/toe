@@ -34,8 +34,8 @@ public class ComplexStepperBS extends ComplexStepperBase{
   Complex[][] fsave;
   int[] ipoint;
   Complex[] dens;
-  public ComplexStepperBS(){
 
+  public ComplexStepperBS(){
   }
 
   public ComplexStepperBS(final Complex[] yy, final Complex[] dydxx, final double xx,
@@ -112,43 +112,54 @@ public class ComplexStepperBS extends ComplexStepperBase{
     Complex y0,y1,yp0,yp1,ydiff,aspl,bspl,ph0,ph1,ph2,ph3;
     Complex[] a = new Complex[31];
     for (int i=0; i<n; i++) {
-      y0=y[i];
-      y1=y[2*n+i];
-      yp0=y[n+i];
-      yp1=y[3*n+i];
-      ydiff=y1.minus(y0);
-      aspl=yp1.neg().plus(ydiff);
-      bspl=yp0.minus(ydiff);
-      y[n+i]=ydiff;
-      y[2*n+i]=aspl;
-      y[3*n+i]=bspl;
-      if (imit < 0) continue;
-      ph0=y0.plus(y1).scale(0.5).plus(aspl.plus(bspl).scale(0.125));
-      ph1=ydiff.plus(aspl.minus(bspl).scale(0.25));
-      ph2=yp0.minus(yp1).neg();
-      ph3=bspl.minus(aspl).scale(6.0);
-      if (imit >= 1) {
-        a[1]=y[5*n+i].minus(ph1).scale(16.0);
-        if (imit >= 3) {
-          a[3]=y[7*n+i].minus(ph3).plus(a[1].scale(3.)).scale(16.0);
-          for (int im=5; im <=imit; im+=2) {
-            fac1=im*(im-1)/2.0;
-            fac2=fac1*(im-2)*(im-3)*2.0;
-            a[im]=y[(im+4)*n+i].plus(a[im-2].scale(fac1)).minus(a[im-4].scale(fac2)).scale(16.0);
-          }
+        /*
+        y0=y[i].clone();
+        y1=y[2*n+i].clone();
+        yp0=y[n+i].clone();
+        yp1=y[3*n+i].clone();
+        */
+        y0=y[i];
+        y1=y[2*n+i];
+        yp0=y[n+i];
+        yp1=y[3*n+i];
+        ydiff=y1.minus(y0);
+        aspl=yp1.neg().plus(ydiff);
+        bspl=yp0.minus(ydiff);
+        /*
+        y[n+i]=ydiff.clone();
+        y[2*n+i]=aspl.clone();
+        y[3*n+i]=bspl.clone();
+        */
+        y[n+i]=ydiff;
+        y[2*n+i]=aspl;
+        y[3*n+i]=bspl;
+        if (imit < 0) continue;
+        ph0=y0.plus(y1).scale(0.5).plus(aspl.plus(bspl).scale(0.125));
+        ph1=ydiff.plus(aspl.minus(bspl).scale(0.25));
+        ph2=yp0.minus(yp1).neg();
+        ph3=bspl.minus(aspl).scale(6.0);
+        if (imit >= 1) {
+            a[1]=y[5*n+i].minus(ph1).scale(16.0);
+            if (imit >= 3) {
+                a[3]=y[7*n+i].minus(ph3).plus(a[1].scale(3.)).scale(16.0);
+                for (int im=5; im <=imit; im+=2) {
+                    fac1=im*(im-1)/2.0;
+                    fac2=fac1*(im-2)*(im-3)*2.0;
+                    a[im]=y[(im+4)*n+i].plus(a[im-2].scale(fac1)).minus(a[im-4].scale(fac2)).scale(16.0);
+                }
+            }
         }
-      }
-      a[0]=y[4*n+i].minus(ph0).scale(16.0);
-      if (imit >= 2) {
-        a[2]=y[n*6+i].minus(ph2).plus(a[0]).scale(16.0);
-        for (int im=4; im <=imit; im+=2) {
-          fac1=im*(im-1)/2.0;
-          fac2=im*(im-1)*(im-2)*(im-3);
-          a[im]=y[n*(im+4)+i].plus(a[im-2].scale(fac1)).minus(a[im-4].scale(fac2)).scale(16.0);
+        a[0]=y[4*n+i].minus(ph0).scale(16.0);
+        if (imit >= 2) {
+            a[2]=y[n*6+i].minus(ph2).plus(a[0]).scale(16.0);
+            for (int im=4; im <=imit; im+=2) {
+                fac1=im*(im-1)/2.0;
+                fac2=im*(im-1)*(im-2)*(im-3);
+                a[im]=y[n*(im+4)+i].plus(a[im-2].scale(fac1)).minus(a[im-4].scale(fac2)).scale(16.0);
+            }
         }
-      }
-      for (int im=0; im<=imit; im++)
-        y[n*(im+4)+i]=a[im];
+        for (int im=0; im<=imit; im++)
+            y[n*(im+4)+i]=a[im]; //.clone()
     }
   }
   
@@ -157,8 +168,9 @@ public class ComplexStepperBS extends ComplexStepperBase{
     int nstep=nseq[k];
     double h=htot/nstep;
     for (int i=0;i<n;i++) {
-      ym[i]=y[i];
-      yn[i]=y[i].plus(dydx[i].scale(h));
+        //ym[i]=y[i].clone();
+        ym[i]=y[i];
+        yn[i]=y[i].plus(dydx[i].scale(h));
     }
     double xnew=x+h;
     derivs.derivs(xnew,yn,yend);
@@ -166,16 +178,16 @@ public class ComplexStepperBS extends ComplexStepperBase{
     for (int nn=1;nn<nstep;nn++) {
       if (dense && nn == nstep/2) {
           for (int i=0;i<n;i++)
-            ysave[k][i]=yn[i];
+            ysave[k][i]=yn[i];//.clone();
       }
       if (dense && abs(nn-nstep/2) <= 2*k+1) {
         ipt.val++;
         for (int i=0;i<n;i++)
-          fsave[ipt.val][i]=yend[i];
+          fsave[ipt.val][i]=yend[i];//.clone();
       }
       for (int i=0;i<n;i++) {
         Complex swap=ym[i].plus(yend[i].scale(h2));
-        ym[i]=yn[i];
+        ym[i]=yn[i];//.clone();
         yn[i]=swap;
       }
       xnew += h;
@@ -184,7 +196,7 @@ public class ComplexStepperBS extends ComplexStepperBase{
     if (dense && nstep/2 <= 2*k+1) {
       ipt.val++;
       for (int i=0;i<n;i++)
-        fsave[ipt.val][i]=yend[i];
+        fsave[ipt.val][i]=yend[i];//.clone();
     }
     for (int i=0;i<n;i++)
       yend[i]=ym[i].plus(yn[i]).plus(yend[i].scale(h)).scale(0.5);
@@ -203,9 +215,9 @@ public class ComplexStepperBS extends ComplexStepperBase{
     final Complex[] ysav,final double[] scale,final int k,final doubleW error) {
     mu=2*k-1;
     for (int i=0; i<n; i++) {
-      dens[i]=ysav[i];
+      dens[i]=ysav[i];//.clone();
       dens[n+i]=dydx[i].scale(h);
-      dens[2*n+i]=y[i];
+      dens[2*n+i]=y[i];//.clone();
       dens[3*n+i]=dydxnew[i].scale(h);
     }
     for (int j=1; j<=k; j++) {
@@ -213,11 +225,11 @@ public class ComplexStepperBS extends ComplexStepperBase{
       for (int l=j; l>=1; l--) {
         double factor=SQR(dblenj/nseq[l-1])-1.0;
         for (int i=0; i<n; i++)
-          ysave[l-1][i]=ysave[l][i].plus(ysave[l][i].minus(ysave[l-1][i]).scale(factor));
+          ysave[l-1][i]=ysave[l][i].plus(ysave[l][i].minus(ysave[l-1][i]).scale(1./factor));
       }
     }
     for (int i=0; i<n; i++)
-      dens[4*n+i]=ysave[0][i];
+      dens[4*n+i]=ysave[0][i];//.clone();
     for (int kmi=1; kmi<=mu; kmi++) {
       int kbeg=(kmi-1)/2;
       for (int kk=kbeg; kk<=k; kk++) {
@@ -231,7 +243,7 @@ public class ComplexStepperBS extends ComplexStepperBase{
         for (int l=j; l>=kbeg+1; l--) {
           double factor=SQR(dblenj/nseq[l-1])-1.0;
           for (int i=0; i<n; i++)
-            ysave[l-1][i]=ysave[l][i].plus(ysave[l][i].minus(ysave[l-1][i]).scale(factor));
+            ysave[l-1][i]=ysave[l][i].plus(ysave[l][i].minus(ysave[l-1][i]).scale(1./factor));
         }
       }
       for (int i=0; i<n; i++)
@@ -310,7 +322,7 @@ public class ComplexStepperBS extends ComplexStepperBase{
           System.arraycopy(yseq, 0, y, 0, y.length);
         else
           for (i=0;i<n;i++)
-            table[k-1][i]=yseq[i];
+            table[k-1][i]=yseq[i];//.clone();
         if (k != 0) {
           polyextr(k,table,y);
           err.val=0.0;
@@ -382,9 +394,13 @@ public class ComplexStepperBS extends ComplexStepperBase{
     }
     break;
     } // while(true)
-    
-    System.arraycopy(dydxnew, 0, dydx, 0, dydxnew.length);
-    //dydx=dydxnew; XXX
+
+    // dydx=dydxnew; XXX
+    //System.arraycopy(dydxnew, 0, dydx, 0, dydxnew.length);
+    for (i = 0;i<dydxnew.length;i++)
+        dydx[i] = dydxnew[i];//.clone();
+
+
     xold=x;
     x+=h;
     hdid=h;

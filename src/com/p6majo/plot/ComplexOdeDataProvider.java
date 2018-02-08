@@ -1,38 +1,32 @@
 package com.p6majo.plot;
 
 import com.p6majo.math.complex.Complex;
+import com.p6majo.math.complexode.ComplexDerivativeInf;
+import com.p6majo.math.complexode.ComplexInitialConditions;
 
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
-public class ComplexFunctionDataProvider extends DataProvider {
+/**
+ * The data provider performes the integration of a set of ordinary differential equations for a
+ * rectangular domain in the complex plane
+ * @author jmartin
+ * @version 1.0
+ */
+public class ComplexOdeDataProvider extends DataProvider {
 
-    final private Function<Complex,Complex> function;
+    final private ComplexDerivativeInf odes;
+    final private ComplexInitialConditions ics;
 
-    public ComplexFunctionDataProvider(Function<Complex, Complex> function){
-        this.function  = function;
+    public ComplexOdeDataProvider(ComplexDerivativeInf odes, ComplexInitialConditions ics){
+        this.odes = odes;
+        this.ics  =ics;
     }
 
-    /**
-     * Causes this thread to begin execution; the Java Virtual Machine
-     * calls the <code>run</code> method of this thread.
-     * <p>
-     * The result is that two threads are running concurrently: the
-     * current thread (which returns from the call to the
-     * <code>start</code> method) and the other thread (which executes its
-     * <code>run</code> method).
-     * <p>
-     * It is never legal to start a thread more than once.
-     * In particular, a thread may not be restarted once it has completed
-     * execution.
-     *
-     * @throws IllegalThreadStateException if the thread was already
-     *                                     started.
-     * @see #run()
-     * @see #stop()
-     */
     @Override
     public synchronized void start() {
+
+        //setup of the domain
         Range xRange = super.range.getRange(0);
         Range yRange = super.range.getRange(1);
 
@@ -45,15 +39,14 @@ public class ComplexFunctionDataProvider extends DataProvider {
         double xmin = xRange.getStart().doubleValue();
         double ymin = yRange.getStart().doubleValue();
 
-        super.data = IntStream.range(0,ySamples)
-                .boxed()
-                .parallel()
-                .flatMap(y->IntStream
-                        .range(0,xSamples)
-                        .mapToObj(x->new Complex(xmin+dx*x,ymin+dy*y))
-                )
-                .map(function)
-                .toArray(Complex[]::new);
+        //now each sample point of the domain has to be covered by the ode solver
+        //check, whether the initial conditions are part of the domain, otherwise integrate to the lower left corner of the domain
+
+        //TODO there should be the possibility of customization, where the integration of the domain should be started from
+        //TODO in order to be able to avoid singularities
+
+
+
     }
 
     public Number[] getData(){

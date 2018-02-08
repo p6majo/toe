@@ -22,6 +22,7 @@ public abstract class DataProvider<D extends Number> extends Thread {
 
     public void setData(D[] data){
         this.data = data;
+        System.out.println(data.toString());
         if (range!=null) {
             if (range.getSamplingPoints()!=data.length)
                 Utils.errorMsg("The number of data points does not match the number of sampling points");

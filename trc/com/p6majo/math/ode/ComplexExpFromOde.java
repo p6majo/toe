@@ -10,6 +10,8 @@ import com.p6majo.math.complexode.ComplexDerivativeInf;
 import com.p6majo.math.complexode.ComplexOdeint;
 import com.p6majo.math.complexode.ComplexOutput;
 import com.p6majo.math.complexode.ComplexStepperBS;
+import com.p6majo.math.function.ComplexElliptSn;
+import com.p6majo.math.function.ComplexExp;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +20,7 @@ import static com.nr.test.NRTestUtil.maxel;
 import static com.nr.test.NRTestUtil.vecsub;
 import static org.junit.Assert.fail;
 
-public class JacobiSnFromOde {
+public class ComplexExpFromOde {
 
   @Before
   public void setUp() throws Exception {
@@ -30,50 +32,44 @@ public class JacobiSnFromOde {
 
   @Test
   public void test() {
-    int i,nvar=4;
-    final double atol=1.0e-6,rtol=atol,h1=0.01,hmin=0.0,x1=1.0,x2=20.0;
+    int i,nvar=1,nouts=200;
+    final double atol=1.0e-6,rtol=atol,h1=0.01,hmin=0.0,x1=0,x2=20.0;
     double sbeps;
     // dydx= new double[nvar], not used
     boolean localflag, globalflag=false;
     Complex[] yc = new Complex[nvar], youtc=new Complex[nvar], yexpc = new Complex[nvar];
 
     // Test StepperBS
-    System.out.println("Testing StepperBS");
+    System.out.println("Testing complex integration with ComplexStepperBS of the ode for exponential in imaginary direction");
 
-    FncSn
+    ComplexExp exp  = new ComplexExp();
     for (i=0;i<nvar;i++) {
-      yc[i]=Complex.ONE.scale(bess.jn(i,x1));
-      yexpc[i]=Complex.ONE.scale(bess.jn(i,x2));
+      yc[i]=exp.eval(new Complex(x1,0));
+      yexpc[i]=exp.eval(new Complex(0,x2));
     }
 
-
-    Output out=new Output(20);
-    ComplexOutput outc = new ComplexOutput(20);
-    rhs_StepperBS d = new rhs_StepperBS();
+    ComplexOutput outc = new ComplexOutput(nouts);
     rhs_ComplexStepperBS dc = new rhs_ComplexStepperBS();
-
-    StepperBS s = new StepperBS();
     ComplexStepperBS sc = new ComplexStepperBS();
 
-    Odeint ode = new Odeint(y,x1,x2,atol,rtol,h1,hmin,out,d,s);
     ComplexOdeint odec = new ComplexOdeint(yc,x1,x2,atol,rtol,h1,hmin,outc,dc,sc);
-    long startDouble = System.currentTimeMillis();
-    ode.integrate();
-    System.out.println("Time for double integration: "+(System.currentTimeMillis()-startDouble)+" ms.");
     long startComplex = System.currentTimeMillis();
     odec.integrate();
     System.out.println("Time for complex integration: "+(System.currentTimeMillis()-startComplex)+" ms.");
 
     for (i=0;i<nvar;i++) {
-      yout[i]=out.ysave[i][out.count-1];
       youtc[i]=outc.ysave[i][outc.count-1];
-      System.out.printf("%f  %f %s %s\n", yout[i],yexp[i],youtc[i].toString(),yexpc[i].toString());
+      System.out.printf("%s %s %f %f %d\n", youtc[i].toString(),yexpc[i].toString(),Math.cos(x2),Math.sin(x2),outc.count-1);
     }
 
-    sbeps = 1.e-8;
-    System.out.println(maxel(vecsub(yout,yexp)));
-    localflag = maxel(vecsub(yout,yexp)) > sbeps;
-    globalflag = globalflag || localflag;
+    sbeps = 1.e-5;
+    double devMax = 0.;
+    for (i=0;i<nvar;i++)
+        devMax = Math.max(devMax,youtc[i].minus(yexpc[i]).abs())/Math.max(youtc[i].abs(),yexpc[i].abs());
+
+    System.out.println("maximal deviation in magnitude "+devMax);
+    localflag = devMax>sbeps;
+    globalflag = globalflag||localflag;
     if (localflag) {
       fail("*** StepperBS: Inaccurate integration");
       
@@ -81,24 +77,21 @@ public class JacobiSnFromOde {
 
     if (globalflag) System.out.println("Failed\n");
     else System.out.println("Passed\n");
-  }
-  
-  class rhs_StepperBS implements DerivativeInf {
-    public void derivs(final double x,double[] y,double[] dydx) {
-      dydx[0]= -y[1];
-      dydx[1]=y[0]-(1.0/x)*y[1];
-      dydx[2]=y[1]-(2.0/x)*y[2];
-      dydx[3]=y[2]-(3.0/x)*y[3];
+
+    double arg = 0.;
+    for (i=0;i<nouts;i++){
+        arg = i*x2/nouts;
+        System.out.printf("%s %f %f\n",outc.ysave[0][200].toString(),Math.cos(arg),Math.sin(arg));
     }
-    public void jacobian(final double x, double[] y, double[] dfdx, double[][] dfdy){}
+
+
   }
 
+
+  //differential equation for the exponential function along the imaginary direction
   class rhs_ComplexStepperBS implements ComplexDerivativeInf {
     public void derivs(final double x,Complex[] y,Complex[] dydx) {
-      dydx[0]= y[1].neg();
-      dydx[1]=y[0].minus(y[1].scale(1.0/x));
-      dydx[2]=y[1].minus(y[2].scale(2.0/x));
-      dydx[3]=y[2].minus(y[3].scale(3.0/x));
+      dydx[0]= y[0].times(Complex.I);
     }
     public void jacobian(final double x, Complex[] y, Complex[] dfdx, Complex[][] dfdy){}
   }

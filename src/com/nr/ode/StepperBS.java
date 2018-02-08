@@ -230,7 +230,7 @@ public class StepperBS extends StepperBase{
         }
       }
       for (int i=0; i<n; i++)
-        dens[(kmi+4)*n+i]=ysave[kbeg][i]*h;
+        dens[(kmi + 4) * n + i] = ysave[kbeg][i] * h;
       if (kmi == mu) continue;
       for (int kk=kmi/2; kk<=k; kk++) {
         int lbeg=ipoint[kk+1]-1;

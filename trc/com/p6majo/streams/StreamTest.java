@@ -23,7 +23,7 @@ public class StreamTest extends TestCase {
 
         Function<Complex,Complex> function = (a)->a.times(a);
 
-        //nexted for loop
+        //nested for loop
         for (int y=0;y<10;y++) {
             for (int x = 0; x < 2; x++) {
                 System.out.print("(" + x + "," + y + ")");

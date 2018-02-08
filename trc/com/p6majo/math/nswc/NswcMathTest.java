@@ -1,4 +1,4 @@
-package com.tests.p6majo.mathematics.nswc;
+package com.p6majo.math.nswc;
 
 
 import com.p6majo.math.complex.Complex;

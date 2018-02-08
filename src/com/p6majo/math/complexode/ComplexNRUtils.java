@@ -10,7 +10,7 @@ public class ComplexNRUtils {
         Complex[][] v = new Complex[nn][mm];
         for(int i=0; i<nn; i++)
             for(int j=0; j<mm; j++)
-                v[i][j] = b[i][j];
+                v[i][j] = b[i][j];//.clone();
         return v;
     }
 }
