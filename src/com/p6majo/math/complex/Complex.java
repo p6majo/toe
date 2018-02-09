@@ -141,10 +141,10 @@ public class Complex extends Number implements Html,Comparable<Complex>,Cloneabl
 		if (Math.abs(this.real)<EPS_FLOAT) re=0.;
 		
 		if (re==0 && im==0.) return "0";
-		else if (re==0.) return String.format("%.5fi", im);
-		else if (im==0.) return String.format("%.5f",re);
-		else if (im>0) return String.format("(%.5f+%.5fi)", re,im);
-		else return String.format("(%.5f - %.5fi)",re,Math.abs(im));
+		else if (re==0.) return String.format("%.6fi", im);
+		else if (im==0.) return String.format("%.6f",re);
+		else if (im>0) return String.format("(%.6f+%.6fi)", re,im);
+		else return String.format("(%.6f - %.6fi)",re,Math.abs(im));
 	}
 
 	@Override

@@ -33,7 +33,7 @@ public class ComplexExpFromOde {
   @Test
   public void test() {
     int i,nvar=1,nouts=200;
-    final double atol=1.0e-6,rtol=atol,h1=0.01,hmin=0.0,x1=0,x2=20.0;
+    final double atol=1.0e-8,rtol=atol,h1=0.01,hmin=0.0,x1=0,x2=20.0;
     double sbeps;
     // dydx= new double[nvar], not used
     boolean localflag, globalflag=false;
@@ -81,7 +81,7 @@ public class ComplexExpFromOde {
     double arg = 0.;
     for (i=0;i<nouts;i++){
         arg = i*x2/nouts;
-        System.out.printf("%s %f %f\n",outc.ysave[0][200].toString(),Math.cos(arg),Math.sin(arg));
+        System.out.printf("%s %f %f\n",outc.ysave[0][i].toString(),Math.cos(arg),Math.sin(arg));
     }
 
 

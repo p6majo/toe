@@ -6,13 +6,15 @@ import com.p6majo.math.complexode.ComplexInitialConditions;
 import com.p6majo.math.function.FcnCos;
 import org.junit.Test;
 
+import static junit.framework.Assert.assertEquals;
+
 public class ComplexOdeDataProviderTest {
 
 
     @Test
     public void start() {
-        int xdim = 11;
-        int ydim = 11;
+        int xdim = 1001;
+        int ydim = 1001;
         final Complex data[] = new Complex[xdim*ydim];
 
         PlotRange plotRange = new PlotRange();
@@ -33,29 +35,53 @@ public class ComplexOdeDataProviderTest {
             public void jacobian(double x, Complex[] y, Complex[] dfdx, Complex[][] dfdy) {
             }
         };
+
+        //TODO it might be possible to modify the stepper routine and call odeint with a flag, depending on a real or imaginary path of integration
+        //right now, a second derivative information is provided for the integration along an imaginary path
+        ComplexDerivativeInf imagDerivativeInf = new ComplexDerivativeInf() {
+            @Override
+            public void derivs(double x, Complex[] y, Complex[] dydx) {
+                dydx[0]= y[0].times(Complex.I);
+            }
+
+            @Override
+            public void jacobian(double x, Complex[] y, Complex[] dfdx, Complex[][] dfdy) {
+            }
+        };
+
         ComplexInitialConditions ics = new ComplexInitialConditions(Complex.NULL,new Complex[]{Complex.ONE});
 
+        long startIntegration = System.currentTimeMillis();
         //calculate the data with a DataProvider
-        ComplexOdeDataProvider provider = new ComplexOdeDataProvider(derivativeInf,ics);
+        ComplexOdeDataProvider provider = new ComplexOdeDataProvider(derivativeInf,imagDerivativeInf,ics);
         provider.setPlotRange(plotRange);
         provider.setData(data);
         provider.start();
+        long endIntegration = System.currentTimeMillis()-startIntegration;
+
+        //compare with implemented function
+        double xmin = -Math.PI;
+        double ymin = -Math.PI;
+        double dx = 2.*Math.PI/(xdim-1);
+        double dy = dx;
+        Complex tmpData[] = new Complex[xdim*ydim];
+        long startInternal = System.currentTimeMillis();
+        for (int y=0;y<ydim;y++){
+            for (int x=0;x<xdim;x++){
+                tmpData[y*xdim+x]=new Complex(xmin+dx*x,ymin+dy*y).exp();
+            }
+        };
+        long endInternal = System.currentTimeMillis()-startInternal;
 
 
-
-
-
-
-
-        /*
+        System.out.println("time requirement for integration: "+endIntegration+" ms.");
+        System.out.println("time requirement for interal functions: "+endInternal+" ms.");
 
         for (int y=0;y<ydim;y++){
             for (int x=0;x<xdim;x++){
-                System.out.print(data[y*xdim+x].toString()+" ");
+                assertEquals(tmpData[y*xdim+x].minus(data[y*xdim+x]).abs(),0.,1.E-3);
             }
-            System.out.println("\n");
         };
-        */
 
         /*
         System.out.println(IntStream.range(0,ydim)

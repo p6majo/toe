@@ -33,4 +33,8 @@ public class Range {
     public Integer getSamples() {
         return samples;
     }
+
+    public String toString(){
+        return "["+start.toString()+"|"+end.toString()+"]";
+    }
 }

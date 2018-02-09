@@ -20,4 +20,12 @@ public class ComplexInitialConditions {
         this.z = z;
         this.ics = ics;
     }
+
+    public Complex getZ() {
+        return z;
+    }
+
+    public Complex[] getIcs() {
+        return ics;
+    }
 }
