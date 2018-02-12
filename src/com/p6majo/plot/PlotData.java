@@ -1,10 +1,24 @@
 package com.p6majo.plot;
 
-public class PlotData<D extends Number> {
-    private Number[] data;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Supplier;
 
-    public PlotData(){
-        this.data = new Number[1];
+/**
+ * This class stores data points for each sample points in an ArrayList
+ * The ArrayList is filled empty points, such that each point of the data can be addressed directly
+ * via the corresponding getData,setData methods
+ * @param <D>
+ */
+public class PlotData<D> {
+    private ArrayList<D> data;
+    private Supplier<D> supplier;
+
+    public PlotData(Supplier<D> supplier){
+        //generate array of zero length
+        this.supplier = supplier;
+        this.data = new ArrayList<D>();
+        this.data.add(supplier.get());
     }
 
     /**
@@ -13,24 +27,24 @@ public class PlotData<D extends Number> {
      * @param sampleSize
      */
     public void extendDataSet(int sampleSize){
-        Number[] newData = new Number[this.data.length*sampleSize];
-        for (int n=0;n<this.data.length;n++) newData[n] = data[n];
-        this.data = newData;
+        int size =  this.data.size()*sampleSize;
+        for (int i=this.data.size();i<size;i++) this.data.add(supplier.get());
     }
 
-    public Number[] getData(){
+    public void setDataSize(int size){
+        for (int i=this.data.size();i<size;i++) this.data.add(supplier.get());
+    }
+
+    public ArrayList<D> getData(){
         return this.data;
     }
 
-    public void setData(Number[] data){
-        this.data = data;
-    }
 
     public D getData(int i){
-        return (D) this.data[i];
+        return this.data.get(i);
     }
 
-    public void setData(int i,Number data){
-        this.data[i]=data;
+    public void setData(int i,D data){
+        this.data.set(i,data);
     }
 }

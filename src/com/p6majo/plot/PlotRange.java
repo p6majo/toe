@@ -1,11 +1,13 @@
 package com.p6majo.plot;
 
+import javax.xml.ws.Provider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlotRange{
+public class PlotRange<D>{
     private List<Range> ranges;
     private long samplingPoints = 1;
+    private DataProvider<D> provider;
 
 
     public PlotRange(){
@@ -14,6 +16,7 @@ public class PlotRange{
 
     public void addRange(Range range){
         this.addRange(range.getStart(),range.getEnd(),range.getSamples());
+        if (range.getSamples()!=null) this.provider.getPlotData().extendDataSet(range.getSamples());
     }
 
     public void addRange(Number start, Number end, Integer samples){
@@ -33,6 +36,9 @@ public class PlotRange{
         return this.ranges.get(i);
     }
 
+    public void setDataProvider(DataProvider<D> provider){
+        this.provider = provider;
+    }
 
     public int getNumberOfRanges(){
         return ranges.size();

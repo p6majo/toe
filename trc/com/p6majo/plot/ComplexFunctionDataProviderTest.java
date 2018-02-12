@@ -14,7 +14,6 @@ public class ComplexFunctionDataProviderTest {
     public void start() {
         int xdim = 11;
         int ydim = 11;
-        final Complex data[] = new Complex[xdim*ydim];
 
         PlotRange plotRange = new PlotRange();
         plotRange.addRange(0,Math.PI*2,xdim);
@@ -23,15 +22,13 @@ public class ComplexFunctionDataProviderTest {
 
         ComplexFunctionDataProvider provider = new ComplexFunctionDataProvider(new FcnCos());
         provider.setPlotRange(plotRange);
-        System.out.println(data.toString());
-        provider.setData(data);
-        provider.start();
+         provider.start();
 
 
 
         for (int y=0;y<ydim;y++){
             for (int x=0;x<xdim;x++){
-                System.out.print(data[y*xdim+x].toString()+" ");
+                System.out.print(provider.getData(y*xdim+x).toString()+" ");
             }
             System.out.println("\n");
         };

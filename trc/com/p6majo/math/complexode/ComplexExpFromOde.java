@@ -1,4 +1,4 @@
-package com.p6majo.math.ode;
+package com.p6majo.math.complexode;
 
 import com.nr.ode.DerivativeInf;
 import com.nr.ode.Odeint;

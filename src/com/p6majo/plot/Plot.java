@@ -1,6 +1,8 @@
 package com.p6majo.plot;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * base class for plots
@@ -8,18 +10,25 @@ import java.util.List;
  * @version 1.0
  * @param <D> type of data (i.e. Double, Complex)
  */
-public abstract class Plot<D extends Number> {
+public abstract class Plot<D> {
 
-    final protected PlotData<D> plotData;
-    final protected PlotRange plotRange;
+    final protected PlotRange<D> plotRange;
     final public PlotOptions plotOptions;
     protected List<Primitive> primitiveList;
     protected DataProvider provider;
     protected OutputChannel out;
 
+
+    /**
+     * there are two possible scenarios of initializing a plot
+     * I) the plot ranges are set before the dataProvider is associated
+     * II) the dataProvider is associated before the ranges are set
+     *
+     * The plotRange has consequences on the number of data points are provided by the data provider
+     * Therefore, a change in plot Range feeds back to the data provider
+     */
     public Plot(){
         this.plotRange = new PlotRange();
-        this.plotData = new PlotData<D>();
         this.plotOptions  = new PlotOptions();
     }
 
@@ -49,12 +58,14 @@ public abstract class Plot<D extends Number> {
      * @param sampleSize
      */
     public void addRange(Number start, Number end, Integer sampleSize){
+        //when the provider is assoiciated already, the change in plotRange feeds back to the data provider
         this.plotRange.addRange(new Range(start,end,sampleSize));
-        if (sampleSize!=null) this.plotData.extendDataSet(sampleSize);
     }
 
     public void addDataProvider(DataProvider provider){
         this.provider = provider;
+        //if plot ranges are defined already, the required data is constructed when the plotRange is set in the provider
+        this.provider.setPlotRange(this.plotRange);
     }
 
 
@@ -75,16 +86,15 @@ public abstract class Plot<D extends Number> {
      * this method utilizes the dataProvider to generate one data point for each sampling point
      */
     public void generateData(){
-        provider.setPlotRange(plotRange);
-        provider.setData(plotData.getData());
-        provider.start();
-        this.plotData.setData(provider.getData());
+         provider.start();
     }
 
     public abstract void out();
 
-    public Number[] getData(){
-        return this.plotData.getData();
+    public int getDataSize(){
+        return this.provider.getPlotData().getData().size();
     }
+
+
 
 }

@@ -5,7 +5,7 @@ import com.p6majo.math.complex.Complex;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
-public class ComplexFunctionDataProvider extends DataProvider {
+public class ComplexFunctionDataProvider extends ComplexDataProvider {
 
     final private Function<Complex,Complex> function;
 
@@ -44,8 +44,9 @@ public class ComplexFunctionDataProvider extends DataProvider {
      */
     @Override
     public synchronized void start() {
-        Range xRange = super.range.getRange(0);
-        Range yRange = super.range.getRange(1);
+        long dataDuration = System.currentTimeMillis();
+        Range xRange = plotRange.getRange(0);
+        Range yRange = plotRange.getRange(1);
 
         int xSamples = xRange.getSamples();
         int ySamples = yRange.getSamples();
@@ -55,8 +56,6 @@ public class ComplexFunctionDataProvider extends DataProvider {
 
         double xmin = xRange.getStart().doubleValue();
         double ymin = yRange.getStart().doubleValue();
-
-        System.out.println(super.data.toString());
 
         //this is not so good since the reference to the old data array is destroyed
 
@@ -70,13 +69,8 @@ public class ComplexFunctionDataProvider extends DataProvider {
                 .map(function)
                 .toArray(Complex[]::new);
 
-        IntStream.range(0,xSamples*ySamples).forEach(i->super.data[i]=tmpData[i]);
+        IntStream.range(0,xSamples*ySamples).forEach(i->setData(i,tmpData[i]));
+        System.out.println("Data generated in "+(System.currentTimeMillis()-dataDuration)+" ms.");
     }
-
-
-    public Number[] getData(){
-        return super.data;
-    }
-
 
 }

@@ -13,7 +13,7 @@ import java.util.function.Function;
 
 import static org.junit.Assert.*;
 
-public class PlotComplexTest {
+public class PlotComplexSinTest {
 
     private PlotComplex cPlot ;
     private ComplexFunctionDataProvider cProvider;
@@ -41,7 +41,7 @@ public class PlotComplexTest {
     @Test
     public void testPlot(){
 
-        long dataLength = this.cPlot.getData().length;
+        long dataLength = this.cPlot.getDataSize();
         assertEquals(dataLength,gridsize*gridsize);
 
        // System.out.println(this.cPlot.getData().length+" ");

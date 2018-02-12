@@ -19,6 +19,14 @@ import static java.lang.Math.*;
  *
  * @author hwh
  *
+ * complexified version
+ * @author p6majo
+ *
+ * however, the Bulirsch-Stoer algorithm fails for complex functions with singular points
+ * it runs very nicely for sin, cos, and exp
+ *
+ * it fails to integrate sn, cn
+ *
  */
 public class ComplexStepperBS extends ComplexStepperBase{
   static final int KMAXX=8,IMAXX=KMAXX+1;

@@ -20,6 +20,12 @@ public class Complex extends Number implements Html,Comparable<Complex>,Cloneabl
 	
 	public double real;
 	public double imag;
+
+	public Complex(){
+	    this.real = 0.;
+	    this.imag = 0.;
+    }
+
 	public Complex(double re, double im) {
 		this.real = re;
 		this.imag = im;
@@ -129,7 +135,12 @@ public class Complex extends Number implements Html,Comparable<Complex>,Cloneabl
         return this.sin().divides(this.cos());
     }
     
-    
+    public Complex sqrt(){
+	    double r = Math.sqrt(this.abs());
+	    double phase = this.phase()/2.;
+	    return new Complex(r*Math.cos(phase),r*Math.sin(phase));
+    }
+
     public Complex clone() {
     	return new Complex(this.real,this.imag);
     }

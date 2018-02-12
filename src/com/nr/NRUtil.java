@@ -18,7 +18,16 @@ public class NRUtil {
   public static double SQR(final double a){return a*a;}
   public static float SQR(final float a){return a*a;}
   public static int SQR(final int a){return a*a;}
-  
+
+  /**
+   * returns a, when a>=0 and b>=0
+   * returns -a, when a<0 and b>=0
+   * returns -a, when a>=0 and b<0
+   * returns a, when a<0 and b<0
+   * @param a
+   * @param b
+   * @return
+   */
   public static double SIGN(final double a, final double b)
   {return b >= 0 ? (a >= 0 ? a : -a) : (a >= 0 ? -a : a);}
 

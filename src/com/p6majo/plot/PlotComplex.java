@@ -29,7 +29,7 @@ public class PlotComplex extends Plot<Complex> {
     Function<Point,Color> colorFunction = new Function<Point, Color>() {
         @Override
         public Color apply(Point p) {
-            Complex z = plotData.getData(p.y*width+p.x);
+            Complex z = (Complex) provider.getData(p.y*width+p.x);
             double phase = z.neg().phase();
             return Color.getHSBColor((float) ((phase+Math.PI)/2./Math.PI),1f,Math.min(1f,(float) (z.abs()/zmax)));
         }
@@ -38,7 +38,7 @@ public class PlotComplex extends Plot<Complex> {
     Function<Point,Color> colorFunctionWithContour = new Function<Point, Color>() {
         @Override
         public Color apply(Point p) {
-            Complex z = plotData.getData(p.y*width+p.x);
+            Complex z = (Complex) provider.getData(p.y*width+p.x);
             double phase = z.neg().phase();
             double e = edges[p.y][p.x];
             Color bg =  Color.getHSBColor((float) ((phase+Math.PI)/2./Math.PI),1f,Math.min(1f,(float) (z.abs()/zmax)));
@@ -54,7 +54,9 @@ public class PlotComplex extends Plot<Complex> {
     };
 
     public PlotComplex(DataProvider<Complex> provider){
+        //add supplier
         super.provider  = provider;
+        super.provider.setPlotRange(this.plotRange);
     }
 
     @Override
@@ -100,10 +102,7 @@ public class PlotComplex extends Plot<Complex> {
             default:
                 break;
         }
-
     }
-
-
 
     private void generateContourLines(int n){
         this.contours = new Color[width*height];
@@ -133,7 +132,7 @@ public class PlotComplex extends Plot<Complex> {
         for (int i=0;i<width;i++)
             for (int j=0;j<height;j++){
             int level = 0;
-            double val = plotData.getData(j*width+i).abs();
+            double val = ((Complex) provider.getData(j*width+i)).abs();
             for (int k=0;k<n;k++) {
                 if (levels[k] >= val) {
                     level = k-1;

@@ -3,7 +3,6 @@ package com.p6majo.plot;
 import com.p6majo.math.complex.Complex;
 import com.p6majo.math.complexode.ComplexDerivativeInf;
 import com.p6majo.math.complexode.ComplexInitialConditions;
-import com.p6majo.math.function.FcnCos;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -15,7 +14,6 @@ public class ComplexOdeDataProviderTest {
     public void start() {
         int xdim = 1001;
         int ydim = 1001;
-        final Complex data[] = new Complex[xdim*ydim];
 
         PlotRange plotRange = new PlotRange();
         plotRange.addRange(-Math.PI,Math.PI,xdim);
@@ -53,9 +51,8 @@ public class ComplexOdeDataProviderTest {
 
         long startIntegration = System.currentTimeMillis();
         //calculate the data with a DataProvider
-        ComplexOdeDataProvider provider = new ComplexOdeDataProvider(derivativeInf,imagDerivativeInf,ics);
+        ComplexOdeBSDataProvider provider = new ComplexOdeBSDataProvider(derivativeInf,imagDerivativeInf,ics);
         provider.setPlotRange(plotRange);
-        provider.setData(data);
         provider.start();
         long endIntegration = System.currentTimeMillis()-startIntegration;
 
@@ -79,7 +76,7 @@ public class ComplexOdeDataProviderTest {
 
         for (int y=0;y<ydim;y++){
             for (int x=0;x<xdim;x++){
-                assertEquals(tmpData[y*xdim+x].minus(data[y*xdim+x]).abs(),0.,1.E-3);
+                assertEquals(tmpData[y*xdim+x].minus(provider.getData(y*xdim+x)).abs(),0.,1.E-3);
             }
         };
 
