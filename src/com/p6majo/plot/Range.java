@@ -33,6 +33,7 @@ public class Range {
     public Integer getSamples() {
         return samples;
     }
+    public void setSamples(int samples){this.samples=samples;}
 
     public String toString(){
         return "["+start.toString()+"|"+end.toString()+"]";

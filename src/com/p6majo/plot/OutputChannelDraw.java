@@ -9,7 +9,6 @@ public class OutputChannelDraw implements OutputChannel {
     private Box range;
     private int width=300;
     private int height = 300;
-    private double zmax = 1;
 
     private final PlotOptions options ;
     private final Plot plot;
@@ -19,10 +18,9 @@ public class OutputChannelDraw implements OutputChannel {
         this.plot = plot;
         this.width = plot.plotRange.getRange(0).getSamples();
         this.height = plot.plotRange.getRange(1).getSamples();
-        this.zmax = plot.plotRange.getRange(2).getEnd().doubleValue();
 
         frame = new Draw();
-        frame.setCanvasSize(width,height);
+        frame.setCanvasSize(width+1,height+1);
         frame.setXscale(0,width);
         frame.setYscale(0,height);
         frame.enableDoubleBuffering();
@@ -33,10 +31,13 @@ public class OutputChannelDraw implements OutputChannel {
      */
     @Override
     public void finished() {
-        primitives.stream()
+        primitivePoints.stream()
                 .forEach(p->{frame.setPenColor(p.color);
-                             frame.point(p.point.x,p.point.y);
+                             frame.point(p.point.x,height-p.point.y);
                             });
+        primitiveLines.stream()
+                .forEach(l->{frame.setPenColor(l.color);
+                             frame.line(l.start.x,height-l.start.y,l.end.x,height-l.end.y);});
         frame.show();
     }
 

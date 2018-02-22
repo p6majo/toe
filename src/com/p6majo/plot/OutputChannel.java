@@ -6,14 +6,27 @@ import java.util.List;
 
 public interface OutputChannel {
 
-    List<PrimitivePoint> primitives = new ArrayList<PrimitivePoint>();
+    List<PrimitivePoint> primitivePoints = new ArrayList<PrimitivePoint>();
+    List<PrimitiveLine> primitiveLines = new ArrayList<PrimitiveLine>();
+
+    default void addPrimitive(Primitive primitive){
+        if (primitive instanceof PrimitivePoint)
+            primitivePoints.add((PrimitivePoint) primitive);
+        else if (primitive instanceof PrimitiveLine)
+            primitiveLines.add((PrimitiveLine) primitive);
+
+    }
 
     default void addPrimitive(PrimitivePoint primitive){
-        primitives.add(primitive);
+            primitivePoints.add((PrimitivePoint) primitive);
+    }
+
+    default void addPrimitive(PrimitiveLine primitive){
+            primitiveLines.add((PrimitiveLine) primitive);
     }
 
     default void addPrimitives(Collection<PrimitivePoint>primitives){
-        primitives.addAll(primitives);
+        primitivePoints.addAll(primitives);
     }
 
     /**

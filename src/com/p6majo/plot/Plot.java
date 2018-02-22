@@ -15,7 +15,7 @@ public abstract class Plot<D> {
     final protected PlotRange<D> plotRange;
     final public PlotOptions plotOptions;
     protected List<Primitive> primitiveList;
-    protected DataProvider provider;
+    protected DataProvider<D> provider;
     protected OutputChannel out;
 
 

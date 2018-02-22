@@ -23,6 +23,13 @@ public class PlotComplex extends Plot<Complex> {
 
     private OutputChannel out ;
 
+
+    public PlotComplex(DataProvider<Complex> provider){
+        //add supplier
+        super.provider  = provider;
+        super.provider.setPlotRange(this.plotRange);
+    }
+
     /**
      * A function that calculates the color of a complex value indicating its phase information
      */
@@ -53,11 +60,6 @@ public class PlotComplex extends Plot<Complex> {
         }
     };
 
-    public PlotComplex(DataProvider<Complex> provider){
-        //add supplier
-        super.provider  = provider;
-        super.provider.setPlotRange(this.plotRange);
-    }
 
     @Override
     public void out() {
