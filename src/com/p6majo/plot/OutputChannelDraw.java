@@ -46,6 +46,6 @@ public class OutputChannelDraw implements OutputChannel {
      */
     @Override
     public void close() {
-
+        frame.clear();
     }
 }

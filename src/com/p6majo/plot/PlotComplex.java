@@ -23,13 +23,6 @@ public class PlotComplex extends Plot<Complex> {
 
     private OutputChannel out ;
 
-
-    public PlotComplex(DataProvider<Complex> provider){
-        //add supplier
-        super.provider  = provider;
-        super.provider.setPlotRange(this.plotRange);
-    }
-
     /**
      * A function that calculates the color of a complex value indicating its phase information
      */
@@ -38,6 +31,7 @@ public class PlotComplex extends Plot<Complex> {
         public Color apply(Point p) {
             Complex z = (Complex) provider.getData(p.y*width+p.x);
             double phase = z.neg().phase();
+            if (phase<0) phase+=Math.PI*2;
             return Color.getHSBColor((float) ((phase+Math.PI)/2./Math.PI),1f,Math.min(1f,(float) (z.abs()/zmax)));
         }
     };
@@ -47,6 +41,7 @@ public class PlotComplex extends Plot<Complex> {
         public Color apply(Point p) {
             Complex z = (Complex) provider.getData(p.y*width+p.x);
             double phase = z.neg().phase();
+            if (phase<0) phase+=Math.PI*2;
             double e = edges[p.y][p.x];
             Color bg =  Color.getHSBColor((float) ((phase+Math.PI)/2./Math.PI),1f,Math.min(1f,(float) (z.abs()/zmax)));
             Color fg = new Color(0f,0f,0f,(float) (1.-0.25*Math.min(4.,edges[p.y][p.x])));
@@ -60,12 +55,20 @@ public class PlotComplex extends Plot<Complex> {
         }
     };
 
+    public PlotComplex(DataProvider<Complex> provider){
+        //add supplier
+        super.provider  = provider;
+        super.provider.setPlotRange(this.plotRange);
+    }
 
     @Override
     public void out() {
         switch(super.plotOptions.getOutputOption()){
             case DEFAULT:
                 this.out = new OutputChannelDraw(this,this.plotOptions);
+                break;
+            case FILE:
+                this.out = new OutputChannelFile(this,this.plotOptions);
             default:
                 break;
         }

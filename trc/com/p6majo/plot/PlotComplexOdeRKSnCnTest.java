@@ -13,7 +13,7 @@ public class PlotComplexOdeRKSnCnTest {
 
     private PlotComplex cPlot ;
     private ComplexDataProvider cProvider;
-    private int gridsize = 1011;
+    private int gridsize = 1001;
 
     //elliptic function parameter
     private double m = 0.64;
