@@ -26,7 +26,7 @@ JH = javah
 	
 IDIRS  = -I/usr/lib/jvm/java-8-oracle/include -I/usr/lib/jvm/java-8-oracle/include/linux
 CCLIBS = -lc -lm
-PTH_JAVA = /home/jmartin/workbase/toe/out/
+PTH_JAVA = /home/jmartin/workbase/toe2/out/production
 
 OFILES = nswc.so
 
