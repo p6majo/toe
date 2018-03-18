@@ -33,11 +33,11 @@ public class OutputChannelDraw implements OutputChannel {
     public void finished() {
         primitivePoints.stream()
                 .forEach(p->{frame.setPenColor(p.color);
-                             frame.point(p.point.x,height-p.point.y);
+                             frame.point(p.point.x,p.point.y);
                             });
         primitiveLines.stream()
                 .forEach(l->{frame.setPenColor(l.color);
-                             frame.line(l.start.x,height-l.start.y,l.end.x,height-l.end.y);});
+                             frame.line(l.start.x,l.start.y,l.end.x,l.end.y);});
         frame.show();
     }
 

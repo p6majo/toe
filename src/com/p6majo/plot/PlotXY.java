@@ -4,7 +4,9 @@ package com.p6majo.plot;
 import com.p6majo.math.complex.Complex;
 import com.p6majo.math.utils.Utils;
 
+
 import java.awt.*;
+import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -32,6 +34,10 @@ public class PlotXY extends Plot<Double> {
         //add supplier
         super.provider  = provider;
         super.provider.setPlotRange(this.plotRange);
+    }
+
+    public PlotXY(List<DataProvider<Double>> providerList){
+
     }
 
     @Override

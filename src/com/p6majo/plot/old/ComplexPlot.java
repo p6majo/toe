@@ -73,7 +73,7 @@ public class ComplexPlot{
      * @return
      */
     private Color getColor(Complex z){
-        double phase = z.phase();
+        double phase = z.arg();
         double mod = z.abs();
         if (phase<0) phase+=2.*Math.PI;
         int transition = (int) Math.floor(phase*6./2./Math.PI);

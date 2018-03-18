@@ -15,7 +15,7 @@ public class ComplexTest {
         System.out.println(factor.toString()+"*"+factor2.toString()+"="+product.toString());
 
         assertEquals(product.minus(new Complex(factor.re()*factor2.re()-factor.im()*factor2.im(),
-                factor.re()*factor2.im()+factor2.re()*factor.im())).abs(),0.,Complex.EPS_FLOAT);
+                factor.re()*factor2.im()+factor2.re()*factor.im())).abs(),0.,1.e-6);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class ComplexTest {
         System.out.println(summand.toString()+"+"+summand2.toString()+"="+sum.toString());
 
         assertEquals(sum.minus(new Complex(summand.re()+summand2.re(),
-                summand.im()+summand2.im())).abs(),0.,Complex.EPS_FLOAT);
+                summand.im()+summand2.im())).abs(),0.,1.e-6);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class ComplexTest {
         System.out.println(minuend.toString()+"-"+subtrahend.toString()+"="+difference.toString());
 
         assertEquals(difference.minus(new Complex(minuend.re()-subtrahend.re(),
-                minuend.im()-subtrahend.im())).abs(),0.,Complex.EPS_FLOAT);
+                minuend.im()-subtrahend.im())).abs(),0.,1.e-6);
     }
 
     @Test
@@ -50,6 +50,6 @@ public class ComplexTest {
         Complex quotient = dividend.divides(divisor);
         System.out.println(dividend.toString()+"/"+divisor.toString()+"="+quotient.toString());
 
-        assertEquals(quotient.minus(dividend.times(divisor.conjugate()).scale(1./divisor.abs()/divisor.abs())).abs(),0.,Complex.EPS_FLOAT);
+        assertEquals(quotient.minus(dividend.times(divisor.conjugate()).scale(1./divisor.abs()/divisor.abs())).abs(),0.,1.e-6);
     }
 }

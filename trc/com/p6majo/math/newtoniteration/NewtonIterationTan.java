@@ -16,7 +16,7 @@ public class NewtonIterationTan {
     public void testNewtonIterationTan() throws Exception {
 
 
-        Resolution res = new Resolution(8*688,8*288);
+        Resolution res = new Resolution(2*688,2*288);
         Box box = new Box(-5.16,-2.16,5.16,2.16);
 
         ComplexFunction tan = new ComplexTan();

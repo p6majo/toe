@@ -16,12 +16,12 @@ public class PlotComplexFracExpTest {
 
     private PlotComplex cPlot ;
     private ComplexFunctionDataProvider cProvider;
-    private int gridsize = 1401;
+    private int gridsize = 1400;
 
     @Before
     public void setUp() throws Exception {
         Function<Complex,Complex> fracExp = new Function<Complex,Complex>(){
-            ComplexFractionalExp fracExp = new ComplexFractionalExp(new Fraction(1,2),1.e-3,100);
+            ComplexFractionalExp fracExp = new ComplexFractionalExp(new Complex(1./4,0.0),1.e-3,100);
             @Override
             public Complex apply(Complex complex) {
                 return fracExp.eval(complex);
@@ -31,15 +31,15 @@ public class PlotComplexFracExpTest {
         this.cProvider = new ComplexFunctionDataProvider(fracExp);
         this.cPlot = new PlotComplex(cProvider);
 
-        this.cPlot.addRange(-3,3,gridsize);//xrange
-        this.cPlot.addRange(-3,3,gridsize);//yrange
+        this.cPlot.addRange(-6,2,2*gridsize);//xrange
+        this.cPlot.addRange(-2,2,gridsize);//yrange
         this.cPlot.addRange(0,1);//zrange
 
-        this.cPlot.plotOptions.setContourLines(21);
-        this.cPlot.plotOptions.setContourRange(new Range(0.1,10));
+        this.cPlot.plotOptions.setContourLines(41);
+        this.cPlot.plotOptions.setContourRange(new Range(0.01,100));
         this.cPlot.plotOptions.setLogScaleZ(true);
-        this.cPlot.plotOptions.setOutputOption(PlotOptions.OutputOption.DEFAULT);
-        this.cPlot.plotOptions.setOutputFilename("test.ppm");
+        this.cPlot.plotOptions.setOutputOption(PlotOptions.OutputOption.FILE);
+        this.cPlot.plotOptions.setOutputFilename("exp0.25.ppm");
 
     }
 
@@ -47,7 +47,7 @@ public class PlotComplexFracExpTest {
     public void testPlot(){
 
         long dataLength = this.cPlot.getDataSize();
-        assertEquals(dataLength,gridsize*gridsize);
+        assertEquals(dataLength,2*gridsize*gridsize);
 
        // System.out.println(this.cPlot.getData().length+" ");
 

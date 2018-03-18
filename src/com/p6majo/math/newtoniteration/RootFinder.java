@@ -48,7 +48,7 @@ public class RootFinder {
         ComplexPolynomial derivative = pol.derivative();
         double scaling = 0.001/deg/deg;
 
-        if (derivative.eval(root).times(Complex.ONE.scale(0.001/deg/deg)).compareTo(Complex.NULL)==0) {
+        if (derivative.eval(root).times(Complex.ONE.scale(0.001/deg/deg)).equals(Complex.NULL,1.e-4)) {
             this.deg --;
             checkMultiplicity(root,derivative);
         }

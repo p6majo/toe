@@ -117,7 +117,7 @@ public class FourierImage extends NeuralImage {
 		
 		//re-scale data
 		for (i=0;i<invData.length;i++) 
-			returnData[i]=(byte) (Math.signum(invData[i].real)*invData[i].abs());
+			returnData[i]=(byte) (Math.signum(invData[i].re())*invData[i].abs());
 		
 		return returnImage;
 	}

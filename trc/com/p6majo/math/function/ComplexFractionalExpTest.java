@@ -11,10 +11,10 @@ public class ComplexFractionalExpTest {
 
     @Test
     public void eval() {
-        ComplexFunction fracExp = new ComplexFractionalExp(new Fraction(2,3),1e-4,100);
+        ComplexFunction fracExp = new ComplexFractionalExp(new Complex(0.999999,0),1e-4,80);
 
         for (int i=0;i<10;i++){
-            Complex z=Complex.random(new Box(1));
+            Complex z=Complex.random(new Box(0.5));
             Complex expz = fracExp.eval(z);
             System.out.println(z.toString()+": "+expz.toString()+" "+z.exp().toString());
         }

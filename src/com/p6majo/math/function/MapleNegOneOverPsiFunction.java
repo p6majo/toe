@@ -17,8 +17,8 @@ public class MapleNegOneOverPsiFunction extends MapleFunction {
 	@Override
 	public Complex eval(Complex z) throws MapleException {
 		String number = "";
-		if (z.imag<0) number = String.format(Locale.ROOT,"%f-%f*I",z.real,Math.abs(z.imag));
-		else number = String.format(Locale.ROOT,"%f+%f*I",z.real,z.imag);
+		if (z.im()<0) number = String.format(Locale.ROOT,"%f-%f*I",z.re(),Math.abs(z.im()));
+		else number = String.format(Locale.ROOT,"%f+%f*I",z.re(),z.im());
 		ComplexNumeric n = (ComplexNumeric) super.engine.evaluate(String.format("-1/Psi(%s):", number) );
 		return new Complex(n.realPart().doubleValue(),n.imaginaryPart().doubleValue());
 	}
@@ -31,8 +31,8 @@ public class MapleNegOneOverPsiFunction extends MapleFunction {
 	@Override
 	public Complex evalDerivative(Complex z) throws MapleException{
 		String number = "";
-		if (z.imag<0) number = String.format(Locale.ROOT,"%f-%f*I",z.real,Math.abs(z.imag));
-		else number = String.format(Locale.ROOT,"%f+%f*I",z.real,z.imag);
+		if (z.im()<0) number = String.format(Locale.ROOT,"%f-%f*I",z.re(),Math.abs(z.im()));
+		else number = String.format(Locale.ROOT,"%f+%f*I",z.re(),z.im());
 		ComplexNumeric n = (ComplexNumeric) super.engine.evaluate(String.format("evalf(Psi(1,%s)/Psi(%s)^2):",number,number ));
 		return new Complex(n.realPart().doubleValue(),n.imaginaryPart().doubleValue());
 	}

@@ -49,9 +49,9 @@ public class PlotSinTest {
 
 
         this.plot.generateData();
-        ArrayList<Double> data = this.plot.provider.getPlotData().getData();
 
-        System.out.println(data.stream().map(x->x.toString()).collect(Collectors.joining("\n")));
+       // ArrayList<Double> data = this.plot.provider.getPlotData().getData();
+       // System.out.println(data.stream().map(x->x.toString()).collect(Collectors.joining("\n")));
 
         this.plot.out();
 

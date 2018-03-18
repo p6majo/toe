@@ -11,6 +11,7 @@ import com.p6majo.math.complex.Complex;
 public class ComplexBesselJNuExtension extends ComplexFunction{
 
 		private Complex order;
+		private static double EPS = 1.e-4;
 
 		public ComplexBesselJNuExtension(Complex order){
 			this.order = order;
@@ -39,7 +40,7 @@ public class ComplexBesselJNuExtension extends ComplexFunction{
 			Complex Istart = Complex.ONE.scale(2.*Math.PI).reciprocal().times(f[0].plus(f[1]));
 			Complex Inext = Istart;
 			
-			while (Inext.minus(Istart).divides(Inext).abs()>Complex.EPS_FLOAT || k==1) {
+			while (Inext.minus(Istart).divides(Inext).abs()>EPS || k==1) {
 				Istart=Inext;
 				k++;
 				steps = (steps-1)*2+1;
@@ -63,7 +64,7 @@ public class ComplexBesselJNuExtension extends ComplexFunction{
 				Inext = Inext.scale(1./Math.PI/2.*dx);
 				
 				f = fnext;
-				if (Inext.abs()<Complex.EPS_FLOAT) return Complex.NULL;
+				if (Inext.abs()<EPS) return Complex.NULL;
 				//if (Inext.abs()<Complex.EPS0) return Complex.NULL;
 			}
 			//System.out.println(k);

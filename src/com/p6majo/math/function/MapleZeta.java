@@ -16,8 +16,8 @@ public class MapleZeta extends MapleFunction {
 	@Override
 	public Complex eval(Complex z) throws MapleException {
 		String number = "";
-		if (z.imag<0) number = String.format(Locale.ROOT,"%f-%f*I",z.real,Math.abs(z.imag));
-		else number = String.format(Locale.ROOT,"%f+%f*I",z.real,z.imag);
+		if (z.im()<0) number = String.format(Locale.ROOT,"%f-%f*I",z.re(),Math.abs(z.im()));
+		else number = String.format(Locale.ROOT,"%f+%f*I",z.re(),z.im());
 		//System.out.print(number+" ");
 		ComplexNumeric n = (ComplexNumeric) super.engine.evaluate(String.format("evalf(Zeta(%s)):", number) );
 		//System.out.println(n.toString());

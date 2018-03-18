@@ -75,7 +75,7 @@ public class ComplexOutput {
     ysave =new Complex[nvar][kmax];
     for (int i=0; i<nvar; i++)
       for (int k=0; k<kold; k++)
-        ysave[i][k]=tempmat[i][k].clone();
+        ysave[i][k]=(Complex) tempmat[i][k].clone();
   }
 
   /**
@@ -99,7 +99,7 @@ public class ComplexOutput {
     if (kmax <= 0) return;
     if (count == kmax) resize();
     for (int i=0;i<nvar;i++)
-      ysave[i][count]=y[i].clone();
+      ysave[i][count]=(Complex) y[i].clone();
     xsave[count++]=x;
   }
 

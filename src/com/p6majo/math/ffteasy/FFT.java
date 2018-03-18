@@ -185,8 +185,7 @@ public class FFT {
 	    c[N/2-b]=c[N/2-b].scale(0.5);
 	  }
 	  temp1 = c[0].clone();
-	  c[0].real = temp1.real+temp1.imag;
-	  c[0].imag = temp1.real-temp1.imag;
+	  c[0]= new Complex(temp1.re()+temp1.im(), temp1.re()-temp1.im());
 	  /* Set b=0 term in transform */
 	  /* Put b=N/2 term in imaginary part of first term */
 	  
@@ -223,8 +222,7 @@ public class FFT {
 	    d[N/2-b]=d[N/2-b].scale(0.5);
 	  }
 	  temp1 = d[0].clone();
-	  d[0].real = temp1.real+temp1.imag;
-	  d[0].imag = temp1.real-temp1.imag;
+	  d[0]=new Complex( temp1.re()+temp1.im(),temp1.re()-temp1.im());
 	  d[0]=d[0].scale(0.5);
 	 
 	  d=fftc1(d,true);
@@ -232,8 +230,8 @@ public class FFT {
 	  //convert into an array of reals
 	  double[] returnReals = new double[N];
 	  for (int a=0;a<N/2;a++) {
-		  returnReals[2*a]=d[a].real;
-		  returnReals[2*a+1]=d[a].imag;
+		  returnReals[2*a]=d[a].re();
+		  returnReals[2*a+1]=d[a].im();
 	  }
 	  return returnReals;
 	}
@@ -264,7 +262,7 @@ public class FFT {
 		Complex[] inv = fftcn(f,size,true);
 		double[] returnValues = new double[inv.length];
 		for (int i=0;i<inv.length;i++) {
-			returnValues[i]=inv[i].real;
+			returnValues[i]=inv[i].re();
 		}
 		return returnValues;
 	}

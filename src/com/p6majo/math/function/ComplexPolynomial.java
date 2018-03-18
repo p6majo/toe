@@ -38,7 +38,7 @@ public class ComplexPolynomial extends ComplexFunction{
 		String out = "";
 		for(int i=0;i<=D;++i) {
 			Integer I=new Integer(i);
-		    if (z[i].compareTo(Complex.NULL)!=0) out+="("+z[i].toString()+")z^"+I.toString()+"+";
+		    if (z[i].equals(Complex.NULL)) out+="("+z[i].toString()+")z^"+I.toString()+"+";
 		}
 		//remove trailing plus sign
 		if (out.substring(out.length()-1, out.length()).compareTo("+")==0) out = out.substring(0,out.length()-1);

@@ -24,6 +24,7 @@ public class NewtonMapleIterator {
 	
 	private TreeSet<Complex> roots = new TreeSet<Complex>();
 	private Color[] colors;
+	private static double EPS = 1.e-4;
 	
 	/**
 	 * for efficiency the expected function is f(x)/f'(x)
@@ -170,7 +171,7 @@ public class NewtonMapleIterator {
 						
 						if (it.getResult()!=null) {
 							for (Complex root:indexedRoots){
-								if (root.compareTo(it.getResult())==0) {
+								if (root.equals(it.getResult(),EPS)) {
 									index = indexedRoots.indexOf(root);
 									break;
 								}
@@ -224,7 +225,7 @@ public class NewtonMapleIterator {
 			Complex z1 = null;
 			double distance = 1;
 			
-			while (distance > Complex.EPS_FLOAT && steps<ITERATIONDEPTH) {
+			while (distance > EPS && steps<ITERATIONDEPTH) {
 				z1 = z.minus(function.eval(z));
 				Complex diff = z1.minus(z);
 				distance = diff.abs();

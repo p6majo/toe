@@ -14,7 +14,7 @@ import com.p6majo.math.utils.Utils;
  * @author jmartin
  *
  */
-public class ComplexFractionalExp extends ComplexFunction{
+public class ComplexMittagLeffler extends ComplexFunction{
 
 	    private Complex alpha;
 	    private Complex[] posCoeff;
@@ -26,25 +26,26 @@ public class ComplexFractionalExp extends ComplexFunction{
      * a value for the required precision can be given. The calculation stops, when the increase is
      * smaller than the precision
      * and a maximal value for the order up to which the laurent series is calculated at most
-	 * The generated function is solution to the fractional differential equation D^\alpha f=f
      * @param alpha
      * @param precision
      * @param maxOrder
      */
-		public ComplexFractionalExp(Complex alpha, double precision, int maxOrder){
+		public ComplexMittagLeffler(Complex alpha, double precision, int maxOrder){
 
+			if (alpha.re()<0) Utils.errorMsg("Real part of alpha has to be larger than zero, but received "+alpha.toString()+" instead.");
 		    this.alpha=alpha;
             this.precision = precision;
             this.maxOrder = maxOrder;
+			NswcMath math = new NswcMath();
 
-            NswcMath math = new NswcMath();
+            Gamma gamma = new Gamma();
 
             //initialize an array of coefficients to reduce the amount of Gamma function evaluations
             this.posCoeff = new Complex[maxOrder+1];
 
-             for (int i=0;i<maxOrder+1;i++) {
-                posCoeff[i] = math.Gamma(alpha.scale(i).plus(alpha));
-                System.out.println(posCoeff[i].toString());
+            for (int i=0;i<maxOrder+1;i++) {
+                posCoeff[i] = math.Gamma(Complex.ONE.plus(alpha.scale(i)));
+               System.out.println(posCoeff[i].toString());
             }
             System.out.println("Coefficients calculated up to order "+maxOrder);
 
@@ -57,20 +58,21 @@ public class ComplexFractionalExp extends ComplexFunction{
 		    Complex result = Complex.ONE;
 		    Complex old = Complex.ONE;
 		    Complex diff = Complex.ONE;
-		    Complex factor = z.log().times(alpha).exp();
-		    Complex numerator = factor.clone();
+		    Complex factor = z;
+		    Complex numerator = (Complex) factor.clone();
 
-		    while (order<maxOrder && diff.abs()/result.abs()>this.precision){
-		        old = result.clone();
+		    while (order<maxOrder && diff.abs()>this.precision){
+		        old = (Complex) result.clone();
 		        result=result.plus(numerator.divides(posCoeff[order]));
 
 		        diff = old.minus(result);
 		        numerator = numerator.times(factor);
 		        order++;
             }
-		    if (order==maxOrder) System.out.println("Result did not converge for z="+z.toString()+". Try to increase the order.");
+            //System.out.println(order);
+		    if (order==maxOrder) Utils.errorMsg("Result did not converge for z="+z.toString()+". Try to increase the order.");
 
-			return result.times(z.log().times(alpha.minus(Complex.ONE)).exp());
+			return result;
 		}
 
 		 @Override

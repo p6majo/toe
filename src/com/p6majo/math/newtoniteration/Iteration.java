@@ -8,6 +8,7 @@ public class Iteration {
         int steps = -1;
         Complex result = null;
         double MAXVAL = 1.E99;
+        double EPS = 1.e-3;
 
         public Iteration(ComplexFunction function, Complex z, int iterationDepth) {
             //System.out.println("Iteration with start: "+z.toString());
@@ -16,7 +17,7 @@ public class Iteration {
 
             //we try to be more precise than float precision to identify closeby numbers
             //in the comparator of complex numbers on the level of float precision
-            while (distance > Complex.EPS_FLOAT/10 && steps<iterationDepth) {
+            while (distance > EPS/10 && steps<iterationDepth) {
                 z1 = z.minus(function.eval(z).divides(function.evalDerivative(z)));
                 Complex diff = z1.minus(z);
                 distance = diff.abs(); //absolute distance is sufficient, since we approach zero

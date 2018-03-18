@@ -30,6 +30,7 @@ public class NewtonIterator {
 	private TreeSet<Complex> roots = new TreeSet<Complex>();
 	private List<Complex> indexedRoots;
 	private Color[] colors;
+	private double EPS  = 1.e-4;
 	
 	
 	public NewtonIterator(ComplexFunction function,Box box, Resolution resolution, String name) {
@@ -161,7 +162,7 @@ public class NewtonIterator {
 
 				if (it.getResult()!=null) {
 					for (Complex root:indexedRoots){
-						if (root.compareTo(it.getResult())==0) {
+						if (root.equals(it.getResult(),EPS)) {
 							index = indexedRoots.indexOf(root);
 							break;
 						}
@@ -350,7 +351,7 @@ public class NewtonIterator {
 						
 						if (it.getResult()!=null) {
 							for (Complex root:indexedRoots){
-								if (root.compareTo(it.getResult())==0) {
+								if (root.equals(it.getResult(),EPS)) {
 									index = indexedRoots.indexOf(root);
 									break;
 								}
