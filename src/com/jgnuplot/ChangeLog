@@ -1,0 +1,11 @@
+2006-04-25  Pander <pander@users.sourceforge.net>
+
+	* general: Java 1.6 compliance and reducing checkstyle violations
+
+2006-10-03  Pander <pander@users.sourceforge.net>
+
+	* general: Small bug fix [ 1517826 ] NullPointerException in Plot.setOutput(...).
+
+2005-09-15  Pander <pander@users.sourceforge.net>
+
+	* general: Initial release.

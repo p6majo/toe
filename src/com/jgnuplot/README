@@ -1,0 +1,58 @@
+Name
+====
+jgnuplot
+
+Description
+===========
+jgnuplot is a Java library for interfacing with the gnuplot plotting package
+which outputs to X11, PostScript, PNG, GIF and other formats.
+
+For more information, please see http://jgnuplot.sourceforge.net
+
+Build
+=====
+The jar files can be build with the command:
+
+	$ ant
+
+This compiles, tests and packages the software, resulting in the these files:
+
+	dist/
+		jgnuplot-[version].jar
+		jgnuplot-[version].jar.MD5
+		jgnuplot-[version]-src.tar.gz
+		jgnuplot-[version]-src.tar.gz.MD5
+		jgnuplot-[version]-src.zip
+		jgnuplot-[version]-src.zip.MD5
+		doc/
+			api/
+				index.html
+				...
+
+These and any intermediate files can be removed by the command:
+
+	$ ant clean
+
+Test
+====
+The junit test can be run with the command:
+
+	$ ant test
+
+Development
+===========
+Eclipse .project and .classpath files are included in the source jar and
+can be imported as a project called jgnuplot.
+
+Also junit launcher for Eclipse is avilable. To use it, make a link called
+	.jgnuplot.launch
+from
+	~/workspace/.metadata/.plugins/org.eclipse.debug.core/.launches
+to
+	~/projects/jgnuplot/.jgnuplot.launch
+
+Install
+=======
+
+Rename the resulting jgnupliot-[version].jar to jgnuplot.jar and put it in a
+general place on the system, e.g. /opt/jgnuplot.jar

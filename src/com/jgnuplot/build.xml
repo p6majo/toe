@@ -1,0 +1,72 @@
+<project name='jgnuplot' default='dist' basedir='.'>
+	<description>The jgnuplot Java package provides an interface to the open source gnuplot which is a command-driven interactive function and data plotting program.</description>
+
+	<property file='build.properties'/>
+
+	<target name='init'>
+		<tstamp>
+			<format property='TODAY' pattern='yyyyMMdd'/>
+		</tstamp>
+		<mkdir dir='build'/>
+	</target>
+
+	<target name='build' depends='init' description='make build'>
+		<mkdir dir='build'/>
+		<javac srcdir='src' destdir='build'/>
+	</target>
+
+	<target name='test' depends='build' description='run unit test'>
+		<junit>
+			<classpath>
+				<pathelement location='${junit-jar}'/>
+			</classpath>
+			<test name='org.${name}.GraphTest'>
+			</test>
+		</junit>
+	</target>
+
+	<target name='doc' depends='build' description='make documentation'>
+		<javadoc packagenames='org.${name}.*' sourcepath='src' destdir='dist/doc/api' private='true' use='true' linksource='yes'/>
+	</target>
+
+	<target name='dist' depends='doc' description='make distribution'>
+		<copy file='README' todir='build'/>
+		<copy file='LICENSE' todir='build'/>
+		<copy file='ChangeLog' todir='build'/>
+		<mkdir dir='dist'/>
+		<jar jarfile='dist/${name}-${version}.jar' basedir='build'>
+			<manifest>
+				<attribute name='Built-By' value='Pander'/>
+				<section name='${name}'>
+					<attribute name='Specification-Title' value='${name}'/>
+					<attribute name='Specification-Version' value='${version}'/>
+					<attribute name='Specification-Vendor' value='Pander'/>
+					<attribute name='Implementation-Title' value='org.${name}'/>
+					<attribute name='Implementation-Version' value='${version} ${TODAY}'/> 
+					<attribute name='Implementation-Vendor' value='Pander'/>
+				</section>
+				<section name='org/${name}/'>
+					<attribute name='Sealed' value='true'/>
+				</section>
+			</manifest>
+		</jar>
+		<checksum file='dist/${name}-${version}.jar' forceOverwrite='yes'/>
+		<zip destfile='dist/${name}-${version}-src.zip' update='true'>
+			<zipfileset dir='.' includes='LICENSE README ChangeLog build.properties build.xml .classpath .project .${name}.launch' prefix='${name}-${version}-src'/>
+			<zipfileset dir='src' includes='**/*.java' prefix='${name}-${version}-src/src'/>
+			<zipfileset dir='test' includes='**/*.java **/*.dat' prefix='${name}-${version}-src/test'/>
+		</zip>
+		<checksum file='dist/${name}-${version}-src.zip' forceOverwrite='yes'/>
+		<tar destfile='dist/${name}-${version}-src.tar.gz' compression='gzip'>
+			<tarfileset dir='.' includes='LICENSE README ChangeLog build.properties build.xml .classpath .project .junit.launch' prefix='${name}-${version}-src'/>
+			<tarfileset dir='src' includes='**/*.java' prefix='${name}-${version}-src/src'/>
+			<tarfileset dir='test' includes='**/*.java **/*.dat' prefix='${name}-${version}-src/test'/>
+		</tar>
+		<checksum file='dist/${name}-${version}-src.tar.gz' forceOverwrite='yes'/>
+	</target>
+
+	<target name='clean' description='clean up'>
+		<delete dir='build'/>
+		<delete dir='dist'/>
+	</target>
+</project>
