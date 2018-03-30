@@ -1,0 +1,3475 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<graph id="Autobahnkreuze" directed="false">
+	<node id="AACHEN - LAURENSBERG (A 4)">
+		<data key="lat">50.803886</data>
+		<data key="lon">6.07693</data>
+	</node>
+	<node id="AM LOHFELDENER RÜSSEL (A 49)">
+		<data key="lat">51.27329</data>
+		<data key="lon">9.529915</data>
+	</node>
+	<node id="ASSLAR (A 480)">
+		<data key="lat">50.57643</data>
+		<data key="lon">8.480021</data>
+	</node>
+	<node id="BAD HOMBURGER KREUZ">
+		<data key="lat">50.1982</data>
+		<data key="lon">8.649153</data>
+	</node>
+	<node id="BAD NEUENAHR (A 573)">
+		<data key="lat">50.552837</data>
+		<data key="lon">7.1194754</data>
+	</node>
+	<node id="BAD OEYNHAUSEN - SÜD (A 30)">
+		<data key="lat">52.2077</data>
+		<data key="lon">8.707174</data>
+	</node>
+	<node id="BEINHORN (A 37)">
+		<data key="lat">52.44323</data>
+		<data key="lon">9.93545</data>
+	</node>
+	<node id="BERLIN -  PRENZLAUER PROMENADE (A 114)">
+		<data key="lat">52.635487</data>
+		<data key="lon">13.42714</data>
+	</node>
+	<node id="BERLIN - LANDSBGR. ALLEE (A 100)">
+		<data key="lat">52.463486</data>
+		<data key="lon">13.449232</data>
+	</node>
+	<node id="BERLIN - SACHSENDAMM (A 103)">
+		<data key="lat">52.478016</data>
+		<data key="lon">13.353212</data>
+	</node>
+	<node id="BERLIN - SEESTRASSE (A 100)">
+		<data key="lat">52.53925</data>
+		<data key="lon">13.329298</data>
+	</node>
+	<node id="BERLIN - WOLFENSTEINDAMM / SCHLOSSSTRASSE (A 103)">
+		<data key="lat">52.471836</data>
+		<data key="lon">13.344193</data>
+	</node>
+	<node id="BOCHUM - STAHLHAUSEN  BOCHUMER WESTKREUZ">
+		<data key="lat">51.364277</data>
+		<data key="lon">7.0704455</data>
+	</node>
+	<node id="BONN - BAD GODESBERG (A 562)">
+		<data key="lat">50.708103</data>
+		<data key="lon">7.1353264</data>
+	</node>
+	<node id="BONN - VERTEILERKREIS (A 555)">
+		<data key="lat">50.7445</data>
+		<data key="lon">7.0764866</data>
+	</node>
+	<node id="BRAUNSCHWEIG - HAMBURGER STRASSE (A 392)">
+		<data key="lat">52.29666</data>
+		<data key="lon">10.480072</data>
+	</node>
+	<node id="BRAUNSCHWEIG - WATENBÜTTEL - OST (A 392)">
+		<data key="lat">52.29666</data>
+		<data key="lon">10.480072</data>
+	</node>
+	<node id="BRAUNSCHWEIG - WENDEN (A 391)">
+		<data key="lat">52.330822</data>
+		<data key="lon">10.5254755</data>
+	</node>
+	<node id="BREMEN - AIRPORT-STADT (A 281)">
+		<data key="lat">53.07437</data>
+		<data key="lon">8.762658</data>
+	</node>
+	<node id="BREMEN - RÖNNEBECK (A 270)">
+		<data key="lat">53.191257</data>
+		<data key="lon">8.56747</data>
+	</node>
+	<node id="BREMER KREUZ">
+		<data key="lat">53.037487</data>
+		<data key="lon">8.990894</data>
+	</node>
+	<node id="BRÜHL - NORD  (Südteil) (A 553)">
+		<data key="lat">50.82757</data>
+		<data key="lon">6.9326677</data>
+	</node>
+	<node id="BUCHHOLZER DREIECK">
+		<data key="lat">53.3757</data>
+		<data key="lon">9.859352</data>
+	</node>
+	<node id="BUNDE - WEST (A 280)">
+		<data key="lat">53.181313</data>
+		<data key="lon">7.245851</data>
+	</node>
+	<node id="BURGHAUSEN (A 94)">
+		<data key="lat">48.244507</data>
+		<data key="lon">12.835993</data>
+	</node>
+	<node id="Bundesgrenze Bad Bentheim NL-D (A 30)">
+		<data key="lat">52.322662</data>
+		<data key="lon">7.062</data>
+	</node>
+	<node id="Bundesgrenze Bad Reichenhall D-A (A 8)">
+		<data key="lat">47.766758</data>
+		<data key="lon">12.904437</data>
+	</node>
+	<node id="Bundesgrenze Breitenau D-CZ (A 17)">
+		<data key="lat">50.831524</data>
+		<data key="lon">13.88592</data>
+	</node>
+	<node id="Bundesgrenze Ellund DK-D (A 7)">
+		<data key="lat">54.804535</data>
+		<data key="lon">9.379214</data>
+	</node>
+	<node id="Bundesgrenze Forst D-PL (A 15)">
+		<data key="lat">51.66651</data>
+		<data key="lon">14.736214</data>
+	</node>
+	<node id="Bundesgrenze Frankfurt D-PL (A 12)">
+		<data key="lat">52.32208</data>
+		<data key="lon">14.347595</data>
+	</node>
+	<node id="Bundesgrenze Füssen D-A (A 7)">
+		<data key="lat">47.56965</data>
+		<data key="lon">10.700407</data>
+	</node>
+	<node id="Bundesgrenze Goch NL-D (A 57)">
+		<data key="lat">51.67571</data>
+		<data key="lon">6.033367</data>
+	</node>
+	<node id="Bundesgrenze Gottmadingen D-CH (A 81)">
+		<data key="lat">47.752964</data>
+		<data key="lon">8.770413</data>
+	</node>
+	<node id="Bundesgrenze Görlitz D-PL (A 4)">
+		<data key="lat">51.198242</data>
+		<data key="lon">14.961646</data>
+	</node>
+	<node id="Bundesgrenze Kiefersfelden D-A (A 93)">
+		<data key="lat">47.619183</data>
+		<data key="lon">12.202484</data>
+	</node>
+	<node id="Bundesgrenze Lichtenbusch B-D (A 44)">
+		<data key="lat">50.71813</data>
+		<data key="lon">6.12048</data>
+	</node>
+	<node id="Bundesgrenze Messenich L-D (A 64)">
+		<data key="lat">49.733917</data>
+		<data key="lon">6.506598</data>
+	</node>
+	<node id="Bundesgrenze Pomellen PL-D (A 11)">
+		<data key="lat">53.33569</data>
+		<data key="lon">14.40757</data>
+	</node>
+	<node id="Bundesgrenze Rheinfelden D - CH (A 861)">
+		<data key="lat">47.584667</data>
+		<data key="lon">7.758927</data>
+	</node>
+	<node id="Bundesgrenze Straelen NL-D (A 40)">
+		<data key="lat">51.384274</data>
+		<data key="lon">6.216186</data>
+	</node>
+	<node id="Bundesgrenze Waidhaus D-CZ (A 6)">
+		<data key="lat">49.63342</data>
+		<data key="lon">12.491857</data>
+	</node>
+	<node id="BÖHLEN (A 72)">
+		<data key="lat">50.901997</data>
+		<data key="lon">12.738905</data>
+	</node>
+	<node id="CUXHAVEN (A 27)">
+		<data key="lat">53.840733</data>
+		<data key="lon">8.734045</data>
+	</node>
+	<node id="DAHLENWARSLEBEN (A 14)">
+		<data key="lat">52.19895</data>
+		<data key="lon">11.549996</data>
+	</node>
+	<node id="DARMSTADT - WEST (A 672)">
+		<data key="lat">49.86974</data>
+		<data key="lon">8.604083</data>
+	</node>
+	<node id="DARMSTÄDTER KREUZ">
+		<data key="lat">49.856247</data>
+		<data key="lon">8.597828</data>
+	</node>
+	<node id="DEGGENDORF - MITTE (A 92)">
+		<data key="lat">48.83101</data>
+		<data key="lon">12.950899</data>
+	</node>
+	<node id="DORTMUND - BAROP (A 40)">
+		<data key="lat">51.497856</data>
+		<data key="lon">7.3805423</data>
+	</node>
+	<node id="DORTMUND - BODELSCHWINGH (A 42)">
+		<data key="lat">51.56044</data>
+		<data key="lon">7.36201</data>
+	</node>
+	<node id="DREIECK AHLHORNER HEIDE">
+		<data key="lat">52.855923</data>
+		<data key="lon">8.225339</data>
+	</node>
+	<node id="DREIECK ALLGÄU">
+		<data key="lat">47.687386</data>
+		<data key="lon">10.361943</data>
+	</node>
+	<node id="DREIECK BAD DÜRRHEIM">
+		<data key="lat">47.993095</data>
+		<data key="lon">8.535914</data>
+	</node>
+	<node id="DREIECK BAD NEUENAHR">
+		<data key="lat">50.571117</data>
+		<data key="lon">7.1192703</data>
+	</node>
+	<node id="DREIECK BAD SCHWARTAU">
+		<data key="lat">53.91549</data>
+		<data key="lon">10.741832</data>
+	</node>
+	<node id="DREIECK BAYERISCHES VOGTLAND">
+		<data key="lat">50.327976</data>
+		<data key="lon">11.799192</data>
+	</node>
+	<node id="DREIECK BAYREUTH / KULMBACH">
+		<data key="lat">50.02601</data>
+		<data key="lon">11.59741</data>
+	</node>
+	<node id="DREIECK BONN - NORDOST">
+		<data key="lat">50.76486</data>
+		<data key="lon">7.1313267</data>
+	</node>
+	<node id="DREIECK BORDESHOLM">
+		<data key="lat">54.177143</data>
+		<data key="lon">9.956794</data>
+	</node>
+	<node id="DREIECK BOTTROP">
+		<data key="lat">51.55876</data>
+		<data key="lon">6.9267983</data>
+	</node>
+	<node id="DREIECK BRAUNSCHWEIG - SÜDWEST">
+		<data key="lat">52.312477</data>
+		<data key="lon">10.515135</data>
+	</node>
+	<node id="DREIECK BREITSCHEID">
+		<data key="lat">51.347603</data>
+		<data key="lon">6.846842</data>
+	</node>
+	<node id="DREIECK BREMEN - INDUSTRIEHÄFEN">
+		<data key="lat">53.07437</data>
+		<data key="lon">8.762658</data>
+	</node>
+	<node id="DREIECK BREMEN - NORD">
+		<data key="lat">53.17367</data>
+		<data key="lon">8.693373</data>
+	</node>
+	<node id="DREIECK BUNDE">
+		<data key="lat">53.16446</data>
+		<data key="lon">7.2836576</data>
+	</node>
+	<node id="DREIECK CHARLOTTENBURG">
+		<data key="lat">52.695164</data>
+		<data key="lon">13.201128</data>
+	</node>
+	<node id="DREIECK DARMSTADT">
+		<data key="lat">49.86974</data>
+		<data key="lon">8.604083</data>
+	</node>
+	<node id="DREIECK DARMSTADT / GRIESHEIM">
+		<data key="lat">49.87132</data>
+		<data key="lon">8.589581</data>
+	</node>
+	<node id="DREIECK DERNBACH">
+		<data key="lat">50.45586</data>
+		<data key="lon">7.7508163</data>
+	</node>
+	<node id="DREIECK DONAUESCHINGEN">
+		<data key="lat">47.993095</data>
+		<data key="lon">8.535914</data>
+	</node>
+	<node id="DREIECK DRAMMETAL">
+		<data key="lat">51.45251</data>
+		<data key="lon">9.866683</data>
+	</node>
+	<node id="DREIECK DRESDEN - NORD">
+		<data key="lat">51.1394</data>
+		<data key="lon">13.749776</data>
+	</node>
+	<node id="DREIECK DRESDEN - WEST">
+		<data key="lat">51.061317</data>
+		<data key="lon">13.606357</data>
+	</node>
+	<node id="DREIECK ERFTTAL">
+		<data key="lat">50.83496</data>
+		<data key="lon">6.7638025</data>
+	</node>
+	<node id="DREIECK ERLENBRUCH">
+		<data key="lat">50.157146</data>
+		<data key="lon">8.705335</data>
+	</node>
+	<node id="DREIECK ESSEN - OST">
+		<data key="lat">51.45138</data>
+		<data key="lon">7.0395727</data>
+	</node>
+	<node id="DREIECK FRIEDRICHSTHAL">
+		<data key="lat">49.31817</data>
+		<data key="lon">7.077751</data>
+	</node>
+	<node id="DREIECK FULDA">
+		<data key="lat">50.48878</data>
+		<data key="lon">9.710322</data>
+	</node>
+	<node id="DREIECK FULDA - MITTE">
+		<data key="lat">50.48878</data>
+		<data key="lon">9.710322</data>
+	</node>
+	<node id="DREIECK FUNKTURM">
+		<data key="lat">52.494843</data>
+		<data key="lon">13.26788</data>
+	</node>
+	<node id="DREIECK HALLE - NORD">
+		<data key="lat">51.48046</data>
+		<data key="lon">11.845162</data>
+	</node>
+	<node id="DREIECK HALLE - SÜD">
+		<data key="lat">51.424725</data>
+		<data key="lon">11.864013</data>
+	</node>
+	<node id="DREIECK HAMBURG - HORN">
+		<data key="lat">53.55912</data>
+		<data key="lon">10.071117</data>
+	</node>
+	<node id="DREIECK HAMBURG - NORDWEST">
+		<data key="lat">53.620247</data>
+		<data key="lon">9.904864</data>
+	</node>
+	<node id="DREIECK HAMBURG - STILLHORN">
+		<data key="lat">53.50963</data>
+		<data key="lon">10.046914</data>
+	</node>
+	<node id="DREIECK HAMBURG - SÜDOST">
+		<data key="lat">53.504322</data>
+		<data key="lon">10.082952</data>
+	</node>
+	<node id="DREIECK HAMBURG - SÜDWEST">
+		<data key="lat">53.434822</data>
+		<data key="lon">9.927618</data>
+	</node>
+	<node id="DREIECK HANNOVER - NORD">
+		<data key="lat">52.45171</data>
+		<data key="lon">9.721265</data>
+	</node>
+	<node id="DREIECK HANNOVER - SÜD">
+		<data key="lat">52.29836</data>
+		<data key="lon">9.885027</data>
+	</node>
+	<node id="DREIECK HANNOVER - WEST">
+		<data key="lat">52.424973</data>
+		<data key="lon">9.653481</data>
+	</node>
+	<node id="DREIECK HAVELLAND">
+		<data key="lat">52.714325</data>
+		<data key="lon">13.002411</data>
+	</node>
+	<node id="DREIECK HOCHFRANKEN">
+		<data key="lat">50.38001</data>
+		<data key="lon">11.963708</data>
+	</node>
+	<node id="DREIECK HOCHRHEIN">
+		<data key="lat">47.584667</data>
+		<data key="lon">7.758927</data>
+	</node>
+	<node id="DREIECK HOCKENHEIM">
+		<data key="lat">49.33206</data>
+		<data key="lon">8.541729</data>
+	</node>
+	<node id="DREIECK HOLLEDAU">
+		<data key="lat">48.58237</data>
+		<data key="lon">11.596435</data>
+	</node>
+	<node id="DREIECK HOLZ">
+		<data key="lat">51.077736</data>
+		<data key="lon">6.336102</data>
+	</node>
+	<node id="DREIECK INNTAL">
+		<data key="lat">47.807</data>
+		<data key="lon">12.095042</data>
+	</node>
+	<node id="DREIECK JACKERATH">
+		<data key="lat">51.034687</data>
+		<data key="lon">6.466653</data>
+	</node>
+	<node id="DREIECK KAISERSLAUTERN">
+		<data key="lat">49.462307</data>
+		<data key="lon">7.8100715</data>
+	</node>
+	<node id="DREIECK KARLSRUHE">
+		<data key="lat">48.97213</data>
+		<data key="lon">8.445751</data>
+	</node>
+	<node id="DREIECK KASSEL - SÜD">
+		<data key="lat">51.278343</data>
+		<data key="lon">9.402669</data>
+	</node>
+	<node id="DREIECK KÖLN - HEUMAR">
+		<data key="lat">51.041393</data>
+		<data key="lon">6.95725</data>
+	</node>
+	<node id="DREIECK LANGENFELD">
+		<data key="lat">51.10866</data>
+		<data key="lon">6.9744377</data>
+	</node>
+	<node id="DREIECK LEONBERG">
+		<data key="lat">48.774235</data>
+		<data key="lon">9.02637</data>
+	</node>
+	<node id="DREIECK LUDWIGSHAFEN - SÜD">
+		<data key="lat">49.454533</data>
+		<data key="lon">8.357279</data>
+	</node>
+	<node id="DREIECK MAINZ">
+		<data key="lat">50.00364</data>
+		<data key="lon">8.187587</data>
+	</node>
+	<node id="DREIECK MOSELTAL">
+		<data key="lat">49.811543</data>
+		<data key="lon">6.75562</data>
+	</node>
+	<node id="DREIECK MÜNCHEN - FELDMOCHING">
+		<data key="lat">48.224617</data>
+		<data key="lon">11.530477</data>
+	</node>
+	<node id="DREIECK MÜNCHEN - SCHWABING">
+		<data key="lat">48.18784</data>
+		<data key="lon">11.611887</data>
+	</node>
+	<node id="DREIECK MÜNCHEN - SENDLING - SÜD">
+		<data key="lat">48.110096</data>
+		<data key="lon">11.516974</data>
+	</node>
+	<node id="DREIECK MÜNCHEN - STEINHAUSEN">
+		<data key="lat">48.138344</data>
+		<data key="lon">11.627254</data>
+	</node>
+	<node id="DREIECK MÜNCHEN - SÜDWEST">
+		<data key="lat">48.128902</data>
+		<data key="lon">11.402515</data>
+	</node>
+	<node id="DREIECK NAHETAL">
+		<data key="lat">49.924915</data>
+		<data key="lon">7.9436736</data>
+	</node>
+	<node id="DREIECK NEUKÖLLN">
+		<data key="lat">52.46165</data>
+		<data key="lon">13.455789</data>
+	</node>
+	<node id="DREIECK NONNWEILER">
+		<data key="lat">49.597622</data>
+		<data key="lon">6.9856496</data>
+	</node>
+	<node id="DREIECK NOSSEN">
+		<data key="lat">51.054543</data>
+		<data key="lon">13.362568</data>
+	</node>
+	<node id="DREIECK NUTHETAL">
+		<data key="lat">52.306778</data>
+		<data key="lon">13.087694</data>
+	</node>
+	<node id="DREIECK NÜRNBERG / FEUCHT">
+		<data key="lat">49.351288</data>
+		<data key="lon">11.201182</data>
+	</node>
+	<node id="DREIECK OLDENBURG - WEST">
+		<data key="lat">53.15316</data>
+		<data key="lon">8.192487</data>
+	</node>
+	<node id="DREIECK PANKOW">
+		<data key="lat">52.635487</data>
+		<data key="lon">13.42714</data>
+	</node>
+	<node id="DREIECK PARTHENAUE">
+		<data key="lat">51.30701</data>
+		<data key="lon">12.550345</data>
+	</node>
+	<node id="DREIECK PORZ">
+		<data key="lat">50.907265</data>
+		<data key="lon">7.0639615</data>
+	</node>
+	<node id="DREIECK POTSDAM">
+		<data key="lat">52.298172</data>
+		<data key="lon">12.900265</data>
+	</node>
+	<node id="DREIECK SAARBRÜCKEN">
+		<data key="lat">49.242718</data>
+		<data key="lon">6.860157</data>
+	</node>
+	<node id="DREIECK SAARBRÜCKEN - LUDWIGSBERG">
+		<data key="lat">49.283226</data>
+		<data key="lon">7.0147414</data>
+	</node>
+	<node id="DREIECK SALZGITTER">
+		<data key="lat">52.10461</data>
+		<data key="lon">10.183642</data>
+	</node>
+	<node id="DREIECK SCHWANEBECK">
+		<data key="lat">52.646603</data>
+		<data key="lon">13.567629</data>
+	</node>
+	<node id="DREIECK SECKBACH">
+		<data key="lat">50.157146</data>
+		<data key="lon">8.705335</data>
+	</node>
+	<node id="DREIECK SINZIG">
+		<data key="lat">50.529736</data>
+		<data key="lon">7.188508</data>
+	</node>
+	<node id="DREIECK SPREEAU">
+		<data key="lat">52.318672</data>
+		<data key="lon">13.785761</data>
+	</node>
+	<node id="DREIECK SPREEWALD">
+		<data key="lat">51.843437</data>
+		<data key="lon">13.926985</data>
+	</node>
+	<node id="DREIECK ST. AUGUSTIN - WEST">
+		<data key="lat">50.76486</data>
+		<data key="lon">7.1313267</data>
+	</node>
+	<node id="DREIECK STARNBERG">
+		<data key="lat">48.01284</data>
+		<data key="lon">11.410442</data>
+	</node>
+	<node id="DREIECK STUHR">
+		<data key="lat">53.006695</data>
+		<data key="lon">8.701334</data>
+	</node>
+	<node id="DREIECK SUHL">
+		<data key="lat">50.586216</data>
+		<data key="lon">10.668593</data>
+	</node>
+	<node id="DREIECK SÜDHARZ">
+		<data key="lat">51.438667</data>
+		<data key="lon">11.332171</data>
+	</node>
+	<node id="DREIECK TRIER">
+		<data key="lat">49.771214</data>
+		<data key="lon">6.598984</data>
+	</node>
+	<node id="DREIECK VELBERT - NORD">
+		<data key="lat">51.35224</data>
+		<data key="lon">7.039928</data>
+	</node>
+	<node id="DREIECK VOLKSPARK PRENZLAUER BERG">
+		<data key="lat">52.646603</data>
+		<data key="lon">13.567629</data>
+	</node>
+	<node id="DREIECK VULKANEIFEL">
+		<data key="lat">50.188477</data>
+		<data key="lon">6.908132</data>
+	</node>
+	<node id="DREIECK WALSRODE">
+		<data key="lat">52.79131</data>
+		<data key="lon">9.661284</data>
+	</node>
+	<node id="DREIECK WEIL">
+		<data key="lat">47.625977</data>
+		<data key="lon">7.6012692</data>
+	</node>
+	<node id="DREIECK WERDER">
+		<data key="lat">52.327297</data>
+		<data key="lon">12.830704</data>
+	</node>
+	<node id="DREIECK WERNTAL">
+		<data key="lat">50.0202</data>
+		<data key="lon">10.161764</data>
+	</node>
+	<node id="DREIECK WITTSTOCK">
+		<data key="lat">53.1233</data>
+		<data key="lon">12.46238</data>
+	</node>
+	<node id="DREIECK WÜRZBURG - WEST">
+		<data key="lat">49.743317</data>
+		<data key="lon">9.822295</data>
+	</node>
+	<node id="DUISBURG - RAHM (A 524)">
+		<data key="lat">51.351826</data>
+		<data key="lon">6.77834</data>
+	</node>
+	<node id="EGELSBACH (A 661)">
+		<data key="lat">49.963593</data>
+		<data key="lon">8.683988</data>
+	</node>
+	<node id="EHLINGEN (A 571)">
+		<data key="lat">50.545044</data>
+		<data key="lon">7.197148</data>
+	</node>
+	<node id="ELMPT (A 52)">
+		<data key="lat">51.21084</data>
+		<data key="lon">6.1297703</data>
+	</node>
+	<node id="ELTEN (A 3)">
+		<data key="lat">51.88171</data>
+		<data key="lon">6.1837254</data>
+	</node>
+	<node id="EMDEN - WEST (A 31)">
+		<data key="lat">53.365944</data>
+		<data key="lon">7.1716404</data>
+	</node>
+	<node id="ESCHBORNER DREIECK">
+		<data key="lat">50.121258</data>
+		<data key="lon">8.583023</data>
+	</node>
+	<node id="ESCHENLOHE (A 95)">
+		<data key="lat">47.6041</data>
+		<data key="lon">11.176489</data>
+	</node>
+	<node id="ESSEN - HEISINGEN (A 535)">
+		<data key="lat">51.40944</data>
+		<data key="lon">7.073216</data>
+	</node>
+	<node id="ESSEN - HEISINGEN (A 540)">
+		<data key="lat">51.40944</data>
+		<data key="lon">7.073216</data>
+	</node>
+	<node id="FEDDERWARDERGRODEN (A 29)">
+		<data key="lat">53.564156</data>
+		<data key="lon">8.096808</data>
+	</node>
+	<node id="FRANKFURT - KATHARINENKREISEL (A 648)">
+		<data key="lat">50.11584</data>
+		<data key="lon">8.591687</data>
+	</node>
+	<node id="FRANKFURTER KREUZ">
+		<data key="lat">50.047394</data>
+		<data key="lon">8.601501</data>
+	</node>
+	<node id="FRIEDELSHEIM (A 650)">
+		<data key="lat">49.47149</data>
+		<data key="lon">8.236683</data>
+	</node>
+	<node id="GAMBACHER KREUZ">
+		<data key="lat">50.47352</data>
+		<data key="lon">8.73119</data>
+	</node>
+	<node id="GEFREES (A 70)">
+		<data key="lat">50.02601</data>
+		<data key="lon">11.59741</data>
+	</node>
+	<node id="GELSDORF (A 565)">
+		<data key="lat">50.58454</data>
+		<data key="lon">7.026152</data>
+	</node>
+	<node id="GIESSENER NORDKREUZ (W)">
+		<data key="lat">50.623825</data>
+		<data key="lon">8.707355</data>
+	</node>
+	<node id="GIESSENER SÜDKREUZ">
+		<data key="lat">50.537224</data>
+		<data key="lon">8.6460705</data>
+	</node>
+	<node id="GÄRTRINGEN">
+		<data key="lat">48.729214</data>
+		<data key="lon">9.077839</data>
+	</node>
+	<node id="HAMBURG - WILSTORF (A 253)">
+		<data key="lat">53.453075</data>
+		<data key="lon">9.992124</data>
+	</node>
+	<node id="HATTENBACHER DREIECK (O)">
+		<data key="lat">50.79947</data>
+		<data key="lon">9.607392</data>
+	</node>
+	<node id="HEIDE - WEST (A 23)">
+		<data key="lat">54.188866</data>
+		<data key="lon">9.046713</data>
+	</node>
+	<node id="HEILIGENHAFEN - MITTE (A 1)">
+		<data key="lat">54.35841</data>
+		<data key="lon">10.9602165</data>
+	</node>
+	<node id="HEINSBERG (A 46)">
+		<data key="lat">51.023075</data>
+		<data key="lon">6.1116953</data>
+	</node>
+	<node id="HENNEF - OST (A 560)">
+		<data key="lat">50.775063</data>
+		<data key="lon">7.3021154</data>
+	</node>
+	<node id="HERMSDORFER KREUZ">
+		<data key="lat">50.86699</data>
+		<data key="lon">11.8510685</data>
+	</node>
+	<node id="HESSISCH LICHTENAU - OST  (Ostteil) (A 44)">
+		<data key="lat">51.278343</data>
+		<data key="lon">9.402669</data>
+	</node>
+	<node id="HORSTER DREIECK">
+		<data key="lat">53.34065</data>
+		<data key="lon">10.020821</data>
+	</node>
+	<node id="KALDENKIRCHEN">
+		<data key="lat">51.328735</data>
+		<data key="lon">6.2144628</data>
+	</node>
+	<node id="KAMENER KREUZ">
+		<data key="lat">51.60089</data>
+		<data key="lon">7.679439</data>
+	</node>
+	<node id="KIEL - WESTRING (A 215)">
+		<data key="lat">54.315575</data>
+		<data key="lon">10.109987</data>
+	</node>
+	<node id="KIRCHHEIMER DREIECK">
+		<data key="lat">50.840427</data>
+		<data key="lon">9.57418</data>
+	</node>
+	<node id="KREUZ ALTDORF">
+		<data key="lat">49.402096</data>
+		<data key="lon">11.289949</data>
+	</node>
+	<node id="KREUZ ALZEY">
+		<data key="lat">49.772903</data>
+		<data key="lon">8.105847</data>
+	</node>
+	<node id="KREUZ BAD OEYNHAUSEN">
+		<data key="lat">52.2077</data>
+		<data key="lon">8.707174</data>
+	</node>
+	<node id="KREUZ BAMBERG">
+		<data key="lat">49.925095</data>
+		<data key="lon">10.922167</data>
+	</node>
+	<node id="KREUZ BARGTEHEIDE">
+		<data key="lat">53.71668</data>
+		<data key="lon">10.332113</data>
+	</node>
+	<node id="KREUZ BIEBELRIED">
+		<data key="lat">49.66586</data>
+		<data key="lon">10.1431675</data>
+	</node>
+	<node id="KREUZ BIELEFELD">
+		<data key="lat">52.200737</data>
+		<data key="lon">8.141142</data>
+	</node>
+	<node id="KREUZ BLIESHEIM">
+		<data key="lat">50.774925</data>
+		<data key="lon">6.829043</data>
+	</node>
+	<node id="KREUZ BOCHUM">
+		<data key="lat">51.492653</data>
+		<data key="lon">7.2754593</data>
+	</node>
+	<node id="KREUZ BOCHUM / WITTEN">
+		<data key="lat">51.364277</data>
+		<data key="lon">7.0704455</data>
+	</node>
+	<node id="KREUZ BONN - NORD">
+		<data key="lat">50.745323</data>
+		<data key="lon">7.072997</data>
+	</node>
+	<node id="KREUZ BONN / SIEGBURG">
+		<data key="lat">50.777485</data>
+		<data key="lon">7.227368</data>
+	</node>
+	<node id="KREUZ BRAUNSCHWEIG - NORD">
+		<data key="lat">52.312477</data>
+		<data key="lon">10.515135</data>
+	</node>
+	<node id="KREUZ BRAUNSCHWEIG - SÜD">
+		<data key="lat">52.238564</data>
+		<data key="lon">10.527793</data>
+	</node>
+	<node id="KREUZ BREITSCHEID">
+		<data key="lat">51.340015</data>
+		<data key="lon">6.848182</data>
+	</node>
+	<node id="KREUZ CASTROP - RAUXEL - OST">
+		<data key="lat">51.582767</data>
+		<data key="lon">7.367057</data>
+	</node>
+	<node id="KREUZ CHEMNITZ">
+		<data key="lat">50.843422</data>
+		<data key="lon">12.845564</data>
+	</node>
+	<node id="KREUZ DEGGENDORF">
+		<data key="lat">48.81463</data>
+		<data key="lon">12.935224</data>
+	</node>
+	<node id="KREUZ DINSLAKEN - WEST">
+		<data key="lat">51.544716</data>
+		<data key="lon">6.7323446</data>
+	</node>
+	<node id="KREUZ DORTMUND - NORDWEST">
+		<data key="lat">51.582767</data>
+		<data key="lon">7.367057</data>
+	</node>
+	<node id="KREUZ DORTMUND - WEST">
+		<data key="lat">51.491894</data>
+		<data key="lon">7.3871317</data>
+	</node>
+	<node id="KREUZ DORTMUND / UNNA">
+		<data key="lat">51.521847</data>
+		<data key="lon">7.6644406</data>
+	</node>
+	<node id="KREUZ DORTMUND / WITTEN">
+		<data key="lat">51.46051</data>
+		<data key="lon">7.4184585</data>
+	</node>
+	<node id="KREUZ DUISBURG">
+		<data key="lat">51.462765</data>
+		<data key="lon">6.7693663</data>
+	</node>
+	<node id="KREUZ DUISBURG - NORD">
+		<data key="lat">51.480206</data>
+		<data key="lon">6.7705393</data>
+	</node>
+	<node id="KREUZ DÜSSELDORF - NORD  (Nordteil)">
+		<data key="lat">51.354244</data>
+		<data key="lon">6.756702</data>
+	</node>
+	<node id="KREUZ DÜSSELDORF - NORD  (Südteil)">
+		<data key="lat">51.354244</data>
+		<data key="lon">6.756702</data>
+	</node>
+	<node id="KREUZ DÜSSELDORF - SÜD">
+		<data key="lat">51.186607</data>
+		<data key="lon">6.872461</data>
+	</node>
+	<node id="KREUZ ERFURT">
+		<data key="lat">50.893425</data>
+		<data key="lon">10.964865</data>
+	</node>
+	<node id="KREUZ ESSEN - BERGERHAUSEN">
+		<data key="lat">51.43024</data>
+		<data key="lon">7.0189223</data>
+	</node>
+	<node id="KREUZ ESSEN - NORD">
+		<data key="lat">51.45138</data>
+		<data key="lon">7.0395727</data>
+	</node>
+	<node id="KREUZ FEUCHTWANGEN / CRAILSHEIM">
+		<data key="lat">49.07092</data>
+		<data key="lon">10.207076</data>
+	</node>
+	<node id="KREUZ FORSTENRIEDER PARK">
+		<data key="lat">48.128902</data>
+		<data key="lon">11.402515</data>
+	</node>
+	<node id="KREUZ FRANKENTHAL">
+		<data key="lat">49.54994</data>
+		<data key="lon">8.315194</data>
+	</node>
+	<node id="KREUZ FÜRTH / ERLANGEN">
+		<data key="lat">49.5789</data>
+		<data key="lon">10.988404</data>
+	</node>
+	<node id="KREUZ GEESTHACHT">
+		<data key="lat">53.47621</data>
+		<data key="lon">10.210489</data>
+	</node>
+	<node id="KREUZ GELSENKIRCHEN - SÜD">
+		<data key="lat">51.364277</data>
+		<data key="lon">7.0704455</data>
+	</node>
+	<node id="KREUZ GLADBECK">
+		<data key="lat">51.45138</data>
+		<data key="lon">7.0395727</data>
+	</node>
+	<node id="KREUZ GREMBERG">
+		<data key="lat">50.912815</data>
+		<data key="lon">7.0327363</data>
+	</node>
+	<node id="KREUZ HAGEN">
+		<data key="lat">51.368122</data>
+		<data key="lon">7.5236864</data>
+	</node>
+	<node id="KREUZ HAMBURG - OST">
+		<data key="lat">53.567165</data>
+		<data key="lon">10.125886</data>
+	</node>
+	<node id="KREUZ HAMBURG - SÜD">
+		<data key="lat">53.50712</data>
+		<data key="lon">10.037158</data>
+	</node>
+	<node id="KREUZ HAMBURG - SÜDERELBE">
+		<data key="lat">53.489227</data>
+		<data key="lon">9.939409</data>
+	</node>
+	<node id="KREUZ HANNOVER - BUCHHOLZ">
+		<data key="lat">52.410557</data>
+		<data key="lon">9.842386</data>
+	</node>
+	<node id="KREUZ HANNOVER - OST">
+		<data key="lat">52.36325</data>
+		<data key="lon">9.855852</data>
+	</node>
+	<node id="KREUZ HEGAU">
+		<data key="lat">47.854355</data>
+		<data key="lon">8.799493</data>
+	</node>
+	<node id="KREUZ HEIDELBERG">
+		<data key="lat">49.422043</data>
+		<data key="lon">8.6268015</data>
+	</node>
+	<node id="KREUZ HERNE">
+		<data key="lat">51.540077</data>
+		<data key="lon">7.2042522</data>
+	</node>
+	<node id="KREUZ HILDEN">
+		<data key="lat">51.192875</data>
+		<data key="lon">6.926585</data>
+	</node>
+	<node id="KREUZ KAARST">
+		<data key="lat">51.26221</data>
+		<data key="lon">6.644055</data>
+	</node>
+	<node id="KREUZ KAISERBERG">
+		<data key="lat">51.44214</data>
+		<data key="lon">6.817988</data>
+	</node>
+	<node id="KREUZ KAMP - LINTFORT">
+		<data key="lat">51.51111</data>
+		<data key="lon">6.583942</data>
+	</node>
+	<node id="KREUZ KARLSRUHE - NORD">
+		<data key="lat">49.039467</data>
+		<data key="lon">8.279587</data>
+	</node>
+	<node id="KREUZ KASSEL - MITTE">
+		<data key="lat">51.27787</data>
+		<data key="lon">9.527527</data>
+	</node>
+	<node id="KREUZ KASSEL - WEST">
+		<data key="lat">51.27242</data>
+		<data key="lon">9.460569</data>
+	</node>
+	<node id="KREUZ KERPEN">
+		<data key="lat">50.8914</data>
+		<data key="lon">6.6982784</data>
+	</node>
+	<node id="KREUZ KIEL - WEST (A 210)">
+		<data key="lat">54.309807</data>
+		<data key="lon">10.063934</data>
+	</node>
+	<node id="KREUZ KOBLENZ">
+		<data key="lat">50.354507</data>
+		<data key="lon">7.49072</data>
+	</node>
+	<node id="KREUZ KÖLN - NORD">
+		<data key="lat">51.000275</data>
+		<data key="lon">6.8867083</data>
+	</node>
+	<node id="KREUZ KÖLN - OST">
+		<data key="lat">50.943638</data>
+		<data key="lon">7.040838</data>
+	</node>
+	<node id="KREUZ KÖLN - SÜD">
+		<data key="lat">50.879982</data>
+		<data key="lon">6.9689107</data>
+	</node>
+	<node id="KREUZ KÖLN - WEST">
+		<data key="lat">50.92974</data>
+		<data key="lon">6.8121204</data>
+	</node>
+	<node id="KREUZ LANDSTUHL - WEST">
+		<data key="lat">49.41419</data>
+		<data key="lon">7.5305433</data>
+	</node>
+	<node id="KREUZ LEVERKUSEN">
+		<data key="lat">51.035995</data>
+		<data key="lon">7.0090933</data>
+	</node>
+	<node id="KREUZ LEVERKUSEN - WEST">
+		<data key="lat">51.041393</data>
+		<data key="lon">6.95725</data>
+	</node>
+	<node id="KREUZ LOTTE / OSNABRÜCK">
+		<data key="lat">52.268204</data>
+		<data key="lon">7.9319577</data>
+	</node>
+	<node id="KREUZ LUDWIGSHAFEN">
+		<data key="lat">49.475822</data>
+		<data key="lon">8.307857</data>
+	</node>
+	<node id="KREUZ LÜBECK">
+		<data key="lat">53.847305</data>
+		<data key="lon">10.600908</data>
+	</node>
+	<node id="KREUZ LÜBECK - SIEMS">
+		<data key="lat">53.91549</data>
+		<data key="lon">10.741832</data>
+	</node>
+	<node id="KREUZ MAGDEBURG">
+		<data key="lat">52.160213</data>
+		<data key="lon">11.544681</data>
+	</node>
+	<node id="KREUZ MAINZ - SÜD">
+		<data key="lat">49.95997</data>
+		<data key="lon">8.234118</data>
+	</node>
+	<node id="KREUZ MANNHEIM">
+		<data key="lat">49.458706</data>
+		<data key="lon">8.546592</data>
+	</node>
+	<node id="KREUZ MARL - NORD">
+		<data key="lat">51.699566</data>
+		<data key="lon">7.141267</data>
+	</node>
+	<node id="KREUZ MECKENHEIM">
+		<data key="lat">50.59022</data>
+		<data key="lon">7.027813</data>
+	</node>
+	<node id="KREUZ MEERBUSCH">
+		<data key="lat">51.285847</data>
+		<data key="lon">6.635693</data>
+	</node>
+	<node id="KREUZ MEMMINGEN">
+		<data key="lat">47.994007</data>
+		<data key="lon">10.145034</data>
+	</node>
+	<node id="KREUZ MOERS">
+		<data key="lat">51.45836</data>
+		<data key="lon">6.5917263</data>
+	</node>
+	<node id="KREUZ MONHEIM - SÜD">
+		<data key="lat">51.08216</data>
+		<data key="lon">6.9330206</data>
+	</node>
+	<node id="KREUZ MUTTERSTADT">
+		<data key="lat">49.441</data>
+		<data key="lon">8.319722</data>
+	</node>
+	<node id="KREUZ MÖNCHENGLADBACH">
+		<data key="lat">51.233494</data>
+		<data key="lon">6.3617125</data>
+	</node>
+	<node id="KREUZ MÖNCHENGLADBACH - WANLO">
+		<data key="lat">51.139374</data>
+		<data key="lon">6.423349</data>
+	</node>
+	<node id="KREUZ MÜNCHEN - NORD">
+		<data key="lat">48.217052</data>
+		<data key="lon">11.637082</data>
+	</node>
+	<node id="KREUZ MÜNCHEN - OST">
+		<data key="lat">48.13682</data>
+		<data key="lon">11.759075</data>
+	</node>
+	<node id="KREUZ MÜNCHEN - SENDLING">
+		<data key="lat">48.12399</data>
+		<data key="lon">11.491835</data>
+	</node>
+	<node id="KREUZ MÜNCHEN - SÜD">
+		<data key="lat">48.02713</data>
+		<data key="lon">11.6412735</data>
+	</node>
+	<node id="KREUZ MÜNCHEN - WEST">
+		<data key="lat">48.183887</data>
+		<data key="lon">11.434676</data>
+	</node>
+	<node id="KREUZ MÜNSTER - SÜD">
+		<data key="lat">51.913815</data>
+		<data key="lon">7.543728</data>
+	</node>
+	<node id="KREUZ NEERSEN">
+		<data key="lat">51.23184</data>
+		<data key="lon">6.4499984</data>
+	</node>
+	<node id="KREUZ NEUFAHRN">
+		<data key="lat">48.312263</data>
+		<data key="lon">11.612398</data>
+	</node>
+	<node id="KREUZ NEUNKIRCHEN">
+		<data key="lat">49.308933</data>
+		<data key="lon">7.257084</data>
+	</node>
+	<node id="KREUZ NEUSS - SÜD">
+		<data key="lat">51.14979</data>
+		<data key="lon">6.758218</data>
+	</node>
+	<node id="KREUZ NEUSS - WEST">
+		<data key="lat">51.216915</data>
+		<data key="lon">6.6431847</data>
+	</node>
+	<node id="KREUZ NÜRNBERG">
+		<data key="lat">49.44755</data>
+		<data key="lon">11.233648</data>
+	</node>
+	<node id="KREUZ NÜRNBERG - OST">
+		<data key="lat">49.4033</data>
+		<data key="lon">11.195913</data>
+	</node>
+	<node id="KREUZ OBERHAUSEN">
+		<data key="lat">51.532757</data>
+		<data key="lon">6.8416376</data>
+	</node>
+	<node id="KREUZ OBERHAUSEN - WEST">
+		<data key="lat">51.48618</data>
+		<data key="lon">6.8037767</data>
+	</node>
+	<node id="KREUZ OBERPFÄLZER WALD">
+		<data key="lat">49.51522</data>
+		<data key="lon">12.16758</data>
+	</node>
+	<node id="KREUZ OLDENBURG - NORD">
+		<data key="lat">53.20583</data>
+		<data key="lon">8.221372</data>
+	</node>
+	<node id="KREUZ OLDENBURG - OST">
+		<data key="lat">53.10632</data>
+		<data key="lon">8.27073</data>
+	</node>
+	<node id="KREUZ OLPE - SÜD">
+		<data key="lat">50.983994</data>
+		<data key="lon">7.838486</data>
+	</node>
+	<node id="KREUZ ORANIENBURG">
+		<data key="lat">52.695164</data>
+		<data key="lon">13.201128</data>
+	</node>
+	<node id="KREUZ OSNABRÜCK - SÜD">
+		<data key="lat">52.241566</data>
+		<data key="lon">8.087204</data>
+	</node>
+	<node id="KREUZ POCKING">
+		<data key="lat">48.533657</data>
+		<data key="lon">13.400087</data>
+	</node>
+	<node id="KREUZ RATINGEN - OST">
+		<data key="lat">51.296654</data>
+		<data key="lon">6.8918767</data>
+	</node>
+	<node id="KREUZ RECKLINGHAUSEN">
+		<data key="lat">51.579144</data>
+		<data key="lon">7.190755</data>
+	</node>
+	<node id="KREUZ REGENSBURG">
+		<data key="lat">48.998093</data>
+		<data key="lon">12.06345</data>
+	</node>
+	<node id="KREUZ RENDSBURG">
+		<data key="lat">54.303585</data>
+		<data key="lon">9.748206</data>
+	</node>
+	<node id="KREUZ RIPPACHTAL">
+		<data key="lat">51.237286</data>
+		<data key="lon">12.0671015</data>
+	</node>
+	<node id="KREUZ ROSTOCK">
+		<data key="lat">54.02753</data>
+		<data key="lon">12.194332</data>
+	</node>
+	<node id="KREUZ SAARBRÜCKEN">
+		<data key="lat">49.352325</data>
+		<data key="lon">7.0259333</data>
+	</node>
+	<node id="KREUZ SCHWEINFURT / WERNECK">
+		<data key="lat">50.000854</data>
+		<data key="lon">10.0828285</data>
+	</node>
+	<node id="KREUZ SCHÖNEBERG">
+		<data key="lat">52.471836</data>
+		<data key="lon">13.344193</data>
+	</node>
+	<node id="KREUZ SCHÜTTORF">
+		<data key="lat">52.337383</data>
+		<data key="lon">7.2581735</data>
+	</node>
+	<node id="KREUZ SIEGBURG">
+		<data key="lat">50.76486</data>
+		<data key="lon">7.1313267</data>
+	</node>
+	<node id="KREUZ STADE - OST">
+		<data key="lat">53.57929</data>
+		<data key="lon">9.52166</data>
+	</node>
+	<node id="KREUZ STUTTGART">
+		<data key="lat">48.729214</data>
+		<data key="lon">9.077839</data>
+	</node>
+	<node id="KREUZ UCKERMARK">
+		<data key="lat">53.246693</data>
+		<data key="lon">14.011251</data>
+	</node>
+	<node id="KREUZ ULM / ELCHINGEN">
+		<data key="lat">48.455956</data>
+		<data key="lon">10.073597</data>
+	</node>
+	<node id="KREUZ WALLDORF">
+		<data key="lat">49.278236</data>
+		<data key="lon">8.627964</data>
+	</node>
+	<node id="KREUZ WALTENHOFEN">
+		<data key="lat">47.682632</data>
+		<data key="lon">10.325471</data>
+	</node>
+	<node id="KREUZ WEINHEIM">
+		<data key="lat">49.54815</data>
+		<data key="lon">8.621987</data>
+	</node>
+	<node id="KREUZ WEINSBERG">
+		<data key="lat">49.233303</data>
+		<data key="lon">9.349797</data>
+	</node>
+	<node id="KREUZ WERL">
+		<data key="lat">51.531136</data>
+		<data key="lon">7.893594</data>
+	</node>
+	<node id="KREUZ WIESBADEN - MAINZER STRASSE">
+		<data key="lat">50.05227</data>
+		<data key="lon">8.246847</data>
+	</node>
+	<node id="KREUZ WITTLICH">
+		<data key="lat">49.960358</data>
+		<data key="lon">6.847991</data>
+	</node>
+	<node id="KREUZ WOLFSBURG / KÖNIGSLUTTER">
+		<data key="lat">52.36497</data>
+		<data key="lon">10.72336</data>
+	</node>
+	<node id="KREUZ WUPPERTAL - NORD (Südteil)">
+		<data key="lat">51.352398</data>
+		<data key="lon">7.2744064</data>
+	</node>
+	<node id="KREUZ WÜNNENBERG - HAAREN">
+		<data key="lat">51.58018</data>
+		<data key="lon">8.723875</data>
+	</node>
+	<node id="KREUZ ÖLPER">
+		<data key="lat">52.29666</data>
+		<data key="lon">10.480072</data>
+	</node>
+	<node id="KROMBACH (A 4)">
+		<data key="lat">50.991116</data>
+		<data key="lon">7.9271154</data>
+	</node>
+	<node id="KÖLN - EHRENFELD (A 57)">
+		<data key="lat">51.000275</data>
+		<data key="lon">6.8867083</data>
+	</node>
+	<node id="KÖLN - VERTEILERKREIS (A 555)">
+		<data key="lat">50.88998</data>
+		<data key="lon">6.9689107</data>
+	</node>
+	<node id="LANGENSELBOLDER DREIECK">
+		<data key="lat">50.17033</data>
+		<data key="lon">9.023527</data>
+	</node>
+	<node id="LANGGÖNS (A 485)">
+		<data key="lat">50.492283</data>
+		<data key="lon">8.654011</data>
+	</node>
+	<node id="LEER - OST (A 28)">
+		<data key="lat">53.26285</data>
+		<data key="lon">7.5448837</data>
+	</node>
+	<node id="LINDAU">
+		<data key="lat">47.58041</data>
+		<data key="lon">7.917556</data>
+	</node>
+	<node id="LUDWIGSHAFEN - STADT (A 650)">
+		<data key="lat">49.4802</data>
+		<data key="lon">8.365497</data>
+	</node>
+	<node id="LÜNEBURG - NORD (A 250)">
+		<data key="lat">53.279293</data>
+		<data key="lon">10.396852</data>
+	</node>
+	<node id="MAINSPITZ-DREIECK">
+		<data key="lat">49.996082</data>
+		<data key="lon">8.345415</data>
+	</node>
+	<node id="MANNHEIM - NECKARAU (A 656)">
+		<data key="lat">49.46655</data>
+		<data key="lon">8.522315</data>
+	</node>
+	<node id="MASCHENER KREUZ">
+		<data key="lat">53.38281</data>
+		<data key="lon">10.023971</data>
+	</node>
+	<node id="MASCHENER KREUZ (W)">
+		<data key="lat">53.390434</data>
+		<data key="lon">10.028261</data>
+	</node>
+	<node id="MÖNCHHOF - DREIECK">
+		<data key="lat">50.01758</data>
+		<data key="lon">8.496967</data>
+	</node>
+	<node id="NEUNKIRCHEN / SPIESEN (A 8)">
+		<data key="lat">49.32385</data>
+		<data key="lon">7.1296916</data>
+	</node>
+	<node id="NORDWESTKREUZ FRANKFURT">
+		<data key="lat">50.132866</data>
+		<data key="lon">8.583014</data>
+	</node>
+	<node id="NUTTLAR (A 46)">
+		<data key="lat">51.36103</data>
+		<data key="lon">8.362118</data>
+	</node>
+	<node id="OBERHAUSEN - EISENHEIM (A 516)">
+		<data key="lat">51.502445</data>
+		<data key="lon">6.862263</data>
+	</node>
+	<node id="OBERURSEL - NORD (A 661)">
+		<data key="lat">50.214344</data>
+		<data key="lon">8.583113</data>
+	</node>
+	<node id="OSNABRÜCK - LÜSTRINGEN (A 33)">
+		<data key="lat">52.26854</data>
+		<data key="lon">8.103377</data>
+	</node>
+	<node id="OSTERWIECK / VIENENBURG - OST (A 395)">
+		<data key="lat">51.957825</data>
+		<data key="lon">10.579777</data>
+	</node>
+	<node id="PERCHA  (Westteil) (A 952)">
+		<data key="lat">48.01284</data>
+		<data key="lon">11.410442</data>
+	</node>
+	<node id="PIRMASENS (A 8)">
+		<data key="lat">49.219593</data>
+		<data key="lon">7.468688</data>
+	</node>
+	<node id="PIRMASENS - WINZELN  DREIECK PIRMASENS (A 62)">
+		<data key="lat">49.389343</data>
+		<data key="lon">7.601225</data>
+	</node>
+	<node id="REISKIRCHENER DREIECK">
+		<data key="lat">50.610706</data>
+		<data key="lon">8.82034</data>
+	</node>
+	<node id="ROSTOCK - ÜBERSEEHAFEN (A 19)">
+		<data key="lat">54.13729</data>
+		<data key="lon">12.116047</data>
+	</node>
+	<node id="RÜSSELSHEIMER DREIECK">
+		<data key="lat">49.967743</data>
+		<data key="lon">8.468249</data>
+	</node>
+	<node id="SAARBRÜCKEN - BURBACH (A 1)">
+		<data key="lat">49.26127</data>
+		<data key="lon">6.9574947</data>
+	</node>
+	<node id="SAARBRÜCKEN - GOLDENE BREMM (A 6)">
+		<data key="lat">49.20776</data>
+		<data key="lon">6.9653177</data>
+	</node>
+	<node id="SCHACHT - AUDORF (A 210)">
+		<data key="lat">54.29351</data>
+		<data key="lon">9.716471</data>
+	</node>
+	<node id="SCHIERSTEINER KREUZ">
+		<data key="lat">50.050716</data>
+		<data key="lon">8.213047</data>
+	</node>
+	<node id="SCHKEUDITZER KREUZ">
+		<data key="lat">51.426723</data>
+		<data key="lon">12.207054</data>
+	</node>
+	<node id="SCHWALMSTADT (A 49)">
+		<data key="lat">51.00282</data>
+		<data key="lon">9.201215</data>
+	</node>
+	<node id="SCHÖNEFELDER KREUZ">
+		<data key="lat">52.320297</data>
+		<data key="lon">13.554471</data>
+	</node>
+	<node id="SELIGENSTÄDTER DREIECK">
+		<data key="lat">49.995552</data>
+		<data key="lon">9.015472</data>
+	</node>
+	<node id="SONNBORNER KREUZ">
+		<data key="lat">51.245987</data>
+		<data key="lon">7.091977</data>
+	</node>
+	<node id="STOCKACH - OST (A 98)">
+		<data key="lat">47.84122</data>
+		<data key="lon">9.021937</data>
+	</node>
+	<node id="STUTTGART - VAIHINGEN (A 831)">
+		<data key="lat">48.729767</data>
+		<data key="lon">9.086627</data>
+	</node>
+	<node id="TREPTOW (A 117)">
+		<data key="lat">52.40118</data>
+		<data key="lon">13.55603</data>
+	</node>
+	<node id="TRIER - VERTEILERKREIS (A 602)">
+		<data key="lat">49.77252</data>
+		<data key="lon">6.663398</data>
+	</node>
+	<node id="UNTERHACHING - NORD (A 995)">
+		<data key="lat">48.078564</data>
+		<data key="lon">11.597598</data>
+	</node>
+	<node id="VIERNHEIMER DREIECK">
+		<data key="lat">49.56341</data>
+		<data key="lon">8.558687</data>
+	</node>
+	<node id="VIERNHEIMER KREUZ">
+		<data key="lat">49.525013</data>
+		<data key="lon">8.566216</data>
+	</node>
+	<node id="WALLBACH (A 98)">
+		<data key="lat">47.58041</data>
+		<data key="lon">7.917556</data>
+	</node>
+	<node id="WALTERSDORFER DREIECK">
+		<data key="lat">52.365467</data>
+		<data key="lon">13.552096</data>
+	</node>
+	<node id="WANKENDORF (A 21)">
+		<data key="lat">54.120754</data>
+		<data key="lon">10.21822</data>
+	</node>
+	<node id="WEIL / HÜNINGEN (A 5)">
+		<data key="lat">47.61511</data>
+		<data key="lon">7.5874767</data>
+	</node>
+	<node id="WERL - NORD (A 445)">
+		<data key="lat">51.567204</data>
+		<data key="lon">7.8863335</data>
+	</node>
+	<node id="WESTHOFENER KREUZ">
+		<data key="lat">51.429817</data>
+		<data key="lon">7.5395427</data>
+	</node>
+	<node id="WESTKREUZ FRANKFURT">
+		<data key="lat">50.11584</data>
+		<data key="lon">8.591687</data>
+	</node>
+	<node id="WETZLARER KREUZ">
+		<data key="lat">50.587986</data>
+		<data key="lon">8.482466</data>
+	</node>
+	<node id="WEYHAUSEN (A 39)">
+		<data key="lat">52.46079</data>
+		<data key="lon">10.737529</data>
+	</node>
+	<node id="WICKEDE (A 445)">
+		<data key="lat">51.517277</data>
+		<data key="lon">7.9014516</data>
+	</node>
+	<node id="WIESBADEN - DOTZHEIM (A 643)">
+		<data key="lat">50.060017</data>
+		<data key="lon">8.213959</data>
+	</node>
+	<node id="WIESBADEN - FRAUENSTEIN (A 66)">
+		<data key="lat">50.04986</data>
+		<data key="lon">8.175923</data>
+	</node>
+	<node id="WIESBADENER KREUZ">
+		<data key="lat">50.05561</data>
+		<data key="lon">8.380597</data>
+	</node>
+	<node id="WINTERSPELT (A 60)">
+		<data key="lat">50.22607</data>
+		<data key="lon">6.195909</data>
+	</node>
+	<edge source="BERLIN - LANDSBGR. ALLEE (A 100)" target="DREIECK NEUKÖLLN">
+		<data key="A">A 100</data>
+		<data key="gewicht">8.2</data>
+	</edge>
+	<edge source="BERLIN - SEESTRASSE (A 100)" target="DREIECK CHARLOTTENBURG">
+		<data key="A">A 100</data>
+		<data key="gewicht">2.5</data>
+	</edge>
+	<edge source="DREIECK CHARLOTTENBURG" target="DREIECK FUNKTURM">
+		<data key="A">A 100</data>
+		<data key="gewicht">3.8</data>
+	</edge>
+	<edge source="DREIECK FUNKTURM" target="KREUZ SCHÖNEBERG">
+		<data key="A">A 100</data>
+		<data key="gewicht">5.8999996</data>
+	</edge>
+	<edge source="DREIECK NEUKÖLLN" target="KREUZ SCHÖNEBERG">
+		<data key="A">A 100</data>
+		<data key="gewicht">7.5</data>
+	</edge>
+	<edge source="BERLIN - SACHSENDAMM (A 103)" target="KREUZ SCHÖNEBERG">
+		<data key="A">A 103</data>
+		<data key="gewicht">0.5</data>
+	</edge>
+	<edge source="BERLIN - WOLFENSTEINDAMM / SCHLOSSSTRASSE (A 103)" target="KREUZ SCHÖNEBERG">
+		<data key="A">A 103</data>
+		<data key="gewicht">3.1</data>
+	</edge>
+	<edge source="DREIECK HAVELLAND" target="DREIECK WERDER">
+		<data key="A">A 10</data>
+		<data key="gewicht">46.0</data>
+	</edge>
+	<edge source="DREIECK HAVELLAND" target="KREUZ ORANIENBURG">
+		<data key="A">A 10</data>
+		<data key="gewicht">13.0</data>
+	</edge>
+	<edge source="DREIECK NUTHETAL" target="DREIECK POTSDAM">
+		<data key="A">A 10</data>
+		<data key="gewicht">12.0</data>
+	</edge>
+	<edge source="DREIECK NUTHETAL" target="SCHÖNEFELDER KREUZ">
+		<data key="A">A 10</data>
+		<data key="gewicht">29.0</data>
+	</edge>
+	<edge source="DREIECK PANKOW" target="DREIECK SCHWANEBECK">
+		<data key="A">A 10</data>
+		<data key="gewicht">10.0</data>
+	</edge>
+	<edge source="DREIECK PANKOW" target="KREUZ ORANIENBURG">
+		<data key="A">A 10</data>
+		<data key="gewicht">18.0</data>
+	</edge>
+	<edge source="DREIECK POTSDAM" target="DREIECK WERDER">
+		<data key="A">A 10</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="DREIECK SCHWANEBECK" target="DREIECK SPREEAU">
+		<data key="A">A 10</data>
+		<data key="gewicht">41.0</data>
+	</edge>
+	<edge source="DREIECK SPREEAU" target="SCHÖNEFELDER KREUZ">
+		<data key="A">A 10</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="DREIECK CHARLOTTENBURG" target="KREUZ ORANIENBURG">
+		<data key="A">A 111</data>
+		<data key="gewicht">20.9</data>
+	</edge>
+	<edge source="DREIECK NEUKÖLLN" target="WALTERSDORFER DREIECK">
+		<data key="A">A 113</data>
+		<data key="gewicht">13.8</data>
+	</edge>
+	<edge source="SCHÖNEFELDER KREUZ" target="WALTERSDORFER DREIECK">
+		<data key="A">A 113</data>
+		<data key="gewicht">5.0</data>
+	</edge>
+	<edge source="BERLIN -  PRENZLAUER PROMENADE (A 114)" target="DREIECK PANKOW">
+		<data key="A">A 114</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="DREIECK FUNKTURM" target="DREIECK NUTHETAL">
+		<data key="A">A 115</data>
+		<data key="gewicht">27.3</data>
+	</edge>
+	<edge source="TREPTOW (A 117)" target="WALTERSDORFER DREIECK">
+		<data key="A">A 117</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="Bundesgrenze Pomellen PL-D (A 11)" target="KREUZ UCKERMARK">
+		<data key="A">A 11</data>
+		<data key="gewicht">29.5</data>
+	</edge>
+	<edge source="DREIECK SCHWANEBECK" target="DREIECK VOLKSPARK PRENZLAUER BERG">
+		<data key="A">A 11</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="DREIECK SCHWANEBECK" target="KREUZ UCKERMARK">
+		<data key="A">A 11</data>
+		<data key="gewicht">81.0</data>
+	</edge>
+	<edge source="Bundesgrenze Frankfurt D-PL (A 12)" target="DREIECK SPREEAU">
+		<data key="A">A 12</data>
+		<data key="gewicht">57.4</data>
+	</edge>
+	<edge source="DREIECK DRESDEN - NORD" target="DREIECK SPREEWALD">
+		<data key="A">A 13</data>
+		<data key="gewicht">89.0</data>
+	</edge>
+	<edge source="DREIECK SPREEWALD" target="SCHÖNEFELDER KREUZ">
+		<data key="A">A 13</data>
+		<data key="gewicht">61.0</data>
+	</edge>
+	<edge source="DREIECK HALLE - NORD" target="DREIECK HALLE - SÜD">
+		<data key="A">A 143</data>
+		<data key="gewicht">22.0</data>
+	</edge>
+	<edge source="DAHLENWARSLEBEN (A 14)" target="KREUZ MAGDEBURG">
+		<data key="A">A 14</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="DREIECK HALLE - NORD" target="KREUZ MAGDEBURG">
+		<data key="A">A 14</data>
+		<data key="gewicht">77.0</data>
+	</edge>
+	<edge source="DREIECK HALLE - NORD" target="SCHKEUDITZER KREUZ">
+		<data key="A">A 14</data>
+		<data key="gewicht">29.0</data>
+	</edge>
+	<edge source="DREIECK NOSSEN" target="DREIECK PARTHENAUE">
+		<data key="A">A 14</data>
+		<data key="gewicht">66.0</data>
+	</edge>
+	<edge source="DREIECK PARTHENAUE" target="SCHKEUDITZER KREUZ">
+		<data key="A">A 14</data>
+		<data key="gewicht">30.0</data>
+	</edge>
+	<edge source="Bundesgrenze Forst D-PL (A 15)" target="DREIECK SPREEWALD">
+		<data key="A">A 15</data>
+		<data key="gewicht">63.0</data>
+	</edge>
+	<edge source="Bundesgrenze Breitenau D-CZ (A 17)" target="DREIECK DRESDEN - WEST">
+		<data key="A">A 17</data>
+		<data key="gewicht">45.0</data>
+	</edge>
+	<edge source="DREIECK WITTSTOCK" target="KREUZ ROSTOCK">
+		<data key="A">A 19</data>
+		<data key="gewicht">109.0</data>
+	</edge>
+	<edge source="KREUZ ROSTOCK" target="ROSTOCK - ÜBERSEEHAFEN (A 19)">
+		<data key="A">A 19</data>
+		<data key="gewicht">15.0</data>
+	</edge>
+	<edge source="BREMER KREUZ" target="BUCHHOLZER DREIECK">
+		<data key="A">A 1</data>
+		<data key="gewicht">71.0</data>
+	</edge>
+	<edge source="BREMER KREUZ" target="DREIECK STUHR">
+		<data key="A">A 1</data>
+		<data key="gewicht">16.0</data>
+	</edge>
+	<edge source="BUCHHOLZER DREIECK" target="HORSTER DREIECK">
+		<data key="A">A 1</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="DREIECK AHLHORNER HEIDE" target="DREIECK STUHR">
+		<data key="A">A 1</data>
+		<data key="gewicht">41.9</data>
+	</edge>
+	<edge source="DREIECK AHLHORNER HEIDE" target="KREUZ LOTTE / OSNABRÜCK">
+		<data key="A">A 1</data>
+		<data key="gewicht">71.0</data>
+	</edge>
+	<edge source="DREIECK BAD SCHWARTAU" target="HEILIGENHAFEN - MITTE (A 1)">
+		<data key="A">A 1</data>
+		<data key="gewicht">58.4</data>
+	</edge>
+	<edge source="DREIECK BAD SCHWARTAU" target="KREUZ LÜBECK">
+		<data key="A">A 1</data>
+		<data key="gewicht">10.0</data>
+	</edge>
+	<edge source="DREIECK ERFTTAL" target="KREUZ BLIESHEIM">
+		<data key="A">A 1</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="DREIECK ERFTTAL" target="KREUZ KÖLN - WEST">
+		<data key="A">A 1</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="DREIECK HAMBURG - STILLHORN" target="KREUZ HAMBURG - SÜD">
+		<data key="A">A 1</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="DREIECK HAMBURG - STILLHORN" target="MASCHENER KREUZ">
+		<data key="A">A 1</data>
+		<data key="gewicht">10.0</data>
+	</edge>
+	<edge source="DREIECK HAMBURG - SÜDOST" target="KREUZ HAMBURG - OST">
+		<data key="A">A 1</data>
+		<data key="gewicht">7.5</data>
+	</edge>
+	<edge source="DREIECK HAMBURG - SÜDOST" target="KREUZ HAMBURG - SÜD">
+		<data key="A">A 1</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="DREIECK MOSELTAL" target="DREIECK NONNWEILER">
+		<data key="A">A 1</data>
+		<data key="gewicht">33.0</data>
+	</edge>
+	<edge source="DREIECK MOSELTAL" target="DREIECK TRIER">
+		<data key="A">A 1</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="DREIECK NONNWEILER" target="KREUZ SAARBRÜCKEN">
+		<data key="A">A 1</data>
+		<data key="gewicht">33.0</data>
+	</edge>
+	<edge source="DREIECK TRIER" target="KREUZ WITTLICH">
+		<data key="A">A 1</data>
+		<data key="gewicht">16.0</data>
+	</edge>
+	<edge source="DREIECK VULKANEIFEL" target="KREUZ BLIESHEIM">
+		<data key="A">A 1</data>
+		<data key="gewicht">74.4</data>
+	</edge>
+	<edge source="DREIECK VULKANEIFEL" target="KREUZ WITTLICH">
+		<data key="A">A 1</data>
+		<data key="gewicht">31.0</data>
+	</edge>
+	<edge source="HORSTER DREIECK" target="MASCHENER KREUZ">
+		<data key="A">A 1</data>
+		<data key="gewicht">1.0</data>
+	</edge>
+	<edge source="KAMENER KREUZ" target="KREUZ DORTMUND / UNNA">
+		<data key="A">A 1</data>
+		<data key="gewicht">8.5</data>
+	</edge>
+	<edge source="KAMENER KREUZ" target="KREUZ MÜNSTER - SÜD">
+		<data key="A">A 1</data>
+		<data key="gewicht">37.0</data>
+	</edge>
+	<edge source="KREUZ BARGTEHEIDE" target="KREUZ HAMBURG - OST">
+		<data key="A">A 1</data>
+		<data key="gewicht">21.0</data>
+	</edge>
+	<edge source="KREUZ BARGTEHEIDE" target="KREUZ LÜBECK">
+		<data key="A">A 1</data>
+		<data key="gewicht">23.3</data>
+	</edge>
+	<edge source="KREUZ DORTMUND / UNNA" target="WESTHOFENER KREUZ">
+		<data key="A">A 1</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="KREUZ KÖLN - NORD" target="KREUZ KÖLN - WEST">
+		<data key="A">A 1</data>
+		<data key="gewicht">10.0</data>
+	</edge>
+	<edge source="KREUZ KÖLN - NORD" target="KREUZ LEVERKUSEN - WEST">
+		<data key="A">A 1</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="KREUZ LEVERKUSEN" target="KREUZ LEVERKUSEN - WEST">
+		<data key="A">A 1</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="KREUZ LEVERKUSEN" target="WESTHOFENER KREUZ">
+		<data key="A">A 1</data>
+		<data key="gewicht">64.0</data>
+	</edge>
+	<edge source="KREUZ LOTTE / OSNABRÜCK" target="KREUZ MÜNSTER - SÜD">
+		<data key="A">A 1</data>
+		<data key="gewicht">49.0</data>
+	</edge>
+	<edge source="KREUZ SAARBRÜCKEN" target="SAARBRÜCKEN - BURBACH (A 1)">
+		<data key="A">A 1</data>
+		<data key="gewicht">12.0</data>
+	</edge>
+	<edge source="KREUZ LÜBECK" target="KREUZ ROSTOCK">
+		<data key="A">A 20</data>
+		<data key="gewicht">121.0</data>
+	</edge>
+	<edge source="KREUZ ROSTOCK" target="KREUZ UCKERMARK">
+		<data key="A">A 20</data>
+		<data key="gewicht">201.0</data>
+	</edge>
+	<edge source="KREUZ KIEL - WEST (A 210)" target="KREUZ RENDSBURG">
+		<data key="A">A 210</data>
+		<data key="gewicht">21.0</data>
+	</edge>
+	<edge source="KREUZ RENDSBURG" target="SCHACHT - AUDORF (A 210)">
+		<data key="A">A 210</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="DREIECK BORDESHOLM" target="KIEL - WESTRING (A 215)">
+		<data key="A">A 215</data>
+		<data key="gewicht">10.5</data>
+	</edge>
+	<edge source="KREUZ BARGTEHEIDE" target="WANKENDORF (A 21)">
+		<data key="A">A 21</data>
+		<data key="gewicht">49.5</data>
+	</edge>
+	<edge source="DREIECK BAD SCHWARTAU" target="KREUZ LÜBECK - SIEMS">
+		<data key="A">A 226</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="DREIECK HAMBURG - NORDWEST" target="HEIDE - WEST (A 23)">
+		<data key="A">A 23</data>
+		<data key="gewicht">95.0</data>
+	</edge>
+	<edge source="DREIECK HAMBURG - HORN" target="KREUZ HAMBURG - OST">
+		<data key="A">A 24</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="DREIECK HAVELLAND" target="DREIECK WITTSTOCK">
+		<data key="A">A 24</data>
+		<data key="gewicht">64.0</data>
+	</edge>
+	<edge source="DREIECK WITTSTOCK" target="KREUZ HAMBURG - OST">
+		<data key="A">A 24</data>
+		<data key="gewicht">168.0</data>
+	</edge>
+	<edge source="LÜNEBURG - NORD (A 250)" target="MASCHENER KREUZ (W)">
+		<data key="A">A 250</data>
+		<data key="gewicht">31.0</data>
+	</edge>
+	<edge source="HAMBURG - WILSTORF (A 253)" target="KREUZ HAMBURG - SÜD">
+		<data key="A">A 252</data>
+		<data key="gewicht">9.7</data>
+	</edge>
+	<edge source="KREUZ HAMBURG - SÜD" target="KREUZ HAMBURG - SÜD">
+		<data key="A">A 255</data>
+		<data key="gewicht">1.0</data>
+	</edge>
+	<edge source="DREIECK HAMBURG - SÜDOST" target="KREUZ GEESTHACHT">
+		<data key="A">A 25</data>
+		<data key="gewicht">17.0</data>
+	</edge>
+	<edge source="BUCHHOLZER DREIECK" target="DREIECK HAMBURG - SÜDWEST">
+		<data key="A">A 261</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="DREIECK HAMBURG - STILLHORN" target="KREUZ HAMBURG - SÜDERELBE">
+		<data key="A">A 26</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="KREUZ HAMBURG - SÜDERELBE" target="KREUZ STADE - OST">
+		<data key="A">A 26</data>
+		<data key="gewicht">33.0</data>
+	</edge>
+	<edge source="BREMEN - RÖNNEBECK (A 270)" target="DREIECK BREMEN - NORD">
+		<data key="A">A 270</data>
+		<data key="gewicht">12.2</data>
+	</edge>
+	<edge source="BREMER KREUZ" target="DREIECK BREMEN - INDUSTRIEHÄFEN">
+		<data key="A">A 27</data>
+		<data key="gewicht">22.5</data>
+	</edge>
+	<edge source="BREMER KREUZ" target="DREIECK WALSRODE">
+		<data key="A">A 27</data>
+		<data key="gewicht">56.0</data>
+	</edge>
+	<edge source="CUXHAVEN (A 27)" target="DREIECK BREMEN - NORD">
+		<data key="A">A 27</data>
+		<data key="gewicht">79.0</data>
+	</edge>
+	<edge source="DREIECK BREMEN - INDUSTRIEHÄFEN" target="DREIECK BREMEN - NORD">
+		<data key="A">A 27</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="BUNDE - WEST (A 280)" target="DREIECK BUNDE">
+		<data key="A">A 280</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="BREMEN - AIRPORT-STADT (A 281)" target="DREIECK BREMEN - INDUSTRIEHÄFEN">
+		<data key="A">A 281</data>
+		<data key="gewicht">14.5</data>
+	</edge>
+	<edge source="DREIECK OLDENBURG - WEST" target="KREUZ OLDENBURG - OST">
+		<data key="A">A 28</data>
+		<data key="gewicht">8.7</data>
+	</edge>
+	<edge source="DREIECK OLDENBURG - WEST" target="LEER - OST (A 28)">
+		<data key="A">A 28</data>
+		<data key="gewicht">50.0</data>
+	</edge>
+	<edge source="DREIECK STUHR" target="KREUZ OLDENBURG - OST">
+		<data key="A">A 28</data>
+		<data key="gewicht">32.4</data>
+	</edge>
+	<edge source="DREIECK OLDENBURG - WEST" target="KREUZ OLDENBURG - NORD">
+		<data key="A">A 293</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="DREIECK AHLHORNER HEIDE" target="KREUZ OLDENBURG - OST">
+		<data key="A">A 29</data>
+		<data key="gewicht">32.0</data>
+	</edge>
+	<edge source="FEDDERWARDERGRODEN (A 29)" target="KREUZ OLDENBURG - NORD">
+		<data key="A">A 29</data>
+		<data key="gewicht">50.0</data>
+	</edge>
+	<edge source="KREUZ OLDENBURG - NORD" target="KREUZ OLDENBURG - OST">
+		<data key="A">A 29</data>
+		<data key="gewicht">12.0</data>
+	</edge>
+	<edge source="DREIECK BOTTROP" target="KREUZ GLADBECK">
+		<data key="A">A 2</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="DREIECK BOTTROP" target="KREUZ OBERHAUSEN">
+		<data key="A">A 2</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="DREIECK HANNOVER - WEST" target="KREUZ BAD OEYNHAUSEN">
+		<data key="A">A 2</data>
+		<data key="gewicht">68.5</data>
+	</edge>
+	<edge source="DREIECK HANNOVER - WEST" target="KREUZ HANNOVER - BUCHHOLZ">
+		<data key="A">A 2</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="DREIECK WERDER" target="KREUZ MAGDEBURG">
+		<data key="A">A 2</data>
+		<data key="gewicht">93.0</data>
+	</edge>
+	<edge source="KAMENER KREUZ" target="KREUZ BIELEFELD">
+		<data key="A">A 2</data>
+		<data key="gewicht">75.5</data>
+	</edge>
+	<edge source="KAMENER KREUZ" target="KREUZ DORTMUND - NORDWEST">
+		<data key="A">A 2</data>
+		<data key="gewicht">23.0</data>
+	</edge>
+	<edge source="KREUZ BAD OEYNHAUSEN" target="KREUZ BIELEFELD">
+		<data key="A">A 2</data>
+		<data key="gewicht">39.0</data>
+	</edge>
+	<edge source="KREUZ BRAUNSCHWEIG - NORD" target="KREUZ HANNOVER - OST">
+		<data key="A">A 2</data>
+		<data key="gewicht">44.0</data>
+	</edge>
+	<edge source="KREUZ BRAUNSCHWEIG - NORD" target="KREUZ WOLFSBURG / KÖNIGSLUTTER">
+		<data key="A">A 2</data>
+		<data key="gewicht">15.0</data>
+	</edge>
+	<edge source="KREUZ DORTMUND - NORDWEST" target="KREUZ RECKLINGHAUSEN">
+		<data key="A">A 2</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="KREUZ GLADBECK" target="KREUZ RECKLINGHAUSEN">
+		<data key="A">A 2</data>
+		<data key="gewicht">15.0</data>
+	</edge>
+	<edge source="KREUZ HANNOVER - BUCHHOLZ" target="KREUZ HANNOVER - OST">
+		<data key="A">A 2</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="KREUZ MAGDEBURG" target="KREUZ WOLFSBURG / KÖNIGSLUTTER">
+		<data key="A">A 2</data>
+		<data key="gewicht">59.5</data>
+	</edge>
+	<edge source="BAD OEYNHAUSEN - SÜD (A 30)" target="KREUZ BAD OEYNHAUSEN">
+		<data key="A">A 30</data>
+		<data key="gewicht">1.0</data>
+	</edge>
+	<edge source="Bundesgrenze Bad Bentheim NL-D (A 30)" target="KREUZ SCHÜTTORF">
+		<data key="A">A 30</data>
+		<data key="gewicht">17.0</data>
+	</edge>
+	<edge source="KREUZ BAD OEYNHAUSEN" target="KREUZ OSNABRÜCK - SÜD">
+		<data key="A">A 30</data>
+		<data key="gewicht">61.0</data>
+	</edge>
+	<edge source="KREUZ LOTTE / OSNABRÜCK" target="KREUZ OSNABRÜCK - SÜD">
+		<data key="A">A 30</data>
+		<data key="gewicht">12.0</data>
+	</edge>
+	<edge source="KREUZ LOTTE / OSNABRÜCK" target="KREUZ SCHÜTTORF">
+		<data key="A">A 30</data>
+		<data key="gewicht">49.0</data>
+	</edge>
+	<edge source="DREIECK BOTTROP" target="KREUZ SCHÜTTORF">
+		<data key="A">A 31</data>
+		<data key="gewicht">94.2</data>
+	</edge>
+	<edge source="DREIECK BUNDE" target="EMDEN - WEST (A 31)">
+		<data key="A">A 31</data>
+		<data key="gewicht">52.0</data>
+	</edge>
+	<edge source="DREIECK BUNDE" target="KREUZ SCHÜTTORF">
+		<data key="A">A 31</data>
+		<data key="gewicht">97.0</data>
+	</edge>
+	<edge source="KREUZ BIELEFELD" target="KREUZ OSNABRÜCK - SÜD">
+		<data key="A">A 33</data>
+		<data key="gewicht">53.0</data>
+	</edge>
+	<edge source="KREUZ BIELEFELD" target="KREUZ WÜNNENBERG - HAAREN">
+		<data key="A">A 33</data>
+		<data key="gewicht">46.0</data>
+	</edge>
+	<edge source="KREUZ OSNABRÜCK - SÜD" target="OSNABRÜCK - LÜSTRINGEN (A 33)">
+		<data key="A">A 33</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="DREIECK HANNOVER - NORD" target="DREIECK HANNOVER - WEST">
+		<data key="A">A 352</data>
+		<data key="gewicht">17.0</data>
+	</edge>
+	<edge source="BEINHORN (A 37)" target="KREUZ HANNOVER - BUCHHOLZ">
+		<data key="A">A 37</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="DREIECK HANNOVER - SÜD" target="KREUZ HANNOVER - BUCHHOLZ">
+		<data key="A">A 37</data>
+		<data key="gewicht">16.7</data>
+	</edge>
+	<edge source="DREIECK DRAMMETAL" target="DREIECK SÜDHARZ">
+		<data key="A">A 38</data>
+		<data key="gewicht">114.5</data>
+	</edge>
+	<edge source="DREIECK HALLE - SÜD" target="DREIECK SÜDHARZ">
+		<data key="A">A 38</data>
+		<data key="gewicht">39.0</data>
+	</edge>
+	<edge source="DREIECK HALLE - SÜD" target="KREUZ RIPPACHTAL">
+		<data key="A">A 38</data>
+		<data key="gewicht">26.0</data>
+	</edge>
+	<edge source="DREIECK PARTHENAUE" target="KREUZ RIPPACHTAL">
+		<data key="A">A 38</data>
+		<data key="gewicht">41.0</data>
+	</edge>
+	<edge source="BRAUNSCHWEIG - WENDEN (A 391)" target="KREUZ BRAUNSCHWEIG - NORD">
+		<data key="A">A 391</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="DREIECK BRAUNSCHWEIG - SÜDWEST" target="KREUZ ÖLPER">
+		<data key="A">A 391</data>
+		<data key="gewicht">5.5</data>
+	</edge>
+	<edge source="KREUZ BRAUNSCHWEIG - NORD" target="KREUZ ÖLPER">
+		<data key="A">A 391</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="BRAUNSCHWEIG - HAMBURGER STRASSE (A 392)" target="KREUZ ÖLPER">
+		<data key="A">A 392</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="BRAUNSCHWEIG - WATENBÜTTEL - OST (A 392)" target="KREUZ ÖLPER">
+		<data key="A">A 392</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="KREUZ BRAUNSCHWEIG - SÜD" target="OSTERWIECK / VIENENBURG - OST (A 395)">
+		<data key="A">A 395</data>
+		<data key="gewicht">34.9</data>
+	</edge>
+	<edge source="DREIECK BRAUNSCHWEIG - SÜDWEST" target="DREIECK SALZGITTER">
+		<data key="A">A 39</data>
+		<data key="gewicht">31.8</data>
+	</edge>
+	<edge source="DREIECK BRAUNSCHWEIG - SÜDWEST" target="KREUZ BRAUNSCHWEIG - SÜD">
+		<data key="A">A 39</data>
+		<data key="gewicht">1.0</data>
+	</edge>
+	<edge source="KREUZ BRAUNSCHWEIG - SÜD" target="KREUZ WOLFSBURG / KÖNIGSLUTTER">
+		<data key="A">A 39</data>
+		<data key="gewicht">18.0</data>
+	</edge>
+	<edge source="KREUZ WOLFSBURG / KÖNIGSLUTTER" target="WEYHAUSEN (A 39)">
+		<data key="A">A 39</data>
+		<data key="gewicht">17.5</data>
+	</edge>
+	<edge source="DREIECK DERNBACH" target="KREUZ BONN / SIEGBURG">
+		<data key="A">A 3</data>
+		<data key="gewicht">56.0</data>
+	</edge>
+	<edge source="DREIECK DERNBACH" target="WIESBADENER KREUZ">
+		<data key="A">A 3</data>
+		<data key="gewicht">72.0</data>
+	</edge>
+	<edge source="DREIECK KÖLN - HEUMAR" target="KREUZ BONN / SIEGBURG">
+		<data key="A">A 3</data>
+		<data key="gewicht">23.0</data>
+	</edge>
+	<edge source="DREIECK KÖLN - HEUMAR" target="KREUZ KÖLN - OST">
+		<data key="A">A 3</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="DREIECK LANGENFELD" target="KREUZ HILDEN">
+		<data key="A">A 3</data>
+		<data key="gewicht">10.0</data>
+	</edge>
+	<edge source="DREIECK LANGENFELD" target="KREUZ LEVERKUSEN">
+		<data key="A">A 3</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="DREIECK WÜRZBURG - WEST" target="KREUZ BIEBELRIED">
+		<data key="A">A 3</data>
+		<data key="gewicht">23.0</data>
+	</edge>
+	<edge source="DREIECK WÜRZBURG - WEST" target="SELIGENSTÄDTER DREIECK">
+		<data key="A">A 3</data>
+		<data key="gewicht">61.0</data>
+	</edge>
+	<edge source="ELTEN (A 3)" target="KREUZ OBERHAUSEN">
+		<data key="A">A 3</data>
+		<data key="gewicht">63.0</data>
+	</edge>
+	<edge source="FRANKFURTER KREUZ" target="MÖNCHHOF - DREIECK">
+		<data key="A">A 3</data>
+		<data key="gewicht">9.5</data>
+	</edge>
+	<edge source="FRANKFURTER KREUZ" target="SELIGENSTÄDTER DREIECK">
+		<data key="A">A 3</data>
+		<data key="gewicht">33.0</data>
+	</edge>
+	<edge source="KREUZ ALTDORF" target="KREUZ NÜRNBERG">
+		<data key="A">A 3</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="KREUZ ALTDORF" target="KREUZ REGENSBURG">
+		<data key="A">A 3</data>
+		<data key="gewicht">81.0</data>
+	</edge>
+	<edge source="KREUZ BIEBELRIED" target="KREUZ FÜRTH / ERLANGEN">
+		<data key="A">A 3</data>
+		<data key="gewicht">80.0</data>
+	</edge>
+	<edge source="KREUZ BREITSCHEID" target="KREUZ KAISERBERG">
+		<data key="A">A 3</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="KREUZ BREITSCHEID" target="KREUZ RATINGEN - OST">
+		<data key="A">A 3</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="KREUZ DEGGENDORF" target="KREUZ POCKING">
+		<data key="A">A 3</data>
+		<data key="gewicht">61.0</data>
+	</edge>
+	<edge source="KREUZ DEGGENDORF" target="KREUZ REGENSBURG">
+		<data key="A">A 3</data>
+		<data key="gewicht">53.0</data>
+	</edge>
+	<edge source="KREUZ FÜRTH / ERLANGEN" target="KREUZ NÜRNBERG">
+		<data key="A">A 3</data>
+		<data key="gewicht">22.0</data>
+	</edge>
+	<edge source="KREUZ HILDEN" target="KREUZ RATINGEN - OST">
+		<data key="A">A 3</data>
+		<data key="gewicht">13.0</data>
+	</edge>
+	<edge source="KREUZ KAISERBERG" target="KREUZ KAISERBERG">
+		<data key="A">A 3</data>
+		<data key="gewicht">5.0</data>
+	</edge>
+	<edge source="KREUZ KAISERBERG" target="KREUZ OBERHAUSEN - WEST">
+		<data key="A">A 3</data>
+		<data key="gewicht">5.0</data>
+	</edge>
+	<edge source="KREUZ KÖLN - OST" target="KREUZ LEVERKUSEN">
+		<data key="A">A 3</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="KREUZ OBERHAUSEN" target="KREUZ OBERHAUSEN - WEST">
+		<data key="A">A 3</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="MÖNCHHOF - DREIECK" target="WIESBADENER KREUZ">
+		<data key="A">A 3</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="BOCHUM - STAHLHAUSEN  BOCHUMER WESTKREUZ" target="KREUZ BOCHUM">
+		<data key="A">A 40</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="BOCHUM - STAHLHAUSEN  BOCHUMER WESTKREUZ" target="KREUZ GELSENKIRCHEN - SÜD">
+		<data key="A">A 40</data>
+		<data key="gewicht">5.2</data>
+	</edge>
+	<edge source="Bundesgrenze Straelen NL-D (A 40)" target="KREUZ MOERS">
+		<data key="A">A 40</data>
+		<data key="gewicht">28.0</data>
+	</edge>
+	<edge source="DORTMUND - BAROP (A 40)" target="KREUZ DORTMUND - WEST">
+		<data key="A">A 40</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="DREIECK ESSEN - OST" target="KREUZ GELSENKIRCHEN - SÜD">
+		<data key="A">A 40</data>
+		<data key="gewicht">4.9</data>
+	</edge>
+	<edge source="DREIECK ESSEN - OST" target="KREUZ KAISERBERG">
+		<data key="A">A 40</data>
+		<data key="gewicht">18.9</data>
+	</edge>
+	<edge source="KREUZ BOCHUM" target="KREUZ DORTMUND - WEST">
+		<data key="A">A 40</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="KREUZ DUISBURG" target="KREUZ KAISERBERG">
+		<data key="A">A 40</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="KREUZ DUISBURG" target="KREUZ MOERS">
+		<data key="A">A 40</data>
+		<data key="gewicht">12.4</data>
+	</edge>
+	<edge source="DORTMUND - BODELSCHWINGH (A 42)" target="KREUZ CASTROP - RAUXEL - OST">
+		<data key="A">A 42</data>
+		<data key="gewicht">0.2</data>
+	</edge>
+	<edge source="KREUZ CASTROP - RAUXEL - OST" target="KREUZ HERNE">
+		<data key="A">A 42</data>
+		<data key="gewicht">12.0</data>
+	</edge>
+	<edge source="KREUZ DUISBURG - NORD" target="KREUZ KAMP - LINTFORT">
+		<data key="A">A 42</data>
+		<data key="gewicht">14.5</data>
+	</edge>
+	<edge source="KREUZ DUISBURG - NORD" target="KREUZ OBERHAUSEN - WEST">
+		<data key="A">A 42</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="KREUZ ESSEN - NORD" target="KREUZ HERNE">
+		<data key="A">A 42</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="KREUZ ESSEN - NORD" target="KREUZ OBERHAUSEN - WEST">
+		<data key="A">A 42</data>
+		<data key="gewicht">13.0</data>
+	</edge>
+	<edge source="KREUZ BOCHUM / WITTEN" target="KREUZ WUPPERTAL - NORD (Südteil)">
+		<data key="A">A 43</data>
+		<data key="gewicht">19.5</data>
+	</edge>
+	<edge source="KREUZ BOCHUM" target="KREUZ BOCHUM / WITTEN">
+		<data key="A">A 43</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="KREUZ BOCHUM" target="KREUZ HERNE">
+		<data key="A">A 43</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="KREUZ HERNE" target="KREUZ RECKLINGHAUSEN">
+		<data key="A">A 43</data>
+		<data key="gewicht">5.0</data>
+	</edge>
+	<edge source="KREUZ MARL - NORD" target="KREUZ MÜNSTER - SÜD">
+		<data key="A">A 43</data>
+		<data key="gewicht">41.0</data>
+	</edge>
+	<edge source="KREUZ MARL - NORD" target="KREUZ RECKLINGHAUSEN">
+		<data key="A">A 43</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="KREUZ WERL" target="WERL - NORD (A 445)">
+		<data key="A">A 445</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="KREUZ WERL" target="WICKEDE (A 445)">
+		<data key="A">A 445</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="BOCHUM - STAHLHAUSEN  BOCHUMER WESTKREUZ" target="KREUZ BOCHUM / WITTEN">
+		<data key="A">A 44</data>
+		<data key="gewicht">9.7</data>
+	</edge>
+	<edge source="BOCHUM - STAHLHAUSEN  BOCHUMER WESTKREUZ" target="KREUZ GELSENKIRCHEN - SÜD">
+		<data key="A">A 44</data>
+		<data key="gewicht">7.2</data>
+	</edge>
+	<edge source="Bundesgrenze Lichtenbusch B-D (A 44)" target="DREIECK JACKERATH">
+		<data key="A">A 44</data>
+		<data key="gewicht">44.5</data>
+	</edge>
+	<edge source="DREIECK ESSEN - OST" target="KREUZ ESSEN - BERGERHAUSEN">
+		<data key="A">A 44</data>
+		<data key="gewicht">5.3</data>
+	</edge>
+	<edge source="DREIECK ESSEN - OST" target="KREUZ GELSENKIRCHEN - SÜD">
+		<data key="A">A 44</data>
+		<data key="gewicht">3.9</data>
+	</edge>
+	<edge source="DREIECK HOLZ" target="DREIECK JACKERATH">
+		<data key="A">A 44</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="DREIECK HOLZ" target="KREUZ NEERSEN">
+		<data key="A">A 44</data>
+		<data key="gewicht">17.0</data>
+	</edge>
+	<edge source="DREIECK KASSEL - SÜD" target="KREUZ KASSEL - MITTE">
+		<data key="A">A 44</data>
+		<data key="gewicht">2.5</data>
+	</edge>
+	<edge source="DREIECK KASSEL - SÜD" target="KREUZ KASSEL - WEST">
+		<data key="A">A 44</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="DREIECK VELBERT - NORD" target="KREUZ ESSEN - BERGERHAUSEN">
+		<data key="A">A 44</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="DREIECK VELBERT - NORD" target="KREUZ RATINGEN - OST">
+		<data key="A">A 44</data>
+		<data key="gewicht">12.0</data>
+	</edge>
+	<edge source="HESSISCH LICHTENAU - OST  (Ostteil) (A 44)" target="KREUZ KASSEL - MITTE">
+		<data key="A">A 44</data>
+		<data key="gewicht">25.5</data>
+	</edge>
+	<edge source="KREUZ BOCHUM / WITTEN" target="KREUZ DORTMUND / WITTEN">
+		<data key="A">A 44</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="KREUZ DORTMUND / UNNA" target="KREUZ DORTMUND / WITTEN">
+		<data key="A">A 44</data>
+		<data key="gewicht">18.0</data>
+	</edge>
+	<edge source="KREUZ DORTMUND / UNNA" target="KREUZ WERL">
+		<data key="A">A 44</data>
+		<data key="gewicht">17.0</data>
+	</edge>
+	<edge source="KREUZ DÜSSELDORF - NORD  (Nordteil)" target="KREUZ DÜSSELDORF - NORD  (Südteil)">
+		<data key="A">A 44</data>
+		<data key="gewicht">1.0</data>
+	</edge>
+	<edge source="KREUZ DÜSSELDORF - NORD  (Nordteil)" target="KREUZ MEERBUSCH">
+		<data key="A">A 44</data>
+		<data key="gewicht">12.8</data>
+	</edge>
+	<edge source="KREUZ DÜSSELDORF - NORD  (Südteil)" target="KREUZ RATINGEN - OST">
+		<data key="A">A 44</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="KREUZ KASSEL - WEST" target="KREUZ WÜNNENBERG - HAAREN">
+		<data key="A">A 44</data>
+		<data key="gewicht">68.0</data>
+	</edge>
+	<edge source="KREUZ MEERBUSCH" target="KREUZ NEERSEN">
+		<data key="A">A 44</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="KREUZ WERL" target="KREUZ WÜNNENBERG - HAAREN">
+		<data key="A">A 44</data>
+		<data key="gewicht">59.0</data>
+	</edge>
+	<edge source="GAMBACHER KREUZ" target="GIESSENER SÜDKREUZ">
+		<data key="A">A 45</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="GAMBACHER KREUZ" target="LANGENSELBOLDER DREIECK">
+		<data key="A">A 45</data>
+		<data key="gewicht">47.0</data>
+	</edge>
+	<edge source="GIESSENER SÜDKREUZ" target="WETZLARER KREUZ">
+		<data key="A">A 45</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="KREUZ CASTROP - RAUXEL - OST" target="KREUZ DORTMUND - NORDWEST">
+		<data key="A">A 45</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="KREUZ CASTROP - RAUXEL - OST" target="KREUZ DORTMUND - WEST">
+		<data key="A">A 45</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="KREUZ DORTMUND - WEST" target="KREUZ DORTMUND / WITTEN">
+		<data key="A">A 45</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="KREUZ DORTMUND / WITTEN" target="WESTHOFENER KREUZ">
+		<data key="A">A 45</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="KREUZ HAGEN" target="KREUZ OLPE - SÜD">
+		<data key="A">A 45</data>
+		<data key="gewicht">57.0</data>
+	</edge>
+	<edge source="KREUZ HAGEN" target="WESTHOFENER KREUZ">
+		<data key="A">A 45</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="KREUZ OLPE - SÜD" target="WETZLARER KREUZ">
+		<data key="A">A 45</data>
+		<data key="gewicht">74.0</data>
+	</edge>
+	<edge source="LANGENSELBOLDER DREIECK" target="SELIGENSTÄDTER DREIECK">
+		<data key="A">A 45</data>
+		<data key="gewicht">24.0</data>
+	</edge>
+	<edge source="DREIECK HOLZ" target="KREUZ MÖNCHENGLADBACH - WANLO">
+		<data key="A">A 46</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="DREIECK HOLZ" target="KREUZ NEUSS - WEST">
+		<data key="A">A 46</data>
+		<data key="gewicht">17.5</data>
+	</edge>
+	<edge source="HEINSBERG (A 46)" target="KREUZ MÖNCHENGLADBACH - WANLO">
+		<data key="A">A 46</data>
+		<data key="gewicht">26.0</data>
+	</edge>
+	<edge source="KREUZ DÜSSELDORF - SÜD" target="KREUZ HILDEN">
+		<data key="A">A 46</data>
+		<data key="gewicht">5.0</data>
+	</edge>
+	<edge source="KREUZ DÜSSELDORF - SÜD" target="KREUZ NEUSS - SÜD">
+		<data key="A">A 46</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="KREUZ HAGEN" target="NUTTLAR (A 46)">
+		<data key="A">A 46</data>
+		<data key="gewicht">76.0</data>
+	</edge>
+	<edge source="KREUZ HAGEN" target="SONNBORNER KREUZ">
+		<data key="A">A 46</data>
+		<data key="gewicht">33.0</data>
+	</edge>
+	<edge source="KREUZ HILDEN" target="SONNBORNER KREUZ">
+		<data key="A">A 46</data>
+		<data key="gewicht">12.8</data>
+	</edge>
+	<edge source="KREUZ NEUSS - SÜD" target="KREUZ NEUSS - WEST">
+		<data key="A">A 46</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="ASSLAR (A 480)" target="WETZLARER KREUZ">
+		<data key="A">A 480</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="REISKIRCHENER DREIECK" target="WETZLARER KREUZ">
+		<data key="A">A 480</data>
+		<data key="gewicht">28.0</data>
+	</edge>
+	<edge source="GIESSENER NORDKREUZ (W)" target="GIESSENER SÜDKREUZ">
+		<data key="A">A 485</data>
+		<data key="gewicht">14.5</data>
+	</edge>
+	<edge source="GIESSENER SÜDKREUZ" target="LANGGÖNS (A 485)">
+		<data key="A">A 485</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="DREIECK DERNBACH" target="KREUZ KOBLENZ">
+		<data key="A">A 48</data>
+		<data key="gewicht">25.0</data>
+	</edge>
+	<edge source="DREIECK VULKANEIFEL" target="KREUZ KOBLENZ">
+		<data key="A">A 48</data>
+		<data key="gewicht">53.0</data>
+	</edge>
+	<edge source="AM LOHFELDENER RÜSSEL (A 49)" target="KREUZ KASSEL - MITTE">
+		<data key="A">A 49</data>
+		<data key="gewicht">0.4</data>
+	</edge>
+	<edge source="KREUZ KASSEL - MITTE" target="KREUZ KASSEL - WEST">
+		<data key="A">A 49</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="KREUZ KASSEL - WEST" target="SCHWALMSTADT (A 49)">
+		<data key="A">A 49</data>
+		<data key="gewicht">49.0</data>
+	</edge>
+	<edge source="AACHEN - LAURENSBERG (A 4)" target="KREUZ KERPEN">
+		<data key="A">A 4</data>
+		<data key="gewicht">41.5</data>
+	</edge>
+	<edge source="Bundesgrenze Görlitz D-PL (A 4)" target="DREIECK DRESDEN - NORD">
+		<data key="A">A 4</data>
+		<data key="gewicht">84.0</data>
+	</edge>
+	<edge source="DREIECK DRESDEN - NORD" target="DREIECK DRESDEN - WEST">
+		<data key="A">A 4</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="DREIECK DRESDEN - WEST" target="DREIECK NOSSEN">
+		<data key="A">A 4</data>
+		<data key="gewicht">17.0</data>
+	</edge>
+	<edge source="DREIECK KÖLN - HEUMAR" target="KREUZ GREMBERG">
+		<data key="A">A 4</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="DREIECK KÖLN - HEUMAR" target="KREUZ KÖLN - OST">
+		<data key="A">A 4</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="DREIECK NOSSEN" target="KREUZ CHEMNITZ">
+		<data key="A">A 4</data>
+		<data key="gewicht">47.0</data>
+	</edge>
+	<edge source="HERMSDORFER KREUZ" target="KREUZ CHEMNITZ">
+		<data key="A">A 4</data>
+		<data key="gewicht">77.0</data>
+	</edge>
+	<edge source="HERMSDORFER KREUZ" target="KREUZ ERFURT">
+		<data key="A">A 4</data>
+		<data key="gewicht">69.0</data>
+	</edge>
+	<edge source="KIRCHHEIMER DREIECK" target="KREUZ ERFURT">
+		<data key="A">A 4</data>
+		<data key="gewicht">109.0</data>
+	</edge>
+	<edge source="KREUZ GREMBERG" target="KREUZ KÖLN - SÜD">
+		<data key="A">A 4</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="KREUZ KERPEN" target="KREUZ KÖLN - WEST">
+		<data key="A">A 4</data>
+		<data key="gewicht">12.0</data>
+	</edge>
+	<edge source="KREUZ KÖLN - OST" target="KREUZ OLPE - SÜD">
+		<data key="A">A 4</data>
+		<data key="gewicht">63.0</data>
+	</edge>
+	<edge source="KREUZ KÖLN - SÜD" target="KREUZ KÖLN - WEST">
+		<data key="A">A 4</data>
+		<data key="gewicht">10.0</data>
+	</edge>
+	<edge source="KREUZ OLPE - SÜD" target="KROMBACH (A 4)">
+		<data key="A">A 4</data>
+		<data key="gewicht">6.5</data>
+	</edge>
+	<edge source="KREUZ OBERHAUSEN" target="OBERHAUSEN - EISENHEIM (A 516)">
+		<data key="A">A 516</data>
+		<data key="gewicht">5.5</data>
+	</edge>
+	<edge source="DREIECK BREITSCHEID" target="DUISBURG - RAHM (A 524)">
+		<data key="A">A 524</data>
+		<data key="gewicht">5.0</data>
+	</edge>
+	<edge source="DREIECK BREITSCHEID" target="KREUZ BREITSCHEID">
+		<data key="A">A 52</data>
+		<data key="gewicht">0.5</data>
+	</edge>
+	<edge source="DREIECK BREITSCHEID" target="KREUZ DÜSSELDORF - NORD  (Nordteil)">
+		<data key="A">A 52</data>
+		<data key="gewicht">6.5</data>
+	</edge>
+	<edge source="DREIECK ESSEN - OST" target="KREUZ ESSEN - BERGERHAUSEN">
+		<data key="A">A 52</data>
+		<data key="gewicht">1.0</data>
+	</edge>
+	<edge source="DREIECK ESSEN - OST" target="KREUZ ESSEN - NORD">
+		<data key="A">A 52</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="ELMPT (A 52)" target="KREUZ MÖNCHENGLADBACH">
+		<data key="A">A 52</data>
+		<data key="gewicht">18.0</data>
+	</edge>
+	<edge source="KREUZ BREITSCHEID" target="KREUZ ESSEN - BERGERHAUSEN">
+		<data key="A">A 52</data>
+		<data key="gewicht">15.5</data>
+	</edge>
+	<edge source="KREUZ DÜSSELDORF - NORD  (Nordteil)" target="KREUZ DÜSSELDORF - NORD  (Südteil)">
+		<data key="A">A 52</data>
+		<data key="gewicht">1.0</data>
+	</edge>
+	<edge source="KREUZ DÜSSELDORF - NORD  (Südteil)" target="KREUZ KAARST">
+		<data key="A">A 52</data>
+		<data key="gewicht">16.2</data>
+	</edge>
+	<edge source="KREUZ ESSEN - NORD" target="KREUZ GLADBECK">
+		<data key="A">A 52</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="KREUZ GLADBECK" target="KREUZ MARL - NORD">
+		<data key="A">A 52</data>
+		<data key="gewicht">22.8</data>
+	</edge>
+	<edge source="KREUZ KAARST" target="KREUZ NEERSEN">
+		<data key="A">A 52</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="KREUZ MÖNCHENGLADBACH" target="KREUZ NEERSEN">
+		<data key="A">A 52</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="DREIECK VELBERT - NORD" target="ESSEN - HEISINGEN (A 535)">
+		<data key="A">A 535</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="DREIECK VELBERT - NORD" target="SONNBORNER KREUZ">
+		<data key="A">A 535</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="DREIECK VELBERT - NORD" target="ESSEN - HEISINGEN (A 540)">
+		<data key="A">A 540</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="DREIECK VELBERT - NORD" target="SONNBORNER KREUZ">
+		<data key="A">A 540</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="DREIECK LANGENFELD" target="KREUZ MONHEIM - SÜD">
+		<data key="A">A 542</data>
+		<data key="gewicht">5.0</data>
+	</edge>
+	<edge source="BRÜHL - NORD  (Südteil) (A 553)" target="KREUZ BLIESHEIM">
+		<data key="A">A 553</data>
+		<data key="gewicht">13.0</data>
+	</edge>
+	<edge source="BONN - VERTEILERKREIS (A 555)" target="KREUZ BONN - NORD">
+		<data key="A">A 555</data>
+		<data key="gewicht">0.4</data>
+	</edge>
+	<edge source="KREUZ BONN - NORD" target="KREUZ KÖLN - SÜD">
+		<data key="A">A 555</data>
+		<data key="gewicht">19.3</data>
+	</edge>
+	<edge source="KREUZ KÖLN - SÜD" target="KÖLN - VERTEILERKREIS (A 555)">
+		<data key="A">A 555</data>
+		<data key="gewicht">0.5</data>
+	</edge>
+	<edge source="DREIECK PORZ" target="KREUZ GREMBERG">
+		<data key="A">A 559</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="DREIECK ST. AUGUSTIN - WEST" target="KREUZ SIEGBURG">
+		<data key="A">A 560</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="HENNEF - OST (A 560)" target="KREUZ BONN / SIEGBURG">
+		<data key="A">A 560</data>
+		<data key="gewicht">5.0</data>
+	</edge>
+	<edge source="KREUZ BONN / SIEGBURG" target="KREUZ SIEGBURG">
+		<data key="A">A 560</data>
+		<data key="gewicht">5.0</data>
+	</edge>
+	<edge source="BONN - BAD GODESBERG (A 562)" target="DREIECK BONN - NORDOST">
+		<data key="A">A 562</data>
+		<data key="gewicht">8.5</data>
+	</edge>
+	<edge source="DREIECK BONN - NORDOST" target="DREIECK ST. AUGUSTIN - WEST">
+		<data key="A">A 565</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="DREIECK BONN - NORDOST" target="KREUZ BONN - NORD">
+		<data key="A">A 565</data>
+		<data key="gewicht">5.0</data>
+	</edge>
+	<edge source="DREIECK ST. AUGUSTIN - WEST" target="KREUZ SIEGBURG">
+		<data key="A">A 565</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="GELSDORF (A 565)" target="KREUZ MECKENHEIM">
+		<data key="A">A 565</data>
+		<data key="gewicht">1.0</data>
+	</edge>
+	<edge source="KREUZ BONN - NORD" target="KREUZ MECKENHEIM">
+		<data key="A">A 565</data>
+		<data key="gewicht">20.0</data>
+	</edge>
+	<edge source="DREIECK SINZIG" target="EHLINGEN (A 571)">
+		<data key="A">A 571</data>
+		<data key="gewicht">1.5</data>
+	</edge>
+	<edge source="BAD NEUENAHR (A 573)" target="DREIECK BAD NEUENAHR">
+		<data key="A">A 573</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="Bundesgrenze Goch NL-D (A 57)" target="KREUZ KAMP - LINTFORT">
+		<data key="A">A 57</data>
+		<data key="gewicht">49.0</data>
+	</edge>
+	<edge source="KREUZ KAARST" target="KREUZ MEERBUSCH">
+		<data key="A">A 57</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="KREUZ KAARST" target="KREUZ NEUSS - WEST">
+		<data key="A">A 57</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="KREUZ KAMP - LINTFORT" target="KREUZ MOERS">
+		<data key="A">A 57</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="KREUZ KÖLN - NORD" target="KREUZ NEUSS - SÜD">
+		<data key="A">A 57</data>
+		<data key="gewicht">21.0</data>
+	</edge>
+	<edge source="KREUZ KÖLN - NORD" target="KÖLN - EHRENFELD (A 57)">
+		<data key="A">A 57</data>
+		<data key="gewicht">13.4</data>
+	</edge>
+	<edge source="KREUZ MEERBUSCH" target="KREUZ MOERS">
+		<data key="A">A 57</data>
+		<data key="gewicht">17.0</data>
+	</edge>
+	<edge source="KREUZ NEUSS - SÜD" target="KREUZ NEUSS - WEST">
+		<data key="A">A 57</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="DREIECK BONN - NORDOST" target="DREIECK ST. AUGUSTIN - WEST">
+		<data key="A">A 59</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="DREIECK KÖLN - HEUMAR" target="DREIECK PORZ">
+		<data key="A">A 59</data>
+		<data key="gewicht">2.5</data>
+	</edge>
+	<edge source="DREIECK KÖLN - HEUMAR" target="KREUZ LEVERKUSEN - WEST">
+		<data key="A">A 59</data>
+		<data key="gewicht">19.0</data>
+	</edge>
+	<edge source="DREIECK PORZ" target="DREIECK ST. AUGUSTIN - WEST">
+		<data key="A">A 59</data>
+		<data key="gewicht">15.0</data>
+	</edge>
+	<edge source="KREUZ DINSLAKEN - WEST" target="KREUZ DUISBURG - NORD">
+		<data key="A">A 59</data>
+		<data key="gewicht">14.7</data>
+	</edge>
+	<edge source="KREUZ DUISBURG" target="KREUZ DUISBURG - NORD">
+		<data key="A">A 59</data>
+		<data key="gewicht">5.0</data>
+	</edge>
+	<edge source="KREUZ DUISBURG" target="KREUZ DÜSSELDORF - NORD  (Nordteil)">
+		<data key="A">A 59</data>
+		<data key="gewicht">19.8</data>
+	</edge>
+	<edge source="KREUZ DÜSSELDORF - NORD  (Nordteil)" target="KREUZ DÜSSELDORF - NORD  (Südteil)">
+		<data key="A">A 59</data>
+		<data key="gewicht">1.0</data>
+	</edge>
+	<edge source="KREUZ DÜSSELDORF - NORD  (Südteil)" target="KREUZ DÜSSELDORF - SÜD">
+		<data key="A">A 59</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="KREUZ DÜSSELDORF - SÜD" target="KREUZ MONHEIM - SÜD">
+		<data key="A">A 59</data>
+		<data key="gewicht">13.0</data>
+	</edge>
+	<edge source="KREUZ LEVERKUSEN - WEST" target="KREUZ MONHEIM - SÜD">
+		<data key="A">A 59</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="BAD HOMBURGER KREUZ" target="GAMBACHER KREUZ">
+		<data key="A">A 5</data>
+		<data key="gewicht">32.0</data>
+	</edge>
+	<edge source="BAD HOMBURGER KREUZ" target="NORDWESTKREUZ FRANKFURT">
+		<data key="A">A 5</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="DARMSTÄDTER KREUZ" target="DREIECK DARMSTADT">
+		<data key="A">A 5</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="DREIECK DARMSTADT" target="FRANKFURTER KREUZ">
+		<data key="A">A 5</data>
+		<data key="gewicht">19.0</data>
+	</edge>
+	<edge source="DREIECK DARMSTADT" target="KREUZ WEINHEIM">
+		<data key="A">A 5</data>
+		<data key="gewicht">33.0</data>
+	</edge>
+	<edge source="DREIECK KARLSRUHE" target="DREIECK WEIL">
+		<data key="A">A 5</data>
+		<data key="gewicht">179.0</data>
+	</edge>
+	<edge source="DREIECK KARLSRUHE" target="KREUZ KARLSRUHE - NORD">
+		<data key="A">A 5</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="DREIECK WEIL" target="WEIL / HÜNINGEN (A 5)">
+		<data key="A">A 5</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="FRANKFURTER KREUZ" target="WESTKREUZ FRANKFURT">
+		<data key="A">A 5</data>
+		<data key="gewicht">7.7</data>
+	</edge>
+	<edge source="GAMBACHER KREUZ" target="REISKIRCHENER DREIECK">
+		<data key="A">A 5</data>
+		<data key="gewicht">17.0</data>
+	</edge>
+	<edge source="HATTENBACHER DREIECK (O)" target="REISKIRCHENER DREIECK">
+		<data key="A">A 5</data>
+		<data key="gewicht">61.0</data>
+	</edge>
+	<edge source="KREUZ KARLSRUHE - NORD" target="KREUZ WALLDORF">
+		<data key="A">A 5</data>
+		<data key="gewicht">27.0</data>
+	</edge>
+	<edge source="KREUZ WALLDORF" target="KREUZ WEINHEIM">
+		<data key="A">A 5</data>
+		<data key="gewicht">28.0</data>
+	</edge>
+	<edge source="NORDWESTKREUZ FRANKFURT" target="WESTKREUZ FRANKFURT">
+		<data key="A">A 5</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="DREIECK MOSELTAL" target="TRIER - VERTEILERKREIS (A 602)">
+		<data key="A">A 602</data>
+		<data key="gewicht">10.0</data>
+	</edge>
+	<edge source="DREIECK MAINZ" target="DREIECK NAHETAL">
+		<data key="A">A 60</data>
+		<data key="gewicht">20.0</data>
+	</edge>
+	<edge source="DREIECK MAINZ" target="KREUZ MAINZ - SÜD">
+		<data key="A">A 60</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="KREUZ MAINZ - SÜD" target="MAINSPITZ-DREIECK">
+		<data key="A">A 60</data>
+		<data key="gewicht">7.3</data>
+	</edge>
+	<edge source="KREUZ WITTLICH" target="WINTERSPELT (A 60)">
+		<data key="A">A 60</data>
+		<data key="gewicht">65.0</data>
+	</edge>
+	<edge source="MAINSPITZ-DREIECK" target="RÜSSELSHEIMER DREIECK">
+		<data key="A">A 60</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="DREIECK ERFTTAL" target="KREUZ BLIESHEIM">
+		<data key="A">A 61</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="DREIECK ERFTTAL" target="KREUZ KERPEN">
+		<data key="A">A 61</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="DREIECK HOCKENHEIM" target="KREUZ MUTTERSTADT">
+		<data key="A">A 61</data>
+		<data key="gewicht">25.5</data>
+	</edge>
+	<edge source="DREIECK JACKERATH" target="KREUZ KERPEN">
+		<data key="A">A 61</data>
+		<data key="gewicht">24.0</data>
+	</edge>
+	<edge source="DREIECK JACKERATH" target="KREUZ MÖNCHENGLADBACH - WANLO">
+		<data key="A">A 61</data>
+		<data key="gewicht">8.5</data>
+	</edge>
+	<edge source="DREIECK NAHETAL" target="KREUZ ALZEY">
+		<data key="A">A 61</data>
+		<data key="gewicht">23.0</data>
+	</edge>
+	<edge source="DREIECK NAHETAL" target="KREUZ KOBLENZ">
+		<data key="A">A 61</data>
+		<data key="gewicht">71.0</data>
+	</edge>
+	<edge source="DREIECK SINZIG" target="KREUZ KOBLENZ">
+		<data key="A">A 61</data>
+		<data key="gewicht">37.0</data>
+	</edge>
+	<edge source="DREIECK SINZIG" target="KREUZ MECKENHEIM">
+		<data key="A">A 61</data>
+		<data key="gewicht">15.0</data>
+	</edge>
+	<edge source="KALDENKIRCHEN" target="KREUZ MÖNCHENGLADBACH">
+		<data key="A">A 61</data>
+		<data key="gewicht">19.0</data>
+	</edge>
+	<edge source="KREUZ ALZEY" target="KREUZ FRANKENTHAL">
+		<data key="A">A 61</data>
+		<data key="gewicht">32.0</data>
+	</edge>
+	<edge source="KREUZ BLIESHEIM" target="KREUZ MECKENHEIM">
+		<data key="A">A 61</data>
+		<data key="gewicht">25.0</data>
+	</edge>
+	<edge source="KREUZ FRANKENTHAL" target="KREUZ LUDWIGSHAFEN">
+		<data key="A">A 61</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="KREUZ LUDWIGSHAFEN" target="KREUZ MUTTERSTADT">
+		<data key="A">A 61</data>
+		<data key="gewicht">4.0</data>
+	</edge>
+	<edge source="KREUZ MÖNCHENGLADBACH" target="KREUZ MÖNCHENGLADBACH - WANLO">
+		<data key="A">A 61</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="DREIECK SAARBRÜCKEN" target="KREUZ SAARBRÜCKEN">
+		<data key="A">A 620</data>
+		<data key="gewicht">52.9</data>
+	</edge>
+	<edge source="DREIECK FRIEDRICHSTHAL" target="DREIECK SAARBRÜCKEN - LUDWIGSBERG">
+		<data key="A">A 623</data>
+		<data key="gewicht">9.5</data>
+	</edge>
+	<edge source="DREIECK NONNWEILER" target="KREUZ LANDSTUHL - WEST">
+		<data key="A">A 62</data>
+		<data key="gewicht">52.3</data>
+	</edge>
+	<edge source="KREUZ LANDSTUHL - WEST" target="PIRMASENS - WINZELN  DREIECK PIRMASENS (A 62)">
+		<data key="A">A 62</data>
+		<data key="gewicht">26.5</data>
+	</edge>
+	<edge source="DREIECK KAISERSLAUTERN" target="KREUZ ALZEY">
+		<data key="A">A 63</data>
+		<data key="gewicht">46.5</data>
+	</edge>
+	<edge source="KREUZ ALZEY" target="KREUZ MAINZ - SÜD">
+		<data key="A">A 63</data>
+		<data key="gewicht">24.0</data>
+	</edge>
+	<edge source="DREIECK MAINZ" target="SCHIERSTEINER KREUZ">
+		<data key="A">A 643</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="SCHIERSTEINER KREUZ" target="WIESBADEN - DOTZHEIM (A 643)">
+		<data key="A">A 643</data>
+		<data key="gewicht">1.0</data>
+	</edge>
+	<edge source="ESCHBORNER DREIECK" target="WESTKREUZ FRANKFURT">
+		<data key="A">A 648</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="FRANKFURT - KATHARINENKREISEL (A 648)" target="WESTKREUZ FRANKFURT">
+		<data key="A">A 648</data>
+		<data key="gewicht">2.5</data>
+	</edge>
+	<edge source="Bundesgrenze Messenich L-D (A 64)" target="DREIECK TRIER">
+		<data key="A">A 64</data>
+		<data key="gewicht">23.2</data>
+	</edge>
+	<edge source="FRIEDELSHEIM (A 650)" target="KREUZ LUDWIGSHAFEN">
+		<data key="A">A 650</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="KREUZ LUDWIGSHAFEN" target="LUDWIGSHAFEN - STADT (A 650)">
+		<data key="A">A 650</data>
+		<data key="gewicht">7.3</data>
+	</edge>
+	<edge source="KREUZ HEIDELBERG" target="KREUZ MANNHEIM">
+		<data key="A">A 656</data>
+		<data key="gewicht">8.5</data>
+	</edge>
+	<edge source="KREUZ MANNHEIM" target="MANNHEIM - NECKARAU (A 656)">
+		<data key="A">A 656</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="KREUZ WEINHEIM" target="VIERNHEIMER KREUZ">
+		<data key="A">A 659</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="DREIECK LUDWIGSHAFEN - SÜD" target="KREUZ MUTTERSTADT">
+		<data key="A">A 65</data>
+		<data key="gewicht">3.5</data>
+	</edge>
+	<edge source="KREUZ KARLSRUHE - NORD" target="KREUZ MUTTERSTADT">
+		<data key="A">A 65</data>
+		<data key="gewicht">79.0</data>
+	</edge>
+	<edge source="BAD HOMBURGER KREUZ" target="DREIECK SECKBACH">
+		<data key="A">A 661</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="BAD HOMBURGER KREUZ" target="OBERURSEL - NORD (A 661)">
+		<data key="A">A 661</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="DREIECK ERLENBRUCH" target="DREIECK SECKBACH">
+		<data key="A">A 661</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="DREIECK ERLENBRUCH" target="EGELSBACH (A 661)">
+		<data key="A">A 661</data>
+		<data key="gewicht">19.3</data>
+	</edge>
+	<edge source="DREIECK ERLENBRUCH" target="DREIECK SECKBACH">
+		<data key="A">A 66</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="DREIECK ERLENBRUCH" target="LANGENSELBOLDER DREIECK">
+		<data key="A">A 66</data>
+		<data key="gewicht">24.2</data>
+	</edge>
+	<edge source="DREIECK FULDA" target="DREIECK FULDA - MITTE">
+		<data key="A">A 66</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="DREIECK FULDA" target="LANGENSELBOLDER DREIECK">
+		<data key="A">A 66</data>
+		<data key="gewicht">67.5</data>
+	</edge>
+	<edge source="DREIECK SECKBACH" target="NORDWESTKREUZ FRANKFURT">
+		<data key="A">A 66</data>
+		<data key="gewicht">8.8</data>
+	</edge>
+	<edge source="ESCHBORNER DREIECK" target="NORDWESTKREUZ FRANKFURT">
+		<data key="A">A 66</data>
+		<data key="gewicht">1.3</data>
+	</edge>
+	<edge source="ESCHBORNER DREIECK" target="WIESBADENER KREUZ">
+		<data key="A">A 66</data>
+		<data key="gewicht">17.0</data>
+	</edge>
+	<edge source="KREUZ WIESBADEN - MAINZER STRASSE" target="SCHIERSTEINER KREUZ">
+		<data key="A">A 66</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="KREUZ WIESBADEN - MAINZER STRASSE" target="WIESBADENER KREUZ">
+		<data key="A">A 66</data>
+		<data key="gewicht">10.0</data>
+	</edge>
+	<edge source="SCHIERSTEINER KREUZ" target="WIESBADEN - FRAUENSTEIN (A 66)">
+		<data key="A">A 66</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="KREUZ WIESBADEN - MAINZER STRASSE" target="MAINSPITZ-DREIECK">
+		<data key="A">A 671</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="DARMSTADT - WEST (A 672)" target="DREIECK DARMSTADT">
+		<data key="A">A 672</data>
+		<data key="gewicht">1.0</data>
+	</edge>
+	<edge source="DREIECK DARMSTADT" target="DREIECK DARMSTADT / GRIESHEIM">
+		<data key="A">A 672</data>
+		<data key="gewicht">1.0</data>
+	</edge>
+	<edge source="DARMSTÄDTER KREUZ" target="DREIECK DARMSTADT / GRIESHEIM">
+		<data key="A">A 67</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="DARMSTÄDTER KREUZ" target="VIERNHEIMER DREIECK">
+		<data key="A">A 67</data>
+		<data key="gewicht">35.0</data>
+	</edge>
+	<edge source="DREIECK DARMSTADT / GRIESHEIM" target="RÜSSELSHEIMER DREIECK">
+		<data key="A">A 67</data>
+		<data key="gewicht">16.0</data>
+	</edge>
+	<edge source="MÖNCHHOF - DREIECK" target="RÜSSELSHEIMER DREIECK">
+		<data key="A">A 67</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="Bundesgrenze Waidhaus D-CZ (A 6)" target="KREUZ OBERPFÄLZER WALD">
+		<data key="A">A 6</data>
+		<data key="gewicht">33.0</data>
+	</edge>
+	<edge source="DREIECK HOCKENHEIM" target="KREUZ MANNHEIM">
+		<data key="A">A 6</data>
+		<data key="gewicht">15.0</data>
+	</edge>
+	<edge source="DREIECK HOCKENHEIM" target="KREUZ WALLDORF">
+		<data key="A">A 6</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="DREIECK KAISERSLAUTERN" target="DREIECK KAISERSLAUTERN">
+		<data key="A">A 6</data>
+		<data key="gewicht">0.5</data>
+	</edge>
+	<edge source="DREIECK KAISERSLAUTERN" target="KREUZ FRANKENTHAL">
+		<data key="A">A 6</data>
+		<data key="gewicht">41.0</data>
+	</edge>
+	<edge source="DREIECK KAISERSLAUTERN" target="KREUZ LANDSTUHL - WEST">
+		<data key="A">A 6</data>
+		<data key="gewicht">20.0</data>
+	</edge>
+	<edge source="DREIECK SAARBRÜCKEN" target="KREUZ NEUNKIRCHEN">
+		<data key="A">A 6</data>
+		<data key="gewicht">18.0</data>
+	</edge>
+	<edge source="DREIECK SAARBRÜCKEN" target="SAARBRÜCKEN - GOLDENE BREMM (A 6)">
+		<data key="A">A 6</data>
+		<data key="gewicht">0.5</data>
+	</edge>
+	<edge source="KREUZ ALTDORF" target="KREUZ NÜRNBERG - OST">
+		<data key="A">A 6</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="KREUZ ALTDORF" target="KREUZ OBERPFÄLZER WALD">
+		<data key="A">A 6</data>
+		<data key="gewicht">73.0</data>
+	</edge>
+	<edge source="KREUZ FEUCHTWANGEN / CRAILSHEIM" target="KREUZ NÜRNBERG - OST">
+		<data key="A">A 6</data>
+		<data key="gewicht">79.0</data>
+	</edge>
+	<edge source="KREUZ FEUCHTWANGEN / CRAILSHEIM" target="KREUZ WEINSBERG">
+		<data key="A">A 6</data>
+		<data key="gewicht">72.0</data>
+	</edge>
+	<edge source="KREUZ FRANKENTHAL" target="VIERNHEIMER DREIECK">
+		<data key="A">A 6</data>
+		<data key="gewicht">18.0</data>
+	</edge>
+	<edge source="KREUZ LANDSTUHL - WEST" target="KREUZ NEUNKIRCHEN">
+		<data key="A">A 6</data>
+		<data key="gewicht">24.0</data>
+	</edge>
+	<edge source="KREUZ MANNHEIM" target="VIERNHEIMER KREUZ">
+		<data key="A">A 6</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="KREUZ WALLDORF" target="KREUZ WEINSBERG">
+		<data key="A">A 6</data>
+		<data key="gewicht">53.0</data>
+	</edge>
+	<edge source="VIERNHEIMER DREIECK" target="VIERNHEIMER KREUZ">
+		<data key="A">A 6</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="DREIECK BAYREUTH / KULMBACH" target="GEFREES (A 70)">
+		<data key="A">A 70</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="DREIECK BAYREUTH / KULMBACH" target="KREUZ BAMBERG">
+		<data key="A">A 70</data>
+		<data key="gewicht">54.0</data>
+	</edge>
+	<edge source="DREIECK WERNTAL" target="KREUZ BAMBERG">
+		<data key="A">A 70</data>
+		<data key="gewicht">59.0</data>
+	</edge>
+	<edge source="DREIECK WERNTAL" target="KREUZ SCHWEINFURT / WERNECK">
+		<data key="A">A 70</data>
+		<data key="gewicht">7.0</data>
+	</edge>
+	<edge source="DREIECK SUHL" target="DREIECK WERNTAL">
+		<data key="A">A 71</data>
+		<data key="gewicht">89.0</data>
+	</edge>
+	<edge source="DREIECK SUHL" target="KREUZ ERFURT">
+		<data key="A">A 71</data>
+		<data key="gewicht">53.0</data>
+	</edge>
+	<edge source="DREIECK SÜDHARZ" target="KREUZ ERFURT">
+		<data key="A">A 71</data>
+		<data key="gewicht">78.0</data>
+	</edge>
+	<edge source="BÖHLEN (A 72)" target="KREUZ CHEMNITZ">
+		<data key="A">A 72</data>
+		<data key="gewicht">60.0</data>
+	</edge>
+	<edge source="DREIECK BAYERISCHES VOGTLAND" target="DREIECK HOCHFRANKEN">
+		<data key="A">A 72</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="DREIECK HOCHFRANKEN" target="KREUZ CHEMNITZ">
+		<data key="A">A 72</data>
+		<data key="gewicht">92.0</data>
+	</edge>
+	<edge source="DREIECK NÜRNBERG / FEUCHT" target="KREUZ FÜRTH / ERLANGEN">
+		<data key="A">A 73</data>
+		<data key="gewicht">29.8</data>
+	</edge>
+	<edge source="DREIECK SUHL" target="KREUZ BAMBERG">
+		<data key="A">A 73</data>
+		<data key="gewicht">98.0</data>
+	</edge>
+	<edge source="KREUZ BAMBERG" target="KREUZ FÜRTH / ERLANGEN">
+		<data key="A">A 73</data>
+		<data key="gewicht">46.0</data>
+	</edge>
+	<edge source="Bundesgrenze Ellund DK-D (A 7)" target="KREUZ RENDSBURG">
+		<data key="A">A 7</data>
+		<data key="gewicht">64.0</data>
+	</edge>
+	<edge source="Bundesgrenze Füssen D-A (A 7)" target="DREIECK ALLGÄU">
+		<data key="A">A 7</data>
+		<data key="gewicht">36.0</data>
+	</edge>
+	<edge source="DREIECK ALLGÄU" target="KREUZ MEMMINGEN">
+		<data key="A">A 7</data>
+		<data key="gewicht">40.0</data>
+	</edge>
+	<edge source="DREIECK BORDESHOLM" target="DREIECK HAMBURG - NORDWEST">
+		<data key="A">A 7</data>
+		<data key="gewicht">65.0</data>
+	</edge>
+	<edge source="DREIECK BORDESHOLM" target="KREUZ RENDSBURG">
+		<data key="A">A 7</data>
+		<data key="gewicht">20.0</data>
+	</edge>
+	<edge source="DREIECK DRAMMETAL" target="DREIECK SALZGITTER">
+		<data key="A">A 7</data>
+		<data key="gewicht">78.0</data>
+	</edge>
+	<edge source="DREIECK DRAMMETAL" target="KREUZ KASSEL - MITTE">
+		<data key="A">A 7</data>
+		<data key="gewicht">34.0</data>
+	</edge>
+	<edge source="DREIECK FULDA - MITTE" target="HATTENBACHER DREIECK (O)">
+		<data key="A">A 7</data>
+		<data key="gewicht">33.0</data>
+	</edge>
+	<edge source="DREIECK FULDA" target="DREIECK FULDA - MITTE">
+		<data key="A">A 7</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="DREIECK FULDA" target="KREUZ SCHWEINFURT / WERNECK">
+		<data key="A">A 7</data>
+		<data key="gewicht">68.0</data>
+	</edge>
+	<edge source="DREIECK HAMBURG - NORDWEST" target="KREUZ HAMBURG - SÜDERELBE">
+		<data key="A">A 7</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="DREIECK HAMBURG - SÜDWEST" target="KREUZ HAMBURG - SÜDERELBE">
+		<data key="A">A 7</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="DREIECK HAMBURG - SÜDWEST" target="MASCHENER KREUZ">
+		<data key="A">A 7</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="DREIECK HANNOVER - NORD" target="DREIECK WALSRODE">
+		<data key="A">A 7</data>
+		<data key="gewicht">30.0</data>
+	</edge>
+	<edge source="DREIECK HANNOVER - NORD" target="KREUZ HANNOVER - OST">
+		<data key="A">A 7</data>
+		<data key="gewicht">18.0</data>
+	</edge>
+	<edge source="DREIECK HANNOVER - SÜD" target="DREIECK SALZGITTER">
+		<data key="A">A 7</data>
+		<data key="gewicht">35.0</data>
+	</edge>
+	<edge source="DREIECK HANNOVER - SÜD" target="KREUZ HANNOVER - OST">
+		<data key="A">A 7</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="DREIECK KASSEL - SÜD" target="KIRCHHEIMER DREIECK">
+		<data key="A">A 7</data>
+		<data key="gewicht">54.0</data>
+	</edge>
+	<edge source="DREIECK KASSEL - SÜD" target="KREUZ KASSEL - MITTE">
+		<data key="A">A 7</data>
+		<data key="gewicht">2.5</data>
+	</edge>
+	<edge source="DREIECK WALSRODE" target="HORSTER DREIECK">
+		<data key="A">A 7</data>
+		<data key="gewicht">79.0</data>
+	</edge>
+	<edge source="HATTENBACHER DREIECK (O)" target="KIRCHHEIMER DREIECK">
+		<data key="A">A 7</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="HORSTER DREIECK" target="MASCHENER KREUZ">
+		<data key="A">A 7</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="KREUZ BIEBELRIED" target="KREUZ FEUCHTWANGEN / CRAILSHEIM">
+		<data key="A">A 7</data>
+		<data key="gewicht">71.0</data>
+	</edge>
+	<edge source="KREUZ BIEBELRIED" target="KREUZ SCHWEINFURT / WERNECK">
+		<data key="A">A 7</data>
+		<data key="gewicht">31.0</data>
+	</edge>
+	<edge source="KREUZ FEUCHTWANGEN / CRAILSHEIM" target="KREUZ ULM / ELCHINGEN">
+		<data key="A">A 7</data>
+		<data key="gewicht">94.0</data>
+	</edge>
+	<edge source="KREUZ MEMMINGEN" target="KREUZ ULM / ELCHINGEN">
+		<data key="A">A 7</data>
+		<data key="gewicht">56.0</data>
+	</edge>
+	<edge source="Bundesgrenze Gottmadingen D-CH (A 81)" target="KREUZ HEGAU">
+		<data key="A">A 81</data>
+		<data key="gewicht">20.0</data>
+	</edge>
+	<edge source="DREIECK BAD DÜRRHEIM" target="GÄRTRINGEN">
+		<data key="A">A 81</data>
+		<data key="gewicht">85.0</data>
+	</edge>
+	<edge source="DREIECK BAD DÜRRHEIM" target="KREUZ HEGAU">
+		<data key="A">A 81</data>
+		<data key="gewicht">32.0</data>
+	</edge>
+	<edge source="DREIECK LEONBERG" target="KREUZ STUTTGART">
+		<data key="A">A 81</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="DREIECK LEONBERG" target="KREUZ WEINSBERG">
+		<data key="A">A 81</data>
+		<data key="gewicht">48.0</data>
+	</edge>
+	<edge source="DREIECK WÜRZBURG - WEST" target="KREUZ WEINSBERG">
+		<data key="A">A 81</data>
+		<data key="gewicht">84.0</data>
+	</edge>
+	<edge source="GÄRTRINGEN" target="KREUZ STUTTGART">
+		<data key="A">A 81</data>
+		<data key="gewicht">17.0</data>
+	</edge>
+	<edge source="GÄRTRINGEN" target="KREUZ STUTTGART">
+		<data key="A">A 831</data>
+		<data key="gewicht">16.0</data>
+	</edge>
+	<edge source="KREUZ STUTTGART" target="STUTTGART - VAIHINGEN (A 831)">
+		<data key="A">A 831</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="Bundesgrenze Rheinfelden D - CH (A 861)" target="DREIECK HOCHRHEIN">
+		<data key="A">A 861</data>
+		<data key="gewicht">4.2</data>
+	</edge>
+	<edge source="DREIECK BAD DÜRRHEIM" target="DREIECK DONAUESCHINGEN">
+		<data key="A">A 864</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="Bundesgrenze Bad Reichenhall D-A (A 8)" target="DREIECK INNTAL">
+		<data key="A">A 8</data>
+		<data key="gewicht">67.5</data>
+	</edge>
+	<edge source="DREIECK FRIEDRICHSTHAL" target="KREUZ SAARBRÜCKEN">
+		<data key="A">A 8</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="DREIECK FRIEDRICHSTHAL" target="NEUNKIRCHEN / SPIESEN (A 8)">
+		<data key="A">A 8</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="DREIECK INNTAL" target="KREUZ MÜNCHEN - SÜD">
+		<data key="A">A 8</data>
+		<data key="gewicht">48.0</data>
+	</edge>
+	<edge source="DREIECK KARLSRUHE" target="DREIECK LEONBERG">
+		<data key="A">A 8</data>
+		<data key="gewicht">55.0</data>
+	</edge>
+	<edge source="DREIECK LEONBERG" target="KREUZ STUTTGART">
+		<data key="A">A 8</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="KREUZ MÜNCHEN - SÜD" target="KREUZ MÜNCHEN - WEST">
+		<data key="A">A 8</data>
+		<data key="gewicht">31.0</data>
+	</edge>
+	<edge source="KREUZ MÜNCHEN - WEST" target="KREUZ ULM / ELCHINGEN">
+		<data key="A">A 8</data>
+		<data key="gewicht">110.0</data>
+	</edge>
+	<edge source="KREUZ NEUNKIRCHEN" target="NEUNKIRCHEN / SPIESEN (A 8)">
+		<data key="A">A 8</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="KREUZ NEUNKIRCHEN" target="PIRMASENS (A 8)">
+		<data key="A">A 8</data>
+		<data key="gewicht">28.0</data>
+	</edge>
+	<edge source="KREUZ STUTTGART" target="KREUZ ULM / ELCHINGEN">
+		<data key="A">A 8</data>
+		<data key="gewicht">91.0</data>
+	</edge>
+	<edge source="NEUNKIRCHEN / SPIESEN (A 8)" target="NEUNKIRCHEN / SPIESEN (A 8)">
+		<data key="A">A 8</data>
+		<data key="gewicht">0.5</data>
+	</edge>
+	<edge source="DEGGENDORF - MITTE (A 92)" target="KREUZ DEGGENDORF">
+		<data key="A">A 92</data>
+		<data key="gewicht">2.0</data>
+	</edge>
+	<edge source="DREIECK MÜNCHEN - FELDMOCHING" target="KREUZ NEUFAHRN">
+		<data key="A">A 92</data>
+		<data key="gewicht">13.0</data>
+	</edge>
+	<edge source="KREUZ DEGGENDORF" target="KREUZ NEUFAHRN">
+		<data key="A">A 92</data>
+		<data key="gewicht">121.0</data>
+	</edge>
+	<edge source="Bundesgrenze Kiefersfelden D-A (A 93)" target="DREIECK INNTAL">
+		<data key="A">A 93</data>
+		<data key="gewicht">25.0</data>
+	</edge>
+	<edge source="DREIECK HOCHFRANKEN" target="KREUZ OBERPFÄLZER WALD">
+		<data key="A">A 93</data>
+		<data key="gewicht">116.0</data>
+	</edge>
+	<edge source="DREIECK HOLLEDAU" target="KREUZ REGENSBURG">
+		<data key="A">A 93</data>
+		<data key="gewicht">65.0</data>
+	</edge>
+	<edge source="KREUZ OBERPFÄLZER WALD" target="KREUZ REGENSBURG">
+		<data key="A">A 93</data>
+		<data key="gewicht">62.0</data>
+	</edge>
+	<edge source="BURGHAUSEN (A 94)" target="KREUZ MÜNCHEN - OST">
+		<data key="A">A 94</data>
+		<data key="gewicht">87.5</data>
+	</edge>
+	<edge source="DREIECK MÜNCHEN - STEINHAUSEN" target="KREUZ MÜNCHEN - OST">
+		<data key="A">A 94</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="DREIECK STARNBERG" target="PERCHA  (Westteil) (A 952)">
+		<data key="A">A 952</data>
+		<data key="gewicht">4.3</data>
+	</edge>
+	<edge source="DREIECK MÜNCHEN - SENDLING - SÜD" target="KREUZ FORSTENRIEDER PARK">
+		<data key="A">A 95</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="DREIECK STARNBERG" target="ESCHENLOHE (A 95)">
+		<data key="A">A 95</data>
+		<data key="gewicht">54.0</data>
+	</edge>
+	<edge source="DREIECK STARNBERG" target="KREUZ FORSTENRIEDER PARK">
+		<data key="A">A 95</data>
+		<data key="gewicht">3.0</data>
+	</edge>
+	<edge source="DREIECK MÜNCHEN - SÜDWEST" target="KREUZ MEMMINGEN">
+		<data key="A">A 96</data>
+		<data key="gewicht">100.4</data>
+	</edge>
+	<edge source="DREIECK MÜNCHEN - SÜDWEST" target="KREUZ MÜNCHEN - SENDLING">
+		<data key="A">A 96</data>
+		<data key="gewicht">9.0</data>
+	</edge>
+	<edge source="KREUZ MEMMINGEN" target="LINDAU">
+		<data key="A">A 96</data>
+		<data key="gewicht">63.0</data>
+	</edge>
+	<edge source="DREIECK ALLGÄU" target="KREUZ WALTENHOFEN">
+		<data key="A">A 980</data>
+		<data key="gewicht">5.0</data>
+	</edge>
+	<edge source="DREIECK HOCHRHEIN" target="DREIECK WEIL">
+		<data key="A">A 98</data>
+		<data key="gewicht">16.0</data>
+	</edge>
+	<edge source="DREIECK HOCHRHEIN" target="WALLBACH (A 98)">
+		<data key="A">A 98</data>
+		<data key="gewicht">13.0</data>
+	</edge>
+	<edge source="KREUZ HEGAU" target="STOCKACH - OST (A 98)">
+		<data key="A">A 98</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="KREUZ MÜNCHEN - SÜD" target="UNTERHACHING - NORD (A 995)">
+		<data key="A">A 995</data>
+		<data key="gewicht">9.5</data>
+	</edge>
+	<edge source="DREIECK MÜNCHEN - FELDMOCHING" target="KREUZ MÜNCHEN - NORD">
+		<data key="A">A 99</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="DREIECK MÜNCHEN - FELDMOCHING" target="KREUZ MÜNCHEN - WEST">
+		<data key="A">A 99</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="DREIECK MÜNCHEN - SÜDWEST" target="KREUZ FORSTENRIEDER PARK">
+		<data key="A">A 99</data>
+		<data key="gewicht">24.5</data>
+	</edge>
+	<edge source="DREIECK MÜNCHEN - SÜDWEST" target="KREUZ MÜNCHEN - WEST">
+		<data key="A">A 99</data>
+		<data key="gewicht">6.5</data>
+	</edge>
+	<edge source="KREUZ FORSTENRIEDER PARK" target="KREUZ MÜNCHEN - SÜD">
+		<data key="A">A 99</data>
+		<data key="gewicht">14.5</data>
+	</edge>
+	<edge source="KREUZ MÜNCHEN - NORD" target="KREUZ MÜNCHEN - OST">
+		<data key="A">A 99</data>
+		<data key="gewicht">17.0</data>
+	</edge>
+	<edge source="KREUZ MÜNCHEN - OST" target="KREUZ MÜNCHEN - SÜD">
+		<data key="A">A 99</data>
+		<data key="gewicht">14.0</data>
+	</edge>
+	<edge source="DREIECK BAYERISCHES VOGTLAND" target="DREIECK BAYREUTH / KULMBACH">
+		<data key="A">A 9</data>
+		<data key="gewicht">39.0</data>
+	</edge>
+	<edge source="DREIECK BAYERISCHES VOGTLAND" target="HERMSDORFER KREUZ">
+		<data key="A">A 9</data>
+		<data key="gewicht">68.0</data>
+	</edge>
+	<edge source="DREIECK BAYREUTH / KULMBACH" target="KREUZ NÜRNBERG">
+		<data key="A">A 9</data>
+		<data key="gewicht">78.0</data>
+	</edge>
+	<edge source="DREIECK HOLLEDAU" target="DREIECK NÜRNBERG / FEUCHT">
+		<data key="A">A 9</data>
+		<data key="gewicht">94.0</data>
+	</edge>
+	<edge source="DREIECK HOLLEDAU" target="KREUZ NEUFAHRN">
+		<data key="A">A 9</data>
+		<data key="gewicht">31.0</data>
+	</edge>
+	<edge source="DREIECK MÜNCHEN - SCHWABING" target="KREUZ MÜNCHEN - NORD">
+		<data key="A">A 9</data>
+		<data key="gewicht">6.0</data>
+	</edge>
+	<edge source="DREIECK NÜRNBERG / FEUCHT" target="KREUZ NÜRNBERG - OST">
+		<data key="A">A 9</data>
+		<data key="gewicht">5.0</data>
+	</edge>
+	<edge source="DREIECK POTSDAM" target="SCHKEUDITZER KREUZ">
+		<data key="A">A 9</data>
+		<data key="gewicht">116.0</data>
+	</edge>
+	<edge source="HERMSDORFER KREUZ" target="KREUZ RIPPACHTAL">
+		<data key="A">A 9</data>
+		<data key="gewicht">45.0</data>
+	</edge>
+	<edge source="KREUZ MÜNCHEN - NORD" target="KREUZ NEUFAHRN">
+		<data key="A">A 9</data>
+		<data key="gewicht">11.0</data>
+	</edge>
+	<edge source="KREUZ NÜRNBERG" target="KREUZ NÜRNBERG - OST">
+		<data key="A">A 9</data>
+		<data key="gewicht">8.0</data>
+	</edge>
+	<edge source="KREUZ RIPPACHTAL" target="SCHKEUDITZER KREUZ">
+		<data key="A">A 9</data>
+		<data key="gewicht">24.0</data>
+	</edge>
+</graph>
