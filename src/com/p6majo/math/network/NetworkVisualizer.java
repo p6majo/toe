@@ -32,8 +32,8 @@ public class NetworkVisualizer {
     private final static String DELIMITER = "|";
     private final static double COLOR_SATURATION = 5.;
 
-    private final int width = 3300;
-    private final int height = 500;
+    private final int width = 1600;
+    private final int height = 800;
     private final int xoffset = 50;
     private final int yoffset = 50;
 
@@ -76,6 +76,9 @@ public class NetworkVisualizer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 network.suspendStochasticDescent();
+                frame.showInfo(network.runTest());
+                frame.setInfoVisible(true);
+
                 /*
                 if (timer!=null) {
                     try {
@@ -92,6 +95,7 @@ public class NetworkVisualizer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 network.resumeStochasticDescent();
+                frame.setInfoVisible(false);
                 //if (timer!=null) timer.notify();
             }
         });
@@ -101,10 +105,10 @@ public class NetworkVisualizer {
         this.drawNeurons();
         this.update();
 
+    }
 
-
-
-
+    public void showInfo(String info){
+        this.frame.showInfo(info);
     }
 
     public void setTimer(Timer timer){

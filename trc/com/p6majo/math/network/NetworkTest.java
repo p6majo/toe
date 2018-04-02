@@ -13,12 +13,12 @@ import org.junit.Test;
  */
 public class NetworkTest extends TestCase {
     private Network network = null;
-    private TrainingsDataList<Double> dataList;
+    private DoubleTrainingsDataList dataList;
 
     @Before
     public void setUp() throws Exception {
         //calculate the network for the conversion of binary numbers of three bits into a decimal
-        dataList= new TrainingsDataList<Double>();
+        dataList= new DoubleTrainingsDataList();
         dataList.add(new DoubleTrainingsData(new Double[]{0.,0.,0.},new Double[]{1.,0.,0.,0.,0.,0.,0.,0.}));//zero
         dataList.add(new DoubleTrainingsData(new Double[]{0.,0.,1.},new Double[]{0.,1.,0.,0.,0.,0.,0.,0.}));//one
         dataList.add(new DoubleTrainingsData(new Double[]{0.,1.,0.},new Double[]{0.,0.,1.,0.,0.,0.,0.,0.}));//two
@@ -38,16 +38,16 @@ public class NetworkTest extends TestCase {
         this.network.stochasticGradientDescentWithAdaptiveLearningRate(dataList,1,0.01*Network.ETA);
         System.out.println(this.network.toString());
 
-        for (TrainingsData<Double> data:dataList){
+        for (DoubleTrainingsData data:dataList){
             System.out.println("Output: "+ Utils.array2String(this.network.eval(data).getActivations(),2));
-            System.out.println("Expectation: "+Utils.array2String(data.getExpectation(),2));
+            System.out.println("Expectation: "+Utils.array2String(data.getExpectations(),2));
         }
 
         //check for mistakes of the trained network
-        for (TrainingsData<Double> data:dataList) {
+        for (DoubleTrainingsData data:dataList) {
             Double[] out = this.network.eval(data).getActivations();
             for (int i = 0; i < data.getInput().length; i++) {
-                assertEquals(Math.round(out[i]),(int)(double) (data.getExpectation()[i]));
+                assertEquals(Math.round(out[i]),(int)(double) (data.getExpectations()[i]));
             }
         }
 
@@ -58,16 +58,16 @@ public class NetworkTest extends TestCase {
         this.network.stochasticGradientDescentWithAdaptiveLearningRate(dataList,1,0.01*Network.ETA);
         System.out.println(this.network.toString());
 
-        for (TrainingsData<Double> data:dataList){
+        for (DoubleTrainingsData data:dataList){
             System.out.println("Output: "+ Utils.array2String(this.network.eval(data).getActivations(),2));
-            System.out.println("Expectation: "+Utils.array2String(data.getExpectation(),2));
+            System.out.println("Expectation: "+Utils.array2String(data.getExpectations(),2));
         }
 
         //check for mistakes of the trained network
-       for (TrainingsData<Double> data:dataList) {
+       for (DoubleTrainingsData data:dataList) {
             Double[] out = this.network.eval(data).getActivations();
             for (int i = 0; i < data.getInput().length; i++) {
-                assertEquals(Math.round(out[i]),(int)(double) (data.getExpectation()[i]));
+                assertEquals(Math.round(out[i]),(int)(double) (data.getExpectations()[i]));
             }
         }
 

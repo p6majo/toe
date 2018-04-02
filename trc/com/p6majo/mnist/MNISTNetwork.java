@@ -1,23 +1,26 @@
-package com.p6majo.math.network;
+package com.p6majo.mnist;
 
-
+import com.p6majo.math.network.DoubleTrainingsData;
+import com.p6majo.math.network.DoubleTrainingsDataList;
+import com.p6majo.math.network.Network;
 import com.p6majo.math.utils.Utils;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.stream.Collectors;
-
-public class NetworkVisualizerTest extends TestCase {
-
+/**
+ * In this test a network is trained that consists of three input neurons and eight output neurons
+ * The network is supposed to convert numbers from binary representations into decimal representations
+ * ie. 101 -> 5, 111->7 etc.
+ * @author p6majo
+ */
+public class MNISTNetwork extends TestCase {
     private Network network = null;
     private DoubleTrainingsDataList dataList;
-
 
     @Before
     public void setUp() throws Exception {
         //calculate the network for the conversion of binary numbers of three bits into a decimal
-
         dataList= new DoubleTrainingsDataList();
         dataList.add(new DoubleTrainingsData(new Double[]{0.,0.,0.},new Double[]{1.,0.,0.,0.,0.,0.,0.,0.}));//zero
         dataList.add(new DoubleTrainingsData(new Double[]{0.,0.,1.},new Double[]{0.,1.,0.,0.,0.,0.,0.,0.}));//one
@@ -28,22 +31,15 @@ public class NetworkVisualizerTest extends TestCase {
         dataList.add(new DoubleTrainingsData(new Double[]{1.,1.,0.},new Double[]{0.,0.,0.,0.,0.,0.,1.,0.}));//six
         dataList.add(new DoubleTrainingsData(new Double[]{1.,1.,1.},new Double[]{0.,0.,0.,0.,0.,0.,0.,1.}));//seven
 
-
-        System.out.println("Data set for training: \n"+dataList.stream().map(Object::toString).collect(Collectors.joining("\n")));
     }
 
-
     @Test
-    public void testVisualizer() {
+    public void testToString() {
 
         //test network with cross entropy cost function
-        this.network = new Network(new int[]{3,8},Network.Seed.RANDOM,Network.sigmoid,Network.standardCostFunction,true);
-        NetworkVisualizer visualizer = new NetworkVisualizer(network,NetworkVisualizer.VisualizerModus.ALL_VERTICES);
-
-
-        this.network.stochasticGradientDescentStreamDelta(dataList,1,0.1*Network.ETA,0.001);
+        this.network = new Network(new int[]{3,8},Network.Seed.RANDOM,Network.sigmoid,Network.crossEntropy);
+        this.network.stochasticGradientDescentWithAdaptiveLearningRate(dataList,1,0.01*Network.ETA);
         System.out.println(this.network.toString());
-
 
         for (DoubleTrainingsData data:dataList){
             System.out.println("Output: "+ Utils.array2String(this.network.eval(data).getActivations(),2));
@@ -57,6 +53,27 @@ public class NetworkVisualizerTest extends TestCase {
                 assertEquals(Math.round(out[i]),(int)(double) (data.getExpectations()[i]));
             }
         }
+
+
+
+        //test network with standard l2 cost function
+        this.network = new Network(new int[]{3,8},Network.Seed.RANDOM,Network.sigmoid,Network.standardCostFunction);
+        this.network.stochasticGradientDescentWithAdaptiveLearningRate(dataList,1,0.01*Network.ETA);
+        System.out.println(this.network.toString());
+
+        for (DoubleTrainingsData data:dataList){
+            System.out.println("Output: "+ Utils.array2String(this.network.eval(data).getActivations(),2));
+            System.out.println("Expectation: "+Utils.array2String(data.getExpectations(),2));
+        }
+
+        //check for mistakes of the trained network
+       for (DoubleTrainingsData data:dataList) {
+            Double[] out = this.network.eval(data).getActivations();
+            for (int i = 0; i < data.getInput().length; i++) {
+                assertEquals(Math.round(out[i]),(int)(double) (data.getExpectations()[i]));
+            }
+        }
+
 
     }
 

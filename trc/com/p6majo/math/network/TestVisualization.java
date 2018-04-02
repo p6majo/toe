@@ -3,10 +3,10 @@ package com.p6majo.math.network;
 public class TestVisualization {
 
     public static void main(String[] args){
-        Network network = new Network(new int[]{3,8,8},Network.Seed.RANDOM,Network.sigmoid,Network.crossEntropy,true);
+        Network network = new Network(new int[]{3,3,8},Network.Seed.RANDOM,Network.sigmoid,Network.crossEntropy,true);
 
            //calculate the network for the conversion of binary numbers of three bits into a decimal
-        TrainingsDataList<Double>  dataList= new TrainingsDataList<Double>();
+        DoubleTrainingsDataList dataList= new DoubleTrainingsDataList();
         dataList.add(new DoubleTrainingsData(new Double[]{0.,0.,0.},new Double[]{1.,0.,0.,0.,0.,0.,0.,0.}));//zero
         dataList.add(new DoubleTrainingsData(new Double[]{0.,0.,1.},new Double[]{0.,1.,0.,0.,0.,0.,0.,0.}));//one
         dataList.add(new DoubleTrainingsData(new Double[]{0.,1.,0.},new Double[]{0.,0.,1.,0.,0.,0.,0.,0.}));//two

@@ -12,12 +12,12 @@ import org.junit.Test;
  */
 public class NetworkStreamTest extends TestCase {
     private Network network = null;
-    private TrainingsDataList dataList;
+    private DoubleTrainingsDataList dataList;
 
     @Before
     public void setUp() throws Exception {
         //calculate the network for the conversion of binary numbers of three bits into a decimal
-        dataList= new TrainingsDataList<Double>();
+        dataList= new DoubleTrainingsDataList();
         dataList.add(new DoubleTrainingsData(new Double[]{0.,0.,0.},new Double[]{1.,0.,0.,0.,0.,0.,0.,0.}));//zero
         dataList.add(new DoubleTrainingsData(new Double[]{0.,0.,1.},new Double[]{0.,1.,0.,0.,0.,0.,0.,0.}));//one
         dataList.add(new DoubleTrainingsData(new Double[]{0.,1.,0.},new Double[]{0.,0.,1.,0.,0.,0.,0.,0.}));//two

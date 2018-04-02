@@ -1,5 +1,6 @@
 package com.p6majo.math.network;
 
+import com.google.common.graph.AbstractNetwork;
 import com.p6majo.math.utils.Utils;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.stream.IntStream;
  * Network class
  * @author jmartin
  */
-public class Network extends AbstractNetwork<Double>{
+public class Network implements FeedForwardTraining{
 
     private static final double EPS = 1e-9;//cutoff for zero activations to prevent log-overflow
     private final String tag;
@@ -43,7 +44,7 @@ public class Network extends AbstractNetwork<Double>{
     // private Structure network;
     public static final double ETA = 1;//Learning rate
     private final SigmoidFunction sf;
-    private final CostFunction<Double> cf;
+    private final CostFunction cf;
 
 
     private boolean visual = false;
@@ -51,10 +52,10 @@ public class Network extends AbstractNetwork<Double>{
     private NetworkVisualizer visualizer;
 
     private Timer timer;
-    private int updateInterval=100;
+    private int updateInterval=1000;
 
     private StochasticDescent stochasticDescent = null;
-
+    private DoubleTrainingsDataList dataList;
     /**
      * Constructor of the network
      * @param structure
@@ -165,7 +166,7 @@ public class Network extends AbstractNetwork<Double>{
     }
 
     @Override
-    public TrainingsData<Double> eval(TrainingsData<Double> data) {
+    public DoubleTrainingsData eval(DoubleTrainingsData data) {
         this.setInput(data.getInput());
         data.setActivations(this.getOutput());
         return data;
@@ -246,7 +247,7 @@ public class Network extends AbstractNetwork<Double>{
      * @param batchSize
      * @param learningRate
      */
-    public void stochasticGradientDescentWithAdaptiveLearningRate(TrainingsDataList<Double> dataList, int batchSize, double learningRate) {
+    public void stochasticGradientDescentWithAdaptiveLearningRate(DoubleTrainingsDataList dataList, int batchSize, double learningRate) {
         double sqrBatch = Math.sqrt(batchSize); //variable to adjust for the error growth depending on the batchsize
         double errorSum = 100;
         long steps = 0;
@@ -256,7 +257,7 @@ public class Network extends AbstractNetwork<Double>{
             dataList.shuffle();
             errorSum = 0.;
             int dataCounter = 1;
-            for (TrainingsData<Double> data : dataList) {
+            for (DoubleTrainingsData data : dataList) {
                 if (dataCounter == 1) this.calcErrors(data, true);
                 else this.calcErrors(data, false);
                 if (dataCounter == batchSize) { //if the batchsize is reached
@@ -310,7 +311,7 @@ public class Network extends AbstractNetwork<Double>{
      * @param dataList
      * @param learningRate
      */
-    public void stochasticDecentFixedSteps(TrainingsDataList<Double> dataList, double learningRate,int steps) {
+    public void stochasticDecentFixedSteps(DoubleTrainingsDataList dataList, double learningRate,int steps) {
 
         long start =System.currentTimeMillis();
         for (int s=0;s<steps;s++) {
@@ -356,7 +357,7 @@ public class Network extends AbstractNetwork<Double>{
      * @param learningRate
      * @param delta the optimization is finished when the error has dropped to the fraction delta
      */
-    public void stochasticGradientDescentStreamDelta(TrainingsDataList<Double> dataList, int batchSize, double learningRate,double delta) {
+    public void stochasticGradientDescentStreamDelta(DoubleTrainingsDataList dataList, int batchSize, double learningRate,double delta) {
 
         double errorSum = 100;
         long steps = 0;
@@ -415,13 +416,13 @@ public class Network extends AbstractNetwork<Double>{
      * @param batchSize
      * @param learningRate
      */
-    public void stochasticGradientDescentStream(TrainingsDataList<Double> dataList, int batchSize, double learningRate) {
+    public void stochasticGradientDescentStream(DoubleTrainingsDataList dataList, int batchSize, double learningRate) {
         double sqrBatch = Math.sqrt(batchSize); //variable to adjust for the error growth depending on the batchsize
         double errorSum = 100;
         long steps = 0;
 
 
-
+        this.dataList = dataList;
         stochasticDescent = new StochasticDescent(this,dataList,batchSize,learningRate);
         stochasticDescent.start();
 
@@ -437,7 +438,7 @@ public class Network extends AbstractNetwork<Double>{
      * @param batchSize
      * @param learningRate
      */
-    public void stochasticGradientDescent(TrainingsDataList<Double> dataList, int batchSize, double learningRate) {
+    public void stochasticGradientDescent(DoubleTrainingsDataList dataList, int batchSize, double learningRate) {
         double sqrBatch = Math.sqrt(batchSize); //variable to adjust for the error growth depending on the batchsize
         double errorSum = 100;
         long steps = 0;
@@ -445,7 +446,7 @@ public class Network extends AbstractNetwork<Double>{
             dataList.shuffle();
             errorSum = 0.;
             int dataCounter = 1;
-            for (TrainingsData<Double> data : dataList) {
+            for (DoubleTrainingsData data : dataList) {
                 if (dataCounter == 1)
                    this.resetErrors();
                 this.accumulateErrors(data);
@@ -502,11 +503,11 @@ public class Network extends AbstractNetwork<Double>{
      * @param learningRate
      * @param limit
      */
-    public void stochasticGradientDescentWithLimit(TrainingsDataList<Double> dataList, double learningRate,int limit) {
+    public void stochasticGradientDescentWithLimit(DoubleTrainingsDataList dataList, double learningRate,int limit) {
         int count = 0;
         while (count<limit) {
             dataList.shuffle();
-            for (TrainingsData<Double> data : dataList) {
+            for (DoubleTrainingsData data : dataList) {
                 this.calcErrors(data, true);
                 for (int layer = 1; layer < this.getNumberOfLayers(); layer++) {
                     List<Neuron> previousLayer = this.getNeuronsOfLayer(layer - 1);
@@ -528,11 +529,11 @@ public class Network extends AbstractNetwork<Double>{
      * @param batchSize
      * @param learningRate
      */
-    public void stochasticGradientDescent2(TrainingsDataList<Double> dataList, int batchSize, double learningRate) {
+    public void stochasticGradientDescent2(DoubleTrainingsDataList dataList, int batchSize, double learningRate) {
         //The idea is to provide the training data bit by bit and always generate a partially trained network
         dataList.shuffle();
-        TrainingsDataList<Double> tmpList = new TrainingsDataList<Double>();
-        for (TrainingsData<Double> data : dataList) {
+        DoubleTrainingsDataList tmpList = new DoubleTrainingsDataList();
+        for (DoubleTrainingsData data : dataList) {
             tmpList.add(data);
             stochasticGradientDescent(tmpList, 1, learningRate);
             System.out.println("System trained with " + tmpList.size() + "/" + dataList.size() + " of the data.");
@@ -546,11 +547,11 @@ public class Network extends AbstractNetwork<Double>{
      * @param batchSize
      * @param learningRate
      */
-    public void stochasticGradientDescentWithAdaptiveLearningRate2(TrainingsDataList<Double> dataList, int batchSize, double learningRate) {
+    public void stochasticGradientDescentWithAdaptiveLearningRate2(DoubleTrainingsDataList dataList, int batchSize, double learningRate) {
         //The idea is to provide the training data bit by bit and always generate a partially trained network
         dataList.shuffle();
-        TrainingsDataList<Double> tmpList = new TrainingsDataList<Double>();
-        for (TrainingsData<Double> data : dataList) {
+        DoubleTrainingsDataList tmpList = new DoubleTrainingsDataList();
+        for (DoubleTrainingsData data : dataList) {
             tmpList.add(data);
             stochasticGradientDescentWithAdaptiveLearningRate(tmpList, batchSize, learningRate);
             System.out.println("System trained with " + tmpList.size() + "/" + dataList.size() + " of the data.");
@@ -558,12 +559,36 @@ public class Network extends AbstractNetwork<Double>{
     }
 
 
+    public String runTest(){
+
+        int rnd = (int) (Math.random()*dataList.size());
+        DoubleTrainingsData data = dataList.get(rnd);
+
+
+            double cost = cf.eval(data);
+            int expectation = 0;
+            int out = 0;
+            double prop = 0.;
+
+            Double[] activations = data.getActivations();
+            Double[] expectations = data.getExpectations();
+            for (int i=0;i<activations.length;i++){
+                if (activations[i]>prop) {prop=activations[i];out=i;}
+                if (expectations[i]==1.) expectation=i;
+            }
+
+            return "Expectation: "+expectation+" heighest prop: "+prop+" for output: "+out;
+    }
+
     /**
      * Calculate the error term for each neuron that it contributes to the total error in the sigmoid function
      * and add it to the existing error
      * @param data
      */
-    public void accumulateErrors(TrainingsData<Double> data){
+    public void accumulateErrors(DoubleTrainingsData data){
+
+        //calculate the output of the network for a given piece of data
+        //the output is stored in the DoubleTrainingsData
         this.eval(data);
 
         int lastLayerIndex = this.structure.length - 1;
@@ -621,7 +646,7 @@ public class Network extends AbstractNetwork<Double>{
      *
      * @param data
      */
-    public void calcErrors(TrainingsData<Double> data, boolean reset) {
+    public void calcErrors(DoubleTrainingsData data, boolean reset) {
         this.eval(data);
 
         int lastLayerIndex = this.structure.length - 1;
@@ -696,7 +721,7 @@ public class Network extends AbstractNetwork<Double>{
      * @param dataList
      * @return
      */
-    public double getFitness(TrainingsDataList<Double> dataList){
+    public double getFitness(DoubleTrainingsDataList dataList){
         if (this.fitness==null)
             this.fitness = dataList.stream().map(this::eval).mapToDouble(this.cf::eval).sum();
         return fitness;
@@ -708,7 +733,7 @@ public class Network extends AbstractNetwork<Double>{
      * after mutation etc.
      * @param dataList
      */
-    public void updateFitness(TrainingsDataList<Double> dataList){
+    public void updateFitness(DoubleTrainingsDataList dataList){
         this.fitness = dataList.stream().map(this::eval).mapToDouble(this.cf::eval).sum();
     }
 
@@ -734,13 +759,13 @@ public class Network extends AbstractNetwork<Double>{
      * The standard cost function returning the sum of the squares of the differences between
      * activations and expectations
      */
-    public static CostFunction<Double> standardCostFunction = new CostFunction<Double>() {
+    public static CostFunction standardCostFunction = new CostFunction() {
 
         @Override
-        public Double eval(TrainingsData<Double> data) {
+        public Double eval(DoubleTrainingsData data) {
             double sum = 0.;
             Double[] activations = data.getActivations();
-            Double[] expectations = data.getExpectation();
+            Double[] expectations = data.getExpectations();
 
             for (int i = 0; i < activations.length; i++)
                 sum += (activations[i] - expectations[i]) * (activations[i] - expectations[i]);
@@ -748,9 +773,9 @@ public class Network extends AbstractNetwork<Double>{
         }
 
         @Override
-        public Double[] gradient(TrainingsData<Double> data) {
+        public Double[] gradient(DoubleTrainingsData data) {
             Double[] activations = data.getActivations();
-            Double[] expectations = data.getExpectation();
+            Double[] expectations = data.getExpectations();
             Double[] grad = new Double[activations.length];
             for (int i = 0; i < activations.length; i++)
                 grad[i] = 2 * (activations[i] - expectations[i]);
@@ -758,22 +783,22 @@ public class Network extends AbstractNetwork<Double>{
         }
     };
 
-    public static CostFunction<Double> crossEntropy = new CostFunction<Double>() {
+    public static CostFunction crossEntropy = new CostFunction() {
 
         @Override
-        public Double eval(TrainingsData<Double> data) {
+        public Double eval(DoubleTrainingsData data) {
             double cost = 0.;
             Double[] activations = data.getActivations();
-            Double[] expectations = data.getExpectation();
+            Double[] expectations = data.getExpectations();
             for (int a = 0; a < activations.length; a++)
                 cost = (expectations[a]+EPS) * Math.log(activations[a]+EPS) + (1. - expectations[a]+EPS) * Math.log(1 - activations[a]+EPS);
             return -cost;
         }
 
         @Override
-        public Double[] gradient(TrainingsData<Double> data) {
+        public Double[] gradient(DoubleTrainingsData data) {
             Double[] activations = data.getActivations();
-            Double[] expectations = data.getExpectation();
+            Double[] expectations = data.getExpectations();
             Double[] grad = new Double[activations.length];
             for (int a = 0; a < activations.length; a++)
                 grad[a] = (1. - expectations[a]+EPS) / (1 - activations[a]+EPS) - (expectations[a]+EPS) / (activations[a]+EPS);

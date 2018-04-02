@@ -14,14 +14,14 @@ public class StochasticDescent implements Runnable {
     private Thread t;
     private String name;
 
-    private final TrainingsDataList<Double> dataList;
+    private final DoubleTrainingsDataList dataList;
     private final int batchSize;
     private final double learningRate;
 
     private final Network network;
 
 
-    public StochasticDescent(Network network,TrainingsDataList<Double> dataList, int batchSize, double learningRate){
+    public StochasticDescent(Network network,DoubleTrainingsDataList dataList, int batchSize, double learningRate){
         this.name = "Stochastic descent thread";
         this.network = network;
         this.batchSize= batchSize;
@@ -60,7 +60,7 @@ public class StochasticDescent implements Runnable {
 
             //here is the implementation of the stochastic descent
 
-            dataList.shuffle();
+            if (dataList.size()<100) dataList.shuffle();
 
             IntStream.range(0,dataList.size()/batchSize)
                     .mapToObj(i->dataList.subList(i*batchSize,(i+1)*batchSize))
@@ -87,7 +87,7 @@ public class StochasticDescent implements Runnable {
                 errorSum+=network.getNeuronsOfLayer(layer).stream().mapToDouble(n->Math.abs(n.error)).sum();//todo parallel
 
             steps++;
-            if (steps % 2000 == 0) {
+            if (steps % 10 == 0) {
                 String infoString = "Error sum: " + errorSum+" after "+steps+" steps.";
                 System.out.println(infoString);
             }

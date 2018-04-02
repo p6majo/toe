@@ -245,6 +245,11 @@ public class ExtendedDraw  implements ActionListener, MouseListener, MouseMotion
 
     }
 
+    public void showInfo(String info){
+        this.actionPane.setText(info);
+    }
+
+
     /**
      * Initializes an empty drawing object.
      */
@@ -326,6 +331,20 @@ public class ExtendedDraw  implements ActionListener, MouseListener, MouseMotion
         button3.addActionListener(listener);
     }
 
+    public void setButton1Visible(boolean isVisible){
+        button1.setVisible(isVisible);
+    }
+    public void setButton2Visible(boolean isVisible){
+        button2.setVisible(isVisible);
+    }
+    public void setButton3Visible(boolean isVisible){
+        button3.setVisible(isVisible);
+    }
+
+
+    public void setInfoVisible(boolean isVisible){
+        actionPane.setVisible(isVisible);
+    }
     /**
      * Sets the upper-left hand corner of the drawing window to be (x, y), where (0, 0) is upper left.
      *
