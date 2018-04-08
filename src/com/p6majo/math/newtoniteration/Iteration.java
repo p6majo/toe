@@ -22,7 +22,7 @@ public class Iteration {
                 Complex diff = z1.minus(z);
                 distance = diff.abs(); //absolute distance is sufficient, since we approach zero
                 steps++;
-                //System.out.println(function.evalDerivative(z)+" "+function.eval(z)+" "+z.toString());
+                //System.out.println(function.evalDerivative(z)+" "+function.feedForward(z)+" "+z.toString());
                 z = z1;
                 if (z.abs()>MAXVAL) {
                     z=null;

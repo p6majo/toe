@@ -85,7 +85,7 @@ public class Chebyshev {
   public double eval(final double x, final int m) {
     double d=0.0,dd=0.0,sv,y,y2;
     int j;
-    if ((x-a)*(x-b) > 0.0) throw new IllegalArgumentException("x not in range in eval");
+    if ((x-a)*(x-b) > 0.0) throw new IllegalArgumentException("x not in range in feedForward");
     y2=2.0*(y=(2.0*x-a-b)/(b-a));
     for (j=m-1;j>0;j--) {
       sv=d;
@@ -175,7 +175,7 @@ public class Chebyshev {
   
   public int setm(final double thresh) {while (m>1 && abs(c[m-1])<thresh) m--; return m;}
   
-  //public double operator() (double x) {return eval(x,m);}
+  //public double operator() (double x) {return feedForward(x,m);}
   
   public double get(final double x) {return eval(x,m);}
 

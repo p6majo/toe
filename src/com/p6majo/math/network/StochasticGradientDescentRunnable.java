@@ -1,32 +1,44 @@
 package com.p6majo.math.network;
 
-import java.nio.channels.ClosedByInterruptException;
-import java.nio.channels.InterruptibleChannel;
-import java.nio.channels.Selector;
 import java.util.stream.IntStream;
 
-public class StochasticDescent implements Runnable {
+public class StochasticGradientDescentRunnable implements Runnable {
 
     //flags that control the performance of the Thread
     private boolean suspended;
     private boolean singleStep;
+    private boolean finished=false;
+    private boolean testable=true;
 
     private Thread t;
     private String name;
 
-    private final DoubleTrainingsDataList dataList;
+    private final Network network;
+    private final DataList dataList;
     private final int batchSize;
     private final double learningRate;
+    private final boolean verbose;
+    private final int maxCycles;
 
-    private final Network network;
 
 
-    public StochasticDescent(Network network,DoubleTrainingsDataList dataList, int batchSize, double learningRate){
+
+    public StochasticGradientDescentRunnable(Network network, DataList dataList, int batchSize, double learningRate, boolean verbose, int maxCycles){
         this.name = "Stochastic descent thread";
         this.network = network;
         this.batchSize= batchSize;
         this.dataList = dataList;
         this.learningRate = learningRate;
+        this.verbose = verbose;
+        this.maxCycles=maxCycles;
+    }
+
+    public StochasticGradientDescentRunnable(Network network, DataList dataList, int batchSize, double learningRate, boolean verbose){
+        this(network,dataList,batchSize,learningRate,true,Integer.MAX_VALUE);
+    }
+
+    public StochasticGradientDescentRunnable(Network network, DataList dataList, int batchSize, double learningRate){
+       this(network,dataList,batchSize,learningRate,true,Integer.MAX_VALUE);
     }
 
     /**
@@ -43,10 +55,14 @@ public class StochasticDescent implements Runnable {
     @Override
     public void run() {
         System.out.println("Running ..."  );
-        int steps = 0;
-        double errorSum = 100.;
+        System.out.println("Success rate at before the training: "+network.runTest(10000));
 
-        while (errorSum>0.001 && steps<1000000){
+        int cycles = 0;
+        double errorSum = 100.;
+        //double dynamicLearningRate = this.learningRate;
+
+        while (errorSum>0.01 && cycles<this.maxCycles){
+
             synchronized(this) {
                 while(suspended) {
                     System.out.println("Waiting ...");
@@ -58,10 +74,10 @@ public class StochasticDescent implements Runnable {
                 }
             }
 
-            //here is the implementation of the stochastic descent
-
-            if (dataList.size()<100) dataList.shuffle();
-
+            //here is the implementation of the stochastic gradient descent
+            dataList.shuffle();
+            testable=false;
+            long start = System.currentTimeMillis();
             IntStream.range(0,dataList.size()/batchSize)
                     .mapToObj(i->dataList.subList(i*batchSize,(i+1)*batchSize))
                     .forEach(batch->{
@@ -80,21 +96,38 @@ public class StochasticDescent implements Runnable {
                         }
 
                     });
-
+            testable = true;
             //sum all error terms of the biases
             errorSum = 0;
             for (int layer=1;layer<network.getNumberOfLayers();layer++)
                 errorSum+=network.getNeuronsOfLayer(layer).stream().mapToDouble(n->Math.abs(n.error)).sum();//todo parallel
 
-            steps++;
-            if (steps % 10 == 0) {
-                String infoString = "Error sum: " + errorSum+" after "+steps+" steps.";
+            //output is given after approximately 10000 stochastic descent steps
+            cycles++;
+            //dynamicLearningRate = this.learningRate/Math.pow(10.,((double) cycles/10));
+            if (verbose && (cycles-1) % Math.max(1,10000/dataList.size()*batchSize) == 0) {
+                String infoString = "Error sum: " + errorSum+" after "+cycles+" training cycles in "+(System.currentTimeMillis()-start)+" ms.";
                 System.out.println(infoString);
+                System.out.println("Success rate based on 1000 tests: "+network.runTest(1000));
             }
+
+            if (singleStep)
+                this.suspend();
+
         }
-        System.out.println(name + " exiting.");
+
+
+        //send the message of the finished stochastic gradient descent to the main thread that should be waiting
+        synchronized(this){
+            this.finished = true;
+            System.out.println(name + " exiting.");
+            notifyAll();
+        }
     }
 
+    /**
+     * start the thread that is associated with the runnable
+     */
     public void start(){
         System.out.println("Starting the "+name+" ...");
         if (t == null) {
@@ -103,21 +136,41 @@ public class StochasticDescent implements Runnable {
         }
     }
 
+    /**
+     * suspend the stochastic gradient descent
+     */
     public void suspend(){
         this.suspended=true;
-        this.singleStep = false;
     }
 
+    public boolean isSuspended(){
+        return this.suspended;
+    }
+
+    public boolean isTestable(){ return this.testable;}
+
+    /**
+     * resume the stochastic gradient descent
+     */
     public synchronized void resume(){
         this.suspended=false;
         this.singleStep = false;
-        notify();
+        notifyAll();
         System.out.println("Continuing ...");
     }
 
-    public void singleStep(){
+    /**
+     * only perform one single cycle of training (going through the whole data of training once
+     */
+    public synchronized void singleStep(){
         this.singleStep = true;
         this.suspended = false;
+        notifyAll();
+        System.out.println("Continuing for one step ...");
+    }
+
+    public boolean isFinished(){
+        return this.finished;
     }
 
 }

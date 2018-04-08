@@ -5,17 +5,36 @@ import java.util.Random;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
+/**
+ * Class for the atomic element (neuron) of a network
+ * Have a look at the description of {@link Network} to get an overview over
+ * the tasks of neurons inside the network
+ *
+ * @author p6majo
+ * @version 1.0
+ * @date 3.4.18
+ *
+ *
+
+ */
 public class Neuron {
+
     public int index;//index of the neuron in layer
     public Double[] weights;
     public double bias;
     public double value;
     public double error=0.;
+
     /**
-     * all neurons except input neurons are dynamic neurons that can adjust in the process of learning
+     * all neurons except input neurons are dynamic neurons
+     * that can adjust in the process of learning
      */
     private final boolean dynamic;
 
+    /**
+     * a predicate that allows to filter for dynamic neurons
+     * from the list of all neurons of a network
+     */
     public static Predicate<Neuron> dynamicTest=new Predicate<Neuron>(){
         @Override
         public boolean test(Neuron neuron) {
@@ -23,6 +42,12 @@ public class Neuron {
         }
     };
 
+    /**
+     * The neuron is constructed with the information about its position in the layer
+     * @param seed type of initialization for the weights and bias of the neuron
+     * @param nWeights number of weights, one for each neuron of the preceding layer
+     * @param index position of the neuron within the layer
+     */
     public Neuron(Network.Seed seed, int nWeights, int index){
         this.index = index;
         if (nWeights!=0) {
@@ -70,6 +95,14 @@ public class Neuron {
         this.bias = bias;
     }
 
+    /**
+     * return, whether a neuron is dynamic
+     * by default, every neuron in the first layer of the network is static.
+     * It cannot change its weights and bias.
+     * The neurons of every other layer are dynamic.
+     *
+     * @return dynamic
+     */
     public boolean isDynamic(){
         return this.dynamic;
 

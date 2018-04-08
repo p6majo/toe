@@ -13,6 +13,7 @@
 			different demo. The package "org.lwjgl.demo." is prepended automatically. -->
 		<class>game.SpaceGame</class>
         <kotlin.version>1.2.31</kotlin.version>
+        <nd4j.version>0.9.1</nd4j.version>
     </properties>
 	<profiles>
 		<profile>
@@ -142,6 +143,26 @@
 		</repository>
 	</repositories>
 	<dependencies>
+
+
+        <dependency>
+            <groupId>org.nd4j</groupId>
+            <!-- use
+                for working with cpu instead of gpu
+ -->
+            <artifactId>nd4j-native-platform</artifactId>
+
+			<!-- use
+                                <artifactId>nd4j-cuda-8.0-platform</artifactId>
+
+                                               for working with gpu instead of the cpu
+                                           -->
+            <version>${nd4j.version}</version>
+        </dependency>
+
+
+
+
 		<dependency>
 			<groupId>org.joml</groupId>
 			<artifactId>joml</artifactId>

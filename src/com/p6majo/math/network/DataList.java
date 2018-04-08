@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DoubleTrainingsDataList extends ArrayList<DoubleTrainingsData> {
+public class DataList extends ArrayList<Data> {
 
-   public DoubleTrainingsDataList(){
+   public DataList(){
        super();
    }
 
-    public DoubleTrainingsDataList(List<DoubleTrainingsData> dataList){
+    public DataList(List<Data> dataList){
         this.addAll(dataList);
     }
 
@@ -20,7 +20,7 @@ public class DoubleTrainingsDataList extends ArrayList<DoubleTrainingsData> {
     }
 
     public String toString(){
-        return this.stream().map(Object::toString).collect(Collectors.joining("\n"));
+       return this.stream().map(Object::toString).collect(Collectors.joining("\n"));
     }
 
 }

@@ -230,7 +230,7 @@ public class NewtonMapleIterator {
 				Complex diff = z1.minus(z);
 				distance = diff.abs();
 				steps++;
-				//System.out.println(function.evalDerivative(z)+" "+function.eval(z)+" "+z.toString());
+				//System.out.println(function.evalDerivative(z)+" "+function.feedForward(z)+" "+z.toString());
 				z = z1;
 				if (z.abs()>MAXVAL) {
 					z=null;

@@ -32,6 +32,8 @@ public class ExtendedDraw  implements ActionListener, MouseListener, MouseMotion
     private JButton button2;
     private JButton button3;
     private JTextPane actionPane;
+    private JButton button4;
+    private JButton button5;
     private JFrame frame;
 
 
@@ -243,6 +245,34 @@ public class ExtendedDraw  implements ActionListener, MouseListener, MouseMotion
                 }
             });
 
+        button4.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionPane.setText("Button 4 pressed!\n You might want to override the Listener by a customized Listener via setListenerForButton3.");
+                actionPane.setVisible(true);
+
+            }
+        });
+
+        button5.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionPane.setText("Button 5 pressed!\n You might want to override the Listener by a customized Listener via setListenerForButton3.");
+                actionPane.setVisible(true);
+
+            }
+        });
+
     }
 
     public void showInfo(String info){
@@ -316,6 +346,13 @@ public class ExtendedDraw  implements ActionListener, MouseListener, MouseMotion
         button3.setText(label);
     }
 
+    public void setButton4Label(String label){
+        button4.setText(label);
+    }
+
+    public void setButton5Label(String label){
+        button5.setText(label);
+    }
 
     public void setActionListenerForButton1(ActionListener listener){
         button1.removeActionListener(button1.getActionListeners()[0]);
@@ -331,6 +368,16 @@ public class ExtendedDraw  implements ActionListener, MouseListener, MouseMotion
         button3.addActionListener(listener);
     }
 
+    public void setActionListenerForButton4(ActionListener listener){
+        button4.removeActionListener(button4.getActionListeners()[0]);
+        button4.addActionListener(listener);
+    }
+    public void setActionListenerForButton5(ActionListener listener){
+        button5.removeActionListener(button5.getActionListeners()[0]);
+        button5.addActionListener(listener);
+    }
+
+
     public void setButton1Visible(boolean isVisible){
         button1.setVisible(isVisible);
     }
@@ -339,6 +386,12 @@ public class ExtendedDraw  implements ActionListener, MouseListener, MouseMotion
     }
     public void setButton3Visible(boolean isVisible){
         button3.setVisible(isVisible);
+    }
+    public void setButton4Visible(boolean isVisible){
+        button4.setVisible(isVisible);
+    }
+    public void setButton5Visible(boolean isVisible){
+        button5.setVisible(isVisible);
     }
 
 

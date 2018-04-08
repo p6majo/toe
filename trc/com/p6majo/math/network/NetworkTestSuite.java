@@ -10,7 +10,7 @@ import java.util.Enumeration;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	NetworkTest.class
+	NetworkTest.class,NetworkStreamTest.class
 })
 
 public class NetworkTestSuite {
@@ -19,7 +19,7 @@ public class NetworkTestSuite {
 	    
 		TestResult result = new TestResult();
 	      TestSuite suite = new TestSuite(
-	      		NetworkTest.class
+	      		NetworkTest.class,NetworkStreamTest.class
 		  );
 	      suite.run(result);
 	      System.out.println("Number of test cases = " + result.runCount());

@@ -16,7 +16,7 @@ public class IterationBesselJ {
 		
 		ComplexFunction besselJ = new ComplexBesselJ(0);
 		
-		//System.out.println(besselJ.eval(new Complex(0.1,0.3)).toString()+" "+besselJ.evalDerivative(new Complex(0.1,0.3)).toString());
+		//System.out.println(besselJ.feedForward(new Complex(0.1,0.3)).toString()+" "+besselJ.evalDerivative(new Complex(0.1,0.3)).toString());
 		
 		
 		NewtonIterator iterator = new NewtonIterator(besselJ,box,res,String.format("besselj0.ppm"));

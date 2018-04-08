@@ -20,7 +20,7 @@ public class MapleZetaOverZetaPrime extends MapleFunction {
 		if (z.im()<0) number = String.format(Locale.ROOT,"%f-%f*I",z.re(),Math.abs(z.im()));
 		else number = String.format(Locale.ROOT,"%f+%f*I",z.re(),z.im());
 		//System.out.print(number+" ");
-		ComplexNumeric n = (ComplexNumeric) super.engine.evaluate(String.format("evalf(eval(Zeta(z)/Zeta(1,z),z=%s)):", number) );
+		ComplexNumeric n = (ComplexNumeric) super.engine.evaluate(String.format("evalf(feedForward(Zeta(z)/Zeta(1,z),z=%s)):", number) );
 		//System.out.println(n.toString());
 		return new Complex(n.realPart().doubleValue(),n.imaginaryPart().doubleValue());
 	}

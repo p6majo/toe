@@ -103,6 +103,15 @@ public class Utils {
         return null;
     }
 
-
+    public static String intArray2String(int[] array,String sep, String bracket){
+        String output = "";
+        if (array.length>0){
+            if (bracket.length()>1) output+=bracket.substring(0,1);
+            for (int i=0;i<array.length;i++) output+=array[i]+sep;
+            output=output.substring(0,output.length()-1);
+            if (bracket.length()>1) output+=bracket.substring(1,2);
+        }
+        return output;
+    }
 
 }

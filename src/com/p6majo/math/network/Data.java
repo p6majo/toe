@@ -2,7 +2,7 @@ package com.p6majo.math.network;
 
 import com.p6majo.math.utils.Utils;
 
-public class DoubleTrainingsData {
+public class Data {
 
     private Double[] input;
     private Double[] expectation;
@@ -13,7 +13,7 @@ public class DoubleTrainingsData {
      * @param input    array of input data
      * @param expectation array of expected output data
      */
-    public DoubleTrainingsData(Double[] input, Double[] expectation) {
+    public Data(Double[] input, Double[] expectation) {
         this.input = input;
         this.expectation = expectation;
     }
@@ -24,7 +24,7 @@ public class DoubleTrainingsData {
      * in streams
      * @param value
      */
-    public DoubleTrainingsData setExpectation(int value){
+    public Data setExpectation(int value){
         for (int i=0;i<expectation.length;i++){
             expectation[i]=0.;
         }

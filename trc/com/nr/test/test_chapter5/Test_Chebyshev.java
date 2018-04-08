@@ -32,8 +32,8 @@ public class Test_Chebyshev {
 
     
 
-    // Test Chebyshev (eval)
-    System.out.println("Testing Chebyshev (eval)");
+    // Test Chebyshev (feedForward)
+    System.out.println("Testing Chebyshev (feedForward)");
     bjn bjn = new bjn();
     Chebyshev cheb = new Chebyshev(bjn,aa,bb,NN);
     m=cheb.setm(thresh);
@@ -42,11 +42,11 @@ public class Test_Chebyshev {
       y[i]=cheb.eval(x,m);
       yy[i]=bjn.funk(x);
     }
-    System.out.printf("Chebyshev (eval): Maximum discrepancy = %f\n", maxel(vecsub(y,yy)));
+    System.out.printf("Chebyshev (feedForward): Maximum discrepancy = %f\n", maxel(vecsub(y,yy)));
     localflag = maxel(vecsub(y,yy)) > sbeps;
     globalflag = globalflag || localflag;
     if (localflag) {
-      fail("*** Chebyshev (eval): Chebyshev approximation does not evaluate to accurate function values");
+      fail("*** Chebyshev (feedForward): Chebyshev approximation does not evaluate to accurate function values");
       
     }
 
