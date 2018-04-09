@@ -387,7 +387,7 @@ public class Network {
             Double[] activations = data.getActivations();
             Double[] expectations = data.getExpectations();
             for (int a = 0; a < activations.length; a++)
-                cost = (expectations[a]+EPS) * Math.log(activations[a]+EPS) + (1. - expectations[a]+EPS) * Math.log(1 - activations[a]+EPS);
+                cost += (expectations[a]+EPS) * Math.log(activations[a]+EPS) + (1. - expectations[a]+EPS) * Math.log(1 - activations[a]+EPS);
             return -cost;
         }
 

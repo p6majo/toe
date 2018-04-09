@@ -36,7 +36,7 @@ public class SigmoidLayer extends Layer {
         INDArray factor = super.activations.sub(1).mul(-1);
         factor = factor.mul(super.activations);
 
-        super.errors = errors.mul(factor);
+        super.errorsForPreviousLayer= errors.mul(factor);
     }
 
     @Override

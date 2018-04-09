@@ -139,9 +139,25 @@ public class LinearLayer extends Layer {
         if (this.inputData.shape()[0]>1) {
             int batchSize=this.inputData.shape()[0];
             this.biases.subi(this.errors.sum(0).mul(learningRate/batchSize)); //adjust biases
-            correction = Nd4j.tensorMmul(this.inputData, this.errors, new int[][]{{1}, {1}});
-            //sum contributions from all batches
-            correction = correction.sum(0);
+            //this is a bit tricky at this point
+            //we have to combine the inputData with the errors to get a correction matrix with the dimensions of the weights
+            //the input data is of the form bxm and the errors are of the form bxn
+            //they are supposed to form an mxn correction matrix
+            //the input and errors are reshaped and then the tensor product is performed batch-element-wise and summed over all batch elements
+            //the input is reshaped into a b-vector of a row vector in each component
+            int[] newInputShape = new int[3];
+            newInputShape[0]=this.inputData.shape()[0];
+            newInputShape[1]=1;
+            newInputShape[2]=this.inputData.shape()[1];
+            //the error data is reshaped into a b-vector of a column vector in each component
+            int[] newErrorShape = new int[3];
+            newErrorShape[0]=this.errors.shape()[0];
+            newErrorShape[2]=1;
+            newErrorShape[1]=this.errors.shape()[1];
+
+
+
+            correction = Nd4j.tensorMmul(this.inputData.reshape(newInputShape), this.errors.reshape(newErrorShape), new int[][]{{0,1}, {0,2}});
             this.weights.subi(correction.mul(learningRate/batchSize));//adjust weights
         }
         else {

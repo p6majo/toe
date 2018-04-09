@@ -246,7 +246,7 @@ public class LinearLayerTest {
         ll.learn(learningRate);
 
         System.out.println(ll+"\n\n");
-
+        System.out.println("The constraints on the structure of the tensors simplify concerns of internal consistencies. Once the objects end up having the correct shape, it is very likely that the correct transformations have been performed.");
 
     }
 
