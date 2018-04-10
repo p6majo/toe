@@ -2,11 +2,14 @@ package com.p6majo.math.network2.layers;
 
 import com.p6majo.math.network2.Batch;
 import com.p6majo.math.network2.Data;
+import com.p6majo.math.utils.Utils;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.impl.accum.Sum;
 import org.nd4j.linalg.api.ops.impl.transforms.Log;
 import org.nd4j.linalg.api.ops.impl.transforms.Sigmoid;
 import org.nd4j.linalg.factory.Nd4j;
+import org.nd4j.linalg.indexing.BooleanIndexing;
+import org.nd4j.linalg.indexing.conditions.Conditions;
 
 public class CrossEntropyLayer extends LossLayer {
 
@@ -20,18 +23,21 @@ public class CrossEntropyLayer extends LossLayer {
 
     @Override
     public void pushForward(Batch batch) {
-        super.activations = batch.getBatchInput();
+        super.activations = batch.getActivations();
         this.expectations = batch.getBatchExpectation();
-        super.errors = Nd4j.zeros(batch.getBatchInput().shape());
-        this.batchSize = batch.getBatchInput().shape()[0];
+        super.errors = Nd4j.ones(batch.getActivations().shape());
+        this.batchSize = batch.getActivations().shape()[0];
+        regularize();
     }
 
-    @Override
-    public void pushForward(Data data) {
-        super.activations =  data.getInput();
-        this.expectations = data.getExpectations();
-        super.errors = Nd4j.ones(data.getInput().shape());
-        this.batchSize = 1;
+   private void regularize(){
+        float EPS = 0.0000001f;
+        BooleanIndexing.replaceWhere(expectations,EPS, Conditions.epsEquals(0));
+        BooleanIndexing.replaceWhere(expectations,1-EPS,Conditions.epsEquals(1));
+
+        BooleanIndexing.replaceWhere(activations,EPS, Conditions.epsEquals(0));
+        BooleanIndexing.replaceWhere(activations,1-EPS,Conditions.epsEquals(1));
+
     }
 
     public void pullBack(){
@@ -40,7 +46,7 @@ public class CrossEntropyLayer extends LossLayer {
 
     @Override
     public void pullBack(INDArray errors) {
-        super.errorsForPreviousLayer = this.getLossGradient();
+        super.errorsForPreviousLayer = this.getLossGradient().mul(errors);
     }
 
     @Override
@@ -57,14 +63,22 @@ public class CrossEntropyLayer extends LossLayer {
 
     @Override
     public INDArray getLossGradient() {
-        return this.expectations.sub(1).div(this.activations.sub(1)).sub(this.expectations.div(this.activations));
+       return this.expectations.sub(1).div(this.activations.sub(1)).sub(this.expectations.div(this.activations));
     }
-
 
 
     @Override
     public void learn(float learningRate) {
         //nothing to do in this layer since it is a passive layer
         //there are not parameters to be adjusted
+    }
+
+    public String toString() {
+        StringBuilder out = new StringBuilder();
+        out.append("***********************************\n");
+        out.append("Cross entropy layer with signature: "+ Utils.intArray2String(this.inSignature,",","[]")+"\n");
+        out.append("***********************************\n");
+
+        return out.toString();
     }
 }

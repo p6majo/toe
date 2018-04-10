@@ -45,9 +45,13 @@ public class Data {
 
     public String toString(){
         StringBuilder out = new StringBuilder();
-        out.append("i: "+ input+"\n");
-        out.append("e: "+ expectation+"\n");
+        out.append("i:\n"+ input+"\n");
+        out.append("e:\n"+ expectation+"\n");
         return out.toString();
+    }
+
+    public void setExpectationToUnity(int position){
+        this.expectation.put(0,position,1);
     }
 
     //TODO there should be helper functions that convert all types of data into the tensor structure

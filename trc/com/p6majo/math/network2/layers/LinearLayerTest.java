@@ -124,45 +124,6 @@ public class LinearLayerTest {
 
 
     @Test
-    public void pushForward2() {
-
-        float[] pod = new float[8]; //piece of data
-        for (int n = 0; n < 8; n++) pod[n] = (n + 1);
-        Data data = new Data(Nd4j.create(pod, new int[]{4, 2}), Nd4j.create(new float[]{1}, new int[]{1}));
-
-        System.out.println("Now testing the push Forward of the Linear Layer for a single piece of data:\n" + data);
-
-        LinearLayer ll = new LinearLayer(data.getInput().shape(), 5);
-        ll.pushForward(data);
-        System.out.println("Push forward: " + ll.getActivations());
-
-        System.out.println("Check manually:\n");
-        float[] test = new float[5];
-        String out = "[";
-        for (int a = 0; a < 5; a++) {
-            float sum = 0f;
-            for (int r = 0; r < 4; r++)
-                for (int c = 0; c < 2; c++) {
-                    sum += data.getInput().getFloat(r, c) * ll.getWeights().getFloat(c + 2 * r, a);
-                }
-            sum += ll.getBiases().getFloat(a);
-            test[a] = sum;
-            out += sum + ",";
-        }
-        out = out.substring(0, out.length() - 1) + "]";
-        System.out.println(out);
-
-        INDArray testArray = Nd4j.create(test);
-
-        boolean testresult = testArray.equals(ll.getActivations());
-        //Test for the calculation of activations
-        assertTrue(testresult);
-        if (testresult) System.out.println("Push forward of a single piece of data for linear layer was successful.");
-        System.out.println("****\n\n");
-    }
-
-
-    @Test
     public void pullBack() {
         System.out.println("Check the backward pass for the errors:\n");
         INDArray errors = Nd4j.ones(10);
@@ -172,14 +133,14 @@ public class LinearLayerTest {
         ll.pullBack(errors);
         System.out.println(ll.toString());
         System.out.println("The following errors are calculated:\n");
-        System.out.println(ll.getErrors());
+        System.out.println(ll.getErrorsForPreviousLayer());
         System.out.println("The fact, that the dimensions are obtained correctly, shows, that the multiplication is performed correctly.\n");
         System.out.println("With this simple setup of errors, this just corresponds to summing all weights row-wise.\n");
         System.out.println("Let's apply the corresponding command to the weights and reshape.\n");
 
         INDArray test = ll.getWeights().sum(1);
         test = test.reshape(new int[]{2,3});
-        boolean testresult = test.equals(ll.getErrors());
+        boolean testresult = test.equals(ll.getErrorsForPreviousLayer());
         System.out.println(test);
         if (testresult) {
             System.out.println("Error calculation of a single piece of data successful\n\n\n");
@@ -193,7 +154,7 @@ public class LinearLayerTest {
 
         ll.pullBack(errors);
 
-        System.out.println(ll.getErrors()+"\n\n");
+        System.out.println(ll.getErrorsForPreviousLayer()+"\n\n");
 
         INDArray fac1 = Nd4j.create(new float[]{1f,2f,3f});
         INDArray fac2 = Nd4j.create(new float[]{4f,5f});
@@ -223,15 +184,8 @@ public class LinearLayerTest {
         INDArray input = Nd4j.ones(3,4);
         System.out.println("Process trivial input data: \n"+input);
         Data data = new Data(input,Nd4j.zeros(10));
-        ll.pushForward(data);
 
         INDArray error = Nd4j.ones(10);
-        System.out.println("Test learning for errors from single data: \n"+error);
-        ll.pullBack(error);
-        System.out.println(ll);
-        ll.learn(learningRate);
-        System.out.println("After learning: \n");
-        System.out.println(ll+"\n\n");
 
         INDArray input2 = Nd4j.zeros(3,4);
         Data data2 = new Data(input2,Nd4j.ones(10));

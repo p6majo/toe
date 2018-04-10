@@ -29,6 +29,8 @@ public class LinearLayer extends Layer {
     //stored as intermediate values to train the network
     private INDArray inputData;
 
+    private int batchSize;
+
     public LinearLayer(int[] inSignature, int outSignature) {
         super(inSignature,new int[] {outSignature});
 
@@ -55,17 +57,22 @@ public class LinearLayer extends Layer {
         //flatten the batchData
         checkBatchConsistency(batch);
 
-        int [] newShape = new int[]{batch.getBatchInput().shape()[0],flattenedInDim};
-        inputData = batch.getBatchInput().reshape(newShape);
+        batchSize = batch.getActivations().shape()[0];
+        int [] newShape = new int[]{batchSize,flattenedInDim};
+        inputData = batch.getActivations().reshape(newShape);
         //calculate activations
         //a_{bi}=z_{bj}*w_{ij}+b_i  (b is the batchData index, summation over j)
         //tmp has to be written first, such that the index b is the row index after multiplication
         super.activations = Nd4j.tensorMmul(inputData,this.weights,new int[][]{{1},{0}});
         super.activations.addiRowVector(biases);
+
+        //reshape activations from a matrix into a vector of row vectors
+        int[] reshape = new int[]{batchSize,1,flattenedOutDim};
+        batch.setActivations(activations.reshape(reshape));
     }
 
     private void checkBatchConsistency(Batch batch){
-        int[] batchSignature = batch.getBatchInput().shape();
+        int[] batchSignature = batch.getActivations().shape();
         int[] dataSignature = new int[batchSignature.length-1];
         int dim = 1;
         for (int n=1;n<batchSignature.length;n++) {
@@ -75,21 +82,7 @@ public class LinearLayer extends Layer {
         if (dim!=flattenedInDim) Utils.errorMsg("Incompatible data in Linear layer.\n Received data signature: "+Utils.intArray2String(dataSignature,",","[]")+"\n, for the Layer structure "+Utils.intArray2String(this.inSignature,",","\n"));
     }
 
-    @Override
-    public void pushForward(Data data) {
-        checkDataConsistency(data);
-        inputData  = data.getInput().reshape(new int[]{1,flattenedInDim});
-        super.activations =inputData.mmul(this.weights);
-        super.activations.addi(biases);
-    }
 
-    private void checkDataConsistency(Data data){
-        int[] dataSignature = data.getInput().shape();
-        int dim = 1;
-        for (int n=0;n<dataSignature.length;n++) dim*=dataSignature[n];
-
-        if (dim!=flattenedInDim) Utils.errorMsg("Incompatible data in Linear layer.\n Received data signature: "+Utils.intArray2String(dataSignature,",","[]")+"\n, for the Layer structure "+Utils.intArray2String(this.inSignature,",","\n"));
-    }
 
     @Override
     public void pullBack(INDArray errors) {

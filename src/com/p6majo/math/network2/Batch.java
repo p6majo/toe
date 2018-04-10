@@ -21,6 +21,7 @@ import java.util.function.UnaryOperator;
 public class Batch {
 
     private INDArray batchInput;
+    private INDArray activations;
     private INDArray batchExpectation;
     private int batchSize;
 
@@ -72,6 +73,7 @@ public class Batch {
         for (int n=0;n<shape.length;n++) newShape[n+1]=shape[n];
 
         batchInput = inputStack.reshape(newShape);
+        this.activations = batchInput.dup();
 
         shape = expectations[0].shape();
         newShape = new int[shape.length+1];
@@ -81,12 +83,16 @@ public class Batch {
         batchExpectation = expectationStack.reshape(newShape);
     }
 
+    public void setActivations(INDArray activations){
+        this.activations = activations;
+    }
+
     public INDArray getBatchExpectation(){
         return this.batchExpectation;
     }
 
-    public INDArray getBatchInput() {
-        return batchInput;
+    public INDArray getActivations() {
+        return activations;
     }
 
     public String toString(){

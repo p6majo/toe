@@ -10,8 +10,6 @@ import org.nd4j.linalg.factory.Nd4j;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
-
 public class SigmoidLayerTest {
 
     private Batch batch;
@@ -56,9 +54,6 @@ public class SigmoidLayerTest {
     @Test
     public void pushForward() {
         SigmoidLayer sigmoid = new SigmoidLayer(inputShape);
-        System.out.println("Single data: "+data);
-        sigmoid.pushForward(data);
-        System.out.println("Single data passed through sigmoid Layer: "+sigmoid.getActivations());
 
         System.out.println("Batch of data: "+batch);
         sigmoid.pushForward(batch);
@@ -74,15 +69,11 @@ public class SigmoidLayerTest {
         System.out.println("\n\n now back pass test: \n");
         SigmoidLayer sigmoid = new SigmoidLayer(inputShape);
 
-        System.out.println("Single data: "+data);
-        sigmoid.pushForward(data);
-        System.out.println("Single data passed through sigmoid Layer: "+sigmoid.getActivations());
-        System.out.println("Check that the input data is unchanged: "+data+"\n\n");
 
 
         System.out.println("Now test backpass of errors: "+error);
         sigmoid.pullBack(error);
-        System.out.println("pull back of errors gives: "+sigmoid.getErrors());
+        System.out.println("pull back of errors gives: "+sigmoid.getErrorsForPreviousLayer());
         System.out.println("make sure that the activations are not overwritten: "+sigmoid.getActivations());
         System.out.println("make sure that the initial errors are not overwritten: "+error);
 

@@ -26,7 +26,6 @@ public abstract class Layer  {
     protected final int[] outSignature;
 
     public abstract void pushForward(Batch batch);
-    public abstract void pushForward(Data data);
     public abstract void pullBack(INDArray errors);
     public abstract void learn(float learningRate);
 
@@ -44,8 +43,8 @@ public abstract class Layer  {
         return this.activations;
     }
 
-    public INDArray getErrors(){
-        return this.errors;
+    public INDArray getErrorsForPreviousLayer(){
+        return this.errorsForPreviousLayer;
     }
 
     public int getLayerIndex(){

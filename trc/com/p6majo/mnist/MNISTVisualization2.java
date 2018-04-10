@@ -1,27 +1,33 @@
 package com.p6majo.mnist;
 
-import com.p6majo.math.network.*;
+import com.p6majo.math.network2.Data;
+import com.p6majo.math.network2.Network;
+import com.p6majo.math.network2.layers.CrossEntropyLayer;
+import com.p6majo.math.network2.layers.LinearLayer;
+import com.p6majo.math.network2.layers.SigmoidLayer;
+import org.nd4j.linalg.factory.Nd4j;
 
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-public class MNISTVisualization {
+public class MNISTVisualization2 {
 
-    private static DataList dataList= new DataList();
-    private static DataList testList= new DataList();
+    private static Data[] dataList;
+    private static Data[] testList;
 
 
     private static Function<int[][],Data> converter = new Function<int[][], Data>() {
         @Override
         public Data apply(int[][] ints) {
-            Double[] input = new Double[28*28];
+            float[][] input = new float[28][28];
             for (int width=0;width<28;width++)
                 for (int height=0;height<28;height++)
-                    input[height+width*28]=(double) ints[width][height]/255.;
-            Double[] expectations = new Double[10];
-            Data data = new Data(input,expectations);
+                    input[width][height]=(float) (ints[width][height]/255.);
+            float[] expectations = new float[10];
+            Data data = new Data(Nd4j.create(input),Nd4j.create(expectations));
             return data;
         }
     };
@@ -44,9 +50,9 @@ public class MNISTVisualization {
 
         start = System.currentTimeMillis();
         System.out.println("Now conversion into TrainingsData ...");
-        dataList.addAll(images.stream().limit(10000).map(converter).collect(Collectors.toList()));
+        dataList= images.stream().map(converter).toArray(Data[]::new);
         //add the expectations
-        IntStream.range(0,dataList.size()).boxed().forEach(i->dataList.get(i).setExpectation(labels[i]));
+        IntStream.range(0,dataList.length).boxed().forEach(i->dataList[i].setExpectationToUnity(labels[i]));
         System.out.println("Time for conversion: "+(System.currentTimeMillis()-start)+" ms.");
 
         LABEL_FILE = "/home/p6majo/workbase/toe/src/com/p6majo/mnist/t10k-labels-idx1-ubyte";
@@ -61,23 +67,40 @@ public class MNISTVisualization {
 
         start = System.currentTimeMillis();
         System.out.println("Now conversion into TrainingsData ...");
-        testList.addAll(images.stream().map(converter).collect(Collectors.toList()));
+        testList=images.stream().map(converter).toArray(Data[]::new);
         //add the expectations
-        IntStream.range(0,testList.size()).boxed().forEach(i->testList.get(i).setExpectation(labels2[i]));
+        IntStream.range(0,testList.length).boxed().forEach(i->testList[i].setExpectationToUnity(labels2[i]));
         System.out.println("Time for conversion: "+(System.currentTimeMillis()-start)+" ms.");
 
     }
 
 
     public static void main(String[] args){
-       Network network = new Network(new int[]{28*28,40,20,10},Network.Seed.RANDOM,Network.sigmoid,Network.crossEntropy,true);
+        Network network = new Network(false);
+
+        LinearLayer ll = new LinearLayer(new int[]{28,28},16);
+        network.addLayer(ll);
+
+        SigmoidLayer sig = new SigmoidLayer(new int[]{16});
+        network.addLayer(sig);
+
+        LinearLayer ll2 = new LinearLayer(new int[]{16},10);
+        network.addLayer(ll2);
+
+        SigmoidLayer sig2 = new SigmoidLayer(new int[]{10});
+        network.addLayer(sig2);
+
+        CrossEntropyLayer cel = new CrossEntropyLayer(new int[]{10});
+        network.addLayer(cel);
 
         generateData();
+        System.out.println(testList[0].toString());
 
+        long start = System.currentTimeMillis();
 
-       long start = System.currentTimeMillis();
-        network.stochasticGradientDescent(dataList,testList, 1,0.01,8);
-       network.stochasticGradientDescent(dataList,testList, 1,0.001,400);
+        network.train(dataList,10);
+        //network.stochasticGradientDescent(dataList,testList, 1,0.01,8);
+        //network.stochasticGradientDescent(dataList,testList, 1,0.001,400);
 
        /*
        int batchSize = 100;
