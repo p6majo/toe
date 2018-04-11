@@ -83,6 +83,15 @@ public class Batch {
         batchExpectation = expectationStack.reshape(newShape);
     }
 
+    /**
+     * The batch is used to store intermediate values of the network, while it is passed along through the layers
+     * This method resets the batch to its initial state
+     *
+     */
+    public void resetBatch(){
+        this.activations=this.batchInput.dup();
+    }
+
     public void setActivations(INDArray activations){
         this.activations = activations;
     }

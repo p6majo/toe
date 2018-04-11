@@ -13,6 +13,7 @@ public class SigmoidLayer extends Layer {
     public SigmoidLayer(int[] signature) {
         //the layer doen't change the data structure
         super(signature, signature);
+        super.name = "Sigmoid Layer";
     }
 
     @Override
@@ -24,6 +25,8 @@ public class SigmoidLayer extends Layer {
 
     @Override
     public void pullBack(INDArray errors) {
+        //set errors for this layer
+        super.errors=errors.dup();
         //evaluate the derivative of the sigmoid of the activations and multiply it with the incoming error term
         //since this layer is an elementwise scalar function the structure term of the errors must be the same as
         //the structure term of the activations

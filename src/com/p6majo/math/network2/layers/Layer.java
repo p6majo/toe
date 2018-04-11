@@ -17,6 +17,7 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 public abstract class Layer  {
 
     protected int layerIndex=0;
+    protected String name ="";
 
     protected INDArray activations;
     protected INDArray errors;
@@ -47,12 +48,20 @@ public abstract class Layer  {
         return this.errorsForPreviousLayer;
     }
 
+    public INDArray getErrors(){
+        return this.errors;
+    }
+
     public int getLayerIndex(){
         return this.layerIndex;
     }
 
     public void setLayerIndex(int layerIndex){
         this.layerIndex = layerIndex;
+    }
+
+    public String toShortString(){
+        return this.name;
     }
 
 }

@@ -2,6 +2,8 @@ package com.p6majo.math.network2.layers;
 
 import com.p6majo.math.network2.Batch;
 import com.p6majo.math.network2.Data;
+import com.p6majo.math.network2.Network;
+import com.p6majo.math.network2.TestResult;
 import com.p6majo.math.utils.Utils;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.impl.accum.Sum;
@@ -10,6 +12,7 @@ import org.nd4j.linalg.api.ops.impl.transforms.Sigmoid;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.indexing.BooleanIndexing;
 import org.nd4j.linalg.indexing.conditions.Conditions;
+import org.nd4j.linalg.indexing.functions.Value;
 
 public class CrossEntropyLayer extends LossLayer {
 
@@ -19,6 +22,7 @@ public class CrossEntropyLayer extends LossLayer {
     public CrossEntropyLayer(int[] signature) {
         //the layer doen't change the data structure
         super(signature);
+        super.name = "Cross Entropy Layer";
     }
 
     @Override
@@ -46,6 +50,9 @@ public class CrossEntropyLayer extends LossLayer {
 
     @Override
     public void pullBack(INDArray errors) {
+        //set errors for this layer
+        super.errors=errors.dup();
+
         super.errorsForPreviousLayer = this.getLossGradient().mul(errors);
     }
 
@@ -66,12 +73,40 @@ public class CrossEntropyLayer extends LossLayer {
        return this.expectations.sub(1).div(this.activations.sub(1)).sub(this.expectations.div(this.activations));
     }
 
+    @Override
+    public TestResult getTestResult(Network.Test test) {
+        TestResult testResult = new TestResult(this.batchSize);
+
+        //select highest probability state
+        //set all maximal values for each row to one
+        for (int b = 0; b < batchSize; b++) {
+            float max = Nd4j.max(this.activations.getRow(b)).getFloat(0,0);
+            testResult.setProbability(b,max);
+            BooleanIndexing.applyWhere(this.activations.getRow(b),Conditions.equals(max),new Value(1f));
+        }
+        //set all other values to zero
+        BooleanIndexing.applyWhere(this.activations, Conditions.lessThan(1),new Value(0f));
+
+        //Calculate difference between activations and expectations
+        INDArray diff = this.activations.sub(this.expectations);
+        //scan through rows to detect deviations
+        for (int b = 0; b < batchSize; b++) {
+            float max = Nd4j.max(diff.getRow(b)).getFloat(0,0);
+            if (Math.abs(max)>0.1f)
+                testResult.addFailure(b);
+
+        }
+
+        return testResult;
+    }
+
 
     @Override
     public void learn(float learningRate) {
         //nothing to do in this layer since it is a passive layer
         //there are not parameters to be adjusted
     }
+
 
     public String toString() {
         StringBuilder out = new StringBuilder();

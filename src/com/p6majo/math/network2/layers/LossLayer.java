@@ -2,6 +2,8 @@ package com.p6majo.math.network2.layers;
 
 import com.p6majo.math.network2.Batch;
 import com.p6majo.math.network2.Data;
+import com.p6majo.math.network2.Network;
+import com.p6majo.math.network2.TestResult;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 /**
@@ -24,6 +26,8 @@ public abstract class LossLayer extends Layer{
     public abstract float getLoss();
   
     public abstract INDArray getLossGradient();
+
+    public abstract TestResult getTestResult(Network.Test test);
 
 
 

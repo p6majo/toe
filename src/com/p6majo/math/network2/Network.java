@@ -2,12 +2,16 @@ package com.p6majo.math.network2;
 
 
 import com.p6majo.math.network.DataList;
-import com.p6majo.math.network2.layers.CrossEntropyLayer;
-import com.p6majo.math.network2.layers.Layer;
+import com.p6majo.math.network2.layers.*;
+import com.p6majo.math.utils.Utils;
+import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static com.p6majo.math.network2.Network.Test.MAX_PROBABILITY;
 
 /**
  * A network is a List of {@link Layer}
@@ -16,6 +20,9 @@ import java.util.List;
  * @version 2.0
  * @data 10.4.18
  *
+ * TODO Check whether setup is consistent,i.e. layer dimensions match, loss layer at the end, at least one dynamic layer, etc.
+ * TODO find bottle necks, performance is less than expected
+ *
  */
 public class Network {
 
@@ -23,8 +30,10 @@ public class Network {
      * different flags to determine the initial values of the neurons
      */
     public static enum Seed {NO_SEED, RANDOM, NO_BIAS, NO_BIAS_UNITY};
+    public static enum Test {MAX_PROBABILITY};
 
     private final List<Layer> layers;
+    //private final List<INDArray> trainableParameters;
 
     /**
      *
@@ -32,6 +41,7 @@ public class Network {
     public Network(boolean visual) {
 
         layers = new ArrayList<Layer>();
+        //trainableParameters= new ArrayList<INDArray>();
 
         if (visual) {
             //System.out.println("init visualizer");
@@ -43,38 +53,150 @@ public class Network {
     }
 
     public void addLayer(Layer layer){
+        int index = this.layers.size();
+        layer.setLayerIndex(index);
         this.layers.add(layer);
+
+        /*
+        if (layer instanceof DynamicLayer){
+            this.trainableParameters.addAll(((DynamicLayer) layer).getTrainableParameters());
+        }
+        */
     }
 
+
+    /*
+    public void addTrainableParameter(List<INDArray> params){
+        this.trainableParameters.addAll(params);
+    }*/
 
     public void train(Data[] data,int batchSize){
         Data[] batchData = new Data[batchSize];
         for (int i=0;i+batchSize<data.length;i+=batchSize){
             batchData = Arrays.copyOfRange(data,i,i+batchSize);
             Batch batch = new Batch(batchData);
-            System.out.println("next batch");
+            //System.out.println("next batch");
             pushforward(batch);
             pullBack();
             learn();
-
+            if (i%1000==0) System.out.println("batch " + i);
         }
     }
 
-    public void pushforward(Batch batch){
+    private int getFullDimension(int[]shape){
+        int dim = 1;
+        for (int d=0;d<shape.length;d++) dim*=shape[d];
+        return dim;
+    }
+
+    public String gradientCheck(Batch batch,int layer,int param){
+        //TODO only take first batch element, if many are provided
+
+        DynamicLayer dynLayer = null;
+        if (this.layers.get(layer) instanceof DynamicLayer){
+            dynLayer = (DynamicLayer) this.layers.get(layer);
+
+            float epsilon = 1.e-3f;
+            List<INDArray> trainableParams = dynLayer.getTrainableParameters();
+
+            INDArray params  = trainableParams.get(param);
+
+            int[] shape = params.shape();
+            int dim = getFullDimension(shape);
+
+            LossLayer lossLayer = (LossLayer) (this.layers.get(layers.size() - 1));
+
+            StringBuilder out = new StringBuilder();
+
+            out.append("calculated gradients:\n[");
+
+            float[] gradient = new float[dim];
+            for (int i=0;i<dim;i++) {
+                float[] perturbationData = new float[dim];
+                perturbationData[i] = epsilon;
+
+                INDArray perturbations = Nd4j.create(perturbationData, params.shape());
+
+                batch.resetBatch();
+                pushforward(batch);
+
+
+                float loss = lossLayer.getLoss();
+
+                //shift
+                params.addi(perturbations);
+
+                batch.resetBatch();
+                pushforward(batch);
+
+                float loss2 = lossLayer.getLoss();
+                gradient[i] = (loss2 - loss) / epsilon;
+                String gradientString = String.format("%.2f",gradient[i]);
+
+                out.append(gradientString + " ");
+                if ( (i+1)%16==0) out.append("\n");
+                //undo shift
+                params.subi(perturbations);
+            }
+            out.append("]\n");
+
+            //calculate gradients
+            pullBack();
+            String errors = dynLayer.getDetailedErrors();
+
+            INDArray weightErrors = ((LinearLayer) dynLayer).getWeightCorrections();
+            INDArray numGradient = Nd4j.create(gradient,weightErrors.shape());
+
+            INDArray diff = weightErrors.sub(numGradient);
+            float maxDiff = Nd4j.max(diff).getFloat(0,0);
+            float minDiff =Nd4j.min(diff).getFloat(0,0);
+            out.append("Pullback of errors:\n"+errors+"\nmaximum deviation: "+maxDiff+" or "+minDiff);
+
+            return out.toString();
+
+
+        }
+        else Utils.errorMsg("The provided layer index "+layer+" does not correspond to a dynamic layer.\n It belongs to "+this.layers.get(layer).toShortString()+" instead.");
+        return null;
+    }
+
+    public TestResult test(Data[] data){
+        return test(data,data.length);
+    }
+
+    public TestResult test(Data[] data, int numberOfTests){
+        List<Integer> intList = IntStream.range(0,data.length).boxed().collect(Collectors.toList());
+        Collections.shuffle(intList);
+
+        //convert random sample into batch
+        Data[] dataTest = new Data[numberOfTests];
+        for (int n =0;n<numberOfTests;n++) dataTest[n]=data[intList.get(n)];
+        Batch testBatch = new Batch(dataTest);
+
+        pushforward(testBatch);
+        //get activations of the last layer and compare with the expectations
+        LossLayer lastLayer =  (LossLayer) layers.get(layers.size()-1);
+        return lastLayer.getTestResult(MAX_PROBABILITY);
+    }
+
+    private void pushforward(Batch batch){
         for (int l=0;l<layers.size();l++){
             layers.get(l).pushForward(batch);
         }
     }
 
-    public void pullBack(){
+    private void pullBack(){
         CrossEntropyLayer last = (CrossEntropyLayer) layers.get(layers.size()-1);
+        //System.out.println("Loss: "+last.getLoss());
         last.pullBack();
         for (int l=layers.size()-2;l>-1;l--)
             layers.get(l).pullBack(layers.get(l+1).getErrorsForPreviousLayer());
     }
 
-    public void learn(){
-        for (int l =0;l>layers.size();l++) layers.get(l).learn(0.01f);
+    private void learn(){
+
+        for (int l =0;l<layers.size();l++)
+            layers.get(l).learn(0.01f);
     }
 
  /**

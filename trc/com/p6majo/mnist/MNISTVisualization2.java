@@ -1,7 +1,9 @@
 package com.p6majo.mnist;
 
+import com.p6majo.math.network2.Batch;
 import com.p6majo.math.network2.Data;
 import com.p6majo.math.network2.Network;
+import com.p6majo.math.network2.TestResult;
 import com.p6majo.math.network2.layers.CrossEntropyLayer;
 import com.p6majo.math.network2.layers.LinearLayer;
 import com.p6majo.math.network2.layers.SigmoidLayer;
@@ -76,6 +78,8 @@ public class MNISTVisualization2 {
 
 
     public static void main(String[] args){
+        long start = System.currentTimeMillis();
+
         Network network = new Network(false);
 
         LinearLayer ll = new LinearLayer(new int[]{28,28},16);
@@ -96,9 +100,23 @@ public class MNISTVisualization2 {
         generateData();
         System.out.println(testList[0].toString());
 
-        long start = System.currentTimeMillis();
 
-        network.train(dataList,10);
+        Batch batch = new Batch(testList[0]);
+
+        //System.out.println(network.gradientCheck(batch, 0, 0));
+
+
+
+        TestResult test = network.test(testList);
+        System.out.println("Success rate before: "+test.getSuccessRate());
+
+
+
+        network.train(dataList,100);
+        test = network.test(testList);
+        System.out.println("Success rate after: "+test.getSuccessRate());
+
+
         //network.stochasticGradientDescent(dataList,testList, 1,0.01,8);
         //network.stochasticGradientDescent(dataList,testList, 1,0.001,400);
 
@@ -112,6 +130,7 @@ public class MNISTVisualization2 {
         network.stochasticGradientDescent(dataList,testList, batchSize,learningRate/16,10);
         network.stochasticGradientDescent(dataList,testList, batchSize,learningRate/32,10);
         */
+
        System.out.println("Time: "+(System.currentTimeMillis()-start));
 
     }

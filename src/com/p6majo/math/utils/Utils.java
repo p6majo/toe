@@ -104,14 +104,33 @@ public class Utils {
     }
 
     public static String intArray2String(int[] array,String sep, String bracket){
-        String output = "";
+        StringBuilder output = new StringBuilder();
+        String prefix = "";
         if (array.length>0){
-            if (bracket.length()>1) output+=bracket.substring(0,1);
-            for (int i=0;i<array.length;i++) output+=array[i]+sep;
-            output=output.substring(0,output.length()-1);
-            if (bracket.length()>1) output+=bracket.substring(1,2);
+            if (bracket.length()>1) output.append(bracket.substring(0,1));
+            for (int i=0;i<array.length;i++) {
+                output.append(prefix);
+                prefix = sep;
+                output.append(array[i]);
+            }
+            if (bracket.length()>1) output.append(bracket.substring(1,2));
         }
-        return output;
+        return output.toString();
+    }
+
+    public static String doubleArray2String(double[] array,String sep, String bracket){
+        StringBuilder output = new StringBuilder();
+        String prefix = "";
+        if (array.length>0){
+            if (bracket.length()>1) output.append(bracket.substring(0,1));
+            for (int i=0;i<array.length;i++) {
+                output.append(prefix);
+                prefix = sep;
+                output.append(array[i]);
+            }
+            if (bracket.length()>1) output.append(bracket.substring(1,2));
+        }
+        return output.toString();
     }
 
 }
