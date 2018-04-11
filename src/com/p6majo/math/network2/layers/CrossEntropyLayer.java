@@ -32,6 +32,8 @@ public class CrossEntropyLayer extends LossLayer {
         super.errors = Nd4j.ones(batch.getActivations().shape());
         this.batchSize = batch.getActivations().shape()[0];
         regularize();
+        double rnd = Math.random();
+       // if (rnd>0.999) System.out.println(activations);
     }
 
    private void regularize(){

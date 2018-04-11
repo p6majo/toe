@@ -71,7 +71,17 @@ public class Network {
     }*/
 
     public void train(Data[] data,int batchSize){
-        Data[] batchData = new Data[batchSize];
+
+        //only one piece of data
+
+        Batch batch = new Batch(data[0]);
+        //System.out.println("next batch");
+        pushforward(batch);
+        pullBack();
+        learn();
+
+        /*
+         Data[] batchData = new Data[batchSize];
         for (int i=0;i+batchSize<data.length;i+=batchSize){
             batchData = Arrays.copyOfRange(data,i,i+batchSize);
             Batch batch = new Batch(batchData);
@@ -80,7 +90,8 @@ public class Network {
             pullBack();
             learn();
             if (i%1000==0) System.out.println("batch " + i);
-        }
+        }*/
+
     }
 
     private int getFullDimension(int[]shape){
@@ -182,6 +193,7 @@ public class Network {
     private void pushforward(Batch batch){
         for (int l=0;l<layers.size();l++){
             layers.get(l).pushForward(batch);
+            System.out.println(Utils.intArray2String(layers.get(l).getActivations().shape(),",","[]"));
         }
     }
 
@@ -196,7 +208,7 @@ public class Network {
     private void learn(){
 
         for (int l =0;l<layers.size();l++)
-            layers.get(l).learn(0.01f);
+            layers.get(l).learn(0.001f);
     }
 
  /**

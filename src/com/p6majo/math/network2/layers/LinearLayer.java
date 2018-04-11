@@ -39,8 +39,8 @@ public class LinearLayer extends DynamicLayer {
 
         //according to the transformation out_i=w_{ij} in_j+b_i the index for the output activations is the row index and the
         //index for the incoming activations is the column index
-        weights = Nd4j.rand(new int[]{flattenedInDim, flattenedOutDim}, new NormalDistribution(0, 2));
-        biases = Nd4j.rand(new int[]{flattenedOutDim}, new NormalDistribution(0, 2));
+        weights = Nd4j.rand(new int[]{flattenedInDim, flattenedOutDim}, new NormalDistribution(0, 1));
+        biases = Nd4j.rand(new int[]{flattenedOutDim}, new NormalDistribution(0, 1));
 
         super.trainableParameters.add(weights);
         super.trainableParameters.add(biases);
@@ -133,7 +133,8 @@ public class LinearLayer extends DynamicLayer {
     public void learn(float learningRate) {
         INDArray correction;
         this.biases.subi(this.errors.sum(0).mul(learningRate / batchSize)); //adjust biases
-
+        double rnd = Math.random();
+        //if (rnd>0.999) System.out.println(this.biases);
         correction = getWeightCorrections();
         this.weights.subi(correction.mul(learningRate / batchSize));//adjust weights
 

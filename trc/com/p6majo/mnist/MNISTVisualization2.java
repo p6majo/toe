@@ -82,14 +82,16 @@ public class MNISTVisualization2 {
 
         Network network = new Network(false);
 
-        LinearLayer ll = new LinearLayer(new int[]{28,28},16);
+        LinearLayer ll = new LinearLayer(new int[]{28,28},10);
         network.addLayer(ll);
 
+        /*
         SigmoidLayer sig = new SigmoidLayer(new int[]{16});
         network.addLayer(sig);
 
         LinearLayer ll2 = new LinearLayer(new int[]{16},10);
         network.addLayer(ll2);
+        */
 
         SigmoidLayer sig2 = new SigmoidLayer(new int[]{10});
         network.addLayer(sig2);
@@ -98,7 +100,7 @@ public class MNISTVisualization2 {
         network.addLayer(cel);
 
         generateData();
-        System.out.println(testList[0].toString());
+       // System.out.println(testList[0].toString());
 
 
         Batch batch = new Batch(testList[0]);
@@ -112,7 +114,7 @@ public class MNISTVisualization2 {
 
 
 
-        network.train(dataList,100);
+        network.train(dataList,1);
         test = network.test(testList);
         System.out.println("Success rate after: "+test.getSuccessRate());
 
