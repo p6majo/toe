@@ -23,6 +23,10 @@ public abstract class LossLayer extends Layer{
         super(inSignature, inSignature);
     }
 
+    public void pullBack(){
+        pullBack(this.errors);
+    }
+
     public abstract float getLoss();
   
     public abstract INDArray getLossGradient();

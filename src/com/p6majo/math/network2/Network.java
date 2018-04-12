@@ -29,7 +29,7 @@ public class Network {
      /**
      * different flags to determine the initial values of the neurons
      */
-    public static enum Seed {NO_SEED, RANDOM, NO_BIAS, NO_BIAS_UNITY};
+    public static enum Seed {NO_SEED, RANDOM, NO_BIAS, NO_BIAS_UNITY,ALL_UNITY};
     public static enum Test {MAX_PROBABILITY};
 
     private final List<Layer> layers;
@@ -70,27 +70,36 @@ public class Network {
         this.trainableParameters.addAll(params);
     }*/
 
-    public void train(Data[] data,int batchSize){
-
-        //only one piece of data
-
-        Batch batch = new Batch(data[0]);
-        //System.out.println("next batch");
-        pushforward(batch);
-        pullBack();
-        learn();
-
+    public void train(Data[] data,Data[] test,int batchSize){
         /*
-         Data[] batchData = new Data[batchSize];
-        for (int i=0;i+batchSize<data.length;i+=batchSize){
+        //Gradient check
+        Batch batch = new Batch(data[0]);
+        System.out.println(this.gradientCheck(batch, 0, 1));
+        System.out.println(layers.get(0).getErrors());
+        System.out.println("Loss gradient: "+((LossLayer) layers.get(2)).getLossGradient());
+        System.out.println("Activations of sigmoid: "+layers.get(1).getActivations());
+        */
+        LossLayer lossLayer = (LossLayer) layers.get(layers.size()-1);
+
+        Data[] batchData = new Data[batchSize];
+        for (int i=0;i+batchSize<=data.length;i+=batchSize){
             batchData = Arrays.copyOfRange(data,i,i+batchSize);
             Batch batch = new Batch(batchData);
             //System.out.println("next batch");
             pushforward(batch);
+            System.out.println("Activations after pushforward: "+batch.getActivations());
             pullBack();
+            System.out.println("Corrections after pull back: "+((DynamicLayer) layers.get(0)).getDetailedErrors());
             learn();
-            if (i%1000==0) System.out.println("batch " + i);
-        }*/
+
+            /*
+            if (i%1==0){
+                System.out.println("batch " + i+" "+test(test,test.length).getSuccessRate()+" "+lossLayer.getLoss());
+            }
+            */
+
+        }
+
 
     }
 
@@ -155,17 +164,17 @@ public class Network {
             pullBack();
             String errors = dynLayer.getDetailedErrors();
 
-            INDArray weightErrors = ((LinearLayer) dynLayer).getWeightCorrections();
-            INDArray numGradient = Nd4j.create(gradient,weightErrors.shape());
+            if (param==0) {
+                INDArray weightErrors = ((LinearLayer) dynLayer).getWeightCorrections();
+                INDArray numGradient = Nd4j.create(gradient, weightErrors.shape());
 
-            INDArray diff = weightErrors.sub(numGradient);
-            float maxDiff = Nd4j.max(diff).getFloat(0,0);
-            float minDiff =Nd4j.min(diff).getFloat(0,0);
-            out.append("Pullback of errors:\n"+errors+"\nmaximum deviation: "+maxDiff+" or "+minDiff);
+                INDArray diff = weightErrors.sub(numGradient);
+                float maxDiff = Nd4j.max(diff).getFloat(0, 0);
+                float minDiff = Nd4j.min(diff).getFloat(0, 0);
+                out.append("Pullback of errors:\n" + errors + "\nmaximum deviation: " + maxDiff + " or " + minDiff);
+            }
 
             return out.toString();
-
-
         }
         else Utils.errorMsg("The provided layer index "+layer+" does not correspond to a dynamic layer.\n It belongs to "+this.layers.get(layer).toShortString()+" instead.");
         return null;
@@ -191,14 +200,15 @@ public class Network {
     }
 
     private void pushforward(Batch batch){
+       // System.out.println("input: "+batch.getActivations());
         for (int l=0;l<layers.size();l++){
             layers.get(l).pushForward(batch);
-            System.out.println(Utils.intArray2String(layers.get(l).getActivations().shape(),",","[]"));
+           // System.out.println("after layer "+l+": "+layers.get(l).getActivations());
         }
     }
 
     private void pullBack(){
-        CrossEntropyLayer last = (CrossEntropyLayer) layers.get(layers.size()-1);
+        LossLayer last = (LossLayer) layers.get(layers.size()-1);
         //System.out.println("Loss: "+last.getLoss());
         last.pullBack();
         for (int l=layers.size()-2;l>-1;l--)
@@ -208,7 +218,7 @@ public class Network {
     private void learn(){
 
         for (int l =0;l<layers.size();l++)
-            layers.get(l).learn(0.001f);
+            layers.get(l).learn(0.1f);
     }
 
  /**

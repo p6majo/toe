@@ -1,6 +1,7 @@
 package com.p6majo.math.network2.layers;
 
 import com.p6majo.math.network2.Batch;
+import com.p6majo.math.network2.Network;
 import com.p6majo.math.utils.Utils;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.rng.distribution.impl.NormalDistribution;
@@ -30,7 +31,8 @@ public class LinearLayer extends DynamicLayer {
 
     private int batchSize;
 
-    public LinearLayer(int[] inSignature, int outSignature) {
+
+    public LinearLayer(int[] inSignature,int outSignature, Network.Seed seed){
         super(inSignature, new int[]{outSignature});
         super.name = "Linear Layer";
 
@@ -39,11 +41,26 @@ public class LinearLayer extends DynamicLayer {
 
         //according to the transformation out_i=w_{ij} in_j+b_i the index for the output activations is the row index and the
         //index for the incoming activations is the column index
-        weights = Nd4j.rand(new int[]{flattenedInDim, flattenedOutDim}, new NormalDistribution(0, 1));
-        biases = Nd4j.rand(new int[]{flattenedOutDim}, new NormalDistribution(0, 1));
-
+        switch(seed) {
+            case ALL_UNITY:
+                weights = Nd4j.ones(new int[]{flattenedInDim, flattenedOutDim});
+                biases = Nd4j.ones(new int[]{1,flattenedOutDim});
+                break;
+            case NO_BIAS:
+                weights = Nd4j.rand(new int[]{flattenedInDim, flattenedOutDim}, new NormalDistribution(0, 1));
+                biases = Nd4j.zeros(new int[]{1,flattenedOutDim});
+                break;
+            default:
+                weights = Nd4j.rand(new int[]{flattenedInDim, flattenedOutDim}, new NormalDistribution(0, 1));
+                biases = Nd4j.rand(new int[]{1,flattenedOutDim}, new NormalDistribution(0, 1));
+                break;
+        }
         super.trainableParameters.add(weights);
         super.trainableParameters.add(biases);
+    }
+
+    public LinearLayer(int[] inSignature, int outSignature) {
+       this(inSignature,outSignature, Network.Seed.RANDOM);
     }
 
     private int getBatchSizeFromBatchShape(int[] shape) {
@@ -137,6 +154,8 @@ public class LinearLayer extends DynamicLayer {
         //if (rnd>0.999) System.out.println(this.biases);
         correction = getWeightCorrections();
         this.weights.subi(correction.mul(learningRate / batchSize));//adjust weights
+        //if (layerIndex==2 && rnd>0.999) System.out.println(this.weights);
+
 
     }
 

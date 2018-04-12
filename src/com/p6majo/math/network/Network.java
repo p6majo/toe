@@ -297,7 +297,8 @@ public class Network {
                                 .stream()
                                 .mapToDouble(n -> n.error * n.weights[m.index])
                                 .sum();
-                        error *= this.sf.derivative(this.sf.inverse(m.value));
+                        error *= (1.-m.value)*m.value;
+                        //error*= this.sf.derivative(this.sf.inverse(m.value));
                         m.error += error;//accumulation of errors
                     });
         }

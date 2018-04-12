@@ -5,10 +5,10 @@ import com.p6majo.math.network2.Data;
 import com.p6majo.math.utils.Utils;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.impl.transforms.Sigmoid;
+import org.nd4j.linalg.api.ops.impl.transforms.SigmoidDerivative;
 import org.nd4j.linalg.factory.Nd4j;
 
 public class SigmoidLayer extends Layer {
-
 
     public SigmoidLayer(int[] signature) {
         //the layer doen't change the data structure
@@ -18,7 +18,7 @@ public class SigmoidLayer extends Layer {
 
     @Override
     public void pushForward(Batch batch) {
-        //the activations of the batch get overwritten
+        //the activations of the batch get overwritten by the Executioner
         super.activations = Nd4j.getExecutioner().execAndReturn(new Sigmoid(batch.getActivations()));
     }
 
@@ -33,10 +33,12 @@ public class SigmoidLayer extends Layer {
         //sig'=(1-sig)*sig
         //store sig(error) as intermediate values to save computational power
 
-        INDArray factor = super.activations.sub(1).mul(-1);
-        factor = factor.mul(super.activations);
+       INDArray factor = activations.sub(1).mul(-1);
+       factor.muli(activations);
+       super.errorsForPreviousLayer = errors.mul(factor);
+       int i = 0;
+       i++;
 
-        super.errorsForPreviousLayer = errors.mul(factor);
     }
 
     @Override

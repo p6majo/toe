@@ -1,55 +1,48 @@
 package com.p6majo.math.network2.layers;
 
 import com.p6majo.math.network2.Batch;
-import com.p6majo.math.network2.Data;
 import com.p6majo.math.network2.Network;
 import com.p6majo.math.network2.TestResult;
 import com.p6majo.math.utils.Utils;
+import org.lwjgl.system.CallbackI;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.api.ops.impl.accum.Sum;
 import org.nd4j.linalg.api.ops.impl.transforms.Log;
-import org.nd4j.linalg.api.ops.impl.transforms.Sigmoid;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.indexing.BooleanIndexing;
 import org.nd4j.linalg.indexing.conditions.Conditions;
 import org.nd4j.linalg.indexing.functions.Value;
 
-public class CrossEntropyLayer extends LossLayer {
+public class L2Layer extends LossLayer {
 
     private INDArray expectations ;
     private int batchSize;
 
-    public CrossEntropyLayer(int[] signature) {
+    public L2Layer(int[] signature) {
         //the layer doen't change the data structure
         super(signature);
-        super.name = "Cross Entropy Layer";
+        super.name = "L2 Loss Layer";
     }
 
     @Override
     public void pushForward(Batch batch) {
         super.activations = batch.getActivations();
         this.expectations = batch.getBatchExpectation();
+        //System.out.println("expectations: "+this.expectations);
         super.errors = Nd4j.ones(batch.getActivations().shape());
         this.batchSize = batch.getActivations().shape()[0];
-        regularize();
         double rnd = Math.random();
        // if (rnd>0.999) System.out.println(activations);
     }
 
-   private void regularize(){
-        float EPS = 0.0000001f;
-        BooleanIndexing.replaceWhere(expectations,EPS, Conditions.epsEquals(0));
-        BooleanIndexing.replaceWhere(expectations,1-EPS,Conditions.epsEquals(1));
-
-        BooleanIndexing.replaceWhere(activations,EPS, Conditions.epsEquals(0));
-        BooleanIndexing.replaceWhere(activations,1-EPS,Conditions.epsEquals(1));
-
+    public void pullBack(){
+        this.pullBack(this.errors);
     }
 
     @Override
     public void pullBack(INDArray errors) {
         //set errors for this layer
         super.errors=errors.dup();
+       // System.out.println("Gradient: "+this.getLossGradient());
         super.errorsForPreviousLayer = this.getLossGradient().mul(errors);
     }
 
@@ -57,17 +50,17 @@ public class CrossEntropyLayer extends LossLayer {
     public float getLoss() {
         //cross entropy formula
 
-        //attention! Executioners overwrite the initial data
-        INDArray lna = Nd4j.getExecutioner().execAndReturn(new Log(this.activations.dup()));
-        INDArray ln1ma =Nd4j.getExecutioner().execAndReturn(new Log(this.activations.dup().sub(1).mul(-1)));
-
-       return (expectations.mul(lna).add(ln1ma.mul(expectations.sub(1).mul(-1)))).mul(-1).sumNumber().floatValue()/batchSize;
+       INDArray lossTmp = this.activations.sub(this.expectations);
+       lossTmp.muli(lossTmp);
+       float loss = Nd4j.sum(lossTmp).getFloat(0,0)/batchSize;
+       //System.out.println("loss: "+lossTensor+" "+loss);
+       return loss;
     }
 
 
     @Override
     public INDArray getLossGradient() {
-       return this.expectations.sub(1).div(this.activations.sub(1)).sub(this.expectations.div(this.activations));
+       return this.activations.sub(this.expectations).mul(2);
     }
 
     @Override
@@ -108,7 +101,7 @@ public class CrossEntropyLayer extends LossLayer {
     public String toString() {
         StringBuilder out = new StringBuilder();
         out.append("***********************************\n");
-        out.append("Cross entropy layer with signature: "+ Utils.intArray2String(this.inSignature,",","[]")+"\n");
+        out.append("L2 layer with signature: "+ Utils.intArray2String(this.inSignature,",","[]")+"\n");
         out.append("***********************************\n");
 
         return out.toString();

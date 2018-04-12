@@ -5,6 +5,7 @@ import com.p6majo.math.network2.Data;
 import com.p6majo.math.network2.Network;
 import com.p6majo.math.network2.TestResult;
 import com.p6majo.math.network2.layers.CrossEntropyLayer;
+import com.p6majo.math.network2.layers.L2Layer;
 import com.p6majo.math.network2.layers.LinearLayer;
 import com.p6majo.math.network2.layers.SigmoidLayer;
 import org.nd4j.linalg.factory.Nd4j;
@@ -85,19 +86,24 @@ public class MNISTVisualization2 {
         LinearLayer ll = new LinearLayer(new int[]{28,28},10);
         network.addLayer(ll);
 
-        /*
-        SigmoidLayer sig = new SigmoidLayer(new int[]{16});
+
+        SigmoidLayer sig = new SigmoidLayer(new int[]{10});
         network.addLayer(sig);
 
-        LinearLayer ll2 = new LinearLayer(new int[]{16},10);
+        /*
+        LinearLayer ll2 = new LinearLayer(new int[]{10},10);
         network.addLayer(ll2);
-        */
+
 
         SigmoidLayer sig2 = new SigmoidLayer(new int[]{10});
         network.addLayer(sig2);
+        */
 
-        CrossEntropyLayer cel = new CrossEntropyLayer(new int[]{10});
-        network.addLayer(cel);
+        //CrossEntropyLayer cel = new CrossEntropyLayer(new int[]{10});
+        //network.addLayer(cel);
+
+        L2Layer l2 = new L2Layer(new int[]{10});
+        network.addLayer(l2);
 
         generateData();
        // System.out.println(testList[0].toString());
@@ -109,14 +115,14 @@ public class MNISTVisualization2 {
 
 
 
-        TestResult test = network.test(testList);
-        System.out.println("Success rate before: "+test.getSuccessRate());
+        //TestResult test = network.test(testList);
+       // System.out.println("Success rate before: "+test.getSuccessRate());
 
 
 
-        network.train(dataList,1);
-        test = network.test(testList);
-        System.out.println("Success rate after: "+test.getSuccessRate());
+        network.train(dataList,testList,100);
+        //test = network.test(testList);
+        //System.out.println("Success rate after: "+test.getSuccessRate());
 
 
         //network.stochasticGradientDescent(dataList,testList, 1,0.01,8);
