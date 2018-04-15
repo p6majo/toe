@@ -2,6 +2,7 @@ package com.p6majo.math.network2;
 
 
 import com.p6majo.math.network.DataList;
+import com.p6majo.math.network.NetworkVisualizer;
 import com.p6majo.math.network2.layers.*;
 import com.p6majo.math.utils.Utils;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -35,6 +36,13 @@ public class Network {
     private final List<Layer> layers;
     //private final List<INDArray> trainableParameters;
 
+    private static Random random = null;
+
+    private  NetworkVisualizer2 visualizer;
+    private boolean firstTrainRun = true;
+    private final boolean visual;
+
+
     /**
      *
      */
@@ -42,14 +50,17 @@ public class Network {
 
         layers = new ArrayList<Layer>();
         //trainableParameters= new ArrayList<INDArray>();
+        this.visual = visual;
+    }
 
-        if (visual) {
-            //System.out.println("init visualizer");
-           // visualizer= new NetworkVisualizer(this,NetworkVisualizer.VisualizerModus.TRAINED_EDGES,1);
-           // System.out.println("visualizer initialized");
-        }
-       // else visualizer = null;
+    public int getNumberOfLayers(){
+        return this.layers.size();
+    }
 
+    public int getNumberOfDynamicLayers(){
+        int dynLayers = 0;
+        for (Layer layer:this.layers) if (layer instanceof DynamicLayer) dynLayers++;
+        return dynLayers;
     }
 
     public void addLayer(Layer layer){
@@ -64,6 +75,11 @@ public class Network {
         */
     }
 
+    public List<Layer> getVisualizableLayers(){
+        List<Layer> visLayers = new ArrayList<Layer>();
+        for (Layer layer:layers) if (layer instanceof Visualizable) visLayers.add(layer);
+        return visLayers;
+    }
 
     /*
     public void addTrainableParameter(List<INDArray> params){
@@ -71,6 +87,17 @@ public class Network {
     }*/
 
     public void train(Data[] data,Data[] test,int batchSize){
+
+
+        if (visual && firstTrainRun) {
+            System.out.println("init visualizer");
+            visualizer= new NetworkVisualizer2(this,NetworkVisualizer2.VisualizerModus.TRAINED_EDGES,1);
+            firstTrainRun = false;
+        }
+        else visualizer = null;
+
+        shuffle(data);
+
         /*
         //Gradient check
         Batch batch = new Batch(data[0]);
@@ -79,28 +106,56 @@ public class Network {
         System.out.println("Loss gradient: "+((LossLayer) layers.get(2)).getLossGradient());
         System.out.println("Activations of sigmoid: "+layers.get(1).getActivations());
         */
-        LossLayer lossLayer = (LossLayer) layers.get(layers.size()-1);
 
-        Data[] batchData = new Data[batchSize];
-        for (int i=0;i+batchSize<=data.length;i+=batchSize){
-            batchData = Arrays.copyOfRange(data,i,i+batchSize);
-            Batch batch = new Batch(batchData);
-            //System.out.println("next batch");
-            pushforward(batch);
-            System.out.println("Activations after pushforward: "+batch.getActivations());
-            pullBack();
-            System.out.println("Corrections after pull back: "+((DynamicLayer) layers.get(0)).getDetailedErrors());
-            learn();
-
-            /*
-            if (i%1==0){
-                System.out.println("batch " + i+" "+test(test,test.length).getSuccessRate()+" "+lossLayer.getLoss());
+        /*
+        //no gain in efficiency
+        if (batchSize==1){
+            for (int i=0;i<data.length;i++){
+                Batch batch  =new Batch(data[i]);
+                pushforward(batch);
+                pullBack();
+                learn();
             }
+        }
+        else {
             */
 
-        }
+        IntStream.iterate(0,i->i+batchSize)
+                .limit(data.length)
+                .boxed()//.parallel() should not be used, leads to backpropagation errorsS
+                .forEach(i->{
+                    Data[] batchData = Arrays.copyOfRange(data, i, i + batchSize);
+                    Batch batch = new Batch(batchData);
+                    pushforward(batch);
+                    pullBack();
+                    learn();}
+                    );
+
+        /*
+            for (int i = 0; i + batchSize <= data.length; i += batchSize) {
+                Data[] batchData = Arrays.copyOfRange(data, i, i + batchSize);
+                Batch batch = new Batch(batchData);
+                pushforward(batch);
+                pullBack();
+                learn();
+            }
+            */
+       // }
+    }
 
 
+     private static void shuffle(Data[] array) {
+
+        if (random == null) random = new Random();
+        int count = array.length;
+        for (int i = count; i > 1; i--)
+            swap(array, i - 1, random.nextInt(i));
+    }
+
+    private static void swap(Data[] array, int i, int j) {
+        Data temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
 
     private int getFullDimension(int[]shape){
@@ -109,6 +164,15 @@ public class Network {
         return dim;
     }
 
+    /**
+     * This is an auxiliary method that allows to compute the gradient for parameters of dynamical layers directly from
+     * two forward passes for each parameter
+     * The method is very buggy and is not generic for all tensor like parameters
+     * @param batch
+     * @param layer the layer under consideration
+     * @param param the trainable parameter
+     * @return
+     */
     public String gradientCheck(Batch batch,int layer,int param){
         //TODO only take first batch element, if many are provided
 
@@ -218,8 +282,15 @@ public class Network {
     private void learn(){
 
         for (int l =0;l<layers.size();l++)
-            layers.get(l).learn(0.1f);
+            layers.get(l).learn(0.01f);
     }
+
+
+
+
+
+
+
 
  /**
      * short method call for {@link #stochasticGradientDescent(DataList, DataList, int, double,int)}

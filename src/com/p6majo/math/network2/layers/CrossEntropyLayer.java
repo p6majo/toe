@@ -49,8 +49,11 @@ public class CrossEntropyLayer extends LossLayer {
     @Override
     public void pullBack(INDArray errors) {
         //set errors for this layer
-        super.errors=errors.dup();
-        super.errorsForPreviousLayer = this.getLossGradient().mul(errors);
+       // super.errors=errors.dup();
+        super.errors = errors;
+
+
+        super.errorsForPreviousLayer = this.getLossGradient().muli(errors);
     }
 
     @Override

@@ -41,7 +41,7 @@ public class L2Layer extends LossLayer {
     @Override
     public void pullBack(INDArray errors) {
         //set errors for this layer
-        super.errors=errors.dup();
+        super.errors=errors;
        // System.out.println("Gradient: "+this.getLossGradient());
         super.errorsForPreviousLayer = this.getLossGradient().mul(errors);
     }

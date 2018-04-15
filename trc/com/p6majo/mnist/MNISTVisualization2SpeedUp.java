@@ -1,6 +1,5 @@
 package com.p6majo.mnist;
 
-import com.p6majo.math.network2.Batch;
 import com.p6majo.math.network2.Data;
 import com.p6majo.math.network2.Network;
 import com.p6majo.math.network2.TestResult;
@@ -12,11 +11,9 @@ import org.nd4j.linalg.factory.Nd4j;
 
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
-public class MNISTVisualization2 {
+public class MNISTVisualization2SpeedUp {
 
     private static Data[] dataList;
     private static Data[] testList;
@@ -79,38 +76,30 @@ public class MNISTVisualization2 {
 
 
     public static void main(String[] args){
-        long start = System.currentTimeMillis();
 
-        Network network = new Network(true);
+        Network network = new Network(false);
 
-        LinearLayer ll = new LinearLayer(new int[]{28,28},40);
+        LinearLayer ll = new LinearLayer(new int[]{28,28},20);
         network.addLayer(ll);
 
 
-        SigmoidLayer sig = new SigmoidLayer(new int[]{40});
+        SigmoidLayer sig = new SigmoidLayer(new int[]{20});
         network.addLayer(sig);
 
 
-        LinearLayer ll2 = new LinearLayer(new int[]{40},20);
+
+        LinearLayer ll2 = new LinearLayer(new int[]{20},10);
         network.addLayer(ll2);
 
 
-        SigmoidLayer sig2 = new SigmoidLayer(new int[]{20});
+        SigmoidLayer sig2 = new SigmoidLayer(new int[]{10});
         network.addLayer(sig2);
 
+        CrossEntropyLayer cel = new CrossEntropyLayer(new int[]{10});
+        network.addLayer(cel);
 
-        LinearLayer ll3 = new LinearLayer(new int[]{20},10);
-        network.addLayer(ll3);
-
-
-        SigmoidLayer sig3 = new SigmoidLayer(new int[]{10});
-        network.addLayer(sig3);
-
-        //CrossEntropyLayer cel = new CrossEntropyLayer(new int[]{10});
-        //network.addLayer(cel);
-
-        L2Layer l2 = new L2Layer(new int[]{10});
-        network.addLayer(l2);
+        //L2Layer l2 = new L2Layer(new int[]{10});
+        //network.addLayer(l2);
 
         generateData();
        // System.out.println(testList[0].toString());
@@ -124,12 +113,14 @@ public class MNISTVisualization2 {
         TestResult test = network.test(testList);
        System.out.println("Success rate before: "+test.getSuccessRate());
 
-
-        for (int i = 0; i <7 ; i++) {
+        long start = System.currentTimeMillis();
+        for (int i=0;i<1;i++) {
             network.train(dataList, testList, 1);
-            test = network.test(testList);
-            System.out.println("Success rate after "+i+"th cycle: " + test.getSuccessRate());
+            System.out.println("Time: " + (System.currentTimeMillis() - start));
         }
+        test = network.test(testList);
+        System.out.println("Success rate after cycle: " + test.getSuccessRate());
+
 
         //network.stochasticGradientDescent(dataList,testList, 1,0.01,8);
         //network.stochasticGradientDescent(dataList,testList, 1,0.001,400);
@@ -145,7 +136,6 @@ public class MNISTVisualization2 {
         network.stochasticGradientDescent(dataList,testList, batchSize,learningRate/32,10);
         */
 
-       System.out.println("Time: "+(System.currentTimeMillis()-start));
 
     }
 

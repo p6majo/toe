@@ -71,5 +71,24 @@ public class TensorOperationsAdvanced {
         tens1.addi(tens2);
         System.out.println(tens1);
         System.out.println(tens2);
+
+
+        System.out.println("Check, whether there is inefficiency introduced through multidimensional tensors");
+        INDArray v1 = Nd4j.rand(new int[]{1,10000000});
+        INDArray v2 = Nd4j.rand(new int[]{10000000,1});
+        long start = System.currentTimeMillis();
+        System.out.println(v1.mmul(v2));
+        System.out.println((System.currentTimeMillis() - start) + " ms.");
+
+
+        v1 = Nd4j.rand(new int[]{1,1,10000000});
+        v2 = Nd4j.rand(new int[]{1,10000000,1});
+        start = System.currentTimeMillis();
+        System.out.println(Nd4j.tensorMmul(v1,v2,new int[][]{{1,2},{2,1}}));
+        System.out.println((System.currentTimeMillis() - start) + " ms.");
+
+        System.out.println("Access components: ");
+
     }
+
 }

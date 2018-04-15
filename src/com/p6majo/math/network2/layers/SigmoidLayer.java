@@ -26,7 +26,7 @@ public class SigmoidLayer extends Layer {
     @Override
     public void pullBack(INDArray errors) {
         //set errors for this layer
-        super.errors=errors.dup();
+        super.errors=errors;
         //evaluate the derivative of the sigmoid of the activations and multiply it with the incoming error term
         //since this layer is an elementwise scalar function the structure term of the errors must be the same as
         //the structure term of the activations
@@ -35,10 +35,7 @@ public class SigmoidLayer extends Layer {
 
        INDArray factor = activations.sub(1).mul(-1);
        factor.muli(activations);
-       super.errorsForPreviousLayer = errors.mul(factor);
-       int i = 0;
-       i++;
-
+       super.errorsForPreviousLayer = factor.mul(errors);
     }
 
     @Override
