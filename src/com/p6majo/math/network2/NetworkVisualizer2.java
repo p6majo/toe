@@ -54,6 +54,8 @@ public class NetworkVisualizer2 {
     //Controls the update of the frame
     //this should be paused when the there is no update requested
     private final Timer timer;
+    private final Timer lossTimer;
+
 
     /**
      *
@@ -83,9 +85,20 @@ public class NetworkVisualizer2 {
                 update();
             }
         };
+
+
+        TimerTask lossTimerTask = new TimerTask(){
+            @Override
+            public void run(){
+                collectLossData();
+            }
+        };
+
         timer = new Timer("MyTimer");
         timer.scheduleAtFixedRate(timerTask,1000,1000/fps);
 
+        lossTimer = new Timer("LossTimer");
+        lossTimer.scheduleAtFixedRate(lossTimerTask,1000,100/fps); //the loss timer is ten times faster than the graph timer
 
         // setup graphical environment
         frame = new ExtendedDraw();
@@ -194,6 +207,12 @@ public class NetworkVisualizer2 {
         }
         frame.show();
     }
+
+
+    private void collectLossData(){
+        LossLayer llayer = network.getLossLayer();
+    }
+
 
 
 }

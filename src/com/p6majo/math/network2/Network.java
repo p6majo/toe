@@ -165,6 +165,18 @@ public class Network {
     }
 
     /**
+     * returns the loss layer of the network, which should be the last layer be default
+     * @return
+     */
+    public LossLayer getLossLayer(){
+        int lastPos = layers.size()-1;
+        if (layers.get(lastPos) instanceof LossLayer){
+            return (LossLayer) layers.get(lastPos);
+        }
+        else return null;
+    }
+
+    /**
      * This is an auxiliary method that allows to compute the gradient for parameters of dynamical layers directly from
      * two forward passes for each parameter
      * The method is very buggy and is not generic for all tensor like parameters

@@ -36,6 +36,8 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
 
     private int batchSize;
 
+    //regularization constant
+    private final float lambda = 0.001f;
 
     public LinearLayer(int[] inSignature, int outSignature, Network.Seed seed) {
         super(inSignature, new int[]{outSignature});
@@ -153,7 +155,8 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
 
     @Override
     public void learn(float learningRate) {
-        this.biases.subi(this.errors.sum(0).mul(learningRate / batchSize)); //adjust biases
+        INDArray corrections = this.errors.sum(0).add(this.biases.mul(lambda));
+        this.biases.subi(corrections.mul(learningRate / batchSize)); //adjust biases
         //at this point there was some strange behaviour of the nd4j method mul. If muli is replaced by mul, somehow the components of the correction tensor are strangely shuffled
         this.weights.subi(getWeightCorrections().muli(learningRate / batchSize));//adjust weights
     }
@@ -199,8 +202,12 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
         newErrorShape[0] = this.errors.shape()[0];
         newErrorShape[2] = 1;
         newErrorShape[1] = this.errors.shape()[2];
-        return Nd4j.tensorMmul(this.inputData.reshape(newInputShape), this.errors.reshape(newErrorShape), new int[][]{{0, 1}, {0, 2}});
 
+        INDArray corrections =  Nd4j.tensorMmul(this.inputData.reshape(newInputShape), this.errors.reshape(newErrorShape), new int[][]{{0, 1}, {0, 2}});
+        //regularization
+        corrections.addi(this.weights.mul(lambda));
+
+        return corrections;
     }
 
 

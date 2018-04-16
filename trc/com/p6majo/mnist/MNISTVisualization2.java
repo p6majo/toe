@@ -128,7 +128,7 @@ public class MNISTVisualization2 {
         for (int i = 0; i <7 ; i++) {
             network.train(dataList, testList, 1);
             test = network.test(testList);
-            System.out.println("Success rate after "+i+"th cycle: " + test.getSuccessRate());
+            System.out.println("Success rate after "+(i+1)+"th cycle: " + test.getSuccessRate());
         }
 
         //network.stochasticGradientDescent(dataList,testList, 1,0.01,8);
