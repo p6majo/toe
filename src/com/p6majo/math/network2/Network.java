@@ -96,10 +96,12 @@ public class Network {
     public void train(Data[] data,Data[] test,int batchSize){
 
 
-        if (visual && firstTrainRun) {
-            System.out.println("init visualizer");
-            visualizer= new NetworkVisualizer2(this,NetworkVisualizer2.VisualizerModus.TRAINED_EDGES,1);
-            firstTrainRun = false;
+        if (visual ){
+            if (firstTrainRun) {
+                System.out.println("init visualizer");
+                visualizer = new NetworkVisualizer2(this, NetworkVisualizer2.VisualizerModus.TRAINED_EDGES, 1);
+                firstTrainRun = false;
+            }
         }
         else visualizer = null;
 
