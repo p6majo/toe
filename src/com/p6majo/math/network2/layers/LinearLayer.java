@@ -155,7 +155,7 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
 
     @Override
     public void learn(float learningRate) {
-        INDArray corrections = this.errors.sum(0).add(this.biases.mul(lambda));
+        INDArray corrections = this.errors.sum(0).add(this.biases.mul(2f*lambda));
         this.biases.subi(corrections.mul(learningRate / batchSize)); //adjust biases
         //at this point there was some strange behaviour of the nd4j method mul. If muli is replaced by mul, somehow the components of the correction tensor are strangely shuffled
         this.weights.subi(getWeightCorrections().muli(learningRate / batchSize));//adjust weights
@@ -205,11 +205,19 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
 
         INDArray corrections =  Nd4j.tensorMmul(this.inputData.reshape(newInputShape), this.errors.reshape(newErrorShape), new int[][]{{0, 1}, {0, 2}});
         //regularization
-        corrections.addi(this.weights.mul(lambda));
+        corrections.addi(this.weights.mul(2f*lambda));
 
         return corrections;
     }
 
+
+    @Override
+    public float getRegularization() {
+        float reg = 0f;
+        reg+=Nd4j.sum(this.weights.mul(this.weights)).getFloat(0,0)*lambda;
+        reg+=Nd4j.sum(this.biases.mul(this.biases)).getFloat(0)*lambda;
+        return reg;
+    }
 
     @Override
     public String getDetailedErrors() {

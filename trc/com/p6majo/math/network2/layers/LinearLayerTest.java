@@ -12,10 +12,6 @@ import static org.junit.Assert.*;
 
 public class LinearLayerTest {
 
-    @Before
-    public void setup() {
-    }
-
     @Test
     public void reshapingTest() {
         System.out.println("Test the flattening process: ");
@@ -205,6 +201,10 @@ public class LinearLayerTest {
     }
 
 
-
-
+    @Test
+    public void getRegularization() {
+        LinearLayer ll = new LinearLayer(new int[]{2,1},3);
+        System.out.println("Layer: "+ll.toString());
+        System.out.println("Regularization: "+ll.getRegularization());
+    }
 }

@@ -3,14 +3,13 @@ package com.p6majo.math.network2;
 
 import com.p6majo.math.network2.layers.DynamicLayer;
 import com.p6majo.math.network2.layers.Layer;
-import com.p6majo.math.network2.layers.LinearLayer;
 import com.p6majo.math.network2.layers.LossLayer;
 import com.princeton.Draw;
 import com.princeton.ExtendedDraw;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -46,6 +45,9 @@ public class NetworkVisualizer2 {
     private final int xoffset = 50;
     private final int yoffset = 50;
 
+   private final Draw plot;
+
+
     private final double layerSpacing ;
     private final List<Layer> visibleLayers;
 
@@ -53,9 +55,11 @@ public class NetworkVisualizer2 {
 
     //Controls the update of the frame
     //this should be paused when the there is no update requested
-    private final Timer timer;
+    private final Timer graphTimer;
     private final Timer lossTimer;
 
+    private ArrayList<Float> lossData;
+    private ArrayList<Float> regulData;
 
     /**
      *
@@ -72,21 +76,19 @@ public class NetworkVisualizer2 {
         vModus = modus;
         network = net;
 
-
         //layer spacing
         this.visibleLayers = net.getVisualizableLayers();
         this.layerSpacing = (height-yoffset)/(visibleLayers.size()-1);
 
 
-        //setup timer
+        //setup graphTimer
         TimerTask timerTask = new TimerTask(){
             @Override
             public void run() {
                 update();
             }
         };
-
-
+        //setup lossTimer
         TimerTask lossTimerTask = new TimerTask(){
             @Override
             public void run(){
@@ -94,11 +96,11 @@ public class NetworkVisualizer2 {
             }
         };
 
-        timer = new Timer("MyTimer");
-        timer.scheduleAtFixedRate(timerTask,1000,1000/fps);
+        graphTimer = new Timer("MyTimer");
+        graphTimer.scheduleAtFixedRate(timerTask,1000,1000/fps);
 
         lossTimer = new Timer("LossTimer");
-        lossTimer.scheduleAtFixedRate(lossTimerTask,1000,100/fps); //the loss timer is ten times faster than the graph timer
+        lossTimer.scheduleAtFixedRate(lossTimerTask,1000,100/fps); //the loss graphTimer is ten times faster than the graph graphTimer
 
         // setup graphical environment
         frame = new ExtendedDraw();
@@ -111,7 +113,6 @@ public class NetworkVisualizer2 {
         frame.setButton3Label("Resume");
         frame.setButton4Label("Test");
         frame.setButton5Label("Exit");
-
 
         frame.setActionListenerForButton1(new ActionListener(){
             @Override
@@ -166,6 +167,16 @@ public class NetworkVisualizer2 {
             l++;
         }
 
+        //loss plot
+
+        plot = new Draw();
+        plot.setCanvasSize(1000,100);
+        plot.setXscale(0,1000);
+        plot.setYscale(0,100);
+
+        this.lossData = new ArrayList<Float>();
+        this.regulData = new ArrayList<Float>();
+
         this.update();
 
     }
@@ -206,11 +217,21 @@ public class NetworkVisualizer2 {
             l++;
         }
         frame.show();
+
+        
     }
 
 
+    /**
+     * periodically collect the loss and regularization term
+     */
     private void collectLossData(){
         LossLayer llayer = network.getLossLayer();
+        lossData.add(llayer.getLoss());
+        float regterm = 0f;
+        for (DynamicLayer layer:network.getDynamicLayers())
+            regterm+=layer.getRegularization();
+        regulData.add(regterm);
     }
 
 

@@ -63,6 +63,12 @@ public class Network {
         return dynLayers;
     }
 
+    public List<DynamicLayer> getDynamicLayers(){
+        List<DynamicLayer> dynLayers = new ArrayList<DynamicLayer>();
+        for (Layer layer:layers) if (layer instanceof DynamicLayer) dynLayers.add((DynamicLayer) layer);
+        return dynLayers;
+    }
+
     public void addLayer(Layer layer){
         int index = this.layers.size();
         layer.setLayerIndex(index);
@@ -74,6 +80,7 @@ public class Network {
         }
         */
     }
+
 
     public List<Layer> getVisualizableLayers(){
         List<Layer> visLayers = new ArrayList<Layer>();

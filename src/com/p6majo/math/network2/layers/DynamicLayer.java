@@ -39,4 +39,6 @@ public abstract class DynamicLayer extends Layer{
      * @return
      */
     public abstract String getDetailedErrors();
+
+    public abstract  float getRegularization();
 }

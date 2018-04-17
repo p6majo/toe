@@ -1,6 +1,7 @@
 package com.p6majo.info.klausuren;
 
 public class Sortieralgorithmus {
+
     public static void main(String[] args) {
         double[] data = new double[]{10.5,54.3,13.4,-15.2,37.6};
         double tmp=0;
@@ -16,4 +17,10 @@ public class Sortieralgorithmus {
             }
         }
     }
+
+
+
+
+
+
 }
