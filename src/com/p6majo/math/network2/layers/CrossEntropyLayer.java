@@ -77,18 +77,19 @@ public class CrossEntropyLayer extends LossLayer {
     public TestResult getTestResult(Network.Test test) {
         TestResult testResult = new TestResult(this.batchSize);
 
+        INDArray copyOfActivations = this.activations.dup();
         //select highest probability state
         //set all maximal values for each row to one
         for (int b = 0; b < batchSize; b++) {
-            float max = Nd4j.max(this.activations.getRow(b)).getFloat(0,0);
+            float max = Nd4j.max(copyOfActivations.getRow(b)).getFloat(0,0);
             testResult.setProbability(b,max);
-            BooleanIndexing.applyWhere(this.activations.getRow(b),Conditions.equals(max),new Value(1f));
+            BooleanIndexing.applyWhere(copyOfActivations.getRow(b),Conditions.equals(max),new Value(1f));
         }
         //set all other values to zero
-        BooleanIndexing.applyWhere(this.activations, Conditions.lessThan(1),new Value(0f));
+        BooleanIndexing.applyWhere(copyOfActivations, Conditions.lessThan(1),new Value(0f));
 
         //Calculate difference between activations and expectations
-        INDArray diff = this.activations.sub(this.expectations);
+        INDArray diff = copyOfActivations.sub(this.expectations);
         //scan through rows to detect deviations
         for (int b = 0; b < batchSize; b++) {
             float max = Nd4j.max(diff.getRow(b)).getFloat(0,0);

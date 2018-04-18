@@ -14,17 +14,20 @@ public class PlotUtils {
         int binSize = data.size()/bins+1;
         float[] binnedData = new float[data.size()/binSize];
         int binCounter=  0;
+        int i =0;
         if (data.size()>bins){
-            for (int i=0;(i+binSize-1)<data.size();i+=binSize){
+            while (binCounter<binnedData.length && (i+binSize-1)<data.size()){
                 float bin = 0f;
                 for (int b=0;b<binSize;b++)
                     bin+=data.get(i+b);
                 bin/=binSize;
                 binnedData[binCounter]=bin;
+                binCounter++;
+                i+=binSize;
             }
         }
         else{
-            for (int i=0;i<binnedData.length;i++)
+            for (i=0;i<binnedData.length;i++)
                 binnedData[i]=data.get(i);
         }
         return binnedData;

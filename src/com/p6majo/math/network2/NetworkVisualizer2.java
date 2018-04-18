@@ -51,9 +51,13 @@ public class NetworkVisualizer2 {
     private final int xoffset = 50;
     private final int yoffset = 50;
 
-   private final Draw plot;
-   private final int plotWidth=500;
-   private final int plotHeight = 500;
+    private final Draw plot;
+    private final int plotWidth=500;
+    private final int plotHeight = 500;
+
+    private final float invLg10 = (float) (1. / Math.log(10));
+    private final float[] logSubTics = new float[]{0.3010f,0.47712f,0.6021f,0.69897f,0.77815f,0.8451f,0.90309f,0.95424f};
+    private float plotmin = 1f;
 
 
     private final double layerSpacing ;
@@ -94,7 +98,7 @@ public class NetworkVisualizer2 {
         TimerTask timerTask = new TimerTask(){
             @Override
             public void run() {
-
+                graphUpdate();
             }
         };
         //setup lossTimer
@@ -102,7 +106,6 @@ public class NetworkVisualizer2 {
             @Override
             public void run(){
                 collectLossData();
-                graphUpdate();
                 plotUpdate();
             }
         };
@@ -111,7 +114,7 @@ public class NetworkVisualizer2 {
         graphTimer.scheduleAtFixedRate(timerTask,1000,500/fps);
 
         lossTimer = new Timer("LossRegularizationTimer");
-        lossTimer.scheduleAtFixedRate(lossTimerTask,1000,100/fps); //the loss graphTimer is ten times faster than the graph graphTimer
+        lossTimer.scheduleAtFixedRate(lossTimerTask,1000,500/fps); //the loss graphTimer is ten times faster than the graph graphTimer
 
         // setup graphical environment
         frame = new ExtendedDraw();
@@ -233,50 +236,67 @@ public class NetworkVisualizer2 {
     }
 
     private void plotGrid(float xmin,float ymin,float xmax,float ymax,float dx, float dy){
-        plot.setPenColor(Color.GRAY);
-        float x = Math.round(xmin);
+
+        float x = (float) Math.floor(xmin);
         while (x<xmax){
-            plot.line((xmin+(x-xmin))*dx,0,(xmin+(x-xmin))*dx,plotHeight);
+            plot.setPenColor(Color.GRAY);
+            plot.line((x-xmin)*dx,0,(x-xmin)*dx,plotHeight);
+            plot.setPenColor(Color.lightGray);
+            for (float subX:this.logSubTics)
+                plot.line((x+subX-xmin)*dx,0,(x+subX-xmin)*dx,plotHeight);
             x+=1;
         }
-        float y = Math.round(ymin);
+        float y = (float) Math.floor(ymin);
         while (y<ymax){
-            plot.line(0,(ymin+(y-ymin))*dy,plotWidth,(ymin+(y-ymin))*dy);
+            plot.setPenColor(Color.GRAY);
+            plot.line(0,((y-ymin))*dy,plotWidth,((y-ymin))*dy);
+            plot.setPenColor(Color.lightGray);
+            for (float subY:this.logSubTics)
+                plot.line(0,((y+subY-ymin))*dy,plotWidth,((y+subY-ymin))*dy);
             y+=1;
         }
     }
 
     private void plotUpdate(){
         plot.clear();
-        if (lossData.size()>0 && regulData.size()>0) {
-            float[] lossData = PlotUtils.binData(this.lossData, plotWidth);
-            float[] regData = PlotUtils.binData(this.regulData, plotWidth);
+        if (lossData.size()>0) {
+            float[] lossBinData = PlotUtils.binData(this.lossData, plotWidth);
+            int binSize = lossData.size()/plotWidth+1;
+            float maxLoss =(float)  Math.log(findMax(lossBinData))*invLg10;
 
-            float lg10 = (float) (1. / Math.log(10));
-            float maxLoss = Math.round(lg10 * Math.log(findMax(lossData)) + 0.49f);
-            float maxReg = Math.round(lg10 * Math.log(findMax(regData)) + 0.49f);
-            float minLoss = Math.round(Math.log(findMin(lossData) * lg10) - 0.49f);
-            float minReg = Math.round(Math.log(findMin(regData) * lg10) - 0.49f);
+            float minLoss =(float)  Math.log(findMin(lossBinData)) * invLg10 ;
 
-            float plotMax = Math.max(maxLoss, maxReg);
-            float plotMin = Math.min(minLoss, minReg);
+            float plotMax = maxLoss;
+            float plotMin = minLoss;
 
-            float minX = 0;
-            float maxX = Math.round(Math.log(lossData.length) * lg10 + 0.49f);
+            float minX = (float) Math.log(binSize)*invLg10;
+            float maxX = Math.round(Math.log(lossData.size()) * invLg10 + 0.49f);
 
             float dx = (float) plotWidth / (maxX - minX);
             float dy = (float) plotHeight / (plotMax - plotMin);
 
-            plotGrid(minX, plotMin, maxX, plotMax, dx, dy);
-
-            plot.setPenColor(Color.RED);
-            for (int i = 0; i < lossData.length - 1; i++) {
-                plot.line(minX + ((float) Math.log(i) * lg10 - minX) * dx, ((float) Math.log(lossData[i]) * lg10 - plotMin) * dy, minX + (float) Math.log(i + 1) * lg10 * dx, ((float) Math.log(lossData[i + 1]) * lg10 - plotMin) * dy);
+            float[] regData=null;
+            if (network.isRegularized() && regulData.size()>0) {
+                regData = PlotUtils.binData(this.regulData, plotWidth);
+                float maxReg =(float) Math.log(findMax(regData))*invLg10;
+                float minReg = (float) Math.log(findMin(regData)) * invLg10;
+                plotMax = Math.max(maxLoss, maxReg);
+                plotMin = Math.min(minLoss, minReg);
             }
 
-            plot.setPenColor(Color.GREEN);
-            for (int i = 0; i < regData.length - 1; i++) {
-                plot.line(minX + ((float) Math.log(i) * lg10 - minX) * dx, ((float) Math.log(regData[i]) * lg10 - plotMin) * dy, minX + (float) Math.log(i + 1) * lg10 * dx, ((float) Math.log(regData[i + 1]) * lg10 - plotMin) * dy);
+
+            plotGrid(minX, plotMin, maxX, plotMax, dx, dy);
+            plot.setPenColor(Color.RED);
+
+            for (int i = 0; i < lossBinData.length - 1; i++) {
+                plot.line(((float) Math.log(i*binSize) * invLg10 - minX) * dx, ((float) Math.log(lossBinData[i]) * invLg10 - plotMin) * dy, (float) (Math.log((i + 1)*binSize) * invLg10-minX) * dx, ((float) Math.log(lossBinData[i + 1]) * invLg10 - plotMin) * dy);
+            }
+
+            if (network.isRegularized() && regulData.size()>0) {
+                plot.setPenColor(Color.blue);
+                for (int i = 0; i < regData.length - 1; i++) {
+                    plot.line( ((float) Math.log(i*binSize) * invLg10 - minX) * dx, ((float) Math.log(regData[i]) * invLg10 - plotMin) * dy, (float) (Math.log((i + 1)*binSize) * invLg10-minX) * dx, ((float) Math.log(regData[i + 1]) * invLg10 - plotMin) * dy);
+                }
             }
 
             plot.show();
@@ -289,13 +309,17 @@ public class NetworkVisualizer2 {
      * periodically collect the loss and regularization term
      */
     private void collectLossData(){
-        if (lossLayer==null)  lossLayer = network.getLossLayer();
-
-        lossData.add(lossLayer.getLoss());
-        float regterm = 0f;
-        for (DynamicLayer layer:network.getDynamicLayers())
-            regterm+=layer.getRegularization();
-        regulData.add(regterm);
+        if (lossLayer==null)
+            lossLayer = network.getLossLayer();
+        else {
+            lossData.add(lossLayer.getLoss() );
+            if (network.isRegularized()){
+                float regterm = 0f;
+                for (DynamicLayer layer : network.getDynamicLayers())
+                    regterm += layer.getRegularization();
+                regulData.add(regterm);
+            }
+        }
     }
 
 }

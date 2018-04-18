@@ -27,11 +27,12 @@ import static com.p6majo.math.network2.Network.Test.MAX_PROBABILITY;
  */
 public class Network {
 
-     /**
+    /**
      * different flags to determine the initial values of the neurons
      */
     public static enum Seed {NO_SEED, RANDOM, NO_BIAS, NO_BIAS_UNITY,ALL_UNITY};
     public static enum Test {MAX_PROBABILITY};
+
 
     private final List<Layer> layers;
     //private final List<INDArray> trainableParameters;
@@ -42,6 +43,11 @@ public class Network {
     private boolean firstTrainRun = true;
     private final boolean visual;
 
+    public float lambda;
+    private boolean isRegularized = false;
+    private float learningRate = 0.01f;
+
+    private LossLayer lossLayer =null;
 
     /**
      *
@@ -74,13 +80,40 @@ public class Network {
         layer.setLayerIndex(index);
         this.layers.add(layer);
 
-        /*
-        if (layer instanceof DynamicLayer){
-            this.trainableParameters.addAll(((DynamicLayer) layer).getTrainableParameters());
+        if (layer instanceof DynamicLayer)
+            ((DynamicLayer) layer).setRegularization(lambda);
+
+        if (layer instanceof LossLayer){
+            if (this.lossLayer!=null) Utils.errorMsg("Only one loss layer per network possible");
+            else this.lossLayer = (LossLayer) layer;
         }
-        */
     }
 
+
+    /**
+     * returns the loss layer of the network, which should be the last layer be default
+     * @return
+     */
+    public LossLayer getLossLayer(){
+       return this.lossLayer;
+    }
+
+    public void setRegularization(float lambda){
+        this.lambda = lambda;
+        if (this.lambda!=0f){
+            this.isRegularized = true;
+            for (DynamicLayer dynamicLayer:this.getDynamicLayers())
+                dynamicLayer.setRegularization(lambda);
+        }
+    }
+
+    public void setLearningRate(float learningRate){
+        this.learningRate=learningRate;
+    }
+
+    public boolean isRegularized() {
+        return isRegularized;
+    }
 
     public List<Layer> getVisualizableLayers(){
         List<Layer> visLayers = new ArrayList<Layer>();
@@ -173,17 +206,6 @@ public class Network {
         return dim;
     }
 
-    /**
-     * returns the loss layer of the network, which should be the last layer be default
-     * @return
-     */
-    public LossLayer getLossLayer(){
-        int lastPos = layers.size()-1;
-        if (layers.get(lastPos) instanceof LossLayer){
-            return (LossLayer) layers.get(lastPos);
-        }
-        else return null;
-    }
 
     /**
      * This is an auxiliary method that allows to compute the gradient for parameters of dynamical layers directly from
@@ -280,8 +302,8 @@ public class Network {
 
         pushforward(testBatch);
         //get activations of the last layer and compare with the expectations
-        LossLayer lastLayer =  (LossLayer) layers.get(layers.size()-1);
-        return lastLayer.getTestResult(MAX_PROBABILITY);
+
+        return lossLayer.getTestResult(MAX_PROBABILITY);
     }
 
     private void pushforward(Batch batch){
@@ -303,7 +325,7 @@ public class Network {
     private void learn(){
 
         for (int l =0;l<layers.size();l++)
-            layers.get(l).learn(0.01f);
+            layers.get(l).learn(this.learningRate);
     }
 
 

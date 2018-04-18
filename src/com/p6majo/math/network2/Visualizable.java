@@ -6,7 +6,7 @@ import java.awt.*;
 
 public interface Visualizable {
     public static final boolean isVisualizable = true;
-    public static final double COLOR_SATURATION = 5.;
+    public static final double COLOR_SATURATION = 2.;
     public static final String DELIMITER ="|";
 
 

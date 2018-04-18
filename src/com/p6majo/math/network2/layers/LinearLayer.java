@@ -36,9 +36,6 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
 
     private int batchSize;
 
-    //regularization constant
-    private final float lambda = 0.001f;
-
     public LinearLayer(int[] inSignature, int outSignature, Network.Seed seed) {
         super(inSignature, new int[]{outSignature});
         super.name = "Linear Layer";
@@ -54,12 +51,12 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
                 biases = Nd4j.ones(new int[]{1, flattenedOutDim});
                 break;
             case NO_BIAS:
-                weights = Nd4j.rand(new int[]{flattenedInDim, flattenedOutDim}, new NormalDistribution(0, 1));
+                weights = Nd4j.rand(new int[]{flattenedInDim, flattenedOutDim}, new NormalDistribution(0, 0.5));
                 biases = Nd4j.zeros(new int[]{1, flattenedOutDim});
                 break;
             default:
-                weights = Nd4j.rand(new int[]{flattenedInDim, flattenedOutDim}, new NormalDistribution(0, 1));
-                biases = Nd4j.rand(new int[]{1, flattenedOutDim}, new NormalDistribution(0, 1));
+                weights = Nd4j.rand(new int[]{flattenedInDim, flattenedOutDim}, new NormalDistribution(0, 0.5));
+                biases = Nd4j.rand(new int[]{1, flattenedOutDim}, new NormalDistribution(0, 0.5));
                 break;
         }
         super.trainableParameters.add(weights);
@@ -205,18 +202,20 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
 
         INDArray corrections =  Nd4j.tensorMmul(this.inputData.reshape(newInputShape), this.errors.reshape(newErrorShape), new int[][]{{0, 1}, {0, 2}});
         //regularization
-        corrections.addi(this.weights.mul(2f*lambda));
-
+        if (lambda!=0f) corrections.addi(this.weights.mul(2f*lambda));
         return corrections;
     }
 
 
     @Override
     public float getRegularization() {
-        float reg = 0f;
-        reg+=Nd4j.sum(this.weights.mul(this.weights)).getFloat(0,0)*lambda;
-        reg+=Nd4j.sum(this.biases.mul(this.biases)).getFloat(0)*lambda;
-        return reg;
+        if (lambda==0f) return 0f;
+        else {
+            float reg = 0f;
+            reg += Nd4j.sum(this.weights.mul(this.weights)).getFloat(0, 0) * lambda;
+            reg += Nd4j.sum(this.biases.mul(this.biases)).getFloat(0) * lambda;
+            return reg;
+        }
     }
 
     @Override

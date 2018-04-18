@@ -21,6 +21,7 @@ import java.util.Set;
 public abstract class DynamicLayer extends Layer{
 
     protected List<INDArray> trainableParameters;
+    protected float lambda;
 
     public DynamicLayer(int[] inSignature, int[] outSignature) {
         super(inSignature, outSignature);
@@ -41,4 +42,9 @@ public abstract class DynamicLayer extends Layer{
     public abstract String getDetailedErrors();
 
     public abstract  float getRegularization();
+
+    public void setRegularization(float lambda){
+        this.lambda = lambda;
+    }
+
 }
