@@ -11,39 +11,26 @@ public class UtilsTest {
 
     @Test
     public void reflectKernel() {
-        System.out.println("Start with rank 2 case: \n");
+
+        System.out.println("Weights of rank 4 case: \n");
         int dim = 2*((int) (Math.random()*4))+1;//should be odd;
-        System.out.println("and dimension: " + dim+"\n");
-        INDArray kernel = Nd4j.rand(dim,dim);
+        int inDepth = (int) Math.max(1,(Math.random()*5));
+        int outDepth = (int) Math.max(1,(Math.random()*5));
+        System.out.println("with outDepth: "+outDepth+", inDepth: "+inDepth+" and kernel height and width: " + dim+"\n");
+
+        INDArray kernel = Nd4j.rand(new int[]{outDepth, inDepth,dim,dim});
         System.out.println("Kernel: \n" + kernel);
 
         INDArray reflectedKernel = Utils.reflectKernel(kernel);
         System.out.println("reflected Kernel: \n"+reflectedKernel);
 
         //test a few components randomly
-        for (int i = 0; i < 10; i++) {
+        for (int c = 0; c < 10; c++) {
+            int i =(int) (Math.random()*inDepth);
+            int o =(int) (Math.random()*outDepth);
             int x=(int) (Math.random()*dim);
             int y=(int) (Math.random()*dim);
-            assertEquals(kernel.getFloat(x,y),reflectedKernel.getFloat(dim-1-x,dim-1-y),1.e-5);
-        }
-
-        System.out.println("Continue with rank 3 case: \n");
-        dim = 2*((int) (Math.random()*4))+1;//should be odd;
-        int depth = (int) (Math.random()*5);
-        System.out.println("and dimension: " + dim+" and depth "+depth+"\n");
-
-        kernel = Nd4j.rand(new int[]{depth,dim,dim});
-        System.out.println("Kernel: \n" + kernel);
-
-        reflectedKernel = Utils.reflectKernel(kernel);
-        System.out.println("reflected Kernel: \n"+reflectedKernel);
-
-        //test a few components randomly
-        for (int i = 0; i < 10; i++) {
-            int d =(int) (Math.random()*depth);
-            int x=(int) (Math.random()*dim);
-            int y=(int) (Math.random()*dim);
-            assertEquals(kernel.getRow(d).getFloat(x,y),reflectedKernel.getRow(d).getFloat(dim-1-x,dim-1-y),1.e-5);
+            assertEquals(kernel.getRow(o).getRow(i).getFloat(x,y),reflectedKernel.getRow(o).getRow(i).getFloat(dim-1-x,dim-1-y),1.e-5);
         }
 
     }

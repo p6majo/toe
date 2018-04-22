@@ -10,6 +10,7 @@ public class Utils {
     /**
      * multiply all dimensions to get one dimension that can hold the data from all dimensions
      * Remember that the batch index is not part of the signature
+     *
      * @param signature
      * @return
      */
@@ -23,33 +24,34 @@ public class Utils {
 
     /**
      * reflects a kernel around its mid point
-     * rank 2 means:  row, column
-     * rank 3 means:  depth, row, column
+     * rank 4 weight: ouDepth, inDepth, row, column
+     *
      * @param kernel
      * @return
      */
-    public static INDArray reflectKernel(INDArray kernel){
-        if (!(kernel.rank()==3 || kernel.rank()==2))
-            errorMsg("The kernel has to have rank 2 or rank 3 but received: "+kernel.rank()+" instead.");
+    public static INDArray reflectKernel(INDArray kernel) {
+        if (!(kernel.rank() == 4))
+            errorMsg("The kernel has to have rank 4 but received: " + kernel.rank() + " instead.");
 
         int[] shape = kernel.shape();
 
-        if (kernel.rank()==2){
-            INDArray tmp = Nd4j.toFlattened(kernel);
-            tmp = Nd4j.reverse(tmp);
-            return tmp.reshape(shape);
+        //the dup is necessary, otherwise the input kernel is overwritten
+        INDArray flattened, tmp2 = null;
+        int outDepth = kernel.size(0);
+        int inDepth = kernel.size(1);
+        int dimx = kernel.size(2);
+        int dimy = kernel.size(3);
 
+        flattened = kernel.reshape(new int[]{outDepth, inDepth, dimx * dimy});
+
+        for (int o = 0; o < outDepth; o++){
+            for (int i = 0; i < inDepth; i++)
+                if (tmp2 == null)
+                    tmp2 = Nd4j.reverse(flattened.getRow(o).getRow(i).dup());
+                else
+                    tmp2 = Nd4j.concat(1, tmp2, Nd4j.reverse(flattened.getRow(o).getRow(i).dup()));
         }
-        else{
-            //the dup is necessary, otherwise the input kernel is overwritten
-            INDArray flattened,tmp2;
-            int depth = kernel.size(0);
-            int dimx = kernel.size(1);
-            int dimy = kernel.size(2);
-            flattened = kernel.reshape(new int[]{depth,dimx*dimy});
-            tmp2 = Nd4j.reverse(flattened.getRow(0).dup());
-            for (int i=1;i<depth;i++) tmp2=Nd4j.concat(1,tmp2,Nd4j.reverse(flattened.getRow(i).dup()));
-           return tmp2.reshape(shape);
-        }
+
+        return tmp2.reshape(shape);
     }
 }
