@@ -61,14 +61,14 @@ public class LinearLayerTest {
         for (int i = 0; i < 3; i++) {
             float[] pod = new float[8]; //piece of data
             for (int n = 0; n < 8; n++) pod[n] = (n + 1) * (i + 1);
-            data[i] = new Data(Nd4j.create(pod, new int[]{4, 2}), Nd4j.create(new float[]{1}, new int[]{1}));
+            data[i] = new Data(Nd4j.create(pod, new int[]{8}), Nd4j.create(new float[]{1}, new int[]{1}));
         }
 
         Batch batch = new Batch(data);
         System.out.println(batch);
 
-        System.out.println("Set up a (4,2)->(1,10)-Linear Layer");
-        LinearLayer ll = new LinearLayer(new int[]{4, 2}, 10);
+        System.out.println("Set up a 8->10-Linear Layer");
+        LinearLayer ll = new LinearLayer(8, 10);
         System.out.println("The following weights: ");
         System.out.println(ll.getWeights());
 
@@ -125,7 +125,7 @@ public class LinearLayerTest {
         INDArray errors = Nd4j.ones(10);
         System.out.println(errors);
 
-        LinearLayer ll = new LinearLayer(new int[]{2, 3}, 10);
+        LinearLayer ll = new LinearLayer(6, 10);
         ll.pullBack(errors);
         System.out.println(ll.toString());
         System.out.println("The following errors are calculated:\n");
@@ -175,7 +175,7 @@ public class LinearLayerTest {
     @Test
     public void learningTest(){
         float learningRate = 0.1f;
-        LinearLayer ll = new LinearLayer(new int[]{3,4},10);
+        LinearLayer ll = new LinearLayer(12,10);
 
         INDArray input = Nd4j.ones(3,4);
         System.out.println("Process trivial input data: \n"+input);
@@ -203,7 +203,7 @@ public class LinearLayerTest {
 
     @Test
     public void getRegularization() {
-        LinearLayer ll = new LinearLayer(new int[]{2,1},3);
+        LinearLayer ll = new LinearLayer(2,3);
         System.out.println("Layer: "+ll.toString());
         System.out.println("Regularization: "+ll.getRegularization());
     }

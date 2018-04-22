@@ -56,8 +56,8 @@ public class Batch {
     private void convert(Data... data){
         if (data.length==0) Utils.errorMsg("Empty batches are not allowed.");
         this.batchSize = data.length;
-        INDArray[] inputs = new INDArray[batchSize];
-        INDArray[] expectations = new INDArray[batchSize];
+        INDArray[] inputs =new INDArray[batchSize];
+        INDArray[] expectations=new INDArray[batchSize];
 
         for (int n=0;n<batchSize;n++){
             inputs[n]=data[n].getInput();
@@ -75,10 +75,11 @@ public class Batch {
         batchInput = inputStack.reshape(newShape);
         this.activations = batchInput.dup();
 
+        //expectations do not need a depth index, it is replaced with the batchSize index
         shape = expectations[0].shape();
-        newShape = new int[shape.length+1];
+        newShape = new int[shape.length];
         newShape[0]=batchSize;
-        for (int n=0;n<shape.length;n++) newShape[n+1]=shape[n];
+        for (int n=1;n<shape.length;n++) newShape[n]=shape[n];
 
         batchExpectation = expectationStack.reshape(newShape);
     }
@@ -90,6 +91,10 @@ public class Batch {
      */
     public void resetBatch(){
         this.activations=this.batchInput.dup();
+    }
+
+    public int getBatchSize(){
+        return this.batchSize;
     }
 
     public void setActivations(INDArray activations){

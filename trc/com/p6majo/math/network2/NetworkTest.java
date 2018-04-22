@@ -38,7 +38,7 @@ public class NetworkTest {
     public void construction2Test(){
         Network network = new Network(false);
 
-        LinearLayer ll = new LinearLayer(new int[]{1,3},8,ALL_UNITY);
+        LinearLayer ll = new LinearLayer(3,8,ALL_UNITY);
         network.addLayer(ll);
 
         SigmoidLayer sig = new SigmoidLayer(new int[]{8});

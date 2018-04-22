@@ -12,6 +12,8 @@ import org.nd4j.linalg.factory.Nd4j;
 
 import java.awt.*;
 
+import static com.p6majo.math.network2.layers.Utils.getflattenedDimFromSignature;
+
 /**
  * A layer that applies a linear transformation to the activations of the previous layer
  * The activation data is stretched out and all spatial information is lost
@@ -25,9 +27,6 @@ import java.awt.*;
  */
 public class LinearLayer extends DynamicLayer implements Visualizable {
 
-    private final INDArray weights;
-    private final INDArray biases;
-
     private final int flattenedInDim;
     private final int flattenedOutDim;
 
@@ -36,34 +35,34 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
 
     private int batchSize;
 
-    public LinearLayer(int[] inSignature, int outSignature, Network.Seed seed) {
-        super(inSignature, new int[]{outSignature});
+    public LinearLayer(int inSignature, int outSignature, Network.Seed seed) {
+        super(new int[] {inSignature}, new int[]{outSignature});
         super.name = "Linear Layer";
 
-        flattenedInDim = getflattenedDimFromSignature(inSignature);
+        flattenedInDim = inSignature;
         flattenedOutDim = outSignature;
 
         //according to the transformation out_i=w_{ij} in_j+b_i the index for the output activations is the row index and the
         //index for the incoming activations is the column index
         switch (seed) {
             case ALL_UNITY:
-                weights = Nd4j.ones(new int[]{flattenedInDim, flattenedOutDim});
-                biases = Nd4j.ones(new int[]{1, flattenedOutDim});
+                super.weights = Nd4j.ones(new int[]{flattenedInDim, flattenedOutDim});
+                super.biases = Nd4j.ones(new int[]{1, flattenedOutDim});
                 break;
             case NO_BIAS:
-                weights = Nd4j.rand(new int[]{flattenedInDim, flattenedOutDim}, new NormalDistribution(0, 0.5));
-                biases = Nd4j.zeros(new int[]{1, flattenedOutDim});
+                super.weights = Nd4j.rand(new int[]{flattenedInDim, flattenedOutDim}, new NormalDistribution(0, 0.5));
+                super.biases = Nd4j.zeros(new int[]{1, flattenedOutDim});
                 break;
             default:
-                weights = Nd4j.rand(new int[]{flattenedInDim, flattenedOutDim}, new NormalDistribution(0, 0.5));
-                biases = Nd4j.rand(new int[]{1, flattenedOutDim}, new NormalDistribution(0, 0.5));
+                super.weights = Nd4j.rand(new int[]{flattenedInDim, flattenedOutDim}, new NormalDistribution(0, 0.5));
+                super.biases = Nd4j.rand(new int[]{1, flattenedOutDim}, new NormalDistribution(0, 0.5));
                 break;
         }
         super.trainableParameters.add(weights);
         super.trainableParameters.add(biases);
     }
 
-    public LinearLayer(int[] inSignature, int outSignature) {
+    public LinearLayer(int inSignature, int outSignature) {
         this(inSignature, outSignature, Network.Seed.RANDOM);
     }
 
@@ -79,32 +78,17 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
         return dim;
     }
 
-    private int getflattenedDimFromSignature(int[] signature) {
-        int dim = 1;
-        for (int d = 0; d < signature.length; d++) {
-            dim *= signature[d];
-        }
-        return dim;
-    }
-
     @Override
     public void pushForward(Batch batch) {
-        //the dup() makes a copy and ensures that the data is not overwritten
-        //flatten the batchData
-        checkBatchConsistency(batch);
-
-        batchSize = batch.getActivations().shape()[0];
-        int[] newShape = new int[]{batchSize, flattenedInDim};
-        inputData = batch.getActivations().reshape(newShape);
+       this.batchSize = batch.getBatchSize();
+        inputData = batch.getActivations().dup();
         //calculate activations
         //a_{bi}=z_{bj}*w_{ij}+b_i  (b is the batchData index, summation over j)
         //tmp has to be written first, such that the index b is the row index after multiplication
         super.activations = Nd4j.tensorMmul(inputData, this.weights, new int[][]{{1}, {0}});
         super.activations.addiRowVector(biases);
 
-        //reshape activations from a matrix into a vector of row vectors
-        int[] reshape = new int[]{batchSize, 1, flattenedOutDim};
-        batch.setActivations(activations.reshape(reshape));
+        batch.setActivations(activations);
     }
 
     private void checkBatchConsistency(Batch batch) {
@@ -134,7 +118,7 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
                 //the first index of the errors is the batch index, this index has to be preserved
                 //transposing is omitted instead the weights are multiplied with respect to their first index
                 //delta_{bi}=delta_{bj}*w_{ji}
-                super.errorsForPreviousLayer = Nd4j.tensorMmul(errors, weights, new int[][]{{2}, {1}});
+                super.errorsForPreviousLayer = Nd4j.tensorMmul(errors, weights, new int[][]{{1}, {1}});
                 // int[] newShape = new int[this.inSignature.length + 1];
                 // newShape[0] = errors.shape()[0];
                 // for (int d = 1; d < newShape.length; d++) newShape[d] = this.inSignature[d - 1];
@@ -190,33 +174,24 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
         //they are supposed to form an mxn correction matrix
         //the input and errors are reshaped and then the tensor product is performed batch-element-wise and summed over all batch elements
         //the input is reshaped into a b-vector of a row vector in each component
-        int[] newInputShape = new int[3];
-        newInputShape[0] = this.inputData.shape()[0];
-        newInputShape[1] = 1;
-        newInputShape[2] = this.inputData.shape()[1];
+      //  int[] newInputShape = new int[3];
+       // newInputShape[0] = this.inputData.shape()[0];
+      //  newInputShape[1] = 1;
+      //  newInputShape[2] = this.inputData.shape()[1];
         //the error data is reshaped into a b-vector of a column vector in each component
-        int[] newErrorShape = new int[3];
-        newErrorShape[0] = this.errors.shape()[0];
-        newErrorShape[2] = 1;
-        newErrorShape[1] = this.errors.shape()[2];
+       // int[] newErrorShape = new int[3];
+      //  newErrorShape[0] = this.errors.shape()[0];
+      //  newErrorShape[2] = 1;
+      //  newErrorShape[1] = this.errors.shape()[2];
+//
+      //  INDArray corrections =  Nd4j.tensorMmul(this.inputData.reshape(newInputShape), this.errors.reshape(newErrorShape), new int[][]{{0, 1}, {0, 2}});
+        INDArray corrections =  Nd4j.tensorMmul(this.inputData, this.errors, new int[][]{{0, 0}, {0, 0}});
 
-        INDArray corrections =  Nd4j.tensorMmul(this.inputData.reshape(newInputShape), this.errors.reshape(newErrorShape), new int[][]{{0, 1}, {0, 2}});
         //regularization
         if (lambda!=0f) corrections.addi(this.weights.mul(2f*lambda));
         return corrections;
     }
 
-
-    @Override
-    public float getRegularization() {
-        if (lambda==0f) return 0f;
-        else {
-            float reg = 0f;
-            reg += Nd4j.sum(this.weights.mul(this.weights)).getFloat(0, 0) * lambda;
-            reg += Nd4j.sum(this.biases.mul(this.biases)).getFloat(0) * lambda;
-            return reg;
-        }
-    }
 
     @Override
     public String getDetailedErrors() {

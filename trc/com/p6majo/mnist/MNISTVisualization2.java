@@ -4,10 +4,8 @@ import com.p6majo.math.network2.Batch;
 import com.p6majo.math.network2.Data;
 import com.p6majo.math.network2.Network;
 import com.p6majo.math.network2.TestResult;
-import com.p6majo.math.network2.layers.CrossEntropyLayer;
-import com.p6majo.math.network2.layers.L2Layer;
-import com.p6majo.math.network2.layers.LinearLayer;
-import com.p6majo.math.network2.layers.SigmoidLayer;
+import com.p6majo.math.network2.layers.*;
+import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
 import java.util.List;
@@ -22,15 +20,30 @@ public class MNISTVisualization2 {
     private static Data[] testList;
 
 
+    /**
+     * convert the data of the images into standard inputData for the network
+     * The inputData generically has the shape
+     * depth, height, width
+     * The batch generically has the shape
+     * batchSize, depth, height, width
+     *
+     */
     private static Function<int[][],Data> converter = new Function<int[][], Data>() {
         @Override
         public Data apply(int[][] ints) {
+            //inDepth, inHeight, inWidth
+            int[] inputShape =new int[]{1,28,28};
             float[][] input = new float[28][28];
             for (int width=0;width<28;width++)
                 for (int height=0;height<28;height++)
                     input[width][height]=(float) (ints[width][height]/255.);
             float[] expectations = new float[10];
-            Data data = new Data(Nd4j.create(input),Nd4j.create(expectations));
+            INDArray in = Nd4j.create(input);
+            in = in.reshape(inputShape);
+            INDArray exp = Nd4j.create(expectations);
+          //  int[] expShape = new int[]{1,10};
+            exp = Nd4j.toFlattened(exp);
+            Data data = new Data(in,exp);
             return data;
         }
     };
@@ -83,7 +96,10 @@ public class MNISTVisualization2 {
 
         Network network = new Network(true);
 
-        LinearLayer ll = new LinearLayer(new int[]{28,28},40);
+        FlattenLayer flat = new FlattenLayer(new int[]{28,28});
+        network.addLayer(flat);
+
+        LinearLayer ll = new LinearLayer(784,40);
         network.addLayer(ll);
 
 
@@ -91,7 +107,7 @@ public class MNISTVisualization2 {
         network.addLayer(sig);
 
 
-        LinearLayer ll2 = new LinearLayer(new int[]{40},20);
+        LinearLayer ll2 = new LinearLayer(40,20);
         network.addLayer(ll2);
 
 
@@ -99,7 +115,7 @@ public class MNISTVisualization2 {
         network.addLayer(sig2);
 
 
-        LinearLayer ll3 = new LinearLayer(new int[]{20},10);
+        LinearLayer ll3 = new LinearLayer(20,10);
         network.addLayer(ll3);
 
 

@@ -3,10 +3,7 @@ package com.p6majo.mnist;
 import com.p6majo.math.network2.Data;
 import com.p6majo.math.network2.Network;
 import com.p6majo.math.network2.TestResult;
-import com.p6majo.math.network2.layers.CrossEntropyLayer;
-import com.p6majo.math.network2.layers.L2Layer;
-import com.p6majo.math.network2.layers.LinearLayer;
-import com.p6majo.math.network2.layers.SigmoidLayer;
+import com.p6majo.math.network2.layers.*;
 import org.nd4j.linalg.factory.Nd4j;
 
 import java.util.List;
@@ -79,7 +76,9 @@ public class MNISTVisualization2SpeedUp {
 
         Network network = new Network(false);
 
-        LinearLayer ll = new LinearLayer(new int[]{28,28},20);
+        FlattenLayer flat = new FlattenLayer(new int[]{28,28});
+
+        LinearLayer ll = new LinearLayer(784,20);
         network.addLayer(ll);
 
 
@@ -88,7 +87,7 @@ public class MNISTVisualization2SpeedUp {
 
 
 
-        LinearLayer ll2 = new LinearLayer(new int[]{20},10);
+        LinearLayer ll2 = new LinearLayer(20,10);
         network.addLayer(ll2);
 
 

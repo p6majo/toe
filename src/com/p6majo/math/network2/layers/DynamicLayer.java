@@ -2,6 +2,7 @@ package com.p6majo.math.network2.layers;
 
 import com.p6majo.math.network2.Batch;
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,6 +24,10 @@ public abstract class DynamicLayer extends Layer{
     protected List<INDArray> trainableParameters;
     protected float lambda;
 
+    protected  INDArray weights;
+    protected  INDArray biases;
+
+
     public DynamicLayer(int[] inSignature, int[] outSignature) {
         super(inSignature, outSignature);
         trainableParameters = new ArrayList<INDArray>();
@@ -41,7 +46,19 @@ public abstract class DynamicLayer extends Layer{
      */
     public abstract String getDetailedErrors();
 
-    public abstract  float getRegularization();
+    /**
+     * returns the square sum of all weights and biases multiplied by the regularization parameter lambda
+     * @return
+     */
+    public float getRegularization() {
+            if (lambda==0f) return 0f;
+            else {
+            float reg = 0f;
+            reg += Nd4j.sum(this.weights.mul(this.weights)).getFloat(0, 0) * lambda;
+            reg += Nd4j.sum(this.biases.mul(this.biases)).getFloat(0) * lambda;
+            return reg;
+        }
+    }
 
     public void setRegularization(float lambda){
         this.lambda = lambda;
