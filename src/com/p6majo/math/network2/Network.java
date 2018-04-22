@@ -1,8 +1,6 @@
 package com.p6majo.math.network2;
 
 
-import com.p6majo.math.network.DataList;
-import com.p6majo.math.network.NetworkVisualizer;
 import com.p6majo.math.network2.layers.*;
 import com.p6majo.math.utils.Utils;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -73,6 +71,10 @@ public class Network {
         List<DynamicLayer> dynLayers = new ArrayList<DynamicLayer>();
         for (Layer layer:layers) if (layer instanceof DynamicLayer) dynLayers.add((DynamicLayer) layer);
         return dynLayers;
+    }
+
+    public Layer getLayer(int index){
+        return this.layers.get(index);
     }
 
     public void addLayer(Layer layer){
@@ -200,92 +202,18 @@ public class Network {
         array[j] = temp;
     }
 
-    private int getFullDimension(int[]shape){
+
+    /**
+     * TODO find a good place for this auxiliary method
+     * @param shape
+     * @return
+     */
+    public static int getFullDimensionOfParameter(int[]shape){
         int dim = 1;
         for (int d=0;d<shape.length;d++) dim*=shape[d];
         return dim;
     }
 
-
-    /**
-     * This is an auxiliary method that allows to compute the gradient for parameters of dynamical layers directly from
-     * two forward passes for each parameter
-     * The method is very buggy and is not generic for all tensor like parameters
-     * @param batch
-     * @param layer the layer under consideration
-     * @param param the trainable parameter
-     * @return
-     */
-    public String gradientCheck(Batch batch,int layer,int param){
-        //TODO only take first batch element, if many are provided
-
-        DynamicLayer dynLayer = null;
-        if (this.layers.get(layer) instanceof DynamicLayer){
-            dynLayer = (DynamicLayer) this.layers.get(layer);
-
-            float epsilon = 1.e-3f;
-            List<INDArray> trainableParams = dynLayer.getTrainableParameters();
-
-            INDArray params  = trainableParams.get(param);
-
-            int[] shape = params.shape();
-            int dim = getFullDimension(shape);
-
-            LossLayer lossLayer = (LossLayer) (this.layers.get(layers.size() - 1));
-
-            StringBuilder out = new StringBuilder();
-
-            out.append("calculated gradients:\n[");
-
-            float[] gradient = new float[dim];
-            for (int i=0;i<dim;i++) {
-                float[] perturbationData = new float[dim];
-                perturbationData[i] = epsilon;
-
-                INDArray perturbations = Nd4j.create(perturbationData, params.shape());
-
-                batch.resetBatch();
-                pushforward(batch);
-
-
-                float loss = lossLayer.getLoss();
-
-                //shift
-                params.addi(perturbations);
-
-                batch.resetBatch();
-                pushforward(batch);
-
-                float loss2 = lossLayer.getLoss();
-                gradient[i] = (loss2 - loss) / epsilon;
-                String gradientString = String.format("%.2f",gradient[i]);
-
-                out.append(gradientString + " ");
-                if ( (i+1)%16==0) out.append("\n");
-                //undo shift
-                params.subi(perturbations);
-            }
-            out.append("]\n");
-
-            //calculate gradients
-            pullBack();
-            String errors = dynLayer.getDetailedErrors();
-
-            if (param==0) {
-                INDArray weightErrors = ((LinearLayer) dynLayer).getWeightCorrections();
-                INDArray numGradient = Nd4j.create(gradient, weightErrors.shape());
-
-                INDArray diff = weightErrors.sub(numGradient);
-                float maxDiff = Nd4j.max(diff).getFloat(0, 0);
-                float minDiff = Nd4j.min(diff).getFloat(0, 0);
-                out.append("Pullback of errors:\n" + errors + "\nmaximum deviation: " + maxDiff + " or " + minDiff);
-            }
-
-            return out.toString();
-        }
-        else Utils.errorMsg("The provided layer index "+layer+" does not correspond to a dynamic layer.\n It belongs to "+this.layers.get(layer).toShortString()+" instead.");
-        return null;
-    }
 
     public TestResult test(Data[] data){
         return test(data,data.length);
@@ -306,7 +234,7 @@ public class Network {
         return lossLayer.getTestResult(MAX_PROBABILITY);
     }
 
-    private void pushforward(Batch batch){
+    public void pushforward(Batch batch){
        // System.out.println("input: "+batch.getActivations());
         for (int l=0;l<layers.size();l++){
             layers.get(l).pushForward(batch);
@@ -314,7 +242,7 @@ public class Network {
         }
     }
 
-    private void pullBack(){
+    public void pullBack(){
         LossLayer last = (LossLayer) layers.get(layers.size()-1);
         //System.out.println("Loss: "+last.getLoss());
         last.pullBack();
@@ -329,126 +257,6 @@ public class Network {
     }
 
 
-
-
-
-
-
-
- /**
-     * short method call for {@link #stochasticGradientDescent(DataList, DataList, int, double,int)}
-     * @param dataList
-     * @param batchSize
-     * @param learningRate
-     */
-    public void stochasticGradientDescent(DataList dataList, int batchSize, double learningRate){
-        stochasticGradientDescent(dataList,dataList,batchSize,learningRate,Integer.MAX_VALUE);
-    }
-
-
-
-    /**
-     * Do stochastic gradient descent
-     * @param trainingData
-     * @param testData
-     * @param batchSize
-     * @param learningRate
-     */
-    public void stochasticGradientDescent(DataList trainingData, DataList testData, int batchSize, double learningRate,int maxCycles) {
-        double sqrBatch = Math.sqrt(batchSize); //variable to adjust for the error growth depending on the batchsize
-        double errorSum = 100;
-        long steps = 0;
-
-    /*
-        this.trainingData = trainingData;
-        this.testData = testData;
-        stochasticGradientDescentRunnable = new StochasticGradientDescentRunnable(this,trainingData,batchSize,learningRate,true,maxCycles);
-        stochasticGradientDescentRunnable.start();
-
-        synchronized(stochasticGradientDescentRunnable){
-            while (!stochasticGradientDescentRunnable.isFinished()){
-                try{
-                    stochasticGradientDescentRunnable.wait();
-                }catch(InterruptedException ex){
-                    System.out.println("Could not wait for the stochastic descent to finish.");
-                }
-            }
-        }
-    */
-        System.out.println("Fertig");
-    }
-
-
-    public void suspendStochasticDescent(){
-       // if (stochasticGradientDescentRunnable !=null) this.stochasticGradientDescentRunnable.suspend();
-    }
-
-    public void resumeStochasticDescent(){
-       // if (stochasticGradientDescentRunnable !=null) this.stochasticGradientDescentRunnable.resume();
-    }
-
-    public void performSingleStep(){
-        /*
-        if (stochasticGradientDescentRunnable !=null)
-            if (stochasticGradientDescentRunnable.isSuspended())
-                this.stochasticGradientDescentRunnable.singleStep();
-        */
-    }
-
-
-    /**
-     * Evaluate the network for a given piece of {@link com.p6majo.math.network.Data}
-     * The output of the network is stored in the activations of {@code data}
-     * @param data piece of {@link com.p6majo.math.network.Data}
-     * @return the piece of {@link com.p6majo.math.network.Data}
-     */
-    protected com.p6majo.math.network.Data feedForward(Data data) {
-     return null;
-    }
-
-
-
-
-    public double runTest(){
-        //return this.runTest(testData.size());
-        return 0.;
-    }
-
-    /**
-     * run counts tests and return the rate of success
-     * @param counts
-     * @return
-     */
-    public double runTest(int counts){
-        /*
-        if (stochasticGradientDescentRunnable.isTestable()) {
-            int correct = 0;
-            for (int r = 0; r < counts; r++) {
-                int rnd = (int) (Math.random() * testData.size());
-                Data data = testData.get(rnd);
-                this.feedForward(data);
-                double cost = cf.eval(data);
-                int expectation = 0;
-                int out = 0;
-                double prop = 0.;
-
-                Double[] activations = data.getActivations();
-                Double[] expectations = data.getExpectations();
-                for (int i = 0; i < activations.length; i++) {
-                    if (activations[i] > prop) {
-                        prop = activations[i];
-                        out = i;
-                    }
-                    if (expectations[i] == 1.) expectation = i;
-                }
-                if (expectation == out) correct++;
-            }
-            return (double) correct / counts;
-        }
-        */
-        return -1.;
-    }
-
     /**
      * outputs the full state of the network
      * @return
@@ -461,5 +269,9 @@ public class Network {
         out.append("********************************************\n");
         return out.toString();
     }
+
+
+
+
 
 }

@@ -79,7 +79,7 @@ public class RootsOnDisplay {
 
        System.out.println("Calculate roots for "+newPolynomials.size()+" polynomials.");
        newPolynomials.stream().parallel().forEach(i->getRoots(i));
-      // System.out.println(newPolynomials.stream().map(Utils::arrayOfIntegerToString).collect(Collectors.joining("\n")));
+      // System.out.println(newPolynomials.stream().map(LayerUtils::arrayOfIntegerToString).collect(Collectors.joining("\n")));
 
    }
 

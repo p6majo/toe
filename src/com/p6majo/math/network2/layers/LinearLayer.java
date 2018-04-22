@@ -12,8 +12,6 @@ import org.nd4j.linalg.factory.Nd4j;
 
 import java.awt.*;
 
-import static com.p6majo.math.network2.layers.Utils.getflattenedDimFromSignature;
-
 /**
  * A layer that applies a linear transformation to the activations of the previous layer
  * The activation data is stretched out and all spatial information is lost

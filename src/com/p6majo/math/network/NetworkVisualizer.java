@@ -293,7 +293,7 @@ public class NetworkVisualizer {
 
         //
         // label +="_";
-        // label += Utils.getIndices(pos+"");
+        // label += LayerUtils.getIndices(pos+"");
         // label += layer+"";
         // label += pos+"";
         return label;

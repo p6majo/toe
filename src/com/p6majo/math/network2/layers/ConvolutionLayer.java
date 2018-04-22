@@ -9,7 +9,8 @@ import org.nd4j.linalg.api.shape.Shape;
 import org.nd4j.linalg.convolution.Convolution;
 import org.nd4j.linalg.factory.Nd4j;
 
-import static com.p6majo.math.network2.layers.Utils.reflectKernel;
+import static com.p6majo.math.network2.layers.LayerUtils.reflectKernel;
+
 
 public class ConvolutionLayer extends DynamicLayer {
 
@@ -133,16 +134,43 @@ public class ConvolutionLayer extends DynamicLayer {
 
     @Override
     public void pullBack(INDArray errors) {
+
+        int errorsH = errors.size(2);
+        int errorsW = errors.size(3);
+        int errorsDepth = errors.size(1);
+
         INDArray col = Nd4j.createUninitialized(new int[]{batchSize,inHeight,inWidth,outDepth,kernelHeight,kernelWidth},'c');
         INDArray col2= col.permute(0,3,4,5,1,2);
         Convolution.im2col(errors,kernelHeight,kernelWidth,strideHeight,strideWidth,paddingHeight+kernelHeight-1,paddingWidth+kernelWidth-1,false,col2);
-        INDArray im2col2d = Shape.newShapeNoCopy(col, new int[]{batchSize*inHeight*inWidth,outDepth*kernelHeight*kernelWidth},false);
 
-        INDArray permutedW = reflectKernel(this.weights).permute(3,2,1,0);
+        INDArray im2col2d = col.reshape(new int[]{batchSize*inWidth*inHeight,outDepth*kernelHeight*kernelWidth});
+        //INDArray im2col2d = Shape.newShapeNoCopy(col, new int[]{batchSize*inHeight*inWidth,outDepth*kernelHeight*kernelWidth},false);
+
+          //reflect weights
+        /*
+        int[] wShape = this.weights.shape();
+        INDArray flattenedW = this.weights.reshape(new int[]{wShape[0],wShape[1],wShape[2]*wShape[3]});
+        INDArray tmp2 = null;
+        for (int o = 0; o < outDepth; o++){
+            for (int i = 0; i < inDepth; i++)
+                if (tmp2 == null)
+                    tmp2 = Nd4j.reverse(flattenedW.getRow(o).getRow(i).dup());
+                else
+                    tmp2 = Nd4j.concat(1, tmp2, Nd4j.reverse(flattenedW.getRow(o).getRow(i).dup()));
+        }
+
+        INDArray reflectedW = tmp2.reshape(wShape);
+        */
+
+       // System.out.println("converted:\n"+im2col2d);
+        INDArray  reflectedW = reflectKernel(this.weights);
+        System.out.println("reflected weights:\n" + reflectedW);
+        INDArray permutedW = reflectedW.permute(3,2,0,1);//in and outDepth are exchanged in comparison to pushforward
         INDArray reshapedW = permutedW.reshape('f',kernelWidth*kernelHeight*outDepth,inDepth);
+        //System.out.println("reshaped:\n"+reshapedW);
 
         this.errorsForPreviousLayer = im2col2d.mmul(reshapedW);
-        this.errorsForPreviousLayer=Shape.newShapeNoCopy(this.errorsForPreviousLayer,new int[]{inWidth,inHeight,batchSize,inDepth},true);
+        this.errorsForPreviousLayer=Shape.newShapeNoCopy(this.errorsForPreviousLayer,new int[]{inHeight,inWidth,batchSize,inDepth},true);
         this.errorsForPreviousLayer = this.errorsForPreviousLayer.permute(2,3,1,0);
     }
 

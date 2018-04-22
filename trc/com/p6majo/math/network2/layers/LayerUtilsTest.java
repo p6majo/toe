@@ -1,13 +1,12 @@
 package com.p6majo.math.network2.layers;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
 import static org.junit.Assert.assertEquals;
 
-public class UtilsTest {
+public class LayerUtilsTest {
 
     @Test
     public void reflectKernel() {
@@ -21,7 +20,7 @@ public class UtilsTest {
         INDArray kernel = Nd4j.rand(new int[]{outDepth, inDepth,dim,dim});
         System.out.println("Kernel: \n" + kernel);
 
-        INDArray reflectedKernel = Utils.reflectKernel(kernel);
+        INDArray reflectedKernel = LayerUtils.reflectKernel(kernel);
         System.out.println("reflected Kernel: \n"+reflectedKernel);
 
         //test a few components randomly

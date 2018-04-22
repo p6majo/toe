@@ -128,6 +128,8 @@ public class NetworkVisualizer2 {
         frame.setButton4Label("Test");
         frame.setButton5Label("Exit");
 
+        /*
+
         frame.setActionListenerForButton1(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -165,6 +167,8 @@ public class NetworkVisualizer2 {
                 frame.setInfoVisible(true);
             }
         });
+
+    */
 
         frame.setActionListenerForButton5(new ActionListener(){
             @Override

@@ -39,7 +39,7 @@ public class ConvolutionLayerTest {
 
     @Test
     public void pushForward() {
-        ConvolutionLayer convLayer = new ConvolutionLayer(new int[]{3,6,6},5,3,2,1,1,1,0,Network.Seed.NO_BIAS);
+        ConvolutionLayer convLayer = new ConvolutionLayer(new int[]{3,6,6},5,3,2,1,1,0,0,Network.Seed.NO_BIAS);
         System.out.println(convLayer.toString());
 
         convLayer.pushForward(batch);
@@ -55,8 +55,9 @@ public class ConvolutionLayerTest {
         int inHeight= 6;
         int kernelWidth = 5;
         int kernelHeight= 3;
-        int paddingWidth=1;
+        int paddingWidth=0;
         int paddingHeight=0;
+
         ConvolutionLayer convLayer = new ConvolutionLayer(new int[]{inDepth,inHeight,inWidth},kernelWidth,kernelHeight,outDepth,1,1,paddingWidth,paddingHeight,Network.Seed.NO_BIAS);
         System.out.println(convLayer.toString());
 
@@ -68,9 +69,10 @@ public class ConvolutionLayerTest {
         int outWidth = (inWidth-kernelWidth+2*paddingWidth)/1+1;
         int outHeight = (inHeight-kernelHeight+2*paddingHeight)/1+1;
 
-        INDArray errors  = Nd4j.ones(new int[]{outDepth,outHeight,outWidth});
+        INDArray errors  = Nd4j.ones(new int[]{batch.getBatchSize(),outDepth,outHeight,outWidth});
         convLayer.pullBack(errors);
         System.out.println("pullback:\n"+convLayer.getErrorsForPreviousLayer());
+        System.out.println("Finished!");
     }
 
     @Test

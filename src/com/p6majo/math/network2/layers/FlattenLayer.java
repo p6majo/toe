@@ -2,7 +2,6 @@ package com.p6majo.math.network2.layers;
 
 import com.p6majo.math.network2.Batch;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
 
 public class FlattenLayer extends Layer {
 
@@ -11,8 +10,8 @@ public class FlattenLayer extends Layer {
     private int batchSize;
 
     public FlattenLayer(int[] inSignature) {
-        super(inSignature,new int[]{Utils.getflattenedDimFromSignature(inSignature)} );
-        this.flattenedDim = Utils.getflattenedDimFromSignature(inSignature);
+        super(inSignature,new int[]{LayerUtils.getflattenedDimFromSignature(inSignature)} );
+        this.flattenedDim = LayerUtils.getflattenedDimFromSignature(inSignature);
         this.inShape = inSignature;
     }
 

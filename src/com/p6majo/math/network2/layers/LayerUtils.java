@@ -5,7 +5,7 @@ import org.nd4j.linalg.factory.Nd4j;
 
 import static com.p6majo.math.utils.Utils.errorMsg;
 
-public class Utils {
+public class LayerUtils {
 
     /**
      * multiply all dimensions to get one dimension that can hold the data from all dimensions
