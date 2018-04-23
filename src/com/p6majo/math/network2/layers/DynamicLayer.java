@@ -46,6 +46,8 @@ public abstract class DynamicLayer extends Layer{
      */
     public abstract String getDetailedErrors();
 
+
+
     /**
      * returns the square sum of all weights and biases multiplied by the regularization parameter lambda
      * @return

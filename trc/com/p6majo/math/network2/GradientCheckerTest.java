@@ -8,7 +8,7 @@ public class GradientCheckerTest {
     @Test
     public void GCT(){
         GradientChecker gradChecker = new GradientChecker();
-        System.out.println(gradChecker.gradientCheck(2, 1));
+        System.out.println(gradChecker.gradientCheck(2, 0));
     }
 
 }

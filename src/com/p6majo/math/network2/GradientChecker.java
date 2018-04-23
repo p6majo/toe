@@ -166,8 +166,8 @@ public class GradientChecker {
             out.append(gradients);
             //calculate gradients
             network.pullBack();
-            out.append("\nPullback of errors:\n"+dynLayer.getErrors());
-            //out.append("\nPullback of errors:\n"+dynLayer.getDetailedErrors());
+            //out.append("\nPullback of errors:\n"+dynLayer.getErrors());
+            out.append("\nPullback of errors:\n"+dynLayer.getDetailedErrors());
 
             return out.toString();
         }

@@ -100,7 +100,13 @@ public class ConvolutionLayer extends DynamicLayer {
      */
     @Override
     public String getDetailedErrors() {
-        return null;
+
+        StringBuilder out = new StringBuilder();
+
+        out.append("Corrections to the biases:\n" + this.getErrors());
+        out.append("\nCorrections to the weights:\n" + this.getWeightCorrections());
+
+        return out.toString();
     }
 
     @Override
@@ -121,7 +127,7 @@ public class ConvolutionLayer extends DynamicLayer {
         INDArray col = Nd4j.createUninitialized(new int[] {batchSize, outHeight, outWidth, inDepth, kernelHeight, kernelWidth}, 'c');
         INDArray col2 = col.permute(0, 3, 4, 5, 1, 2);
         Convolution.im2col(inputData, kernelHeight, kernelWidth, strideHeight, strideWidth, paddingHeight, paddingWidth,  false, col2);
-        INDArray im2col2d = Shape.newShapeNoCopy(col, new int[] {batchSize * outHeight * outWidth, inDepth * kernelHeight * kernelWidth}, false);
+        INDArray im2col2d = Shape.newShapeNoCopy(col, new int[] {batchSize * outHeight * outWidth, inDepth*kernelHeight * kernelWidth}, false);
 
         INDArray permutedW = this.weights.permute(3,2,1,0);
         INDArray reshapedW = permutedW.reshape('f', kernelWidth * kernelHeight * inDepth, outDepth);
@@ -181,25 +187,48 @@ public class ConvolutionLayer extends DynamicLayer {
 
     @Override
     public void learn(float learningRate) {
-
+        INDArray corrections = this.errors.sum(0).add(this.biases.mul(2f*lambda));
+        this.biases.subi(corrections.mul(learningRate / batchSize)); //adjust biases
+        //at this point there was some strange behaviour of the nd4j method mul. If muli is replaced by mul, somehow the components of the correction tensor are strangely shuffled
+        this.weights.subi(getWeightCorrections().muli(learningRate / batchSize));//adjust weights
     }
 
-    private INDArray getCorrectionsForWeights(){
+    private INDArray getWeightCorrections(){
         /*
         The back propagation is a convolution of the kernel from the errors with the input activations of this layer
         out dimensions become kernel dimensions
         and kernel dimensions become the new out dimensions
-         */
-        INDArray col = Nd4j.createUninitialized(new int[]{batchSize,this.kernelHeight,kernelWidth,outDepth,outHeight,outWidth},'c');
-        INDArray col2 = col.permute(0,3,4,5,1,2);
-        Convolution.im2col(this.errors,outHeight,outWidth,strideHeight,strideWidth,paddingHeight,paddingWidth,false,col2);
-        INDArray im2col2d = Shape.newShapeNoCopy(col,new int[]{batchSize*kernelHeight*kernelWidth*inDepth,outDepth*outHeight*outWidth},false);
+        */
+        //the inDepth is simply treated as an additional batch dimension
+        INDArray newInputData = this.inputData.reshape(batchSize*inDepth,1,inHeight,inWidth);
 
-        INDArray permutedW = inputData.permute(3,2,1,0);
-        INDArray reshapedW=permutedW.reshape('f',outWidth*outHeight*outDepth,inDepth);
+        INDArray col = Nd4j.createUninitialized(new int[]{batchSize*inDepth,this.kernelHeight,this.kernelWidth,1,outHeight,outWidth},'c');
+        INDArray col2 = col.permute(0,3,4,5,1,2);
+        Convolution.im2col(newInputData,outHeight,outWidth,strideHeight,strideWidth,paddingHeight,paddingWidth,false,col2);
+
+        //create 2d matrix with convolution data stored in rows (outHeight*outWidth) is the flattened kernel length with depth 1
+        INDArray im2col2d = Shape.newShapeNoCopy(col,new int[]{batchSize*inDepth*kernelHeight*kernelWidth,outHeight*outWidth},false);
+
+       // System.out.println("input:\n"+inputData);
+        //im2col2d = im2col2d.reshape(batchSize,inDepth,kernelHeight*kernelWidth,outHeight*outWidth);
+       // System.out.println("convolprep:\n"+im2col2d);
+
+
+        INDArray permutedW = errors.permute(1,3,2,0);
+
+        INDArray reshapedW=permutedW.reshape('f',outWidth*outHeight,outDepth).transpose();
+
+       // System.out.println("errors:\n"+errors);
+       // System.out.println("reshaped:\n"+reshapedW);
+
         INDArray corrections = im2col2d.mmul(reshapedW);
-        corrections = Shape.newShapeNoCopy(corrections,new int[]{kernelWidth,kernelHeight,batchSize,inDepth},true);
-        corrections = corrections.permute(2,3,1,0);
+        //corrections = corrections.transpose();
+       // corrections=Shape.newShapeNoCopy(corrections,new int[]{outDepth,kernelHeight,kernelWidth,inDepth},true);
+       // corrections = Shape.newShapeNoCopy(corrections,new int[]{kernelWidth,kernelHeight,batchSize,outDepth,inDepth},true);
+       // corrections = corrections.permute(2,4,3,1,0);
+        corrections  =  corrections.transpose().reshape(batchSize,outDepth,inDepth,kernelHeight,kernelWidth);
+        //corrections  = corrections.permute(0,1,4,2,3);
+        //System.out.println("corrections:\n" +corrections);
         return corrections;
     }
 
