@@ -12,6 +12,8 @@ import org.nd4j.linalg.factory.Nd4j;
 
 import java.awt.*;
 
+import static com.p6majo.math.network2.layers.LayerUtils.getFlattenedDimFromBatchShape;
+
 /**
  * A layer that applies a linear transformation to the activations of the previous layer
  * The activation data is stretched out and all spatial information is lost
@@ -64,17 +66,6 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
         this(inSignature, outSignature, Network.Seed.RANDOM);
     }
 
-    private int getBatchSizeFromBatchShape(int[] shape) {
-        return shape[0];
-    }
-
-    private int getFlattenedDimFromBatchShape(int[] shape) {
-        int dim = 1;
-        for (int d = 1; d < shape.length; d++) {
-            dim *= shape[d];
-        }
-        return dim;
-    }
 
     @Override
     public void pushForward(Batch batch) {
@@ -128,7 +119,7 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
     }
 
     private boolean checkErrorBatchConsistency(INDArray errors) {
-        if (this.getFlattenedDimFromBatchShape(errors.shape()) == this.flattenedOutDim) return true;
+        if (getFlattenedDimFromBatchShape(errors.shape()) == this.flattenedOutDim) return true;
         return false;
     }
 

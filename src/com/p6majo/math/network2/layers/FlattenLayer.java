@@ -10,8 +10,8 @@ public class FlattenLayer extends Layer {
     private int batchSize;
 
     public FlattenLayer(int[] inSignature) {
-        super(inSignature,new int[]{LayerUtils.getflattenedDimFromSignature(inSignature)} );
-        this.flattenedDim = LayerUtils.getflattenedDimFromSignature(inSignature);
+        super(inSignature,new int[]{LayerUtils.getFlattenedDimFromSignature(inSignature)} );
+        this.flattenedDim = LayerUtils.getFlattenedDimFromSignature(inSignature);
         this.inShape = inSignature;
     }
 

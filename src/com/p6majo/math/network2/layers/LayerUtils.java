@@ -14,10 +14,18 @@ public class LayerUtils {
      * @param signature
      * @return
      */
-    public static int getflattenedDimFromSignature(int[] signature) {
+    public static int getFlattenedDimFromSignature(int[] signature) {
         int dim = 1;
         for (int d = 0; d < signature.length; d++) {
             dim *= signature[d];
+        }
+        return dim;
+    }
+
+    public static int getFlattenedDimFromBatchShape(int[] shape) {
+        int dim = 1;
+        for (int d = 1; d < shape.length; d++) {
+            dim *= shape[d];
         }
         return dim;
     }

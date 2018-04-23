@@ -9,8 +9,10 @@ import org.nd4j.linalg.api.rng.distribution.impl.NormalDistribution;
 import org.nd4j.linalg.factory.Nd4j;
 
 import java.util.List;
+import java.util.function.Function;
 
 import static com.p6majo.math.network2.Network.getFullDimensionOfParameter;
+import static com.p6majo.math.network2.NetworkUtils.iterateThroughTensor;
 
 /**
  * Test class to verify the back propagation for various types of dynamical layers
@@ -27,6 +29,13 @@ public class GradientChecker {
     private final Network network;
     private final Batch batch;
 
+    //input and output dimensions
+    private static int inDepth=2;
+    private static int inRows = 6;
+    private static int inCols = 6;
+    private static int outClasses = 2;
+
+
 
     public GradientChecker(){
         this(setupNetwork(),setupData());
@@ -41,21 +50,25 @@ public class GradientChecker {
 
         //input and output dimensions
        int inDepth=2;
-       int inRows = 4;
-       int inCols = 4;
+       int inRows = 6;
+       int inCols = 6;
        int outClasses = 2;
-
-
 
         Network network = new Network(false);
 
         SigmoidLayer sig = new SigmoidLayer(new int[]{inDepth,inRows,inCols});
         network.addLayer(sig);
 
-        FlattenLayer flat = new FlattenLayer(new int[]{inDepth,inRows,inCols});
+        ConvolutionLayer conv = new ConvolutionLayer(new int[]{inDepth,inRows,inCols},3,3,3,1,1,0,0, Network.Seed.RANDOM);
+        network.addLayer(conv);
+
+        ConvolutionLayer conv2 = new ConvolutionLayer(new int[]{3,inRows-2,inCols-2},3,3,4,1,1,0,0, Network.Seed.RANDOM);
+        network.addLayer(conv2);
+
+        FlattenLayer flat = new FlattenLayer(new int[]{4,2,2});
         network.addLayer(flat);
 
-        LinearLayer ll = new LinearLayer(inDepth*inRows*inCols,outClasses);
+        LinearLayer ll = new LinearLayer(16,outClasses);
         network.addLayer(ll);
 
         SigmoidLayer sig2 = new SigmoidLayer(new int[]{outClasses});
@@ -71,7 +84,7 @@ public class GradientChecker {
 
     private static Batch setupData(){
 
-        INDArray input = Nd4j.rand(new int[]{2,4,4},new NormalDistribution(0.,2.));
+        INDArray input = Nd4j.rand(new int[]{inDepth,inRows,inCols},new NormalDistribution(0.,2.));
         INDArray output = Nd4j.zeros(new int[]{2});
         output.put(0,1,1f);
 
@@ -79,6 +92,38 @@ public class GradientChecker {
         Batch batch = new Batch(data);
         System.out.println(batch);
         return batch;
+    }
+
+    public void iterateThroughTensor(INDArray gradient, INDArray params){
+        float epsilon = 1.e-2f;
+        int[] shape = gradient.shape();
+        int[] shape2 = params.shape();
+        if (shape.equals(shape2)) Utils.errorMsg("Both tensors have to have the same shape, but received "+Utils.intArray2String(shape,"x","")+" and "+Utils.intArray2String(shape2,"x","")+" instead.");
+
+        if (shape.length==2 && gradient.size(0)==1){
+            for (int c = 0; c < gradient.size(1); c++) {
+                //calc gradient component numerically
+                LossLayer lossLayer = network.getLossLayer();
+                batch.resetBatch();
+                network.pushforward(batch);
+                float loss1 = lossLayer.getLoss();
+
+                params.put(0,c,(params.getFloat(0,c)+epsilon));
+                batch.resetBatch();
+                network.pushforward(batch);
+                float loss2 = lossLayer.getLoss();
+                gradient.put(0,c,(loss2-loss1)/epsilon);
+
+                params.put(0,c,(params.getFloat(0,c)-epsilon));
+            }
+        }
+        else{
+            //System.out.println(Utils.intArray2String(tensor.shape(), "x", ""));
+           // System.out.println("[");
+            for (int r=0;r<gradient.size(0);r++)
+                iterateThroughTensor(gradient.getRow(r),params.getRow(r));
+            //System.out.println("]");
+        }
     }
 
     /**
@@ -98,7 +143,6 @@ public class GradientChecker {
         }
 
         if (dynLayer!=null){
-            float epsilon = 1.e-3f;
             List<INDArray> trainableParams = dynLayer.getTrainableParameters();
 
             INDArray params  = trainableParams.get(param);
@@ -106,58 +150,24 @@ public class GradientChecker {
             int[] shape = params.shape();
             int dim = getFullDimensionOfParameter(shape);
 
-            LossLayer lossLayer = network.getLossLayer();
+
 
             StringBuilder out = new StringBuilder();
 
-            out.append("calculated gradients:\n[");
-
-            float[] gradient = new float[dim];
-            for (int i=0;i<dim;i++) {
-                float[] perturbationData = new float[dim];
-                perturbationData[i] = epsilon;
-
-                INDArray perturbations = Nd4j.create(perturbationData, params.shape());
-
-                batch.resetBatch();
-                network.pushforward(batch);
+            out.append("calculated gradients:\n");
 
 
-                float loss = lossLayer.getLoss();
+            INDArray gradients = Nd4j.zeros(shape);
 
-                //shift
-                params.addi(perturbations);
+            //System.out.println(params);
 
-                batch.resetBatch();
-                network.pushforward(batch);
+            iterateThroughTensor(gradients,params);
 
-                float loss2 = lossLayer.getLoss();
-                gradient[i] = (loss2 - loss) / epsilon;
-                String gradientString = String.format("%.2f",gradient[i]);
-
-                out.append(gradientString + " ");
-                if ( (i+1)%16==0) out.append("\n");
-                //undo shift
-                params.subi(perturbations);
-            }
-            out.append("]\n");
-
+            out.append(gradients);
             //calculate gradients
             network.pullBack();
-            String errors = dynLayer.getDetailedErrors();
-
-            if (param==0) {
-                INDArray weightErrors = ((LinearLayer) dynLayer).getWeightCorrections();
-                INDArray numGradient = Nd4j.create(gradient, weightErrors.shape());
-
-                INDArray diff = weightErrors.sub(numGradient);
-                float maxDiff = Nd4j.max(diff).getFloat(0, 0);
-                float minDiff = Nd4j.min(diff).getFloat(0, 0);
-                out.append("Pullback of errors:\n" + errors + "\nmaximum deviation: " + maxDiff + " or " + minDiff);
-            }
-            else{
-                out.append("Pullback of errors:\n"+errors);
-            }
+            out.append("\nPullback of errors:\n"+dynLayer.getErrors());
+            //out.append("\nPullback of errors:\n"+dynLayer.getDetailedErrors());
 
             return out.toString();
         }

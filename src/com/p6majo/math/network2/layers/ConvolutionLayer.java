@@ -116,11 +116,11 @@ public class ConvolutionLayer extends DynamicLayer {
     public void pushForward(Batch batch) {
 
         this.batchSize = batch.getBatchSize();
-        this.inputData = batch.getActivations();
+        this.inputData = batch.getActivations().dup();
 
         INDArray col = Nd4j.createUninitialized(new int[] {batchSize, outHeight, outWidth, inDepth, kernelHeight, kernelWidth}, 'c');
         INDArray col2 = col.permute(0, 3, 4, 5, 1, 2);
-        Convolution.im2col(batch.getActivations(), kernelHeight, kernelWidth, strideHeight, strideWidth, paddingHeight, paddingWidth,  false, col2);
+        Convolution.im2col(inputData, kernelHeight, kernelWidth, strideHeight, strideWidth, paddingHeight, paddingWidth,  false, col2);
         INDArray im2col2d = Shape.newShapeNoCopy(col, new int[] {batchSize * outHeight * outWidth, inDepth * kernelHeight * kernelWidth}, false);
 
         INDArray permutedW = this.weights.permute(3,2,1,0);
@@ -129,11 +129,16 @@ public class ConvolutionLayer extends DynamicLayer {
         this.activations = im2col2d.mmul(reshapedW);
         this.activations = Shape.newShapeNoCopy(this.activations, new int[] {outWidth, outHeight, batchSize, outDepth}, true);
         this.activations = activations.permute(2,3,1,0); //batchSize, outDepth, outHeight, outWidth
+        //TODO look for predefined operation
+        for (int b = 0; b < batchSize; b++)
+            this.activations.getRow(b).addi(this.biases);
+
         batch.setActivations(this.activations);
     }
 
     @Override
     public void pullBack(INDArray errors) {
+        super.errors = errors;
 
         int errorsH = errors.size(2);
         int errorsW = errors.size(3);
@@ -164,7 +169,7 @@ public class ConvolutionLayer extends DynamicLayer {
 
        // System.out.println("converted:\n"+im2col2d);
         INDArray  reflectedW = reflectKernel(this.weights);
-        System.out.println("reflected weights:\n" + reflectedW);
+        //System.out.println("reflected weights:\n" + reflectedW);
         INDArray permutedW = reflectedW.permute(3,2,0,1);//in and outDepth are exchanged in comparison to pushforward
         INDArray reshapedW = permutedW.reshape('f',kernelWidth*kernelHeight*outDepth,inDepth);
         //System.out.println("reshaped:\n"+reshapedW);
