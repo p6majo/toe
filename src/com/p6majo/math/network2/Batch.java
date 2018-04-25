@@ -59,7 +59,7 @@ public class Batch {
         INDArray[] inputs =new INDArray[batchSize];
         INDArray[] expectations=new INDArray[batchSize];
 
-        for (int n=0;n<batchSize;n++){
+        for (int n=0;n<data.length;n++){
             inputs[n]=data[n].getInput();
             expectations[n]=data[n].getExpectations();
         }

@@ -2,10 +2,12 @@ package com.p6majo.math.network2.layers;
 
 import com.p6majo.math.network2.Batch;
 import com.p6majo.math.network2.Data;
+import com.p6majo.math.network2.GradientChecker;
 import com.p6majo.math.network2.Network;
 import org.junit.Before;
 import org.junit.Test;
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.api.rng.distribution.impl.NormalDistribution;
 import org.nd4j.linalg.factory.Nd4j;
 
 import static org.junit.Assert.*;
@@ -77,5 +79,50 @@ public class ConvolutionLayerTest {
 
     @Test
     public void learn() {
+        //input and output dimensions
+        int inDepth=2;
+        int inRows = 6;
+        int inCols = 6;
+        int outClasses = 2;
+
+        Network network = new Network(false);
+
+        SigmoidLayer sig = new SigmoidLayer(new int[]{inDepth,inRows,inCols});
+        network.addLayer(sig);
+
+        ConvolutionLayer conv = new ConvolutionLayer(new int[]{inDepth,inRows,inCols},3,3,3,1,1,0,0, Network.Seed.RANDOM);
+        network.addLayer(conv);
+
+        ConvolutionLayer conv2 = new ConvolutionLayer(new int[]{3,inRows-2,inCols-2},3,3,4,1,1,0,0, Network.Seed.RANDOM);
+        network.addLayer(conv2);
+
+        FlattenLayer flat = new FlattenLayer(new int[]{4,2,2});
+        network.addLayer(flat);
+
+        LinearLayer ll = new LinearLayer(16,outClasses);
+        network.addLayer(ll);
+
+        SigmoidLayer sig2 = new SigmoidLayer(new int[]{outClasses});
+        network.addLayer(sig2);
+
+        CrossEntropyLayer cel = new CrossEntropyLayer(new int[]{outClasses});
+        network.addLayer(cel);
+
+        network.setLearningRate(0.01f);
+        network.setRegularization(0.f,0.f);
+
+        System.out.println(network);
+
+        INDArray input = Nd4j.rand(new int[]{inDepth,inRows,inCols},new NormalDistribution(0.,2.));
+        INDArray output = Nd4j.zeros(new int[]{2});
+        output.put(0,1,1f);
+
+        Data data =new Data(input,output);
+        Batch batch = new Batch(data);
+        System.out.println(batch);
+
+        GradientChecker gc = new GradientChecker(network,batch);
+        System.out.println(gc.gradientCheck(1, 0));
+
     }
 }

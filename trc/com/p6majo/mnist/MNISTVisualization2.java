@@ -122,14 +122,14 @@ public class MNISTVisualization2 {
         SigmoidLayer sig3 = new SigmoidLayer(new int[]{10});
         network.addLayer(sig3);
 
-        CrossEntropyLayer cel = new CrossEntropyLayer(new int[]{10});
-        network.addLayer(cel);
+       // CrossEntropyLayer cel = new CrossEntropyLayer(new int[]{10});
+       // network.addLayer(cel);
 
-       // L2Layer l2 = new L2Layer(new int[]{10});
-      // network.addLayer(l2);
+       L2Layer l2 = new L2Layer(new int[]{10});
+        network.addLayer(l2);
 
         network.setLearningRate(0.01f);
-        network.setRegularization(0.00025f);
+        network.setRegularization(0.000f,0.f);
         generateData();
        // System.out.println(testList[0].toString());
 
@@ -142,11 +142,9 @@ public class MNISTVisualization2 {
        System.out.println("Success rate before: "+test.getSuccessRate());
 
 
-        for (int i = 0; i <15 ; i++) {
-            network.train(dataList, testList, 1);
+
+            network.train(dataList, testList, 10,15,100);
             test = network.test(testList);
-            System.out.println("Success rate after "+(i+1)+"th cycle: " + test.getSuccessRate());
-        }
 
         //network.stochasticGradientDescent(dataList,testList, 1,0.01,8);
         //network.stochasticGradientDescent(dataList,testList, 1,0.001,400);

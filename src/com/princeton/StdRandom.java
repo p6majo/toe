@@ -281,17 +281,17 @@ public final class StdRandom {
     }
 
     /**
-     * Returns a random integer from a Poisson distribution with mean &lambda;.
+     * Returns a random integer from a Poisson distribution with mean &lambdaW;.
      *
      * @param  lambda the mean of the Poisson distribution
-     * @return a random integer from a Poisson distribution with mean {@code lambda}
-     * @throws IllegalArgumentException unless {@code lambda > 0.0} and not infinite
+     * @return a random integer from a Poisson distribution with mean {@code lambdaW}
+     * @throws IllegalArgumentException unless {@code lambdaW > 0.0} and not infinite
      */
     public static int poisson(double lambda) {
         if (!(lambda > 0.0))
-            throw new IllegalArgumentException("lambda must be positive: " + lambda);
+            throw new IllegalArgumentException("lambdaW must be positive: " + lambda);
         if (Double.isInfinite(lambda))
-            throw new IllegalArgumentException("lambda must not be infinite: " + lambda);
+            throw new IllegalArgumentException("lambdaW must not be infinite: " + lambda);
         // using algorithm given by Knuth
         // see http://en.wikipedia.org/wiki/Poisson_distribution
         int k = 0;
@@ -410,16 +410,16 @@ public final class StdRandom {
 
     /**
      * Returns a random real number from an exponential distribution
-     * with rate &lambda;.
+     * with rate &lambdaW;.
      *
      * @param  lambda the rate of the exponential distribution
      * @return a random real number from an exponential distribution with
-     *         rate {@code lambda}
-     * @throws IllegalArgumentException unless {@code lambda > 0.0}
+     *         rate {@code lambdaW}
+     * @throws IllegalArgumentException unless {@code lambdaW > 0.0}
      */
     public static double exp(double lambda) {
         if (!(lambda > 0.0))
-            throw new IllegalArgumentException("lambda must be positive: " + lambda);
+            throw new IllegalArgumentException("lambdaW must be positive: " + lambda);
         return -Math.log(1 - uniform()) / lambda;
     }
 

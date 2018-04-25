@@ -93,32 +93,47 @@ public class MNISTVisualization3 {
 
         Network network = new Network(true);
 
-        ConvolutionLayer conv = new ConvolutionLayer(new int[]{1,28,28},5,5,5,1,1,0,0, Network.Seed.RANDOM);
+        ConvolutionLayer conv = new ConvolutionLayer(new int[]{1,28,28},5,5,20,1,1,0,0, Network.Seed.RANDOM);
         network.addLayer(conv);
 
-        SigmoidLayer sig = new SigmoidLayer(new int[]{5,24,24});
+        MaxPoolingLayer maxPool = new MaxPoolingLayer(new int[]{20,24,24},2,2);
+        network.addLayer(maxPool);
+
+        SigmoidLayer sig = new SigmoidLayer(new int[]{20,12,12});
         network.addLayer(sig);
 
-        //We need pooling layers
-        //to reduce the amount of data points
+        ConvolutionLayer conv2 = new ConvolutionLayer(new int[]{20,12,12},5,5,50,1,1,0,0, Network.Seed.RANDOM);
+        network.addLayer(conv2);
 
-        System.exit(0);
+        MaxPoolingLayer maxPool2 = new MaxPoolingLayer(new int[]{50,8,8},2,2);
+       network.addLayer(maxPool2);
 
-        LinearLayer ll2 = new LinearLayer(1805,10);
+        SigmoidLayer sig2 = new SigmoidLayer(new int[]{50,4,4});
+        network.addLayer(sig2);
+
+        FlattenLayer flat = new FlattenLayer(new int[]{50,4,4});
+        network.addLayer(flat);
+
+        LinearLayer ll2 = new LinearLayer(800  ,100);
         network.addLayer(ll2);
 
 
-        SigmoidLayer sig2 = new SigmoidLayer(new int[]{10});
-        network.addLayer(sig2);
+        SigmoidLayer sig3 = new SigmoidLayer(new int[]{100});
+        network.addLayer(sig3);
+
+        LinearLayer ll3 = new LinearLayer(100  ,10);
+        network.addLayer(ll3);
+
+
+        SigmoidLayer sig4 = new SigmoidLayer(new int[]{10});
+        network.addLayer(sig4);
+
 
         CrossEntropyLayer cel = new CrossEntropyLayer(new int[]{10});
         network.addLayer(cel);
 
-       // L2Layer l2 = new L2Layer(new int[]{10});
-      // network.addLayer(l2);
-
         network.setLearningRate(0.01f);
-        network.setRegularization(0.00025f);
+        network.setRegularization(0.0001f,0.f);
         generateData();
        // System.out.println(testList[0].toString());
 
@@ -127,15 +142,13 @@ public class MNISTVisualization3 {
         //System.out.println(network.gradientCheck(batch, 0, 0));
 
 
-        TestResult test = network.test(testList);
-       System.out.println("Success rate before: "+test.getSuccessRate());
+        long testtime=System.currentTimeMillis();
+        TestResult test = network.test(testList,100);
+       System.out.println("Success rate before: "+test.getSuccessRate()+" in test time: "+(System.currentTimeMillis()-testtime)+" ms.");
 
 
-        for (int i = 0; i <15 ; i++) {
-            network.train(dataList, testList, 1);
-            test = network.test(testList);
-            System.out.println("Success rate after "+(i+1)+"th cycle: " + test.getSuccessRate());
-        }
+
+       network.train(dataList, testList, 1,7,10);
 
         //network.stochasticGradientDescent(dataList,testList, 1,0.01,8);
         //network.stochasticGradientDescent(dataList,testList, 1,0.001,400);

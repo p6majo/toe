@@ -18,6 +18,7 @@ public class SigmoidLayer extends Layer {
 
     @Override
     public void pushForward(Batch batch) {
+        super.pushForward(batch);
         //the activations of the batch get overwritten by the Executioner
         super.activations = Nd4j.getExecutioner().execAndReturn(new Sigmoid(batch.getActivations()));
     }
@@ -36,12 +37,6 @@ public class SigmoidLayer extends Layer {
        INDArray factor = activations.sub(1).mul(-1);
        factor.muli(activations);
        super.errorsForPreviousLayer = factor.mul(errors);
-    }
-
-    @Override
-    public void learn(float learningRate) {
-        //nothing to do in this layer since it is a passive layer
-        //there are not parameters to be adjusted
     }
 
     public String toString() {

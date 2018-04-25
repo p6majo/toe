@@ -78,7 +78,7 @@ public class GradientChecker {
         network.addLayer(cel);
 
         network.setLearningRate(0.01f);
-        network.setRegularization(0.f);
+        network.setRegularization(0.f,0.f);
         return network;
     }
 

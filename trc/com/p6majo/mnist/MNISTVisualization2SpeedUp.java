@@ -113,12 +113,8 @@ public class MNISTVisualization2SpeedUp {
        System.out.println("Success rate before: "+test.getSuccessRate());
 
         long start = System.currentTimeMillis();
-        for (int i=0;i<1;i++) {
-            network.train(dataList, testList, 1);
-            System.out.println("Time: " + (System.currentTimeMillis() - start));
-        }
-        test = network.test(testList);
-        System.out.println("Success rate after cycle: " + test.getSuccessRate());
+        network.train(dataList, testList, 1,1,100);
+        System.out.println("Time: " + (System.currentTimeMillis() - start));
 
 
         //network.stochasticGradientDescent(dataList,testList, 1,0.01,8);

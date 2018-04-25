@@ -22,7 +22,8 @@ import java.util.Set;
 public abstract class DynamicLayer extends Layer{
 
     protected List<INDArray> trainableParameters;
-    protected float lambda;
+    protected float lambdaW;
+    protected float lambdaB;
 
     protected  INDArray weights;
     protected  INDArray biases;
@@ -45,25 +46,27 @@ public abstract class DynamicLayer extends Layer{
      * @return
      */
     public abstract String getDetailedErrors();
+    public abstract void learn(float learningRate);
 
 
 
     /**
-     * returns the square sum of all weights and biases multiplied by the regularization parameter lambda
+     * returns the square sum of all weights and biases multiplied by the regularization parameter lambdaW
      * @return
      */
     public float getRegularization() {
-            if (lambda==0f) return 0f;
+            if (lambdaW==0f && lambdaB==0f) return 0f;
             else {
             float reg = 0f;
-            reg += Nd4j.sum(this.weights.mul(this.weights)).getFloat(0, 0) * lambda;
-            reg += Nd4j.sum(this.biases.mul(this.biases)).getFloat(0) * lambda;
+            if (lambdaW!=0f) reg += Nd4j.sum(this.weights.mul(this.weights)).getFloat(0, 0) * lambdaW;
+            if (lambdaB!=0f) reg += Nd4j.sum(this.biases.mul(this.biases)).getFloat(0) * lambdaB;
             return reg;
         }
     }
 
-    public void setRegularization(float lambda){
-        this.lambda = lambda;
+    public void setRegularization(float lambdaW,float lambdaB){
+        this.lambdaW = lambdaW;
+        this.lambdaB = lambdaB;
     }
 
 }

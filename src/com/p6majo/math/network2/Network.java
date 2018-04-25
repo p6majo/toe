@@ -3,8 +3,6 @@ package com.p6majo.math.network2;
 
 import com.p6majo.math.network2.layers.*;
 import com.p6majo.math.utils.Utils;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,6 +29,7 @@ public class Network {
     public static enum Seed {NO_SEED, RANDOM, NO_BIAS, NO_BIAS_UNITY,ALL_UNITY};
     public static enum Test {MAX_PROBABILITY};
 
+    public static boolean LEARNING = true;
 
     private final List<Layer> layers;
     //private final List<INDArray> trainableParameters;
@@ -41,7 +40,8 @@ public class Network {
     private boolean firstTrainRun = true;
     private final boolean visual;
 
-    public float lambda;
+    public float lambdaW;
+    public float lambdaB;
     private boolean isRegularized = false;
     private float learningRate = 0.01f;
 
@@ -83,7 +83,7 @@ public class Network {
         this.layers.add(layer);
 
         if (layer instanceof DynamicLayer)
-            ((DynamicLayer) layer).setRegularization(lambda);
+            ((DynamicLayer) layer).setRegularization(lambdaW,lambdaB);
 
         if (layer instanceof LossLayer){
             if (this.lossLayer!=null) Utils.errorMsg("Only one loss layer per network possible");
@@ -100,12 +100,13 @@ public class Network {
        return this.lossLayer;
     }
 
-    public void setRegularization(float lambda){
-        this.lambda = lambda;
-        if (this.lambda!=0f){
+    public void setRegularization(float lambdaW,float lambdaB){
+        this.lambdaW = lambdaW;
+        this.lambdaB = lambdaB;
+        if (this.lambdaW !=0f||this.lambdaB!=0f){
             this.isRegularized = true;
             for (DynamicLayer dynamicLayer:this.getDynamicLayers())
-                dynamicLayer.setRegularization(lambda);
+                dynamicLayer.setRegularization(lambdaW,lambdaB);
         }
     }
 
@@ -123,68 +124,55 @@ public class Network {
         return visLayers;
     }
 
-    /*
-    public void addTrainableParameter(List<INDArray> params){
-        this.trainableParameters.addAll(params);
-    }*/
 
-    public void train(Data[] data,Data[] test,int batchSize){
-
-
+    /**
+     * train the network
+     * @param data
+     * @param testData
+     * @param batchSize
+     * @param trainingsRuns
+     * @param percent
+     */
+    public void train(Data[] data,Data[] testData,int batchSize,int trainingsRuns, int percent){
+        long start = System.currentTimeMillis();
         if (visual ){
-            if (firstTrainRun) {
                 System.out.println("init visualizer");
                 visualizer = new NetworkVisualizer2(this, NetworkVisualizer2.VisualizerModus.TRAINED_EDGES, 1);
-                firstTrainRun = false;
-            }
+                visualizer.setNumberOfRuns(trainingsRuns);
+                visualizer.setNumberOfStepsPerRun(data.length);
         }
         else visualizer = null;
 
-        shuffle(data);
+        for (int run = 0; run < trainingsRuns; run++) {
+            LEARNING = true;
 
-        /*
-        //Gradient check
-        Batch batch = new Batch(data[0]);
-        System.out.println(this.gradientCheck(batch, 0, 1));
-        System.out.println(layers.get(0).getErrors());
-        System.out.println("Loss gradient: "+((LossLayer) layers.get(2)).getLossGradient());
-        System.out.println("Activations of sigmoid: "+layers.get(1).getActivations());
-        */
 
-        /*
-        //no gain in efficiency
-        if (batchSize==1){
-            for (int i=0;i<data.length;i++){
-                Batch batch  =new Batch(data[i]);
-                pushforward(batch);
-                pullBack();
-                learn();
-            }
-        }
-        else {
-            */
+            shuffle(data);
 
-        IntStream.iterate(0,i->i+batchSize)
-                .limit(data.length)
-                .boxed()//.parallel() should not be used, leads to backpropagation errorsS
-                .forEach(i->{
-                    Data[] batchData = Arrays.copyOfRange(data, i, i + batchSize);
-                    Batch batch = new Batch(batchData);
-                    pushforward(batch);
-                    pullBack();
-                    learn();}
+            int finalRun = run;
+            IntStream.iterate(0, i -> i + batchSize)
+                    .limit(data.length/batchSize)
+                    .boxed()//.parallel() should not be used, leads to backpropagation errorsS
+                    .forEach(i -> {
+                                Data[] batchData = Arrays.copyOfRange(data, i, i + batchSize);
+                                Batch batch = new Batch(batchData);
+                                pushforward(batch);
+                                pullBack();
+                                learn();
+                                if (visual) {
+                                    visualizer.setProgressOfCurrentRun(i);
+                                    long time = (System.currentTimeMillis()-start)/1000;
+                                    long estimate = time * trainingsRuns*data.length/(i+1+ finalRun *data.length);
+                                    visualizer.showInfo(time+" s von ca. "+estimate+" s.");
+                                }
+                            }
                     );
 
-        /*
-            for (int i = 0; i + batchSize <= data.length; i += batchSize) {
-                Data[] batchData = Arrays.copyOfRange(data, i, i + batchSize);
-                Batch batch = new Batch(batchData);
-                pushforward(batch);
-                pullBack();
-                learn();
-            }
-            */
-       // }
+            LEARNING = false;
+            TestResult test = this.test(testData,percent*testData.length/100);
+            if (visual) visualizer.setOverallProgress(run+1);
+            System.out.println("Success rate after "+(run+1)+"th run: " + test.getSuccessRate());
+        }
     }
 
 
@@ -216,6 +204,7 @@ public class Network {
 
 
     public TestResult test(Data[] data){
+        LEARNING = false;
         return test(data,data.length);
     }
 
@@ -251,11 +240,10 @@ public class Network {
     }
 
     private void learn(){
-
-        for (int l =0;l<layers.size();l++)
-            layers.get(l).learn(this.learningRate);
+        List<DynamicLayer> layers = this.getDynamicLayers();
+        for (DynamicLayer layer:layers)
+            layer.learn(this.learningRate);
     }
-
 
     /**
      * outputs the full state of the network

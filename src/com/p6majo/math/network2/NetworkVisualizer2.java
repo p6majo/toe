@@ -128,6 +128,9 @@ public class NetworkVisualizer2 {
         frame.setButton4Label("Test");
         frame.setButton5Label("Exit");
 
+        frame.setLabelProgress1("Current run:");
+        frame.setLabelProgress2("Overall progress:");
+
         /*
 
         frame.setActionListenerForButton1(new ActionListener(){
@@ -197,6 +200,7 @@ public class NetworkVisualizer2 {
         this.regulData = new ArrayList<Float>();
 
 
+
     }
 
     /**
@@ -207,6 +211,18 @@ public class NetworkVisualizer2 {
         this.frame.showInfo(info);
     }
 
+    public void setProgressOfCurrentRun(int n){
+        frame.setProgress1(n);
+    }
+    public void setOverallProgress(int n){
+        frame.setProgress2(n);
+    }
+    public void setNumberOfRuns(int n){
+        frame.setMaxProgress2(n);
+    }
+    public void setNumberOfStepsPerRun(int n){
+        frame.setMaxProgress1(n);
+    }
 
     /**
      * redraw lines of the network

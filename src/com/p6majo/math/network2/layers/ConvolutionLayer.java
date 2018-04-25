@@ -27,9 +27,7 @@ public class ConvolutionLayer extends DynamicLayer {
     private final int strideHeight;
     private final int kernelHeight;
     private final int kernelWidth;
-
-    private int batchSize;
-
+    
     private INDArray inputData=null; //used for backpropagation
 
     /**
@@ -109,19 +107,14 @@ public class ConvolutionLayer extends DynamicLayer {
         return out.toString();
     }
 
-    @Override
-    public float getRegularization() {
-        return 0;
-    }
-
     /**
      * performing the convolution
      * @param batch
      */
     @Override
     public void pushForward(Batch batch) {
-
-        this.batchSize = batch.getBatchSize();
+        super.pushForward(batch);
+        
         this.inputData = batch.getActivations().dup();
 
         INDArray col = Nd4j.createUninitialized(new int[] {batchSize, outHeight, outWidth, inDepth, kernelHeight, kernelWidth}, 'c');
@@ -187,10 +180,16 @@ public class ConvolutionLayer extends DynamicLayer {
 
     @Override
     public void learn(float learningRate) {
-        INDArray corrections = this.errors.sum(0).add(this.biases.mul(2f*lambda));
+        INDArray corrections;
+        if (lambdaB!=0f)  corrections = this.errors.sum(0).add(this.biases.mul(2f*lambdaB));
+        else corrections = this.errors.sum(0);
         this.biases.subi(corrections.mul(learningRate / batchSize)); //adjust biases
+
         //at this point there was some strange behaviour of the nd4j method mul. If muli is replaced by mul, somehow the components of the correction tensor are strangely shuffled
-        this.weights.subi(getWeightCorrections().muli(learningRate / batchSize));//adjust weights
+        if (lambdaW!=0f)
+            this.weights.subi(getWeightCorrections().sum(0).muli(learningRate / batchSize).addi(this.weights).muli(2f*lambdaW));//adjust weights
+        else
+            this.weights.subi(getWeightCorrections().sum(0).muli(learningRate / batchSize));
     }
 
     private INDArray getWeightCorrections(){
@@ -216,7 +215,7 @@ public class ConvolutionLayer extends DynamicLayer {
 
         INDArray permutedW = errors.permute(1,3,2,0);
 
-        INDArray reshapedW=permutedW.reshape('f',outWidth*outHeight,outDepth).transpose();
+        INDArray reshapedW=permutedW.reshape('f',outDepth,outWidth*outHeight).transpose();
 
        // System.out.println("errors:\n"+errors);
        // System.out.println("reshaped:\n"+reshapedW);

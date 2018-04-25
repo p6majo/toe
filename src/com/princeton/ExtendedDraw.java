@@ -34,6 +34,10 @@ public class ExtendedDraw  implements ActionListener, MouseListener, MouseMotion
     private JTextPane actionPane;
     private JButton button4;
     private JButton button5;
+    private JProgressBar progressBar1;
+    private JProgressBar progressBar2;
+    private JLabel progress1Label;
+    private JLabel progress2Label;
     private JFrame frame;
 
 
@@ -377,6 +381,31 @@ public class ExtendedDraw  implements ActionListener, MouseListener, MouseMotion
         button5.addActionListener(listener);
     }
 
+    public void setProgress1(int current){
+        this.progressBar1.setValue(current);
+    }
+
+    public void setMaxProgress1(int max){
+        this.progressBar1.setMaximum(max);
+        this.progressBar1.setMinimum(0);
+    }
+
+    public void setProgress2(int current){
+        this.progressBar2.setValue(current);
+    }
+
+    public void setMaxProgress2(int max){
+        this.progressBar2.setMaximum(max);
+        this.progressBar2.setMinimum(0);
+    }
+
+    public void setLabelProgress1(String label){
+        this.progress1Label.setText(label);
+    }
+
+    public void setLabelProgress2(String label){
+        this.progress2Label.setText(label);
+    }
 
     public void setButton1Visible(boolean isVisible){
         button1.setVisible(isVisible);

@@ -33,8 +33,6 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
     //stored as intermediate values to train the network
     private INDArray inputData;
 
-    private int batchSize;
-
     public LinearLayer(int inSignature, int outSignature, Network.Seed seed) {
         super(new int[] {inSignature}, new int[]{outSignature});
         super.name = "Linear Layer";
@@ -69,7 +67,8 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
 
     @Override
     public void pushForward(Batch batch) {
-       this.batchSize = batch.getBatchSize();
+        super.pushForward(batch);
+
         inputData = batch.getActivations().dup();
         //calculate activations
         //a_{bi}=z_{bj}*w_{ij}+b_i  (b is the batchData index, summation over j)
@@ -125,10 +124,11 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
 
     @Override
     public void learn(float learningRate) {
-        INDArray corrections = this.errors.sum(0).add(this.biases.mul(2f*lambda));
-        this.biases.subi(corrections.mul(learningRate / batchSize)); //adjust biases
+        INDArray corrections = this.errors.sum(0).div(batchSize);
+        if (lambdaB!=0) corrections.addi(this.biases.mul(2f*lambdaB));
+        this.biases.subi(corrections.muli(learningRate));//adjust biases
         //at this point there was some strange behaviour of the nd4j method mul. If muli is replaced by mul, somehow the components of the correction tensor are strangely shuffled
-        this.weights.subi(getWeightCorrections().muli(learningRate / batchSize));//adjust weights
+        this.weights.subi(getWeightCorrections().muli(learningRate));//adjust weights
     }
 
     public INDArray getWeights() {
@@ -157,27 +157,13 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
 
 
     public INDArray getWeightCorrections() {
-        //this is a bit tricky at this point
-        //we have to combine the inputData with the errors to get a correction matrix with the dimensions of the weights
-        //the input data is of the form bxm and the errors are of the form bxn
-        //they are supposed to form an mxn correction matrix
-        //the input and errors are reshaped and then the tensor product is performed batch-element-wise and summed over all batch elements
-        //the input is reshaped into a b-vector of a row vector in each component
-      //  int[] newInputShape = new int[3];
-       // newInputShape[0] = this.inputData.shape()[0];
-      //  newInputShape[1] = 1;
-      //  newInputShape[2] = this.inputData.shape()[1];
-        //the error data is reshaped into a b-vector of a column vector in each component
-       // int[] newErrorShape = new int[3];
-      //  newErrorShape[0] = this.errors.shape()[0];
-      //  newErrorShape[2] = 1;
-      //  newErrorShape[1] = this.errors.shape()[2];
-//
-      //  INDArray corrections =  Nd4j.tensorMmul(this.inputData.reshape(newInputShape), this.errors.reshape(newErrorShape), new int[][]{{0, 1}, {0, 2}});
-        INDArray corrections =  Nd4j.tensorMmul(this.inputData, this.errors, new int[][]{{0, 0}, {0, 0}});
 
-        //regularization
-        if (lambda!=0f) corrections.addi(this.weights.mul(2f*lambda));
+        INDArray corrections = inputData.getRow(0).transpose().mmul(this.errors.getRow(0));
+        for (int b = 1; b < batchSize; b++) {
+            corrections.addi(inputData.getRow(b).transpose().mmul(this.errors.getRow(b)));
+        }
+        corrections.divi(batchSize);
+        if (lambdaW!=0f) corrections.addi(this.weights.mul(2f*lambdaW));
         return corrections;
     }
 

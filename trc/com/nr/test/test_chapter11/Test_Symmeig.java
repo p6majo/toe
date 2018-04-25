@@ -55,7 +55,7 @@ public class Test_Symmeig {
     }
     globalflag = globalflag || localflag;
     if (localflag) {
-      fail("*** Symmeig: Matrix times eigenvector was not the same as lambda*eigenvector");
+      fail("*** Symmeig: Matrix times eigenvector was not the same as lambdaW*eigenvector");
       
     }
 
@@ -88,7 +88,7 @@ public class Test_Symmeig {
     }
     globalflag = globalflag || localflag;
     if (localflag) {
-      fail("*** Symmeig: Matrix times eigenvector was not the same as lambda*eigenvector");
+      fail("*** Symmeig: Matrix times eigenvector was not the same as lambdaW*eigenvector");
       
     }
 

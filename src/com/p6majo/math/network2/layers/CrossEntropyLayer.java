@@ -17,7 +17,6 @@ import org.nd4j.linalg.indexing.functions.Value;
 public class CrossEntropyLayer extends LossLayer {
 
     private INDArray expectations ;
-    private int batchSize;
 
     public CrossEntropyLayer(int[] signature) {
         //the layer doen't change the data structure
@@ -27,10 +26,11 @@ public class CrossEntropyLayer extends LossLayer {
 
     @Override
     public void pushForward(Batch batch) {
+       super.pushForward(batch);
+
         super.activations = batch.getActivations();
         this.expectations = batch.getBatchExpectation();
         super.errors = Nd4j.ones(batch.getActivations().shape());
-        this.batchSize = batch.getActivations().shape()[0];
         regularize();
         double rnd = Math.random();
        // if (rnd>0.999) System.out.println(activations);
@@ -52,8 +52,8 @@ public class CrossEntropyLayer extends LossLayer {
        // super.errors=errors.dup();
         super.errors = errors;
 
-
-        super.errorsForPreviousLayer = this.getLossGradient().muli(errors);
+       // super.errorsForPreviousLayer = this.getLossGradient().muli(errors);
+        super.errorsForPreviousLayer = this.getLossGradient(); //optimization
     }
 
     @Override
@@ -99,13 +99,6 @@ public class CrossEntropyLayer extends LossLayer {
         }
 
         return testResult;
-    }
-
-
-    @Override
-    public void learn(float learningRate) {
-        //nothing to do in this layer since it is a passive layer
-        //there are not parameters to be adjusted
     }
 
 

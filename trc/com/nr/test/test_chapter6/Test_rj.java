@@ -26,7 +26,7 @@ public class Test_rj {
   @Test
   public void test() {
     int i,N=1000,M=15;
-    double x,y,z,p,sbeps; // lambda not used.
+    double x,y,z,p,sbeps; // lambdaW not used.
     double xx[]={0.5,0.5,0.5,1.0,1.0,1.0,2.0,2.0,2.0,
       5.0,5.0,5.0,10.0,10.0,10.0};
     double yy[]={0.5,5.0,10.0,0.5,5.0,10.0,0.5,5.0,10.0,

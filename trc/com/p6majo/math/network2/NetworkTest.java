@@ -48,7 +48,7 @@ public class NetworkTest {
         network.addLayer(l2);
 
         System.out.println(network.toString());
-        network.train(dataList,dataList,1);
+        network.train(dataList,dataList,1,1,100);
         System.out.println(network.toString());
     }
 }

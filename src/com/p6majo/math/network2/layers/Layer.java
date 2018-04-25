@@ -26,9 +26,14 @@ public abstract class Layer  {
     protected final int[] inSignature;
     protected final int[] outSignature;
 
-    public abstract void pushForward(Batch batch);
+    protected int batchSize;
+
+    public void pushForward(Batch batch){
+        batchSize = batch.getBatchSize();
+    };
+
     public abstract void pullBack(INDArray errors);
-    public abstract void learn(float learningRate);
+
 
     public Layer(int[] inSignature, int[] outSignature) {
         this.inSignature = inSignature;

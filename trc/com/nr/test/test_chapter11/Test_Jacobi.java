@@ -55,7 +55,7 @@ public class Test_Jacobi {
     }
     globalflag = globalflag || localflag;
     if (localflag) {
-      fail("*** Jacobi: Matrix times eigenvector was not the same as lambda*eigenvector");
+      fail("*** Jacobi: Matrix times eigenvector was not the same as lambdaW*eigenvector");
       
     }
 

@@ -15,7 +15,6 @@ import org.nd4j.linalg.indexing.functions.Value;
 public class L2Layer extends LossLayer {
 
     private INDArray expectations ;
-    private int batchSize;
 
     public L2Layer(int[] signature) {
         //the layer doen't change the data structure
@@ -25,6 +24,8 @@ public class L2Layer extends LossLayer {
 
     @Override
     public void pushForward(Batch batch) {
+        super.pushForward(batch);
+
         super.activations = batch.getActivations();
         this.expectations = batch.getBatchExpectation();
         //System.out.println("expectations: "+this.expectations);
@@ -43,7 +44,8 @@ public class L2Layer extends LossLayer {
         //set errors for this layer
         super.errors=errors;
        // System.out.println("Gradient: "+this.getLossGradient());
-        super.errorsForPreviousLayer = this.getLossGradient().mul(errors);
+        //super.errorsForPreviousLayer = this.getLossGradient().mul(errors);
+        super.errorsForPreviousLayer = this.getLossGradient();//for efficiency
     }
 
     @Override
@@ -88,13 +90,6 @@ public class L2Layer extends LossLayer {
         }
 
         return testResult;
-    }
-
-
-    @Override
-    public void learn(float learningRate) {
-        //nothing to do in this layer since it is a passive layer
-        //there are not parameters to be adjusted
     }
 
 

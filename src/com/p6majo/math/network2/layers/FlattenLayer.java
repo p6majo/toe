@@ -7,7 +7,6 @@ public class FlattenLayer extends Layer {
 
     private final int flattenedDim;
     private final int[] inShape;
-    private int batchSize;
 
     public FlattenLayer(int[] inSignature) {
         super(inSignature,new int[]{LayerUtils.getFlattenedDimFromSignature(inSignature)} );
@@ -18,9 +17,9 @@ public class FlattenLayer extends Layer {
 
     @Override
     public void pushForward(Batch batch) {
+        super.pushForward(batch);
         //flatten the batchData
 
-        batchSize = batch.getActivations().shape()[0];
         int[] newShape = new int[]{batchSize, flattenedDim};
         this.activations = batch.getActivations().reshape(newShape);
         batch.setActivations(this.activations);
@@ -38,9 +37,4 @@ public class FlattenLayer extends Layer {
         super.errorsForPreviousLayer = errors.reshape(shape);
     }
 
-    @Override
-    public void learn(float learningRate) {
-        //nothing to do here
-
-    }
 }

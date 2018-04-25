@@ -23,6 +23,9 @@ public class LayerUtilsTest {
         INDArray reflectedKernel = LayerUtils.reflectKernel(kernel);
         System.out.println("reflected Kernel: \n"+reflectedKernel);
 
+
+        System.out.println("apply default rot function:\n"+Nd4j.rot(kernel));
+
         //test a few components randomly
         for (int c = 0; c < 10; c++) {
             int i =(int) (Math.random()*inDepth);

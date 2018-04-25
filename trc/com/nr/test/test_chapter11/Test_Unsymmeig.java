@@ -69,7 +69,7 @@ public class Test_Unsymmeig {
     }
     globalflag = globalflag || localflag;
     if (localflag) {
-      fail("*** Unsymmeig, symmetric, interface1: Matrix times eigenvector was not the same as lambda*eigenvector");
+      fail("*** Unsymmeig, symmetric, interface1: Matrix times eigenvector was not the same as lambdaW*eigenvector");
       
     }
     
@@ -119,7 +119,7 @@ public class Test_Unsymmeig {
     }
     globalflag = globalflag || localflag;
     if (localflag) {
-      fail("*** Unsymmeig, non-symmetric, interface1: Matrix times eigenvector was not the same as lambda*eigenvector");
+      fail("*** Unsymmeig, non-symmetric, interface1: Matrix times eigenvector was not the same as lambdaW*eigenvector");
       
     }
     
@@ -179,7 +179,7 @@ public class Test_Unsymmeig {
     }
     globalflag = globalflag || localflag;
     if (localflag) {
-      fail("*** Unsymmeig, non-symmetric, interface2: Matrix times eigenvector was not the same as lambda*eigenvector");
+      fail("*** Unsymmeig, non-symmetric, interface2: Matrix times eigenvector was not the same as lambdaW*eigenvector");
       
     }
     

@@ -269,7 +269,7 @@ public class Test_Svm {
     System.out.println();
 
   // Test the algorithm on test data after learning
-  // Do a scan over lambda to find best value
+  // Do a scan over lambdaW to find best value
 
     localflag = false;
     globalflag = globalflag || localflag;
