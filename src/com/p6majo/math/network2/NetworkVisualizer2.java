@@ -91,7 +91,7 @@ public class NetworkVisualizer2 {
 
         //layer spacing
         this.visibleLayers = net.getVisualizableLayers();
-        this.layerSpacing = (height-yoffset)/(visibleLayers.size()-1);
+        this.layerSpacing = (height-yoffset)/Math.max(1,(visibleLayers.size()-1));
 
 
         //setup graphTimer

@@ -30,9 +30,6 @@ public class L2Layer extends LossLayer {
         this.expectations = batch.getBatchExpectation();
         //System.out.println("expectations: "+this.expectations);
         super.errors = Nd4j.ones(batch.getActivations().shape());
-        this.batchSize = batch.getActivations().shape()[0];
-        double rnd = Math.random();
-       // if (rnd>0.999) System.out.println(activations);
     }
 
     public void pullBack(){
@@ -50,12 +47,9 @@ public class L2Layer extends LossLayer {
 
     @Override
     public float getLoss() {
-        //cross entropy formula
-
        INDArray lossTmp = this.activations.sub(this.expectations);
        lossTmp.muli(lossTmp);
        float loss = Nd4j.sum(lossTmp).getFloat(0,0)/batchSize;
-       //System.out.println("loss: "+lossTensor+" "+loss);
        return loss;
     }
 

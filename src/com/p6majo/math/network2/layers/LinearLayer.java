@@ -128,6 +128,11 @@ public class LinearLayer extends DynamicLayer implements Visualizable {
         if (lambdaB!=0) corrections.addi(this.biases.mul(2f*lambdaB));
         this.biases.subi(corrections.muli(learningRate));//adjust biases
         //at this point there was some strange behaviour of the nd4j method mul. If muli is replaced by mul, somehow the components of the correction tensor are strangely shuffled
+
+
+
+
+
         this.weights.subi(getWeightCorrections().muli(learningRate));//adjust weights
     }
 

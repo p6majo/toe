@@ -93,47 +93,41 @@ public class MNISTVisualization3 {
 
         Network network = new Network(true);
 
-        ConvolutionLayer conv = new ConvolutionLayer(new int[]{1,28,28},5,5,20,1,1,0,0, Network.Seed.RANDOM);
+        ConvolutionLayer conv = new ConvolutionLayer(new int[]{1,28,28},5,5,10,1,1,0,0, Network.Seed.RANDOM);
         network.addLayer(conv);
 
-        MaxPoolingLayer maxPool = new MaxPoolingLayer(new int[]{20,24,24},2,2);
+
+
+        MaxPoolingLayer maxPool = new MaxPoolingLayer(new int[]{10,24,24},24,24);
         network.addLayer(maxPool);
 
-        SigmoidLayer sig = new SigmoidLayer(new int[]{20,12,12});
-        network.addLayer(sig);
+     //   SigmoidLayer sig = new SigmoidLayer(new int[]{10,1,1});
+    //    network.addLayer(sig);
 
-        ConvolutionLayer conv2 = new ConvolutionLayer(new int[]{20,12,12},5,5,50,1,1,0,0, Network.Seed.RANDOM);
-        network.addLayer(conv2);
 
-        MaxPoolingLayer maxPool2 = new MaxPoolingLayer(new int[]{50,8,8},2,2);
-       network.addLayer(maxPool2);
-
-        SigmoidLayer sig2 = new SigmoidLayer(new int[]{50,4,4});
-        network.addLayer(sig2);
-
-        FlattenLayer flat = new FlattenLayer(new int[]{50,4,4});
+        FlattenLayer flat = new FlattenLayer(new int[]{10,1,1});
         network.addLayer(flat);
 
-        LinearLayer ll2 = new LinearLayer(800  ,100);
-        network.addLayer(ll2);
+       // LinearLayer ll2 = new LinearLayer(40  ,20);
+      //  network.addLayer(ll2);
 
 
-        SigmoidLayer sig3 = new SigmoidLayer(new int[]{100});
-        network.addLayer(sig3);
+       // SigmoidLayer sig3 = new SigmoidLayer(new int[]{40});
+       // network.addLayer(sig3);
 
-        LinearLayer ll3 = new LinearLayer(100  ,10);
-        network.addLayer(ll3);
+       // LinearLayer ll3 = new LinearLayer(20  ,10);
+      //  network.addLayer(ll3);
 
 
-        SigmoidLayer sig4 = new SigmoidLayer(new int[]{10});
-        network.addLayer(sig4);
+       SigmoidLayer sig4 = new SigmoidLayer(new int[]{10});
+       network.addLayer(sig4);
 
 
         CrossEntropyLayer cel = new CrossEntropyLayer(new int[]{10});
         network.addLayer(cel);
 
         network.setLearningRate(0.01f);
-        network.setRegularization(0.0001f,0.f);
+        network.setRegularization(0.0000f,0.f);
         generateData();
        // System.out.println(testList[0].toString());
 
@@ -143,12 +137,12 @@ public class MNISTVisualization3 {
 
 
         long testtime=System.currentTimeMillis();
-        TestResult test = network.test(testList,100);
-       System.out.println("Success rate before: "+test.getSuccessRate()+" in test time: "+(System.currentTimeMillis()-testtime)+" ms.");
+       TestResult test = network.test(testList,100);
+      System.out.println("Success rate before: "+test.getSuccessRate()+" in test time: "+(System.currentTimeMillis()-testtime)+" ms.");
 
 
 
-       network.train(dataList, testList, 1,7,10);
+       network.train(dataList, testList, 100,7,10);
 
         //network.stochasticGradientDescent(dataList,testList, 1,0.01,8);
         //network.stochasticGradientDescent(dataList,testList, 1,0.001,400);

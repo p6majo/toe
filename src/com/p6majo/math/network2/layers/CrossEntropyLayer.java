@@ -32,8 +32,6 @@ public class CrossEntropyLayer extends LossLayer {
         this.expectations = batch.getBatchExpectation();
         super.errors = Nd4j.ones(batch.getActivations().shape());
         regularize();
-        double rnd = Math.random();
-       // if (rnd>0.999) System.out.println(activations);
     }
 
    private void regularize(){
@@ -64,7 +62,7 @@ public class CrossEntropyLayer extends LossLayer {
         INDArray lna = Nd4j.getExecutioner().execAndReturn(new Log(this.activations.dup()));
         INDArray ln1ma =Nd4j.getExecutioner().execAndReturn(new Log(this.activations.dup().sub(1).mul(-1)));
 
-       return (expectations.mul(lna).add(ln1ma.mul(expectations.sub(1).mul(-1)))).mul(-1).sumNumber().floatValue()/batchSize;
+       return -(expectations.mul(lna).add(ln1ma.mul(expectations.sub(1).mul(-1)))).sumNumber().floatValue()/batchSize;
     }
 
 
