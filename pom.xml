@@ -3,7 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.p6majo</groupId>
 	<artifactId>toe</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<version>1.0.0</version>
+
 	<properties>
 		<lwjgl.version>3.1.6</lwjgl.version>
         <lwjgl.natives>natives-linux</lwjgl.natives>
@@ -15,18 +17,27 @@
         <kotlin.version>1.2.31</kotlin.version>
         <nd4j.version>0.9.1</nd4j.version>
     </properties>
+
 	<profiles>
 		<profile>
-			<id>linux</id>
+			<id>Linux</id>
 			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>platform</name>
+					<value>nix</value>
+				</property>
 				<os>
 					<family>Linux</family>
 				</os>
 			</activation>
 			<properties>
 				<platform>linux</platform>
+				<os_name>linux</os_name>
+				<lib_name>libjnilibrary.so</lib_name>
 			</properties>
 		</profile>
+
 		<profile>
 			<id>linux-amd64</id>
 			<activation>
@@ -43,7 +54,23 @@
 				</dependency>
 			</dependencies>
 		</profile>
+
+		<profile>
+			<id>windows</id>
+			<activation>
+				<property>
+					<name>platform</name>
+					<value>win</value>
+				</property>
+			</activation>
+			<properties>
+				<os_name>win32</os_name>
+				<lib_name>jnilibrary.dll</lib_name>
+			</properties>
+		</profile>
 	</profiles>
+
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
         <testSourceDirectory>trc</testSourceDirectory>
@@ -59,8 +86,96 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>native-maven-plugin</artifactId>
+				<version>1.0-alpha-8</version>
+				<extensions>true</extensions>
+				<configuration>
+
+					<!-- trigger javah execution -->
+					<javahClassNames>
+						<javahClassName>ConvolutionWrapper</javahClassName>
+						<javahClassName>JniWrapper</javahClassName>
+					</javahClassNames>
+
+
+
+					<javahOS>${os_name}</javahOS>
+
+					<!--
+                    <This is dealt in generate-header script>
+                    <javahOutputDirectory>${project.basedir}/native/include</javahOutputDirectory>
+                    <javahClassNames>
+                        <javahClassName>com.example.NativeApplication</javahClassName>
+                    </javahClassNames>
+                    -->
+
+					<sources>
+						<source>
+							<directory>src/native</directory>
+							<fileNames>
+								<fileName>jni.c</fileName>
+								<fileName>convolution.c</fileName>
+							</fileNames>
+						</source>
+						<source>
+							<directory>src/native/include</directory>
+						</source>
+					</sources>
+					<compilerProvider>generic-classic</compilerProvider>
+					<compilerExecutable>gcc</compilerExecutable>
+
+					<compilerStartOptions>
+						<compilerStartOption>-m64</compilerStartOption>
+						<compilerStartOption>-fpic</compilerStartOption>
+						<compilerStartOption>-Wall</compilerStartOption>
+						<compilerStartOption>-Wextra</compilerStartOption>
+						<compilerStartOption>-ansi</compilerStartOption>
+						<compilerStartOption>-g</compilerStartOption>
+						<compilerStartOption>-O3</compilerStartOption>
+					</compilerStartOptions>
+
+					<linkerOutputDirectory>target</linkerOutputDirectory>
+					<linkerExecutable>gcc</linkerExecutable>
+
+					<linkerStartOptions>
+						<linkerStartOption>-m64</linkerStartOption>
+						<linkerStartOption>-shared</linkerStartOption>
+					</linkerStartOptions>
+
+					<linkerFinalName>libjnilibrary</linkerFinalName>
+
+					<linkerEndOptions>
+						<linkerEndOption>-o ${project.build.directory}/libjnilibrary</linkerEndOption>
+					</linkerEndOptions>
+				</configuration>
+
+				<executions>
+					<execution>
+						<id>javah</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>initialize</goal>
+							<goal>compile</goal>
+							<goal>link</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -83,30 +198,7 @@
 					</execution>
 				</executions>
 			</plugin>
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <jvmTarget>1.8</jvmTarget>
-                </configuration>
-            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -144,9 +236,29 @@
 	</repositories>
 	<dependencies>
 
+		<dependency>
+			<groupId>com.maplesoft</groupId>
+			<artifactId>Maple</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>/home/jmartin/maple2017/java/Maple.jar</systemPath>
+		</dependency>
 
+		<dependency>
+			<groupId>com.maplesoft.openmath</groupId>
+			<artifactId>Maple</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>/home/jmartin/maple2017/java/externalcall.jar</systemPath>
+		</dependency>
 
-
+		<dependency>
+			<groupId>com.nr</groupId>
+			<artifactId>nr</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>/home/jmartin/workbase/toe/lib/f2jutil.jar</systemPath>
+		</dependency>
 
         <dependency>
             <groupId>org.nd4j</groupId>
@@ -155,6 +267,28 @@
         </dependency>
 
 
+
+		<!-- https://mvnrepository.com/artifact/org.apfloat/apfloat -->
+		<dependency>
+			<groupId>org.apfloat</groupId>
+			<artifactId>apfloat</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.6.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
 
 
 		<dependency>
@@ -489,17 +623,7 @@
 			<classifier>${lwjgl.natives}</classifier>
 
 		</dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
-            <version>${kotlin.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test</artifactId>
-            <version>${kotlin.version}</version>
-            <scope>test</scope>
-        </dependency>
+
 
 
 
