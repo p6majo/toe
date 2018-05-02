@@ -1,0 +1,26 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.p6majo</groupId>
+        <artifactId>toeParent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>com.p6majo</groupId>
+    <artifactId>java</artifactId>
+    <name>theory of everything</name>
+
+    <build>
+        <plugins>
+            <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
