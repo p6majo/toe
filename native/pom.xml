@@ -1,0 +1,55 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.p6majo</groupId>
+        <artifactId>toeParent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>toeNativeParent</artifactId>
+    <version>1.0.0</version>
+
+    <name>theory of everything native parent</name>
+    <packaging>pom</packaging>
+
+    <profiles>
+        <profile>
+            <id>wind32</id>
+            <activation>
+                <property>
+                    <name>platform</name>
+                    <value>win32</value>
+                </property>
+            </activation>
+            <modules>
+                <module>win32</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>hpux</id>
+            <activation>
+                <property>
+                    <name>platform</name>
+                    <value>hpux</value>
+                </property>
+            </activation>
+            <modules>
+                <module>hpux</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>linux</id>
+            <activation>
+                <property>
+                    <name>platform</name>
+                    <value>linux</value>
+                </property>
+            </activation>
+            <modules>
+                <module>linux</module>
+            </modules>
+        </profile>
+
+    </profiles>
+</project>

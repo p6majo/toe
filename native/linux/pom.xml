@@ -1,0 +1,102 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.p6majo</groupId>
+        <artifactId>toeNativeParent</artifactId> <!-- determines the default name of the dynamic library-->
+        <version>1.0.0</version>
+    </parent>
+
+     <artifactId>libnativeConvolution</artifactId>
+    <version>1.0.0</version>
+    <name>theory of everything native linux</name>
+    <url>http://maven.apache.org</url>
+
+    <packaging>so</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.p6majo</groupId>
+            <artifactId>java</artifactId>
+            <version>1.0.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <!--  trigger javah -->
+                    <javahOS>linux</javahOS>
+
+                    <compilerProvider>generic-classic</compilerProvider>
+                    <compilerExecutable>g++</compilerExecutable>
+
+                    <linkerExecutable>g++</linkerExecutable>
+                    <sources>
+                        <source>
+                            <directory>${project.basedir}/..</directory>
+                            <fileNames>
+                                <fileName>convolution.cpp</fileName>
+                                <fileName>convolution_implementation.cpp</fileName>
+                            </fileNames>
+                        </source>
+                    </sources>
+
+                    <compilerStartOptions>
+                        <compilerStartOption>-lfftw3f</compilerStartOption>
+                        <compilerStartOption>-lm</compilerStartOption>
+                        <compilerStartOption>-shared</compilerStartOption>
+                        <compilerStartOption>-fpic</compilerStartOption>
+                        <compilerStartOption>-c</compilerStartOption>
+                    </compilerStartOptions>
+
+                    <linkerStartOptions>
+                        <linkerStartOption>-fpic</linkerStartOption>
+                        <linkerStartOption>-shared</linkerStartOption>
+                    </linkerStartOptions>
+                    <linkerMiddleOptions>
+                        <linkerMiddleOption>-lc</linkerMiddleOption>
+                        <linkerMiddleOption>-lm</linkerMiddleOption>
+                    </linkerMiddleOptions>
+
+
+                    <linkerOutputDirectory>${project.build.directory}/lib</linkerOutputDirectory>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>javah</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <javahProvider>default</javahProvider>
+                            <javahOutputDirectory>${project.build.directory}/custom-javah</javahOutputDirectory>
+                            <workingDirectory>${basedir}</workingDirectory>
+                            <javahOutputFileName>convolution.h</javahOutputFileName>
+                            <javahClassNames>
+                                <javahClassName>com.p6majo.math.convolution.ConvolutionWrapper</javahClassName>
+                            </javahClassNames>
+                        </configuration>
+                        <goals>
+                            <goal>javah</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+            </plugin>
+        </plugins>
+    </build>
+</project>
